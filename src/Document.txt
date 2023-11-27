@@ -1,0 +1,600 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0QKNM9VLST"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0QKNM9VLST');
+</script>
+
+
+
+navbar section
+
+
+    <div>
+              <nav className="navbar navbarBackground navbar-light bg-light">
+                <a className="navbar-brand text-bold" href="/" style={{ marginLeft: '25px', color: "#30ABE2", fontWeight: "700", fontSize: '27px' }}>GSP</a>
+                <h6 type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> <img src='https://cdn-icons-png.flaticon.com/128/9109/9109764.png' height='50px' width='50px' style={{ marginRight: '20px' }} /></h6>
+                <div className="offcanvas offcanvasDashboard offcanvas-end" tabIndex={-1} id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                  <div className="offcanvas-header">
+                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" />
+                  </div>
+
+                  <div className="offcanvas-body offcanvasBody">
+                    {/* Navbar- Start */}
+
+                    <div className="container-fluid ms-3">
+                      <div  >
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                          {/* <li className="nav-item" style={{ color: "cyan" }}>
+                      <h6>Activation Date: {data.activationTime ? new Date(data.activationTime).toLocaleString() : 'unknown'}</h6>
+                    </li> */}
+                          <li>
+                            <h6 className='text-primary text-center'> Hello, {data.name}</h6>
+                          </li>
+                          <li>
+                            <div className="notification-container">
+                              {/* <IoNotificationsCircle style={{ color: 'yellow', backgroundColor: 'red', borderRadius: '50%' }} className="notification-icon" /> */}
+                              <img src='https://cdn-icons-png.flaticon.com/128/2654/2654416.png' height='35px' width='35px' />
+                              <div className="notification-text" style={{ color: "#150f66" }}>
+                                &nbsp; &nbsp; Account activated on:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; {data.activationTime ? new Date(data.activationTime).toLocaleString() : 'unknown'}
+                              </div>
+
+                            </div>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/profile" style={{ color: "#150f66", fontWeight: '600' }}> <img src='https://cdn-icons-png.flaticon.com/128/10613/10613753.png' height='20px' width='20px' /> &nbsp; Profile </a>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/profile-update" style={{ color: "#150f66", fontWeight: '600' }}> <img src='https://cdn-icons-png.flaticon.com/128/11121/11121490.png' height='20px' width='20px' /> &nbsp; Profile-update </a>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/withdrawal" style={{ color: "#150f66", fontWeight: '600' }}> <img src='https://cdn-icons-png.flaticon.com/128/2845/2845668.png' height='23px' width='23px' /> &nbsp; Withdrawal </a>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/topUp" style={{ color: "#150f66", fontWeight: '600' }}> <img src='https://cdn-icons-png.flaticon.com/128/3503/3503775.png' height='23px' width='23px' /> &nbsp; Top-up history </a>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/task-report" style={{ color: "#150f66", fontWeight: '600' }}> <img src='https://cdn-icons-png.flaticon.com/128/10008/10008048.png' height='23px' width='23px' /> &nbsp; Member Task Report </a>
+                          </li>
+                          {/*  */}
+                          <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" aria-current="page" href="/dashboard" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "#150f66", fontWeight: '600' }}><img src='https://cdn-icons-png.flaticon.com/128/10710/10710128.png' height='25px' width='23px' /> &nbsp; member </a>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li><div className="dropdown-item">
+                                <h6 onClick={() => setIsDirectModelOpen(true)}>Direct</h6>
+                                {/*  */}
+
+                                {/*  */}
+                                <Modal isOpen={isDirectModelOpen} style={customModalStyles}>
+                                  {/* <Modal isOpen={isDirectModelOpen} style={{width:"50%", height:"100px", backgroundColor:"yellow"}}> */}
+                                  <h4 style={{ color: "red", fontWeight: "bold", position: "fixed", cursor: "pointer", right: "10%" }} onClick={() => setIsDirectModelOpen(false)}>X</h4>
+                                  <h6>All team</h6>
+                                  <div>
+                                    <div>
+                                      <table className='table table-striped table-warning table-bordered' style={{ width: "18rem" }}>
+                                        <thead>
+                                          <tr>
+                                            <th>S.No.</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>UserId</th>
+                                            <th>Mobile No</th>
+                                            <th>Status</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {sponsors.map((sponsor, index) => (
+                                            <tr key={sponsor._id}>
+                                              <td>{index + 1}</td>
+                                              <td>{sponsor.name}</td>
+                                              <td>{sponsor.email}</td>
+                                              <td>{sponsor.userId}</td>
+                                              <td>{sponsor.mobile}</td>
+                                              <td>{sponsor.is_active ? 'Active' : 'Inactive'}</td>
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </Modal>
+                              </div></li> <hr />
+                              <li><div className="dropdown-item">
+                                <h6 type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">Team View</h6>
+
+                              </div>
+                                {/* <Modal isOpen={isTeamModelOpen} style={customModalStyleTeam}>
+                                  <Modal isOpen={isDirectModelOpen} style={{width:"50%", height:"100px", backgroundColor:"yellow"}}>
+                                  <h4 style={{ color: "red", fontWeight: "bold", position: "absolute", cursor: "pointer", right: "20%" }} onClick={() => setIsTeamModelOpen(false)}>X</h4>
+                                  <h6 className='text-info'>All Level Member</h6>
+
+                                  <hr />
+                                  <div className="team-structure">
+
+                                    {teamStructure ? (
+                                      <div className='member'>
+                                        <p>Level: {teamStructure.level}</p>
+                                        <p>UserID: {teamStructure.userId}</p>
+                                        <p>Name: {teamStructure.name}</p>
+                                        <p>Mobile: {teamStructure.mobile}</p>
+                                        <p>Status: {teamStructure.status}</p>
+                                        <p>Total member: {teamStructure.allUsersCount}</p>
+                                        <p>Total active member:{teamStructure.activeUsersCount}</p>
+                                        <p>Total Direct member: {teamStructure.downlineCount}</p>
+                                        <p>Active Direct member:{teamStructure.activeDownlineCount}</p>
+                                        <p>Status: {teamStructure.is_active === 'status' ? 'Not Active' : ' Active'}</p>
+
+                                        {currentDownline.length > 0 && (
+                                          <button className='button' onClick={() => handleViewMore(teamStructure.downline)}>View More</button>
+                                        )}
+                                        {visitedDownlines.length > 0 && (
+                                    // Show the "View Back" button when there are visited downlines
+                                    <button className='button' onClick={handleViewBack}>View Back</button>
+                                  )}
+                                        <div className="downline-container">{renderDownline()}</div>
+                                      </div>
+                                    ) : (
+                                      <p>Loading...</p>
+                                    )}
+                                    {!teamStructure && <p>No more  members</p>}
+                                  </div>
+                                </Modal> */}
+
+                              </li> <hr />
+                              <li> <div className='dropdown-item'>
+                                <h6 type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Team Structure</h6>
+                              </div>
+                              </li>
+                            </ul>
+                          </li>
+                          {/*  */}
+                          <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" aria-current="page" href="/dashboard" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: "#150f66", fontWeight: '600' }}><img src='https://cdn-icons-png.flaticon.com/128/11062/11062719.png' height='25px' width='23px' /> &nbsp; Income History </a>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
+                              {reTopupUserNew ?(<>
+                                <li><h6 className="dropdown-item">Old WALLET : {reTopupUserNew.oldWallet}</h6></li>
+                                <div class="dropdown-divider"></div>
+                              <li><h6 className="dropdown-item">RESERVED : {reTopupUserNew.reservedWallet}</h6></li>
+                              </>):(<h6 className='text-center'> Not found  </h6>)}
+                              </ul>
+                          </li>
+                          <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/password-reset" style={{ color: "#150f66", fontWeight: '600' }}> <img src='https://cdn-icons-png.flaticon.com/128/11135/11135315.png' height='23px' width='23px' /> &nbsp; forgot password </a>
+                          </li>
+                          <li className="nav-item">
+                            {isLoggedIn ? (<button className='btn btn-danger' onClick={handleLogout}>LogOut</button>
+                            ) : (<> <button className='btn btn-secondary' onClick={handleLogin}>Login</button></>)}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Navbar- End */}
+                  </div>
+                </div>
+              </nav>
+            </div>
+
+//dashboard code
+
+
+// import React, { useState, useEffect } from 'react';
+// // import axios from 'axios';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { BsWhatsapp } from 'react-icons/bs'
+// import Modal from 'react-modal';
+// import './Dashboard.css'
+// import logo from '../assets/logo-4.png'
+// import QRCODE from '../assets/QRCODE.jpg'
+// import INFO from '../assets/info.jpg'
+// import GOA from '../assets/GOA.jpg'
+// import PATNA from '../assets/PATNA.jpg'
+// import spinner from '../assets/spinner.gif'
+// import { MdOutlineTransferWithinAStation, MdEmail } from 'react-icons/md'
+// import { IoCall } from 'react-icons/io5';
+// import { ImWhatsapp } from 'react-icons/im';
+// import { BsTelegram } from 'react-icons/bs'
+// import { HiOutlineArrowUpTray } from 'react-icons/hi2'
+// import {RiExchangeFundsLine} from 'react-icons/ri'
+// import { AiOutlinePlusCircle } from 'react-icons/ai'
+// import { Link, useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import Timer from '../pages/Timer';
+// const getTokenExpireTime = () => {
+//   const tokenExpire = localStorage.getItem('tokenExpire');
+//   return tokenExpire ? parseInt(tokenExpire) : null;
+// };
+
+// const isTokenExpired = () => {
+//   const expireTime = getTokenExpireTime();
+//   return expireTime ? expireTime < Date.now() : true;
+// };
+
+// const Dashboard = () => {
+
+//   const [isTokenValid, setIsTokenValid] = useState(true);
+//   const [data, setData] = useState([]);
+//   const [realTimeDate, setRealTimeDate] = useState('');
+//   const [isLoading, setIsLoading] = useState(true);
+//   const token = localStorage.getItem('token');
+//   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') ? true : false);
+//   const [dailyIncome, setDailyIncome] = useState('');
+//   //for Direct
+//   const [isDirectModelOpen, setIsDirectModelOpen] = useState(false);
+//   const [isTeamModelOpen, setIsTeamModelOpen] = useState(false);
+
+//   const [teamStructure, setTeamStructure] = useState(null);
+//   const [currentDownline, setCurrentDownline] = useState([]);
+//   const [visitedDownlines, setVisitedDownlines] = useState([]);
+//   const [rank, setRank] = useState('Loading...');
+//   const [activeUsersByLevel, setActiveUsersByLevel] = useState([]);
+//   // const [earnings, setEarnings] = useState([]);
+//   // For deposit...
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [userData, setUserData] = useState({
+//     name: '',
+//     transactionId: '',
+//     userID: '',
+//     depositAmount: '',
+//     // image: null
+//   });
+//   const [activeUserData, setActiveUserData] = useState([]);
+
+//   // for fetch direct sponsorID
+//   const [sponsors, setSponsors] = useState([]);
+
+//   // for fetch direct sponsorID - End
+//   //for Withdrawal
+//   const [withdrawalAmount, setWithdrawalAmount] = useState('');
+//   const [copied, setCopied] = useState(false);
+//   const [userId, setUserId] = useState('');
+//   const [userStatus, setUserStatus] = useState(null);
+//   const [topupButton, setTopupButton] = useState(true);
+//   const [topUpAmount, setTopUpAmount] = useState('');
+//   const [isApproved, setIsApproved] = useState(false)
+//   const [reTopupUserNew, setReTopUpUser]= useState (null)
+
+//   //
+//   //
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const response = await fetch('https://gspserver-0xs1.onrender.com/api/users/profile', {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+//       const result = await response.json();
+//       // const userLevel = getUserLevel(result.level);
+//       // setLevel(userLevel);
+//       setData(result);
+//       setIsLoading(false);
+//     };
+//     fetchData();
+//   }, [token]);
+//   useEffect(() => {
+//     if (data.userId && data.updatedAt) {
+//       const convertTimestamp = () => {
+//         const date = new Date(data.updatedAt);
+//         const realTime = date.toLocaleString();
+//         setRealTimeDate(realTime);
+//       };
+
+//       convertTimestamp();
+//     }
+//   }, [data]);
+//   // for daily level income 
+//   useEffect(() => {
+//     const fetchIncome = async () => {
+//       try {
+//         // const response = await fetch(`https://gspserver-0xs1.onrender.com/api/daily-level-income/users/${data.userId}`);
+//         const response = await fetch(`https://gspserver-0xs1.onrender.com/api/daily-level-income/users/${data.userId}`, {
+//           headers: {
+//             'Cache-Control': 'no-cache',
+//             'Pragma': 'no-cache',
+//           },
+//           method: 'GET'
+//         });
+//         const dailyLevel = await response.json();
+//         setDailyIncome(dailyLevel.dailyIncome);
+//         setIsLoading(false);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+
+//     fetchIncome();
+//   }, [data.userId]);
+//   // Fetch Rank
+
+//   useEffect(() => {
+//     axios.get(`https://gspserver-0xs1.onrender.com/api/users/teamStructureRank/${data.userId}`)
+//       .then(response => {
+//         const data = response.data;
+//         if (data.rank === 'Fresher') {
+//           setRank('FRESHER');
+//         } else {
+//           // setRank(`Congratulations! You have achieved the rank: ${data.rank}.`);
+//           setRank(`${data.rank}.`);
+//         }
+//       })
+//       .catch(error => {
+//         console.error('Error fetching data:', error);
+//         setRank('An error occurred while fetching the data.');
+//       });
+//   }, [data.userId]);
+//   // Fetch Rank End
+//   //Fetch Team Structure Start
+//   useEffect(() => {
+//     // Call the backend API to get the team structure
+//     axios.get(`https://gspserver-0xs1.onrender.com/api/users/teamStructure/${data.userId}`)
+//       .then(response => {
+//         setActiveUsersByLevel(response.data);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching team structure:', error);
+//       });
+//   }, [data.userId]);
+//   //Fetch Team Structure End
+//   useEffect(() => {
+//     fetchTeamStructure(data.userId);
+//   }, [data.userId]);
+  // const fetchTeamStructure = async (userId) => {
+  //   try {
+  //     const response = await axios.get(`https://gspserver-0xs1.onrender.com/api/users/team/${data.userId}`);
+  //     // const response = await axios.get(`https://gspserver-0xs1.onrender.com/api/users/team/${data.userId}`);
+  //     setTeamStructure(response.data);
+  //     setCurrentDownline(response?.data?.downline);
+  //   } catch (error) {
+  //     console.error('Error fetching team structure:', error);
+  //   }
+  // };
+
+//   const handleWithdrawalSubmit = (e) => {
+//     e.preventDefault();
+//     const amount = Number(withdrawalAmount); // convert string to number
+//     fetch(`https://gspserver-0xs1.onrender.comm//api/withdraw/${data.userId}`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         amount,
+//         GPay: data.GPay,
+//         ifscCode: data.ifscCode,
+//         accountNo: data.accountNo,
+//         accountHolderName: data.accountHolderName
+//       }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         if (data.success) {
+//           // display success message or update user balance
+//           // toast.success("Withdrawal successful");
+//         } else {
+//           // display error message
+//           toast.error(`Withdrawal failed: ${data.error}`);
+//           // toast.error('Sunday Closed')
+//         }
+//       })
+//       .catch((error) => {
+//         console.error('Error:', error);
+//         toast.error(`Withdrawal failed: ${error.message}`);
+//         // toast.error('Sunday closed!!!')
+//       });
+//   };
+
+
+//   const handleChange = (event) => {
+//     const { name, value } = event.target;
+//     setUserData(prevState => ({
+//       ...prevState,
+//       [name]: value
+//     }));
+//   };
+
+
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     const formData = new FormData();
+//     formData.append('name', userData.name);
+//     formData.append('transactionId', userData.transactionId);
+//     formData.append('userID', userData.userID);
+//     formData.append('depositAmount', userData.depositAmount);
+//     // formData.append('image', userData.image);
+
+//     try {
+//       // const response = await axios.post('https://gspserver-0xs1.onrender.com/api/deposit/upload', formData);
+//       const response = await axios.post('https://gspserver-0xs1.onrender.com/api/deposit/user', formData);
+//       const data = response.data;
+
+//       console.log(data);
+//       alert('Deposited!');
+//       window.location.href = '/dashboard';
+//     } catch (error) {
+//       if (error.response && error.response.status === 400) {
+//         alert('Transaction Id already exists');
+//       }
+//       console.error(error);
+//       alert('Not Deposited!');
+//     }
+//   };
+//   //for Top up
+//   const handleClick = async () => {
+
+//     try {
+//       const response = await fetch('https://gspserver-0xs1.onrender.com/api/deposit/topUpActivate/', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ userId }),
+//       });
+//       const data = await response.json();
+//       setTopupButton(false); // Hide the button after getting the user status
+//       if (data.status === 'not_found') {
+//         alert('user not found!')
+//         setUserStatus(null);
+//         setTopupButton(true)
+//       } else {
+//         setUserStatus(data.status);
+//       }
+//     } catch (error) {
+//       console.error('Error:', error);
+//     }
+//   };
+
+//   const handleActivateUser = async () => {
+
+//     fetch(`https://gspserver-0xs1.onrender.com/api/deposit/topUpUserID/${data.userId}`, {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         userId,
+//         is_active: true,
+//         activationTime: new Date().toISOString()
+//       }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         if (data.success) {
+//           // display success message or update user balance
+//           alert("UserID Activate SuccessFully");
+//           window.location.href = '/dashboard'
+//         } else {
+//           // display error message
+//           alert(`Activation Failed: ${data.error}`);
+//           // toast.error('Sunday')
+//         }
+//       })
+//       .catch((error) => {
+//         console.error('Error:', error);
+//         alert(`Activation failed: ${error.message}`);
+//         // toast.error('Sunday closed!!!')
+//       });
+//   };
+
+//   useEffect(() => {
+//     fetchTopupAmount(data.userId);
+//     console.log(data.userId)
+//   }, [data.userId]);
+  // const fetchTopupAmount = async (userID) => {
+  //   try {
+  //     const response = await axios.get(`https://gspserver-0xs1.onrender.com/api/deposit/topUpuserAmount/${userID}`)
+  //     console.log('API Response:', response.data);
+  //     console.log(data.userId)
+
+  //     const { deposit } = response.data;
+
+  //     if (!deposit) {
+  //       console.log('User not found!');
+  //       return;
+  //     }
+
+  //     const { depositAmount, isApproved } = deposit;
+  //     console.log('Deposit Amount:', depositAmount);
+  //     // setTopUpAmount(response.data);
+  //     setTopUpAmount(depositAmount);
+  //     setIsApproved(isApproved)
+  //   } catch (error) {
+  //     console.log(error)
+
+  //   }
+
+  // }
+//   useEffect(() => {
+//     // const userReTopUP  = 'GSP2300154903090'
+//     // Call the fetchReTopUpUser function here
+//     fetchReTopUpUser(data.userId);
+//     // console.log(`USER RETOPUP DETAILS - ${data.userId}`)
+//   }, [data.userId]);
+  // const fetchReTopUpUser = async (userID) => {
+  //   try {
+  //     const response = await axios.get(`https://gspserver-0xs1.onrender.com/api/users/reTopup/${userID}`);
+  //     if (response.data) {
+  //       setReTopUpUser(response.data);
+  //       // console.log(`USER RETOPUP DETAILS - ${response.data}`)
+  //     } else {
+  //       setReTopUpUser(null);
+  //     }
+  //   } catch (error) {
+  //     setReTopUpUser(null);
+  //   }
+  // };
+//   //for Top up END
+//   const customModalStyles = {
+//     content: {
+//       width: '98%', // Set the width of the modal here
+//       height: "700px",
+//       left: '2px'
+//     },
+//   };
+//   const customModalStyleTeam = {
+//     content: {
+//       width: '95%', // Set the width of the modal here
+//       height: "700px",
+//       left: '5px',
+//       background: '#000'
+//     },
+//   };
+//   const topupCustomModalStyles = {
+//     content: {
+//       width: '95%', // Set the width of the modal here
+//       height: "500px",
+//       left: '5px',
+//     },
+//   };
+//   //for deposit sectio End...
+//   const navigate = useNavigate();
+//   //For User LogOut
+//   const handleLogout = () => {
+//     localStorage.removeItem('token');
+//     setIsLoggedIn(false);
+//     window.location.href = '/login';
+//   };
+//   //For User LogOut
+//   const handleLogin = () => {
+//     window.location.href = '/login';
+//   };
+//   useEffect(() => {
+//     if (isTokenExpired()) {
+//       setIsTokenValid(false);
+//       // redirect to homepage
+//       window.location.href = '/login';
+//     }
+//   }, []);
+
+
+//   // 
+//   //  for direct userID
+//   useEffect(() => {
+//     const fetchSponsors = async () => {
+//       try {
+//         const response = await axios.get(`https://gspserver-0xs1.onrender.com/api/direct/${data.userId}`);
+//         setSponsors(response.data);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+
+//     fetchSponsors();
+//   }, [data.userId]);
+
+//   useEffect(() => {
+//     const fetchActiveUserData = async () => {
+//       try {
+//         const response = await axios.post(`https://gspserver-0xs1.onrender.com/api/users/activeuser/${data.userId}`);
+//         setActiveUserData(response.data);
+//         console.log(response.data);
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+
+//     fetchActiveUserData();
+//   }, [data.userId]);

@@ -1,0 +1,45 @@
+  *TopUpModel - start
+  
+   <HiOutlineArrowUpTray className='dashboard-icon1' onClick={() => setIsTopupOpen(true)} />
+                    <h6 className='mt-2 ' style={{ color: '#AE67FA' }} onClick={() => setIsTopupOpen(true)}> TOP-UP </h6>
+                    <Modal isOpen={isTopupOpen} style={topupCustomModalStyles} >
+                      <h4 style={{ color: "red", fontWeight: "bold", cursor: "pointer", }} onClick={() => setIsTopupOpen(false)}>X</h4>
+                      <div >
+                        <div className="form_container mb-3">
+                          <form>
+                            <h6 className="text-center text-primary fw-bold mt-3 mb-3" style={{ fontSize: '20px' }}>TOP-UP</h6>
+                            <h6 className='text-success'>Top-up Balance : {isApproved ? <>{topUpAmount !== null ? topUpAmount : 'N/A'} Rs</> : 'Not Approved'}</h6>
+                            <div className="formInput mt-2 mb-3" >
+                              <label htmlFor="userId" style={{ fontSize: '15px' }}>UserID</label>
+                              <input
+                                type="text"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                placeholder="Enter User ID"
+                                required
+                              />
+                              {/* <button className="form_button topUp_button">Search</button> */}
+                            </div>
+                          </form>
+
+                        </div>
+                        <div className="content d-flex" style={{ justifyContent: 'center' }}>
+                          {topupButton && <button className="form_button topUp_button" style={{ width: '300px' }} onClick={handleClick} >Check User Status</button>}
+                        </div>
+                        <div className="content-para d-flex" style={{ justifyContent: 'center' }}>
+                          {userStatus === null ? (
+                            <p >Click the button to check user status.</p>
+                          ) : userStatus ? (
+                            <p className='text-danger'>User Already Activated!.</p>
+                          ) : (
+                            <button className="form_button topUp_button1" style={{ width: '300px' }} onClick={handleActivateUser}>TopUp Now</button>
+                          )}
+                          <div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </Modal>
+
+
+                     *TopUpModel - start

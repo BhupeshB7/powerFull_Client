@@ -1,0 +1,9 @@
+/* TaskList.css */
+.status_completed {
+    color: rgb(58, 231, 58);
+  }
+  
+  .status_pending {
+    color: rgb(249, 68, 68);
+  }
+  
