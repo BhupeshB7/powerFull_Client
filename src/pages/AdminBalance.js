@@ -42,9 +42,9 @@ function AdminBalance() {
   };
 
   return (
-    <div className='Update_Balance mb-5'>
+    <div className='Update_Balance '>
       <h5>User Balance Update...</h5>
-      <div>
+      <div className='p-2'>
         <label className='text-light'>Enter User ID:</label><br />
         <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
         <Button variant='primary' className='m-1' onClick={searchUser}>
