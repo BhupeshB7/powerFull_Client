@@ -70,6 +70,7 @@ const QRCodeGenerator = ({userId}) => {
               </h1>
               {/* <h6>userId: {userId}</h6> */}
               <button
+               
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
@@ -85,7 +86,7 @@ const QRCodeGenerator = ({userId}) => {
               )}
               {qrData && (
                 <div>
-                  <button onClick={handleShareQRCode}>Download</button>
+                  <button className="btn btn-primary" onClick={handleShareQRCode}>Download</button>
                 </div>
               )}
               {/*  */}

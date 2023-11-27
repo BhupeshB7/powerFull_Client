@@ -1911,10 +1911,10 @@ const Dashboard = () => {
                 aria-hidden="true"
               >
                 <div className="modal-dialog ">
-                  <div className="modal-content bg-warning">
+                  <div className="modal-content teamStructure_background">
                     <div className="modal-header">
                       <h5
-                        className="modal-title text-dark"
+                        className="modal-title text-warning"
                         id="exampleModalLabel"
                       >
                         TEAM STRUCTURE
@@ -1942,18 +1942,18 @@ const Dashboard = () => {
                           {Object.keys(activeUsersByLevel).map(
                             (level, index) => (
                               <tr key={level}>
-                                <td className="text-dark text-center">{index + 1}</td>
-                                <td className="text-dark text-center">{level}</td>
-                                <td className="text-success text-center">
+                                <td className="text-warning text-center">{index + 1}</td>
+                                <td className=" text-center" style={{color:'#fccb90'}}>{level}</td>
+                                <td className="text-light text-center">
                                   {activeUsersByLevel[level].active}
                                 </td>
-                                <td className="text-danger text-center">
+                                <td className="text-center"style={{color:'#fccb90'}}>
                                   {activeUsersByLevel[level].inactive}
                                 </td>
-                                <td className="text-dark text-center">
+                                <td className="text-light text-center">
                                   {levelCounts[index]}
                                 </td>
-                                <td className="text-success text-center">
+                                <td className=" text-center" style={{color:'#fccb90'}}>
                                   {levelRanks[index]}
                                 </td>
                               </tr>
