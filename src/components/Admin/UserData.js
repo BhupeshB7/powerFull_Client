@@ -269,9 +269,9 @@ function UserData() {
                 <td>{user.userId}</td>
                 <td>{user.is_active ? "Active" : "Deactive"}</td>
                <td className="text-center"> {user.isBlocked ? (
-              <button className="btn btn-danger" onClick={() => handleUnblock(user._id)}>Unblock</button>
+              <button className="btn btn-danger" onClick={() => handleUnblock(user._id)}>Blocked</button>
             ) : (
-              <button className="btn btn-dark"  onClick={() => handleBlock(user._id)}>Block</button>
+              <button className="btn btn-dark"  onClick={() => handleBlock(user._id)}>UnBlocked</button>
             )}</td>
                 <td>
                   {user.activationTime
