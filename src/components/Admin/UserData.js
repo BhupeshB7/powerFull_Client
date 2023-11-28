@@ -346,7 +346,9 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row, Table } from "react-bootstrap";
+import UserBalance from "./UserBalance";
+import AdminCarouselImage from "./AdminCarouselImage";
 
 const itemsPerPage = 20;
 
@@ -360,7 +362,8 @@ function UserData() {
   const [activeUserCount, setActiveUserCount] = useState(0);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationUserId, setConfirmationUserId] = useState(null);
-
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   useEffect(() => {
     axios
       .get("https://mlm-production.up.railway.app/api/users/daily-new-users")
@@ -404,6 +407,13 @@ function UserData() {
   useEffect(() => {
     getUsers();
   }, [searchQuery]);
+  const handleViewDetails = (userId) => {
+    const user = users.find((user) => user._id === userId);
+    setModalIsOpen(true);
+    console.log(user)
+    setSelectedUser(user);
+  };
+
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -617,8 +627,9 @@ function UserData() {
           </Col>
         </Row>
       </Container>
-
-      <h4 className="text-center text-primary">User Details</h4>
+      <AdminCarouselImage/>
+         <UserBalance/>
+      <h4 className="text-center text-dark p-2">User Details</h4>
       <input
         type="text"
         placeholder="Search users..."
@@ -631,6 +642,7 @@ function UserData() {
           <thead className="text-success">
             <tr>
               <th>S.No</th>
+              <th>All Details</th>
               <th>Name</th>
               <th>Email</th>
               <th>Mobile No</th>
@@ -647,6 +659,15 @@ function UserData() {
             {users.map((user, index) => (
               <tr key={user._id}>
                 <td>{index + 1}</td>
+                <td>
+                  <button
+                  style={{minWidth:'130px'}}
+                    className="btn btn-primary"
+                    onClick={() => handleViewDetails(user._id)}
+                  >
+                    View Details
+                  </button>
+                </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.mobile}</td>
@@ -699,6 +720,59 @@ function UserData() {
           </tbody>
         </table>
       </div>
+      {/*  */}
+        {/* React Modal for displaying user details */}
+        <Modal
+        show={modalIsOpen}
+        onHide={() => setModalIsOpen(false)}
+        
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+               User Details
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+      {selectedUser && (
+        <Table striped bordered hover>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td>{selectedUser.name}</td>
+            </tr>
+            <tr>
+              <td>Balance</td>
+              <td>{selectedUser.balance}</td>
+            </tr>
+            <tr>
+              <td>Income</td>
+              <td>{selectedUser.income}</td>
+            </tr>
+            <tr>
+              <td>Self Income</td>
+              <td>{selectedUser.selfIncome}</td>
+            </tr>
+            <tr>
+              <td>Team Income</td>
+              <td>{selectedUser.teamIncome}</td>
+            </tr>
+            <tr>
+              <td>Topup Wallet</td>
+              <td>{selectedUser.topupWallet}</td>
+            </tr>
+            <tr>
+              <td>Withdrawal</td>
+              <td>{selectedUser.withdrawal}</td>
+            </tr>
+            {/* Add other details as needed */}
+          </tbody>
+        </Table>
+      )}
+    </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setModalIsOpen(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
       <Container>
         <Row>
           <Col sm={12}>
