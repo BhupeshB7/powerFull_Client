@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Card, Col, Container, Row } from 'react-bootstrap';
-
+import imageSpinner from '../../assets/imageSpinner.gif'
 const App = () => {
   const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
@@ -91,14 +91,14 @@ function arrayBufferToBase64(buffer) {
   
   return (
     <Container>
-      <input type="file" accept="image/*" onChange={handleFileChange} style={{maxWidth:'150px'}} />
-      <Button variant="primary" onClick={handleUpload} disabled={!image}>
+      <input type="file" accept="image/*" onChange={handleFileChange} style={{maxWidth:'200px'}} />
+      <Button variant="primary" className='m-1' onClick={handleUpload} disabled={!image}>
         Upload Image
       </Button>
 
       <div style={{ marginTop: '20px' }}>
         {loadingImages ? (
-          <p>Loading images...</p>
+          <p className='text-center'><img src={imageSpinner} height='55px' width='55px' alt='spinner'/></p>
         ) : (
             <Container>
             <Row>

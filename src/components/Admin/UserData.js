@@ -410,7 +410,7 @@ function UserData() {
   const handleViewDetails = (userId) => {
     const user = users.find((user) => user._id === userId);
     setModalIsOpen(true);
-    console.log(user)
+    // console.log(user)
     setSelectedUser(user);
   };
 
@@ -729,7 +729,7 @@ function UserData() {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-               User Details
+             <h6>{selectedUser &&(selectedUser.userId)} All Details...</h6>  
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -739,6 +739,10 @@ function UserData() {
             <tr>
               <td>Name</td>
               <td>{selectedUser.name}</td>
+            </tr>
+            <tr>
+              <td>UserId</td>
+              <td>{selectedUser.userId}</td>
             </tr>
             <tr>
               <td>Balance</td>
