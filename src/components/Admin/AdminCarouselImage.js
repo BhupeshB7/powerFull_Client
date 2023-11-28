@@ -91,7 +91,7 @@ function arrayBufferToBase64(buffer) {
   
   return (
     <Container>
-      <input type="file" accept="image/*" onChange={handleFileChange} style={{maxHeight:'150px'}} />
+      <input type="file" accept="image/*" onChange={handleFileChange} style={{maxWidth:'150px'}} />
       <Button variant="primary" onClick={handleUpload} disabled={!image}>
         Upload Image
       </Button>
