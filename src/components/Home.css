@@ -82,6 +82,7 @@ button:focus:not(:focus-visible) {
 /* Home -section */
 .home-content{
     width: 100%;
+
 }
 .home-section .home-container {
     display: flex;
@@ -93,6 +94,7 @@ button:focus:not(:focus-visible) {
     background-image: url("https://img.freepik.com/free-vector/white-abstract-background_23-2148831511.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais");
     background-size: cover;
     width: 100%;
+    animation: fadeInAnimation  3s ease-in-out forwards;
 }
 
 .home-section .home-container h1 {
@@ -144,7 +146,34 @@ button:focus:not(:focus-visible) {
     margin: auto;
     justify-content: space-between;
     width: 90%;
+    animation: fadeInAnimation  2s ease-in-out forwards;
 }
+.contentOfRow{
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.contentOfRow2{
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 2s ease-out, transform 2s ease-out;
+}
+.slide-in.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+  }
 .about-col-section{
     display: flex;
     margin: auto;

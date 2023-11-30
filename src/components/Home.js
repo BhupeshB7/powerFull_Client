@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { ImLocation, ImWhatsapp } from "react-icons/im";
 import { IoCall } from "react-icons/io5";
@@ -13,6 +13,16 @@ import { MdExpandMore } from "react-icons/md";
 import "react-toastify/dist/ReactToastify.css";
 import ContactForm from "../pages/ContactUs";
 const Home = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    // Add the "active" class after a delay (e.g., 1000 milliseconds)
+    const timer = setTimeout(() => {
+      setIsActive(true);
+    }, 1000);
+
+    return () => clearTimeout(timer); // Clear the timer on component unmount
+  }, []); // Run this effect only once when the component mounts
 
   return (
     <>
@@ -147,7 +157,7 @@ const Home = () => {
       <div className="about-content">
         <div className="about-container head-container">
           <h3 style={{ textAlign: "center" }}>About Us</h3>
-          <div className="row about-row-section">
+          <div className={`row about-row-section contentOfRow2 ${isActive ? 'slide-in active' : 'slide-in'}`}>
             <div className="col-12 col-sm-12 col-md-6 col-lg-5 about-col-section-1 about-col-section">
               <p>
                 {" "}
@@ -169,7 +179,7 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="row about-row-section flex-column-reverse flex-md-row ">
+          <div  className={` row about-row-section flex-column-reverse flex-md-row contentOfRow ${isActive ? 'slide-in active' : 'slide-in'}`}>
             <div className="col-12 col-sm-12 col-md-6 col-lg-6 about-col-section-3 about-col-section">
               <img
                 src="https://img.freepik.com/free-vector/illustration-diverse-people_53876-28662.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph"
@@ -209,7 +219,7 @@ const Home = () => {
                 </div>
                 <div className="contact-details col-10">
                   <a href="/" className="p-text">
-                    Patna 
+                    Rajasthan 
                   </a>
                   {/* <a href="tel:+91 8581869783" className="p-text">+91 8581869783</a> */}
                 </div>
@@ -219,8 +229,8 @@ const Home = () => {
                   <IoCall className="contact-svg" />
                 </div>
                 <div className="contact-details col-10">
-                  <a href="tel:+91 8102256637" className="p-text">
-                    +91 8102256637
+                  <a href="tel:+91 9565404470" className="p-text">
+                  +91 9565404470
                   </a>
                 </div>
               </div>

@@ -477,7 +477,7 @@ const NewGame = () => {
         // const winnings = betAmount * 1.25;
         let winnings;
         if (userChoice === targetColor) {
-          winnings = betAmount * 1.25;
+          winnings = betAmount * 2;
         } else if (userChoiceNumber === targetNumber) {
           winnings = betAmount * 4;
         } else if (userChoiceLetter === targetLetter) {
