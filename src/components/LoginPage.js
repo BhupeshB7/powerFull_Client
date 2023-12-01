@@ -8,6 +8,7 @@ import spinner2 from "../assets/spinner2.gif";
 const LoginForm = ({ setToken }) => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState(true);
   const [captchaResponse, setCaptchaResponse] = useState("");
   const [error, setError] = useState(null);
   const captchaRef = useRef();
@@ -58,6 +59,9 @@ const LoginForm = ({ setToken }) => {
   const handleCaptchaChange = (response) => {
     setCaptchaResponse(response);
   };
+  const handleClickShowPassword =()=>{
+    setPassword1(!password1)
+  }
   return (
     <>
       <div
@@ -110,13 +114,19 @@ const LoginForm = ({ setToken }) => {
                     alt="password"
                     style={{ marginLeft: "20px" }}
                   />
+
                   <input
-                    type="password"
+                    type={password1?'password':'text'}
                     placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
+                  <div className="showPassword" style={{marginLeft:'-20px'}}>
+                      {
+                        password1? <img src="https://cdn-icons-png.flaticon.com/128/7222/7222897.png" height='30px' width='30px' alt="eye" onClick={handleClickShowPassword}/>:<img src="https://cdn-icons-png.flaticon.com/128/8861/8861449.png" height='30px' width='30px' alt="eye"onClick={handleClickShowPassword} />
+                      }
+                  </div>
                 </div>
                 <div className="form_input">
                   <ReCAPTCHA
