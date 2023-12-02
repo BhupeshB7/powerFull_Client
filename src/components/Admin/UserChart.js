@@ -30,7 +30,7 @@ const UserChart = () => {
         series={seriesData}
         options={{
           labels: ['Active', 'Inactive'],
-          title: { text: 'User Active - Inactive' },
+          title: { text: 'User Active-InActive' },
         }}
       />
     </div>

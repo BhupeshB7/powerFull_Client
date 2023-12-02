@@ -32,11 +32,12 @@ function AdminBalance() {
         return;
       }
 
-      await axios.put(`https://mlm-production.up.railway.app/api/balance/${userId}`, { balance });
+      await axios.put(`https://mlm-production.up.railway.app/api/game/balance/${userId}`, { balance });
       setAlert({ show: true, type: 'success', message: 'Balance updated successfully' });
       // Optionally, you can fetch and display the updated user details
     } catch (error) {
       console.error(error);
+      console.log(error);
       setAlert({ show: true, type: 'danger', message: 'Failed to update balance' });
     }
   };
