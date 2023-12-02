@@ -222,7 +222,7 @@ function Withdrawal() {
   return (
     <div >
       {token ? (
-        <div className='topUPBg' style={{minHeight:'100%'}}>
+        <div className='topUPBg' style={{minHeight:'100%',backgroundImage:' linear-gradient(to top, #30cfd0 0%, #330867 100%)', height:'100vh'}}>
           <div className='container'>
             <div>
               <h6 className='text-secondary p-3'>Welcome, {data.name}</h6>
