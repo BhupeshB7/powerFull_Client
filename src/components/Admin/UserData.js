@@ -349,6 +349,8 @@ import axios from "axios";
 import { Button, Col, Container, Modal, Row, Table } from "react-bootstrap";
 import UserBalance from "./UserBalance";
 import AdminCarouselImage from "./AdminCarouselImage";
+import NewUsersChart from "./NewUsersChart";
+import UserChart from "./UserChart";
 
 const itemsPerPage = 20;
 
@@ -357,9 +359,7 @@ function UserData() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [count, setCount] = useState(0);
   const [newUsersCount, setNewUsersCount] = useState(null);
-  const [activeUserCount, setActiveUserCount] = useState(0);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationUserId, setConfirmationUserId] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -377,20 +377,7 @@ function UserData() {
       });
   }, []);
 
-  useEffect(() => {
-    fetch("https://mlm-production.up.railway.app/api/admin/count-active-items")
-      .then((response) => response.json())
-      .then((data) => setActiveUserCount(data.numberOfActiveUser))
-      .catch((error) => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    fetch("https://mlm-production.up.railway.app/api/admin/users/count")
-      .then((response) => response.json())
-      .then((data) => setCount(data.count))
-      .catch((error) => console.error(error));
-  }, []);
-
+ 
   const getUsers = async (page = 1) => {
     try {
       const response = await axios.get(
@@ -536,6 +523,8 @@ function UserData() {
   return (
     <div className="container-fluid" style={{ backgroundColor: "#fbffde" }}>
       <Container>
+        <UserChart/>
+        <NewUsersChart/>
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
             <div>
@@ -570,62 +559,7 @@ function UserData() {
             </div>
           </Col>
           {/* https://cdn-icons-png.flaticon.com/128/11533/11533705.png */}
-          <Col sm={12} md={6} lg={4} className="balanceCard1">
-            <div>
-              <div
-                style={{
-                  height: "50px",
-                  width: "50px",
-                  display: "flex",
-                  background: "rgb(223, 219, 251)",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "-30px",
-                  borderRadius: "50%",
-                }}
-              >
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/4837/4837101.png"
-                  height="50px"
-                  width="50px"
-                  alt="user"
-                  style={{}}
-                />
-              </div>
-              <h6 className="mt-3">
-                Total Users: &nbsp;{" "}
-                <b style={{ fontSize: "23px", lineHeight: "2px" }}>{count}</b>{" "}
-              </h6>
-            </div>
-          </Col>
-          <Col sm={12} md={6} lg={4} className="balanceCard1">
-            <div>
-              <div
-                style={{
-                  height: "50px",
-                  width: "50px",
-                  display: "flex",
-                  background: "rgb(220, 251, 219)",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop: "-30px",
-                  borderRadius: "50%",
-                }}
-              >
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/9654/9654103.png"
-                  height="40px"
-                  width="40px"
-                  alt="user"
-                />
-              </div>
-              <h6 className="mt-3">
-                Active Users: &nbsp;{" "}
-                <b style={{ fontSize: "20px" }}>{activeUserCount}</b>{" "}
-              </h6>
-            </div>
-          </Col>
-        </Row>
+         </Row>
       </Container>
       <AdminCarouselImage/>
          <UserBalance/>

@@ -13,6 +13,7 @@ import { MdExpandMore } from "react-icons/md";
 import "react-toastify/dist/ReactToastify.css";
 import ContactForm from "../pages/ContactUs";
 import { useInView } from "react-intersection-observer";
+import NewUsersChart from "./Admin/NewUsersChart";
 const Home = () => {
   const [ref, inView] = useInView({
     triggerOnce: true, // Only trigger the animation once
@@ -138,6 +139,7 @@ const Home = () => {
       </div>
       {/* Navbar End... */}
       {/* Home section */}
+      <NewUsersChart/>
       <div className="home-content">
         {/* Home Section */}
         <div className="home-section">

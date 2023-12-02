@@ -1364,3 +1364,16 @@ color: green !important;
   margin: 10px;
   flex-wrap: wrap;
 }
+.apexcharts-datalabel, .apexcharts-datalabels span {
+  display: block !important;
+  font-size: 14px !important; /* Adjust the font size as needed */
+  font-weight: bold !important; /* Adjust the font weight as needed */
+}
+.apexcharts-legend-text {
+  display: inline-block !important;
+  font-size: 14px !important; /* Adjust the font size as needed */
+  font-weight: bold !important;
+}
+.LineChart{
+  width: 600px !important;
+}
