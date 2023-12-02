@@ -877,7 +877,7 @@ const Dashboard = () => {
       .then((data) => {
         if (data.success) {
           // display success message or update user balance
-          // toast.success("Withdrawal successful");
+          toast.success("Withdrawal successful");
         } else {
           // display error message
           toast.error(`Withdrawal failed: ${data.error}`);
