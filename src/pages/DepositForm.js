@@ -7,7 +7,7 @@
 // <td>kumaromprakashhdhdksks@axl</td>
 
 import React, { useState } from "react";
-import QRCODE from "../assets/QRCODE2.jpg";
+import QRCODE from "../assets/QRCODE3.jpg";
 import { Button, Container, Table } from "react-bootstrap";
 const DepositForm = () => {
   const [formData, setFormData] = useState({

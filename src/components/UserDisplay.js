@@ -2449,7 +2449,7 @@ const Dashboard = () => {
                   <div className="row">
                     <div className="col-3">
                       <Link
-                        to={"tel:+91 8102256637"}
+                        to={"tel:+91 9565404470"}
                         className="contact-icon col-2"
                       >
                         <IoCall className="contact-svg" />
@@ -2468,7 +2468,7 @@ const Dashboard = () => {
                     <div className="col-3">
                       <Link
                         to={
-                          "https://wa.me/918102256637/?text=Hi!%20I'm%20interested%20to%20know%20more."
+                          "https://wa.me/919565404470/?text=Hi!%20I'm%20interested%20to%20know%20more."
                         }
                         className="contact-icon col-2"
                       >
@@ -2496,7 +2496,7 @@ const Dashboard = () => {
                     </h6>
                     <div className="m-1 p-3">
                       <Link
-                        to="https://chat.whatsapp.com/HjgV1NCYjx4Go5tdcmiPyq"
+                        to="https://chat.whatsapp.com/KLYUMefsR6x7ALmNkw7kGh"
                         className="contact-icon col-2"
                       >
                         <MdGroups2 className="contact-svg" />
