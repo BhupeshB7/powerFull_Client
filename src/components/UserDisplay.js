@@ -1259,7 +1259,7 @@ const Dashboard = () => {
       <div className="m-3 d-flex align-items-center justify-content-center"style={{height:'750px',}}>
       <div className=" blockeduser d-flex align-items-center justify-content-center p-2" style={{width:'100%', height:'350px',background:'white',borderRadius:'6px'}}>
         <div>
-          <h5 className="text-danger" style={{fontSize:'18px'}}>Sorry, you are unable to access this resource,because Your Account is Blocked Please contact us </h5>
+          <h5 className="text-danger" style={{fontSize:'18px'}}>Sorry, Your account is <b>Blocked</b></h5>
           <h6 className="text-secondary">Please contact us </h6>
            </div>
            <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
