@@ -55,7 +55,15 @@ function Setting() {
   const totalIncome =  data.selfIncome + data.teamIncome +data.rewards;
  
   return (
-    <div>
+    <>
+    {
+      data.isBlocked?(
+      <>
+      <h3 className="text-center text-danger m-3">Sorry, you are blocked from accessing this content.</h3>
+      </>
+      ):(
+      <>
+      <div>
       {token ? (
         <div className="setting_dashboard" style={{ background: "#000428" }}>
           <div>
@@ -216,6 +224,10 @@ function Setting() {
         </>
       )}
     </div>
+      </>
+      )}
+    
+    </>
   );
 }
 

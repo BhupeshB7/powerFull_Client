@@ -1377,3 +1377,6 @@ color: green !important;
 .LineChart{
   width: 600px !important;
 }
+.blockeduser{
+  flex-direction: column;
+}
