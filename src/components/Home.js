@@ -145,7 +145,7 @@ const Home = () => {
         <div className="home-section">
           <div className="home-container d-flex ">
             <h1>Welcome to</h1>
-            <h2>POWERFUL INDIA</h2>
+            <h2>POWERFULL INDIA</h2>
             <h6>Please, Login to continue...</h6>
             <div>
               <a className="home-button" href="/register">
