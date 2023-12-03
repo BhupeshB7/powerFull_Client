@@ -117,9 +117,9 @@ const DepositForm = () => {
             <tr className="text-warning text-center">
               <td>UPI</td>
               <td>
-                kumaromprakash
+              powerfullindia
                 <br />
-                hdhdksks@axl
+                849@khdfcbank
               </td>
             </tr>
           </tbody>

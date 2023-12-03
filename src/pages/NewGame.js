@@ -193,7 +193,7 @@ const NewGame = () => {
 
   const handleSubmit = async (e) => {
     if (formData.amount < 100) {
-      alert("Minimum Withdrawal Amount 200");
+      alert("Minimum Withdrawal Amount 100");
       return;
     }
     e.preventDefault();
@@ -220,8 +220,8 @@ const NewGame = () => {
     }
   };
   const handleSubmitWithdrawal = async (e) => {
-    if (formData1.amount < 200) {
-      alert("Minimum Withdrawal Amount 200");
+    if (formData1.amount < 110) {
+      alert("Minimum Withdrawal Amount 110");
       return;
     }
     e.preventDefault();
@@ -1715,7 +1715,7 @@ const NewGame = () => {
                       }}
                     />
                   </div>
-                  <h6 className="text-info">UPI: kumaromprakashhdhdksks@axl</h6>
+                  <h6 className="text-info">UPI: powerfullindia849@khdfcbank</h6>
                   <form onSubmit={handleSubmit} className="deposit_Form">
                     <label>UserId:</label>
                     <input
