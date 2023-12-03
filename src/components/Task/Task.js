@@ -10,6 +10,7 @@ const Task = () => {
   const { taskId } = useParams();
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState([]);
+  const [sponsorId, setSponsorId] = useState([]);
   const [task, setTask] = useState(null);
   const [userTaskStatus, setUserTaskStatus] = useState(false); // Initialize userTaskStatus as false
   const [timerActive, setTimerActive] = useState(false); // Initialize timerActive as false
@@ -29,7 +30,15 @@ const Task = () => {
         const data = await response.json();
         setData(data);
         const userId = data?.userId;
+        const sponsorId = data?.sponsorId;
         console.log(`Token Data user Id - ${userId}`)
+        console.log(`Token Data sponsor Id - ${sponsorId}`)
+        if (sponsorId) {
+          setSponsorId(sponsorId);
+      }
+       else {
+        throw new Error('SponsorId ID is missing from response data');
+      }
         if (userId) {
             setUserId(userId);
         }
@@ -78,11 +87,12 @@ const Task = () => {
       handleTaskCompletion();
     }, timerDuration * 1000);
   };
-
+  console.log('Completed UserId:');
+  console.log(sponsorId);
   const handleTaskCompletion = async () => {
       try {
         // const userId = data._id; // Replace this with the actual user ID of the logged-in user
-      await api.patch(`/tasks/${taskId}/complete`, { userId });
+      await api.patch(`/tasks/${taskId}/complete`, { userId,sponsorId });
       setUserTaskStatus(true); // Update the userTaskStatus in the state
       setTimerActive(false); // Reset the timerActive state to false
     } catch (error) {
