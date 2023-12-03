@@ -627,6 +627,8 @@ import ControlledCarousel from "./CarouselComponent";
 import ParticleComponent from "./Task/ParticleComponent";
 import FileInput from "../extra/App";
 import DisplayImage from "../extra/DisplayImage";
+import TeamTaskReport from "./TteamTaskReport";
+import { Button } from "react-bootstrap";
 
 const getTokenExpireTime = () => {
   const tokenExpire = localStorage.getItem("tokenExpire");
@@ -661,7 +663,8 @@ const Dashboard = () => {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   // For deposit
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  
   // const [activeUserData, setActiveUserData] = useState([]);
 
   // For fetch direct sponsorID
@@ -677,7 +680,6 @@ const Dashboard = () => {
   const [topUpAmount, setTopUpAmount] = useState("");
   const [isApproved, setIsApproved] = useState(false);
   const [imagePresent, setImagePresent] = useState(false);
-
   // Callback function to set the imagePresent state when an image is successfully uploaded
   const handleImageUploadSuccess = () => {
     setImagePresent(true);
@@ -1608,23 +1610,6 @@ const Dashboard = () => {
                               &nbsp; Fund history{" "}
                             </a>
                           </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/task-report"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/10008/10008048.png"
-                                alt="member task report"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Member Task Report{" "}
-                            </a>
-                          </li>
                           {/*  */}
                           <li className="nav-item dropdown">
                             <a
@@ -1847,6 +1832,7 @@ const Dashboard = () => {
                     TEAM STRUCTURE
                   </h6>
                 </div>
+                
                 <div className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard">
                   <p>DAILY INCOME</p>
                   <h6>{data.topupWallets} 25 Rs</h6>
@@ -2487,7 +2473,7 @@ const Dashboard = () => {
               </div>
               {/* Referal section End */}
               {/* Extra information */}
-
+               <TeamTaskReport userId={data.userId}/>
               {/* New Support */}
               <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
                 <h3 style={{ color: "#01b7ff", textDecoration: "underline" }}>
