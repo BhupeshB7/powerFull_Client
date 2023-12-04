@@ -27,14 +27,17 @@ const TeamTaskReport = ({ userId }) => {
 
   return (
     <>
-    <Button onClick={showTaskModal}>Show Task Report</Button>
+    <div className='d-flex align-items-center justify-content-center'>
+    <Button className='m-2' variant='outline-warning' style={{width:'210px'}}  onClick={showTaskModal}>Team Task Report</Button>
+    </div>
     <Modal show={showModal}
     onHide={closeModal}
     style={{ background:'rgba(0,0,0,0.80'}}>
     {/* style={{ backgroundImage:'linear-gradient(to top, #f43b47 0%, #453a94 100%)'}}> */}
-      <Modal.Header closeButton  style={{ backgroundImage:'linear-gradient(to bottom, #233333 0%, #45ca94 100%)'}}>
+      <Modal.Header closeButton  style={{ backgroundImage: 'linear-gradient(to top, #9890e3 0%, #b1f4cf 100%)'}}>
+      
         <Modal.Title>
-           User Task Report
+          <h5 className='text-success'>User Task Report</h5> 
         </Modal.Title>
       </Modal.Header>
       <Modal.Body  style={{ backgroundImage:'linear-gradient(to top, #233333 0%, #453c94 100%)'}}>

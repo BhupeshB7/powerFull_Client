@@ -1833,7 +1833,7 @@ const Dashboard = () => {
                     TEAM STRUCTURE
                   </h6>
                 </div>
-                
+                <TeamTaskReport userId={data.userId}/>
                 <div className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard">
                   <p>DAILY INCOME</p>
                   <h6>{data.topupWallets} 25 Rs</h6>
@@ -2474,7 +2474,7 @@ const Dashboard = () => {
               </div>
               {/* Referal section End */}
               {/* Extra information */}
-               <TeamTaskReport userId={data.userId}/>
+             
               {/* New Support */}
               <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
                 <h3 style={{ color: "#01b7ff", textDecoration: "underline" }}>
