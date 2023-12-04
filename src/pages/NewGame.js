@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import { ImWhatsapp } from "react-icons/im";
 import welcome from "../assets/gameWelcome.png";
 import spinner from "../assets/spinner2.gif";
-import QRCODE from "../assets/QRCODE2.jpg";
+import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
 const NewGame = () => {
