@@ -1356,6 +1356,7 @@ color: green !important;
 }
 .teamStructure_background{
   background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%);
+  color: rgb(211, 246, 211);
 }
 .CarouselImage{
   display: flex;

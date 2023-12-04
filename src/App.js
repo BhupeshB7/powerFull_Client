@@ -40,6 +40,7 @@ import ChangePassword from './pages/ChangePassword';
 import TopUpHistory from './pages/TopUpHistory';
 import LiveGame from './pages/LiveGame';
 import AdminLive from './pages/AdminLive';
+import TeamTaskReport from './components/TteamTaskReport';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -118,6 +119,7 @@ function App() {
           <Route path='/tasks' element={<TaskList/>}/>
           <Route path='/fundHistory' element={<FundHistory/>}/>
           <Route path='/task-report' element={<TaskReport/>}/>
+          <Route path='/task-report-user' element={<TeamTaskReport />}/>
           <Route path='/tasks/:taskId' element={<Task/>}/>
           <Route path='/depositform' element={<DepositForm/>}/>
           <Route path='/deposithistory' element={<DepsoitHistory/>}/>

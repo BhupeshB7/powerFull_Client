@@ -1,50 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const TeamTable = ({ teamStructure, indexSub, levelCounts, completedCounts }) => {
-  if (!teamStructure) {
-    return null;
-  }
+const TeamTable = ({ userId }) => {
+  const [teamStructure, setTeamStructure] = useState(null);
+  const [currentMember, setCurrentMember] = useState(null);
 
-  // Update level counts and completed counts
-  levelCounts[indexSub] = (levelCounts[indexSub] || 0) + 1;
-  if (teamStructure.activeStatus === 'Completed') {
-    completedCounts[indexSub] = (completedCounts[indexSub] || 0) + 1;
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://mlm-production.up.railway.app/api/teamTaskMember/${userId}`);
+        setTeamStructure(response.data);
+        setCurrentMember(response.data);
+      } catch (error) {
+        console.error('Error fetching team structure:', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  const handleViewMore = (memberIndex) => {
+    const newCurrentMember = currentMember.downline[memberIndex];
+    setCurrentMember({ ...newCurrentMember, parent: currentMember });
+  };
+
+  const handleViewBack = () => {
+    if (currentMember && currentMember.parent) {
+      setCurrentMember(currentMember.parent);
+    }
+  };
+
+  const renderChain = (member) => (
+    <div key={member.userId}>
+      <div className='text-light'>
+        <strong className='text-warning'>Level:</strong> {member.level} | <strong>User ID:</strong> {member.userId} | <strong>Status:</strong> {member.status}
+      </div>
+      {member.downline.length > 0 && (
+        <div style={{ marginLeft: '30px',color:'white' }}>
+          {member.downline.map((downlineMember, index) => (
+            <div key={downlineMember.userId}>
+              {renderChain(downlineMember)}
+              {index < member.downline.length - 1 && <hr />} {/* Add a horizontal line between downline members */}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 
   return (
-    <div className='table-responsive table-bordered'>
-      <table className='table '>
-        <thead className='text-light'>
-          <tr>
-            <th>#</th>
-            <th>User ID</th>
-            <th>Level</th>
-            <th>Task Status</th>
-            <th>Level Count</th>
-            <th>Completed Count</th>
-          </tr>
-        </thead>
-        <tbody className='text-light'>
-          <tr>
-            <td>{indexSub}</td>
-            <td>{teamStructure.userId}</td>
-            <td>{teamStructure.level}</td>
-            <td>{teamStructure.activeStatus}</td>
-            <td>{levelCounts[indexSub] || 0}</td>
-            <td>{completedCounts[indexSub] || 0}</td>
-          </tr>
-          {teamStructure.downline &&
-            teamStructure.downline.map((subTeam, index) => (
-              <TeamTable
-                key={index}
-                indexSub={index}
-                teamStructure={subTeam}
-                levelCounts={levelCounts}
-                completedCounts={completedCounts}
-              />
-            ))}
-        </tbody>
-      </table>
+    <div>
+      <h5 className='text-warning'>Team Viewer</h5>
+      {currentMember && renderChain(currentMember)}
+      {currentMember && currentMember.parent && (
+        <button onClick={handleViewBack}>View Back</button>
+      )}
     </div>
   );
 };

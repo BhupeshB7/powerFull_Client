@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import TeamTable from './TeamTable';
+import { Button, Modal } from 'react-bootstrap';
 
 const TeamTaskReport = ({ userId }) => {
   const [teamData, setTeamData] = useState([]);
-
+  const [showModal,setShowModal] =useState(false);
+  const showTaskModal=()=>{
+    setShowModal(true);
+  }
+  const closeModal=()=>{
+    setShowModal(false);
+  }
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
@@ -18,8 +26,20 @@ const TeamTaskReport = ({ userId }) => {
   }, [userId]);
 
   return (
-    <div className='table-responsive'>
-      <h6 className='text-center text-secondary'>Team Task Report for {userId}</h6>
+    <>
+    <Button onClick={showTaskModal}>Show Task Report</Button>
+    <Modal show={showModal}
+    onHide={closeModal}
+    style={{ background:'rgba(0,0,0,0.80'}}>
+    {/* style={{ backgroundImage:'linear-gradient(to top, #f43b47 0%, #453a94 100%)'}}> */}
+      <Modal.Header closeButton  style={{ backgroundImage:'linear-gradient(to bottom, #233333 0%, #45ca94 100%)'}}>
+        <Modal.Title>
+           User Task Report
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body  style={{ backgroundImage:'linear-gradient(to top, #233333 0%, #453c94 100%)'}}>
+      <div className='table-responsive'>
+      <h6 className='text-center text-info'>Team Task Report for {userId}</h6>
       <table className="table table-bordered">
         <thead className="fw-300">
           <tr className="text-light text-center">
@@ -35,12 +55,18 @@ const TeamTaskReport = ({ userId }) => {
               <td className="text-center" style={{ color: '#fccb90' }}>
                 {level}
               </td>
-              <td className="text-light text-center">{teamData[level].completed} &nbsp; &nbsp;<img src='https://cdn-icons-png.flaticon.com/128/190/190411.png' height='20px' width='20px' alt='completed'/></td>
+              <td className=" text-center" style={{color:'rgb(211, 246, 211)'}}>{teamData[level].completed} &nbsp; &nbsp;<img src='https://cdn-icons-png.flaticon.com/128/190/190411.png' height='20px' width='20px' alt='completed'/></td>
             </tr>
           ))}
         </tbody>
       </table>
+      <TeamTable userId={userId}/>
     </div>
+      </Modal.Body>
+    </Modal>
+    
+
+    </>
   );
 };
 
