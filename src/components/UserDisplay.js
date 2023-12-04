@@ -1835,8 +1835,8 @@ const Dashboard = () => {
                 </div>
                 <TeamTaskReport userId={data.userId}/>
                 <div className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard">
-                  <p>DAILY INCOME</p>
-                  <h6>{data.topupWallets} 25 Rs</h6>
+                  <p>TODAY INCOME</p>
+                  <h6 >{data.dailyIncome} Rs</h6>
                 </div>
                 <div
                   className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
