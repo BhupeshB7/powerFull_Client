@@ -10,10 +10,22 @@ const App = () => {
   const controller = new AbortController();
   const signal = controller.signal;
 
-  const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
-  };
+  
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
 
+    if (selectedFile) {
+      // Check if the file size is within the limit (500KB)
+      if (selectedFile.size <= 500 * 1024) {
+        setImage(selectedFile);
+      } else {
+        alert('File size exceeds 500KB. Please choose a smaller file.');
+        // Optionally, you can clear the input field
+        event.target.value = null;
+        setImage(null);
+      }
+    }
+  };
   const handleUpload = async () => {
     try {
       const formData = new FormData();
