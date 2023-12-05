@@ -641,7 +641,7 @@ const isTokenExpired = () => {
   return expireTime ? expireTime < Date.now() : true;
 };
 
-const Dashboard = () => {
+const Dashboard = ({contactInfoList}) => {
   // State declarations
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
@@ -665,7 +665,6 @@ const Dashboard = () => {
   const [message, setMessage] = useState("");
   // For deposit
 
-  
   // const [activeUserData, setActiveUserData] = useState([]);
 
   // For fetch direct sponsorID
@@ -1250,7 +1249,7 @@ const Dashboard = () => {
   const depositFormPage = () => {
     window.location.href = "/depositform";
   };
-  const totalIncome =  data.selfIncome + data.teamIncome +data.rewards;
+  const totalIncome = data.selfIncome + data.teamIncome + data.rewards;
   return (
     <div>
       {/* <div style={{ background: "#000428" }}> */}
@@ -1258,18 +1257,31 @@ const Dashboard = () => {
       {/* <div className="background-image"></div> */}
       {/* <div className="network-image"></div> */}
       <div>
-      {data.isBlocked?(
-      <div className="m-3 d-flex align-items-center justify-content-center"style={{height:'750px',}}>
-      <div className=" blockeduser d-flex align-items-center justify-content-center p-2" style={{width:'100%', height:'350px',background:'white',borderRadius:'6px'}}>
-        <div>
-          <h5 className="text-danger" style={{fontSize:'18px'}}>Sorry, Your account is <b>Blocked</b></h5>
-          <h6 className="text-secondary">Please contact us </h6>
-           </div>
-           <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
+        {data.isBlocked ? (
+          <div
+            className="m-3 d-flex align-items-center justify-content-center"
+            style={{ height: "750px" }}
+          >
+            <div
+              className=" blockeduser d-flex align-items-center justify-content-center p-2"
+              style={{
+                width: "100%",
+                height: "350px",
+                background: "white",
+                borderRadius: "6px",
+              }}
+            >
+              <div>
+                <h5 className="text-danger" style={{ fontSize: "18px" }}>
+                  Sorry, Your account is <b>Blocked</b>
+                </h5>
+                <h6 className="text-secondary">Please contact us </h6>
+              </div>
+              <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
                 <h3 style={{ color: "#01b7ff", textDecoration: "underline" }}>
                   Supports
                 </h3>
-               <div
+                <div
                   className="contact-us mt-5"
                   style={{ marginLeft: "-15px" }}
                 >
@@ -1304,69 +1316,69 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-         </div>
-      </div>
-      </div>
-      ):(
-      <>
-      <div className="dashboard-bg" style={{ zIndex: "1000" }}>
-        {token && isTokenValid ? (
+              </div>
+            </div>
+          </div>
+        ) : (
           <>
-            <div>
-              <nav className="navbar navbarBackground navbar-light bg-light">
-                <a
-                  className="navbar-brand text-bold"
-                  href="/"
-                  style={{
-                    marginLeft: "25px",
-                    color: "#30ABE2",
-                    fontWeight: "700",
-                    fontSize: "27px",
-                  }}
-                >
-                  PI
-                </a>
-                <h6
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasRight"
-                  aria-controls="offcanvasRight"
-                >
-                  {" "}
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/128/9109/9109764.png"
-                    alt="img"
-                    height="50px"
-                    width="50px"
-                    style={{ marginRight: "20px" }}
-                  />
-                </h6>
-                <div
-                  className="offcanvas offcanvasDashboard offcanvas-end"
-                  tabIndex={-1}
-                  id="offcanvasRight"
-                  aria-labelledby="offcanvasRightLabel"
-                >
-                  <div className="offcanvas-header">
-                    <button
-                      type="button"
-                      className="btn-close"
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                    />
-                  </div>
+            <div className="dashboard-bg" style={{ zIndex: "1000" }}>
+              {token && isTokenValid ? (
+                <>
+                  <div>
+                    <nav className="navbar navbarBackground navbar-light bg-light">
+                      <a
+                        className="navbar-brand text-bold"
+                        href="/"
+                        style={{
+                          marginLeft: "25px",
+                          color: "#30ABE2",
+                          fontWeight: "700",
+                          fontSize: "27px",
+                        }}
+                      >
+                        PI
+                      </a>
+                      <h6
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight"
+                        aria-controls="offcanvasRight"
+                      >
+                        {" "}
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/9109/9109764.png"
+                          alt="img"
+                          height="50px"
+                          width="50px"
+                          style={{ marginRight: "20px" }}
+                        />
+                      </h6>
+                      <div
+                        className="offcanvas offcanvasDashboard offcanvas-end"
+                        tabIndex={-1}
+                        id="offcanvasRight"
+                        aria-labelledby="offcanvasRightLabel"
+                      >
+                        <div className="offcanvas-header">
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                          />
+                        </div>
 
-                  <div className="offcanvas-body offcanvasBody">
-                    {/* Navbar- Start */}
+                        <div className="offcanvas-body offcanvasBody">
+                          {/* Navbar- Start */}
 
-                    <div className="container-fluid ms-3">
-                      <div>
-                        <ul className="navbar-nav ms-auto navbar-border mb-2 mb-lg-0">
-                          {/* <li className="nav-item" style={{ color: "cyan" }}>
+                          <div className="container-fluid ms-3">
+                            <div>
+                              <ul className="navbar-nav ms-auto navbar-border mb-2 mb-lg-0">
+                                {/* <li className="nav-item" style={{ color: "cyan" }}>
                 <h6>Activation Date: {data.activationTime ? new Date(data.activationTime).toLocaleString() : 'unknown'}</h6>
               </li> */}
 
-                          {/* {imagePresent ? (
+                                {/* {imagePresent ? (
                             <div className="company-logo">
                               <a href="/dashboard">
                                 <img
@@ -1395,471 +1407,490 @@ const Dashboard = () => {
                             />
                             </>
                           )} */}
-                          <div className="company-logo">
-                            <a href="/dashboard">
-                              <img
-                                src={logo}
-                                height="220px"
-                                width="220px"
-                                alt="logo"
-                              />
-                            </a>
-                          </div>
-                          <li>
-                            <h6 className="text-warning text-center mt-3">
-                              {" "}
-                              Hello, {data.name}
-                            </h6>
-                          </li>
-                          <li>
-                            <>
-                              {data.role === "admin" ||
-                              data.role === "Admin" ? (
-                                <>
-                                  <div>
-                                    <Link to={"/admin/dashboard"}>
-                                      <h6
-                                        className="text-center text-light"
-                                        style={{ textDecoration: "underline" }}
-                                      >
-                                        Admin Dashboard
-                                      </h6>
-                                    </Link>
-                                  </div>
-                                </>
-                              ) : (
-                                <></>
-                              )}
-                            </>
-                          </li>
-                          <div
-                            className="notification-text"
-                            style={{ color: "cyan" }}
-                          >
-                            <img
-                              src="https://cdn-icons-png.flaticon.com/128/11243/11243068.png"
-                              height="30px"
-                              width="30px"
-                              alt="reactivation"
-                            />
-                            &nbsp; &nbsp; Reactivation due on: <br />
-                            {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
-                            &nbsp; &nbsp;&nbsp; &nbsp;
-                            <img
-                              src="https://cdn-icons-png.flaticon.com/128/556/556690.png"
-                              height="25px"
-                              width="25px"
-                              alt="reactivation"
-                            />
-                            {reactivationTime}
-                          </div>
+                                <div className="company-logo">
+                                  <a href="/dashboard">
+                                    <img
+                                      src={logo}
+                                      height="220px"
+                                      width="220px"
+                                      alt="logo"
+                                    />
+                                  </a>
+                                </div>
+                                <li>
+                                  <h6 className="text-warning text-center mt-3">
+                                    {" "}
+                                    Hello, {data.name}
+                                  </h6>
+                                </li>
+                                <li>
+                                  <>
+                                    {data.role === "admin" ||
+                                    data.role === "Admin" ? (
+                                      <>
+                                        <div>
+                                          <Link to={"/admin/dashboard"}>
+                                            <h6
+                                              className="text-center text-light"
+                                              style={{
+                                                textDecoration: "underline",
+                                              }}
+                                            >
+                                              Admin Dashboard
+                                            </h6>
+                                          </Link>
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </>
+                                </li>
+                                <div
+                                  className="notification-text"
+                                  style={{ color: "cyan" }}
+                                >
+                                  <img
+                                    src="https://cdn-icons-png.flaticon.com/128/11243/11243068.png"
+                                    height="30px"
+                                    width="30px"
+                                    alt="reactivation"
+                                  />
+                                  &nbsp; &nbsp; Reactivation due on: <br />
+                                  {/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; */}
+                                  &nbsp; &nbsp;&nbsp; &nbsp;
+                                  <img
+                                    src="https://cdn-icons-png.flaticon.com/128/556/556690.png"
+                                    height="25px"
+                                    width="25px"
+                                    alt="reactivation"
+                                  />
+                                  {reactivationTime}
+                                </div>
 
-                          <div
-                            className="notification-text"
-                            style={{ color: "cyan", fontSize: "17px" }}
-                          >
-                            <br />
-                            <img
-                              src="https://cdn-icons-png.flaticon.com/128/2268/2268536.png"
-                              height="30px"
-                              width="25px"
-                              alt="reactivation"
-                              style={{ marginTop: "-15px" }}
-                            />
-                            &nbsp; &nbsp; {daysLeftForReactivation}
-                          </div>
-                          <li>
-                            <div className="notification-container">
-                              {/* <IoNotificationsCircle style={{ color: 'yellow', backgroundColor: 'red', borderRadius: '50%' }} className="notification-icon" /> */}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/2654/2654416.png"
-                                alt="account Activation"
-                                height="35px"
-                                width="35px"
-                              />
-                              <div
-                                className="notification-text"
-                                style={{ color: "cyan" }}
-                              >
-                                &nbsp; &nbsp; Account activated on: &nbsp;
-                                &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;{" "}
-                                {/* {data.activationTime
+                                <div
+                                  className="notification-text"
+                                  style={{ color: "cyan", fontSize: "17px" }}
+                                >
+                                  <br />
+                                  <img
+                                    src="https://cdn-icons-png.flaticon.com/128/2268/2268536.png"
+                                    height="30px"
+                                    width="25px"
+                                    alt="reactivation"
+                                    style={{ marginTop: "-15px" }}
+                                  />
+                                  &nbsp; &nbsp; {daysLeftForReactivation}
+                                </div>
+                                <li>
+                                  <div className="notification-container">
+                                    {/* <IoNotificationsCircle style={{ color: 'yellow', backgroundColor: 'red', borderRadius: '50%' }} className="notification-icon" /> */}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/2654/2654416.png"
+                                      alt="account Activation"
+                                      height="35px"
+                                      width="35px"
+                                    />
+                                    <div
+                                      className="notification-text"
+                                      style={{ color: "cyan" }}
+                                    >
+                                      &nbsp; &nbsp; Account activated on: &nbsp;
+                                      &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;{" "}
+                                      {/* {data.activationTime
                                   ? new Date(
                                       data.activationTime
                                     ).toLocaleString()
                                   : "unknown"} */}
-                                {activationTime}
-                              </div>
-                            </div>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/profile"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/10613/10613753.png"
-                                alt="profile"
-                                height="20px"
-                                width="20px"
-                              />{" "}
-                              &nbsp; Profile{" "}
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/profile-update"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/11121/11121490.png"
-                                alt="Profile update"
-                                height="20px"
-                                width="20px"
-                              />{" "}
-                              &nbsp; Profile-update{" "}
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/withdrawal"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/2845/2845668.png"
-                                alt="withdrawal"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Withdrawal History{" "}
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/topUp"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/3503/3503775.png"
-                                alt="TopUp History"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Top-up history{" "}
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/topUp-history"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/11286/11286673.png"
-                                alt="TopUp History"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Wallet Transfer{" "}
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/deposithistory"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/1090/1090965.png"
-                                alt="Deposit History"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Deposit history{" "}
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/fundHistory"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/2530/2530313.png"
-                                alt="Fund History"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Fund history{" "}
-                            </a>
-                          </li>
-                          {/*  */}
-                          <li className="nav-item dropdown">
-                            <a
-                              className="nav-link dropdown-toggle"
-                              aria-current="page"
-                              href="/dashboard"
-                              id="navbarDropdown"
-                              role="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/10710/10710128.png"
-                                alt="member"
-                                height="25px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; member{" "}
-                            </a>
-                            <ul
-                              className="dropdown-menu"
-                              aria-labelledby="navbarDropdown"
-                            >
-                              <li style={{border:'none !important'}}>
-                                <div className="dropdown-item">
-                                  <h6
-                                    onClick={() => setIsDirectModelOpen(true)}
-                                  >
-                                    Direct
-                                  </h6>
-                                  {/*  */}
-                                  {/*  */}
-                                  <Modal
-                                    isOpen={isDirectModelOpen}
-                                    style={customModalStyles}
-                                  >
-                                    {/* <Modal isOpen={isDirectModelOpen} style={{width:"50%", height:"100px", backgroundColor:"yellow"}}> */}
-                                    <h4
-                                      style={{
-                                        color: "red",
-                                        fontWeight: "bold",
-                                        position: "fixed",
-                                        cursor: "pointer",
-                                        right: "10%",
-                                      }}
-                                      onClick={() =>
-                                        setIsDirectModelOpen(false)
-                                      }
-                                    >
-                                      X
-                                    </h4>
-                                    <h6>All team</h6>
-                                    <div>
-                                      <div>
-                                        <table
-                                          className="table table-striped table-warning table-bordered"
-                                          style={{ width: "18rem" }}
-                                        >
-                                          <thead>
-                                            <tr>
-                                              <th>S.No.</th>
-                                              <th>Name</th>
-                                              <th>Email</th>
-                                              <th>UserId</th>
-                                              <th>Mobile No</th>
-                                              <th>Status</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            {sponsors.map((sponsor, index) => (
-                                              <tr key={sponsor._id}>
-                                                <td>{index + 1}</td>
-                                                <td>{sponsor.name}</td>
-                                                <td>{sponsor.email}</td>
-                                                <td>{sponsor.userId}</td>
-                                                <td>{sponsor.mobile}</td>
-                                                <td>
-                                                  {sponsor.is_active
-                                                    ? "Active"
-                                                    : "Inactive"}
-                                                </td>
-                                              </tr>
-                                            ))}
-                                          </tbody>
-                                        </table>
-                                      </div>
+                                      {activationTime}
                                     </div>
-                                  </Modal>
-                                </div>
-                              </li>{" "}
-                            </ul>
-                          </li>
-                          {/*  */}
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              aria-current="page"
-                              href="/change-password"
-                              style={{ color: "cyan", fontWeight: "600" }}
-                            >
-                              {" "}
-                              <img
-                                src="https://cdn-icons-png.flaticon.com/128/11135/11135315.png "
-                                alt="forgot Password"
-                                height="23px"
-                                width="23px"
-                              />{" "}
-                              &nbsp; Change password{" "}
-                            </a>
-                          </li>
+                                  </div>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/profile"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/10613/10613753.png"
+                                      alt="profile"
+                                      height="20px"
+                                      width="20px"
+                                    />{" "}
+                                    &nbsp; Profile{" "}
+                                  </a>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/profile-update"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/11121/11121490.png"
+                                      alt="Profile update"
+                                      height="20px"
+                                      width="20px"
+                                    />{" "}
+                                    &nbsp; Profile-update{" "}
+                                  </a>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/withdrawal"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/2845/2845668.png"
+                                      alt="withdrawal"
+                                      height="23px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; Withdrawal History{" "}
+                                  </a>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/topUp"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/3503/3503775.png"
+                                      alt="TopUp History"
+                                      height="23px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; Top-up history{" "}
+                                  </a>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/topUp-history"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/11286/11286673.png"
+                                      alt="TopUp History"
+                                      height="23px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; Wallet Transfer{" "}
+                                  </a>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/deposithistory"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/1090/1090965.png"
+                                      alt="Deposit History"
+                                      height="23px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; Deposit history{" "}
+                                  </a>
+                                </li>
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/fundHistory"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/2530/2530313.png"
+                                      alt="Fund History"
+                                      height="23px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; Fund history{" "}
+                                  </a>
+                                </li>
+                                {/*  */}
+                                <li className="nav-item dropdown">
+                                  <a
+                                    className="nav-link dropdown-toggle"
+                                    aria-current="page"
+                                    href="/dashboard"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/10710/10710128.png"
+                                      alt="member"
+                                      height="25px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; member{" "}
+                                  </a>
+                                  <ul
+                                    className="dropdown-menu"
+                                    aria-labelledby="navbarDropdown"
+                                  >
+                                    <li style={{ border: "none !important" }}>
+                                      <div className="dropdown-item">
+                                        <h6
+                                          onClick={() =>
+                                            setIsDirectModelOpen(true)
+                                          }
+                                        >
+                                          Direct
+                                        </h6>
+                                        {/*  */}
+                                        {/*  */}
+                                        <Modal
+                                          isOpen={isDirectModelOpen}
+                                          style={customModalStyles}
+                                        >
+                                          {/* <Modal isOpen={isDirectModelOpen} style={{width:"50%", height:"100px", backgroundColor:"yellow"}}> */}
+                                          <h4
+                                            style={{
+                                              color: "red",
+                                              fontWeight: "bold",
+                                              position: "fixed",
+                                              cursor: "pointer",
+                                              right: "10%",
+                                            }}
+                                            onClick={() =>
+                                              setIsDirectModelOpen(false)
+                                            }
+                                          >
+                                            X
+                                          </h4>
+                                          <h6>All team</h6>
+                                          <div>
+                                            <div>
+                                              <table
+                                                className="table table-striped table-warning table-bordered"
+                                                style={{ width: "18rem" }}
+                                              >
+                                                <thead>
+                                                  <tr>
+                                                    <th>S.No.</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>UserId</th>
+                                                    <th>Mobile No</th>
+                                                    <th>Status</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  {sponsors.map(
+                                                    (sponsor, index) => (
+                                                      <tr key={sponsor._id}>
+                                                        <td>{index + 1}</td>
+                                                        <td>{sponsor.name}</td>
+                                                        <td>{sponsor.email}</td>
+                                                        <td>
+                                                          {sponsor.userId}
+                                                        </td>
+                                                        <td>
+                                                          {sponsor.mobile}
+                                                        </td>
+                                                        <td>
+                                                          {sponsor.is_active
+                                                            ? "Active"
+                                                            : "Inactive"}
+                                                        </td>
+                                                      </tr>
+                                                    )
+                                                  )}
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </Modal>
+                                      </div>
+                                    </li>{" "}
+                                  </ul>
+                                </li>
+                                {/*  */}
+                                <li className="nav-item">
+                                  <a
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    href="/change-password"
+                                    style={{ color: "cyan", fontWeight: "600" }}
+                                  >
+                                    {" "}
+                                    <img
+                                      src="https://cdn-icons-png.flaticon.com/128/11135/11135315.png "
+                                      alt="forgot Password"
+                                      height="23px"
+                                      width="23px"
+                                    />{" "}
+                                    &nbsp; Change password{" "}
+                                  </a>
+                                </li>
 
-                          <li className="nav-item">
-                            {isLoggedIn ? (
-                              <button
-                                className="btn btn-danger"
-                                onClick={handleLogout}
-                              >
-                                LogOut
-                              </button>
-                            ) : (
-                              <>
-                                {" "}
-                                <button
-                                  className="btn btn-secondary"
-                                  onClick={handleLogin}
-                                >
-                                  Login
-                                </button>
-                              </>
-                            )}
-                          </li>
-                        </ul>
+                                <li className="nav-item">
+                                  {isLoggedIn ? (
+                                    <button
+                                      className="btn btn-danger"
+                                      onClick={handleLogout}
+                                    >
+                                      LogOut
+                                    </button>
+                                  ) : (
+                                    <>
+                                      {" "}
+                                      <button
+                                        className="btn btn-secondary"
+                                        onClick={handleLogin}
+                                      >
+                                        Login
+                                      </button>
+                                    </>
+                                  )}
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Navbar- End */}
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+
+                  {/* Dashboard-Navbar */}
+
+                  {/*  */}
+                  <div className="container-fluid dashboard">
+                    <ControlledCarousel />
+                    {token ? (
+                      <div className="dashboard-profile-center">
+                        <div className="dashboard-profile ">
+                          <h6
+                            className="text-center d-flex text-light"
+                            style={{
+                              justifyContent: "center",
+                              letterSpacing: "2px",
+                            }}
+                          >
+                            Hello, {data.name}
+                          </h6>
+                          <h6
+                            className="text-center fw-bold "
+                            style={{ color: "cyan" }}
+                          >
+                            UserID: {data.userId}
+                          </h6>
+                          <h6
+                            className="text-center "
+                            style={{ color: "#aaa" }}
+                          >
+                            Email: {data.email}
+                          </h6>
+                          <h6 className="text-center" style={{ color: "#ccc" }}>
+                            SponsorID: {data.sponsorId}
+                          </h6>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <h6 className="text-center text-secondary">
+                          Re login to continue...
+                        </h6>
+                        <Link
+                          to="/login"
+                          className="text-center text-primary"
+                          style={{ textDecoration: "underline" }}
+                        >
+                          Login
+                        </Link>
+                      </>
+                    )}
+
+                    <div className="id-status" style={{ letterSpacing: "2px" }}>
+                      <h6 className="text-light ms-5 fw-bold">
+                        ID Status: {data.is_active ? "Active" : "Inactive"}
+                      </h6>
+                    </div>
+                    <div
+                      className="dashboard-rank"
+                      style={{ letterSpacing: "2px" }}
+                    >
+                      <div className="text-light ms-5 fw-bold">
+                        {teamStructure &&
+                        teamStructure.activeDownlineCount !== null ? (
+                          <div>
+                            {/* <p>Rank: {getLevel(teamStructure.activeDownlineCount)}</p> */}
+                            <h6 className="fw-400">Rank: {rank}</h6>
+                            {/* Render other team structure data */}
+                          </div>
+                        ) : (
+                          <p>Loading...</p>
+                        )}
                       </div>
                     </div>
+                    {/* Balance Section */}
 
-                    {/* Navbar- End */}
-                  </div>
-                </div>
-              </nav>
-            </div>
-
-            {/* Dashboard-Navbar */}
-
-            {/*  */}
-            <div className="container-fluid dashboard">
-              <ControlledCarousel />
-              {token ? (
-                <div className="dashboard-profile-center">
-                  <div className="dashboard-profile ">
-                    <h6
-                      className="text-center d-flex text-light"
-                      style={{ justifyContent: "center", letterSpacing: "2px" }}
+                    <div
+                      className="row mt-1 rowBalanceCard "
+                      style={{
+                        color: "white",
+                      }}
                     >
-                      Hello, {data.name}
-                    </h6>
-                    <h6
-                      className="text-center fw-bold "
-                      style={{ color: "cyan" }}
-                    >
-                      UserID: {data.userId}
-                    </h6>
-                    <h6 className="text-center " style={{ color: "#aaa" }}>
-                      Email: {data.email}
-                    </h6>
-                    <h6 className="text-center" style={{ color: "#ccc" }}>
-                      SponsorID: {data.sponsorId}
-                    </h6>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <h6 className="text-center text-secondary">
-                    Re login to continue...
-                  </h6>
-                  <Link
-                    to="/login"
-                    className="text-center text-primary"
-                    style={{ textDecoration: "underline" }}
-                  >
-                    Login
-                  </Link>
-                </>
-              )}
-
-              <div className="id-status" style={{ letterSpacing: "2px" }}>
-                <h6 className="text-light ms-5 fw-bold">
-                  ID Status: {data.is_active ? "Active" : "Inactive"}
-                </h6>
-              </div>
-              <div className="dashboard-rank" style={{ letterSpacing: "2px" }}>
-                <div className="text-light ms-5 fw-bold">
-                  {teamStructure &&
-                  teamStructure.activeDownlineCount !== null ? (
-                    <div>
-                      {/* <p>Rank: {getLevel(teamStructure.activeDownlineCount)}</p> */}
-                      <h6 className="fw-400">Rank: {rank}</h6>
-                      {/* Render other team structure data */}
-                    </div>
-                  ) : (
-                    <p>Loading...</p>
-                  )}
-                </div>
-              </div>
-              {/* Balance Section */}
-
-              <div
-                className="row mt-1 rowBalanceCard "
-                style={{
-                  color: "white",
-                }}
-              >
-                <div className="team_structure_text">
-                  <h6
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    style={{ opacity: ".9" }}
-                  >
-                    TEAM STRUCTURE
-                  </h6>
-                </div>
-                <TeamTaskReport userId={data.userId}/>
-                <div className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard">
-                  <p>TODAY INCOME</p>
-                  <h6 >{data.dailyIncome} Rs</h6>
-                </div>
-                <div
-                  className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
-                  onClick={handleTasks}
-                  userID={data.userId}
-                >
-                  <p className="mt-4" style={{ paddingLeft: "10px" }}>
-                    TODAY'S TASK
-                  </p>
-                </div>
-                {/* <div className="col-11 col-sm-9 col md-6 col-lg-5 balanceCard">
+                      <div className="team_structure_text">
+                        <h6
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          style={{ opacity: ".9" }}
+                        >
+                          TEAM STRUCTURE
+                        </h6>
+                      </div>
+                      <TeamTaskReport userId={data.userId} />
+                      <div className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard">
+                        <p>TODAY INCOME</p>
+                        <h6>{data.dailyIncome} Rs</h6>
+                      </div>
+                      <div
+                        className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
+                        onClick={handleTasks}
+                        userID={data.userId}
+                      >
+                        <p className="mt-4" style={{ paddingLeft: "10px" }}>
+                          TODAY'S TASK
+                        </p>
+                      </div>
+                      {/* <div className="col-11 col-sm-9 col md-6 col-lg-5 balanceCard">
                   <p>TOP UP BALANCE</p>
                   <h4>{topUpAmount !== null ? topUpAmount : 'N/A'} Rs</h4>
                   <h6>{data.topUpAmount} Rs</h6>
                   {data.topupWallet}
                  </div> */}
 
-                {/* <div className="col-11 col-sm-9 col md-6 col-lg-5 balanceCard">
+                      {/* <div className="col-11 col-sm-9 col md-6 col-lg-5 balanceCard">
                   <p>TOTAL BALANCE</p>
                   <h4>{topUpAmount !== null ? topUpAmount : 'N/A'} Rs</h4>
                   <h6>{data.balance} Rs</h6>
                 </div> */}
-                {/* <div className="col-11 col-sm-9 col md-6 col-lg-5 balanceCard">
+                      {/* <div className="col-11 col-sm-9 col md-6 col-lg-5 balanceCard">
                   <p>INCOME WALLET</p>
                   <h6>{data.income} Rs</h6>
                 </div>
@@ -1867,264 +1898,180 @@ const Dashboard = () => {
                   <p>WITHDRAWAL WALLET</p>
                   <h6>{data.withdrawal} Rs</h6>
                 </div> */}
-                <Link
-                  to="/depositform"
-                  className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
-                  onClick={() => depositFormPage}
-                  style={{ paddingLeft: "40px" }}
-                >
-                  <AiOutlinePlusCircle className="dashboard-icon m-1" />
-                  <h6> DEPOSIT</h6>
-                </Link>
-                <div
-                  className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop1"
-                >
-                  <MdOutlineTransferWithinAStation className="dashboard-icon m-1" />
-                  <h6> WITHDRAWAL</h6>
-                </div>
-              </div>
-              {/* Balance section End */}
-              <div className="row rowBalanceCard ">
-                <div className="col-12 col-sm-9 col-md-5 col lg-4 ">
-                  <div className="card incomeCard">
-                    <div
-                      className="card-heading text-warning"
-                      style={{
-                        marginLeft: "20px",
-                        fontWeight: "600",
-                        marginTop: "10px",
-                      }}
-                    >
-                      INCOME
-                    </div>
-                    <div
-                      className="card-text text-light"
-                      style={{ marginLeft: "15px" }}
-                    >
-                      {/* Your Total Income: {data.income} Rs */}
-                      Total Income :{totalIncome} Rs
-                    </div>
-                    <div className="col">
-                      <div className="d-flex flex-row">
-                        <div className="p-2">
-                          <div className="d-flex flex-column income-border">
-                            <div className="p-2 text-light">Self Income</div>
-                            <div className="p-2" style={{ color: "cyan" }}>
-                              {data.selfIncome} Rs
-                            </div>
-                          </div>
-                        </div>
-                        <div className="p-2">
-                          <div className="d-flex flex-column income-border">
-                            <div className="p-2 text-light">Team income</div>
-                            <div className="p-2" style={{ color: "cyan" }}>
-                              {data.teamIncome} Rs
-                            </div>
-                          </div>
-                        </div>
-                        <div className="p-2">
-                          <div className="d-flex flex-column">
-                            <div className="p-2 text-light">Reward</div>
-                            <div className="p-2" style={{ color: "cyan" }}>
-                              {data.rewards}
-                            </div>
-                          </div>
-                        </div>
+                      <Link
+                        to="/depositform"
+                        className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
+                        onClick={() => depositFormPage}
+                        style={{ paddingLeft: "40px" }}
+                      >
+                        <AiOutlinePlusCircle className="dashboard-icon m-1" />
+                        <h6> DEPOSIT</h6>
+                      </Link>
+                      <div
+                        className="col-5 col-sm-9 col md-6 col-lg-5 balanceCard"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop1"
+                      >
+                        <MdOutlineTransferWithinAStation className="dashboard-icon m-1" />
+                        <h6> WITHDRAWAL</h6>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              {/* Balance section End */}
-
-              {/* Team Structure Start */}
-              {/* Modal */}
-              <div
-                className="modal fade"
-                id="exampleModal"
-                tabIndex={-1}
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog ">
-                  <div className="modal-content teamStructure_background">
-                    <div className="modal-header">
-                      <h5
-                        className="modal-title text-warning"
-                        id="exampleModalLabel"
-                      >
-                        TEAM STRUCTURE
-                      </h5>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      />
-                    </div>
-                    <div className="modal-body" style={{ overflowX: "auto" }}>
-                      <table className="table table-bordered" >
-                        <thead className="fw-300">
-                          <tr className="text-light">
-                            <th>S.No</th>
-                            <th>Level</th>
-                            <th>Active</th>
-                            <th style={{ width: "60px" }}>InActive</th>
-                            <th>Target Team</th>
-                            <th>Rank</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {Object.keys(activeUsersByLevel).map(
-                            (level, index) => (
-                              <tr key={level}>
-                                <td className="text-warning text-center">{index + 1}</td>
-                                <td className=" text-center" style={{color:'#fccb90'}}>{level}</td>
-                                <td className="text-light text-center">
-                                  {activeUsersByLevel[level].active}
-                                </td>
-                                <td className="text-center"style={{color:'#fccb90'}}>
-                                  {activeUsersByLevel[level].inactive}
-                                </td>
-                                <td className="text-light text-center">
-                                  {levelCounts[index]}
-                                </td>
-                                <td className=" text-center" style={{color:'#fccb90'}}>
-                                  {levelRanks[index]}
-                                </td>
-                              </tr>
-                            )
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="modal-footer"></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Team Structure End */}
-              {/* Withdrawal */}
-
-              <div
-                className="modal fade "
-                id="staticBackdrop1"
-                data-bs-backdrop="static"
-                data-bs-keyboard="false"
-                tabIndex={-1}
-                aria-labelledby="staticBackdropLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h1 className="modal-title fs-6" id="staticBackdropLabel">
-                        WITHDRAWAL
-                      </h1>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      />
-                    </div>
-                    <div className="modal-body">
-                      <div className="content_container">
-                        <form onSubmit={handleWithdrawalSubmit}>
+                    {/* Balance section End */}
+                    <div className="row rowBalanceCard ">
+                      <div className="col-12 col-sm-9 col-md-5 col lg-4 ">
+                        <div className="card incomeCard">
                           <div
-                            className="formInput"
+                            className="card-heading text-warning"
                             style={{
-                              paddingTop: "20px",
-                              marginBottom: "8px",
+                              marginLeft: "20px",
+                              fontWeight: "600",
+                              marginTop: "10px",
                             }}
                           >
-                            <label style={{ fontSize: "17px" }}>
-                              Account No:
-                            </label>
-                            {/* <input>value={data.accountNo}</input> */}
-                            <input
-                              type="text"
-                              value={data.accountNo}
-                              disabled
-                            />
-                            <label style={{ fontSize: "17px" }}>
-                              IFSC CODE:
-                            </label>
-                            {/* <input>value={data.ifscCode}</input> */}
-                            <input type="text" value={data.ifscCode} disabled />
-
-                            <label style={{ fontSize: "17px" }}>
-                              Account Holder Name:
-                            </label>
-                            {/* <input>value={data.GPay}</input> */}
-                            <input
-                              type="text"
-                              value={data.accountHolderName}
-                              disabled
-                            />
-
-                            <label>Withdraw Amount</label>
-                            <input
-                              type="number"
-                              value={withdrawalAmount}
-                              onChange={(e) =>
-                                setWithdrawalAmount(e.target.value)
-                              }
-                            />
-                            <button
-                              className="form_button"
-                              disabled={!withdrawalAmount}
-                              style={{
-                                backgroundImage:
-                                  "linear-gradient(to left, #ff5f6d 0%, #ffc371 100%)",
-                              }}
-                            >
-                              Withdraw
-                            </button>
+                            INCOME
                           </div>
-                        </form>
-                        <ToastContainer />
+                          <div
+                            className="card-text text-light"
+                            style={{ marginLeft: "15px" }}
+                          >
+                            {/* Your Total Income: {data.income} Rs */}
+                            Total Income :{totalIncome} Rs
+                          </div>
+                          <div className="col">
+                            <div className="d-flex flex-row">
+                              <div className="p-2">
+                                <div className="d-flex flex-column income-border">
+                                  <div className="p-2 text-light">
+                                    Self Income
+                                  </div>
+                                  <div
+                                    className="p-2"
+                                    style={{ color: "cyan" }}
+                                  >
+                                    {data.selfIncome} Rs
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="p-2">
+                                <div className="d-flex flex-column income-border">
+                                  <div className="p-2 text-light">
+                                    Team income
+                                  </div>
+                                  <div
+                                    className="p-2"
+                                    style={{ color: "cyan" }}
+                                  >
+                                    {data.teamIncome} Rs
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="p-2">
+                                <div className="d-flex flex-column">
+                                  <div className="p-2 text-light">Reward</div>
+                                  <div
+                                    className="p-2"
+                                    style={{ color: "cyan" }}
+                                  >
+                                    {data.rewards}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="modal-footer">
-                      {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    {/* Balance section End */}
 
-              <div className="row dashboard-box">
-                <div className="box-row">
-                  <div className="box-col">
-                    <div className="box-col-icon">
-                      {/* TOP-UP NEW MODEL */}
-                      <div>
-                        <HiOutlineArrowUpTray
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop"
-                          className="dashboard-icon1"
-                          style={{ color: " #252E95" }}
-                        />
+                    {/* Team Structure Start */}
+                    {/* Modal */}
+                    <div
+                      className="modal fade"
+                      id="exampleModal"
+                      tabIndex={-1}
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog ">
+                        <div className="modal-content teamStructure_background">
+                          <div className="modal-header">
+                            <h5
+                              className="modal-title text-warning"
+                              id="exampleModalLabel"
+                            >
+                              TEAM STRUCTURE
+                            </h5>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            />
+                          </div>
+                          <div
+                            className="modal-body"
+                            style={{ overflowX: "auto" }}
+                          >
+                            <table className="table table-bordered">
+                              <thead className="fw-300">
+                                <tr className="text-light">
+                                  <th>S.No</th>
+                                  <th>Level</th>
+                                  <th>Active</th>
+                                  <th style={{ width: "60px" }}>InActive</th>
+                                  <th>Target Team</th>
+                                  <th>Rank</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {Object.keys(activeUsersByLevel).map(
+                                  (level, index) => (
+                                    <tr key={level}>
+                                      <td className="text-warning text-center">
+                                        {index + 1}
+                                      </td>
+                                      <td
+                                        className=" text-center"
+                                        style={{ color: "#fccb90" }}
+                                      >
+                                        {level}
+                                      </td>
+                                      <td className="text-light text-center">
+                                        {activeUsersByLevel[level].active}
+                                      </td>
+                                      <td
+                                        className="text-center"
+                                        style={{ color: "#fccb90" }}
+                                      >
+                                        {activeUsersByLevel[level].inactive}
+                                      </td>
+                                      <td className="text-light text-center">
+                                        {levelCounts[index]}
+                                      </td>
+                                      <td
+                                        className=" text-center"
+                                        style={{ color: "#fccb90" }}
+                                      >
+                                        {levelRanks[index]}
+                                      </td>
+                                    </tr>
+                                  )
+                                )}
+                              </tbody>
+                            </table>
+                          </div>
+                          <div className="modal-footer"></div>
+                        </div>
                       </div>
                     </div>
-                    <h6
-                      className="mt-2 "
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop"
-                      style={{ color: " #252E95" }}
-                    >
-                      {" "}
-                      TOP-UP{" "}
-                    </h6>
+
+                    {/* Team Structure End */}
+                    {/* Withdrawal */}
 
                     <div
                       className="modal fade "
-                      id="staticBackdrop"
+                      id="staticBackdrop1"
                       data-bs-backdrop="static"
                       data-bs-keyboard="false"
                       tabIndex={-1}
@@ -2135,10 +2082,10 @@ const Dashboard = () => {
                         <div className="modal-content">
                           <div className="modal-header">
                             <h1
-                              className="modal-title fs-5"
+                              className="modal-title fs-6"
                               id="staticBackdropLabel"
                             >
-                              TOP-UP
+                              WITHDRAWAL
                             </h1>
                             <button
                               type="button"
@@ -2148,12 +2095,132 @@ const Dashboard = () => {
                             />
                           </div>
                           <div className="modal-body">
+                            <div className="content_container">
+                              <form onSubmit={handleWithdrawalSubmit}>
+                                <div
+                                  className="formInput"
+                                  style={{
+                                    paddingTop: "20px",
+                                    marginBottom: "8px",
+                                  }}
+                                >
+                                  <label style={{ fontSize: "17px" }}>
+                                    Account No:
+                                  </label>
+                                  {/* <input>value={data.accountNo}</input> */}
+                                  <input
+                                    type="text"
+                                    value={data.accountNo}
+                                    disabled
+                                  />
+                                  <label style={{ fontSize: "17px" }}>
+                                    IFSC CODE:
+                                  </label>
+                                  {/* <input>value={data.ifscCode}</input> */}
+                                  <input
+                                    type="text"
+                                    value={data.ifscCode}
+                                    disabled
+                                  />
+
+                                  <label style={{ fontSize: "17px" }}>
+                                    Account Holder Name:
+                                  </label>
+                                  {/* <input>value={data.GPay}</input> */}
+                                  <input
+                                    type="text"
+                                    value={data.accountHolderName}
+                                    disabled
+                                  />
+
+                                  <label>Withdraw Amount</label>
+                                  <input
+                                    type="number"
+                                    value={withdrawalAmount}
+                                    onChange={(e) =>
+                                      setWithdrawalAmount(e.target.value)
+                                    }
+                                  />
+                                  <button
+                                    className="form_button"
+                                    disabled={!withdrawalAmount}
+                                    style={{
+                                      backgroundImage:
+                                        "linear-gradient(to left, #ff5f6d 0%, #ffc371 100%)",
+                                    }}
+                                  >
+                                    Withdraw
+                                  </button>
+                                </div>
+                              </form>
+                              <ToastContainer />
+                            </div>
+                          </div>
+                          <div className="modal-footer">
+                            {/* <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="row dashboard-box">
+                      <div className="box-row">
+                        <div className="box-col">
+                          <div className="box-col-icon">
+                            {/* TOP-UP NEW MODEL */}
                             <div>
-                              <div className="form_container mb-3">
-                                <form>
-                                  <h6 className="text-success mt-3">
-                                    Balance :{" "}
-                                    {/* {isApproved ? (
+                              <HiOutlineArrowUpTray
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop"
+                                className="dashboard-icon1"
+                                style={{ color: " #252E95" }}
+                              />
+                            </div>
+                          </div>
+                          <h6
+                            className="mt-2 "
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                            style={{ color: " #252E95" }}
+                          >
+                            {" "}
+                            TOP-UP{" "}
+                          </h6>
+
+                          <div
+                            className="modal fade "
+                            id="staticBackdrop"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabIndex={-1}
+                            aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true"
+                          >
+                            <div className="modal-dialog modal-dialog-centered">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h1
+                                    className="modal-title fs-5"
+                                    id="staticBackdropLabel"
+                                  >
+                                    TOP-UP
+                                  </h1>
+                                  <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  />
+                                </div>
+                                <div className="modal-body">
+                                  <div>
+                                    <div className="form_container mb-3">
+                                      <form>
+                                        <h6 className="text-success mt-3">
+                                          Balance :{" "}
+                                          {/* {isApproved ? (
                                         <>
                                           {topUpAmount !== null
                                             ? topUpAmount
@@ -2163,190 +2230,194 @@ const Dashboard = () => {
                                       ) : (
                                         "Not Approved"
                                       )} */}
-                                    {data.topupWallet}
-                                  </h6>
-                                  <div className="formInput mt-2 mb-3">
-                                    <label
-                                      htmlFor="userId"
-                                      style={{ fontSize: "15px" }}
-                                    >
-                                      UserID
-                                    </label>
-                                    <input
-                                      type="text"
-                                      value={userId}
-                                      onChange={(e) =>
-                                        setUserId(e.target.value)
-                                      }
-                                      placeholder="Enter User ID"
-                                      required
-                                      min={"1"}
-                                      minLength={"1"}
-                                    />
-                                    {/* <button className="form_button topUp_button">Search</button> */}
-                                  </div>
-                                </form>
-                              </div>
-                              <div
-                                className="content d-flex"
-                                style={{ justifyContent: "center" }}
-                              >
-                                {topupButton && (
-                                  <button
-                                    className="form_button topUp_button"
-                                    style={{
-                                      width: "270px",
-                                      fontWeight: "600",
-                                    }}
-                                    onClick={handleClick}
-                                    disabled={!userId}
-                                  >
-                                    Check Status
-                                  </button>
-                                )}
-                              </div>
-                              <div className="content-para d-flex">
-                                {
-                                  userStatus === null ? (
-                                    <p>Click the button to check status.</p>
-                                  ) : (
-                                    <div className="topUPContent">
-                                      {/* <p className="text-danger">
-                                    User Already Activated!.
-                                  </p> */}
-                                      <h6 className="text-success text-center fw-bold">
-                                        {userStatus}
-                                      </h6>{" "}
-                                      {showTopUpButton ? (
-                                        <>
-                                          <button
-                                            className="form_button topUp_button1"
-                                            style={{ width: "300px" }}
-                                            onClick={handleActivateUser}
+                                          {data.topupWallet}
+                                        </h6>
+                                        <div className="formInput mt-2 mb-3">
+                                          <label
+                                            htmlFor="userId"
+                                            style={{ fontSize: "15px" }}
                                           >
-                                            TopUp Now
-                                          </button>
-                                        </>
-                                      ) : (
-                                        <></>
+                                            UserID
+                                          </label>
+                                          <input
+                                            type="text"
+                                            value={userId}
+                                            onChange={(e) =>
+                                              setUserId(e.target.value)
+                                            }
+                                            placeholder="Enter User ID"
+                                            required
+                                            min={"1"}
+                                            minLength={"1"}
+                                          />
+                                          {/* <button className="form_button topUp_button">Search</button> */}
+                                        </div>
+                                      </form>
+                                    </div>
+                                    <div
+                                      className="content d-flex"
+                                      style={{ justifyContent: "center" }}
+                                    >
+                                      {topupButton && (
+                                        <button
+                                          className="form_button topUp_button"
+                                          style={{
+                                            width: "270px",
+                                            fontWeight: "600",
+                                          }}
+                                          onClick={handleClick}
+                                          disabled={!userId}
+                                        >
+                                          Check Status
+                                        </button>
                                       )}
                                     </div>
-                                  )
-                                  //  : (
-                                  //   <button
-                                  //     className="form_button topUp_button1"
-                                  //     style={{ width: "300px" }}
-                                  //     onClick={handleActivateUser}
-                                  //   >
-                                  //     TopUp Now
-                                  //   </button>
-                                  // )
-                                }
-                                <div></div>
+                                    <div className="content-para d-flex">
+                                      {
+                                        userStatus === null ? (
+                                          <p>
+                                            Click the button to check status.
+                                          </p>
+                                        ) : (
+                                          <div className="topUPContent">
+                                            {/* <p className="text-danger">
+                                    User Already Activated!.
+                                  </p> */}
+                                            <h6 className="text-success text-center fw-bold">
+                                              {userStatus}
+                                            </h6>{" "}
+                                            {showTopUpButton ? (
+                                              <>
+                                                <button
+                                                  className="form_button topUp_button1"
+                                                  style={{ width: "300px" }}
+                                                  onClick={handleActivateUser}
+                                                >
+                                                  TopUp Now
+                                                </button>
+                                              </>
+                                            ) : (
+                                              <></>
+                                            )}
+                                          </div>
+                                        )
+                                        //  : (
+                                        //   <button
+                                        //     className="form_button topUp_button1"
+                                        //     style={{ width: "300px" }}
+                                        //     onClick={handleActivateUser}
+                                        //   >
+                                        //     TopUp Now
+                                        //   </button>
+                                        // )
+                                      }
+                                      <div></div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="modal-footer">
+                                  <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                          <div className="modal-footer">
-                            <button
-                              type="button"
-                              className="btn btn-secondary"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                          </div>
+
+                          {/* TOP-UP NEW MODEL END */}
                         </div>
-                      </div>
-                    </div>
-
-                    {/* TOP-UP NEW MODEL END */}
-                  </div>
-                  {/*  */}
-                  <div className="box-col">
-                    <div className="box-col-icon">
-                      {/* TOP-UP NEW MODEL */}
-                      <div>
-                        <RiExchangeFundsLine
-                          type="button"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop3"
-                          className="dashboard-icon1"
-                          style={{ color: "cyan" }}
-                        />
-                      </div>
-                    </div>
-                    <h6
-                      className="mt-2 "
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#staticBackdrop3"
-                      style={{ color: "cyan" }}
-                    >
-                      {" "}
-                      FUND MOVE{" "}
-                    </h6>
-
-                    <div
-                      className="modal fade "
-                      id="staticBackdrop3"
-                      data-bs-backdrop="static"
-                      data-bs-keyboard="false"
-                      tabIndex={-1}
-                      aria-labelledby="staticBackdropLabel"
-                      aria-hidden="true"
-                    >
-                      <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h1
-                              className="modal-title fs-5"
-                              id="staticBackdropLabel"
-                            >
-                              FUND MOVE
-                            </h1>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            />
+                        {/*  */}
+                        <div className="box-col">
+                          <div className="box-col-icon">
+                            {/* TOP-UP NEW MODEL */}
+                            <div>
+                              <RiExchangeFundsLine
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop3"
+                                className="dashboard-icon1"
+                                style={{ color: "cyan" }}
+                              />
+                            </div>
                           </div>
-                          <div className="modal-body">
-                            <form onSubmit={handleFundMoveSubmit}>
-                              <div
-                                className="formInput"
-                                style={{
-                                  paddingTop: "20px",
-                                  marginBottom: "8px",
-                                }}
-                              >
-                                {message && <p className="m-3">{message}</p>}
-                                <label style={{ fontSize: "17px" }}>
-                                  Total Income
-                                </label>
-                                {/* <input>value={data.accountNo}</input> */}
-                                <input
-                                  type="text"
-                                  value={data.income}
-                                  disabled
-                                  style={{ color: "rgb(120, 0, 206)" }}
-                                />
-                                <label style={{ fontSize: "17px" }}>
-                                  Total Balance
-                                </label>
-                                {/* <input>value={data.ifscCode}</input> */}
-                                <input
-                                  type="text"
-                                  value={data.balance}
-                                  disabled
-                                  style={{ color: "rgb(120, 0, 206)" }}
-                                />
-                                <label style={{ fontSize: "17px" }}>
-                                  TopUp Wallet
-                                </label>
-                                {/* <input>value={data.GPay}</input> */}
-                                {/* <h4><>{topUpAmount !== null ? topUpAmount : 'N/A'} Rs</>} Rs</h4> */}
-                                {/* <div>
+                          <h6
+                            className="mt-2 "
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop3"
+                            style={{ color: "cyan" }}
+                          >
+                            {" "}
+                            FUND MOVE{" "}
+                          </h6>
+
+                          <div
+                            className="modal fade "
+                            id="staticBackdrop3"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabIndex={-1}
+                            aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true"
+                          >
+                            <div className="modal-dialog modal-dialog-centered">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h1
+                                    className="modal-title fs-5"
+                                    id="staticBackdropLabel"
+                                  >
+                                    FUND MOVE
+                                  </h1>
+                                  <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  />
+                                </div>
+                                <div className="modal-body">
+                                  <form onSubmit={handleFundMoveSubmit}>
+                                    <div
+                                      className="formInput"
+                                      style={{
+                                        paddingTop: "20px",
+                                        marginBottom: "8px",
+                                      }}
+                                    >
+                                      {message && (
+                                        <p className="m-3">{message}</p>
+                                      )}
+                                      <label style={{ fontSize: "17px" }}>
+                                        Total Income
+                                      </label>
+                                      {/* <input>value={data.accountNo}</input> */}
+                                      <input
+                                        type="text"
+                                        value={data.income}
+                                        disabled
+                                        style={{ color: "rgb(120, 0, 206)" }}
+                                      />
+                                      <label style={{ fontSize: "17px" }}>
+                                        Total Balance
+                                      </label>
+                                      {/* <input>value={data.ifscCode}</input> */}
+                                      <input
+                                        type="text"
+                                        value={data.balance}
+                                        disabled
+                                        style={{ color: "rgb(120, 0, 206)" }}
+                                      />
+                                      <label style={{ fontSize: "17px" }}>
+                                        TopUp Wallet
+                                      </label>
+                                      {/* <input>value={data.GPay}</input> */}
+                                      {/* <h4><>{topUpAmount !== null ? topUpAmount : 'N/A'} Rs</>} Rs</h4> */}
+                                      {/* <div>
                                <h6>
                                   {" "}
                                   {isApproved ? (
@@ -2362,281 +2433,295 @@ const Dashboard = () => {
                                   style={{ color: "rgb(120, 0, 206)" }}
                                 </h6>
                                </div> */}
-                                <input
-                                  // value={
-                                  //   isApproved
-                                  //     ? topUpAmount !== null
-                                  //       ? `${topUpAmount} Rs`
-                                  //       : "N/A"
-                                  //     : "Not Approved"
-                                  // }
-                                  value={data.topupWallet}
-                                  disabled
-                                  style={{ color: "rgb(120, 0, 206)" }}
-                                />
-                                <label style={{ fontSize: "17px" }}>
-                                  Enter Amount:
-                                </label>
-                                <input
-                                  type="text"
-                                  value={amount}
-                                  onChange={handleAmountChange}
-                                  style={{ color: "rgb(120, 0, 206)" }}
-                                />
+                                      <input
+                                        // value={
+                                        //   isApproved
+                                        //     ? topUpAmount !== null
+                                        //       ? `${topUpAmount} Rs`
+                                        //       : "N/A"
+                                        //     : "Not Approved"
+                                        // }
+                                        value={data.topupWallet}
+                                        disabled
+                                        style={{ color: "rgb(120, 0, 206)" }}
+                                      />
+                                      <label style={{ fontSize: "17px" }}>
+                                        Enter Amount:
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value={amount}
+                                        onChange={handleAmountChange}
+                                        style={{ color: "rgb(120, 0, 206)" }}
+                                      />
 
-                                <button
-                                  className="form_button"
-                                  type="submit"
-                                  style={{
-                                    background:
-                                      "linear-gradient(to right, #c6d9df, #283048)",
-                                  }}
-                                >
-                                  Submit
-                                </button>
+                                      <button
+                                        className="form_button"
+                                        type="submit"
+                                        style={{
+                                          background:
+                                            "linear-gradient(to right, #c6d9df, #283048)",
+                                        }}
+                                      >
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div className="modal-footer">
+                                  <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                </div>
                               </div>
-                            </form>
+                            </div>
                           </div>
-                          <div className="modal-footer">
+
+                          {/* TOP-UP NEW MODEL END */}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/*Withdrawal section end  */}
+                    {/* Referral Section */}
+                    <div className="row rowBalanceCard">
+                      <div className="col-12 col-sm-9 col-md-5 col-lg-4 ">
+                        <div className="card mb-3 referralCard">
+                          <div
+                            className="card-heading"
+                            style={{ color: "darkorchid" }}
+                          >
+                            Referral Link
+                          </div>
+                          <div>
+                            <div className="form_input">
+                              <input
+                                type="text"
+                                value={referralLink}
+                                readOnly
+                                style={{ color: "#eee" }}
+                              />
+                            </div>
+
                             <button
-                              type="button"
-                              className="btn btn-secondary"
-                              data-bs-dismiss="modal"
+                              className="referral-button"
+                              onClick={handleCopy}
                             >
-                              Close
+                              {copied ? (
+                                <div className="text-light">Copied!</div>
+                              ) : (
+                                <>
+                                  {/* <h6 className='text-dark' style={{paddingTop:"5px"}}>COPY LINK</h6> */}
+                                  <img
+                                    src="https://cdn-icons-png.flaticon.com/128/1828/1828249.png"
+                                    height="25px"
+                                    width="25px"
+                                    alt=""
+                                  />
+                                </>
+                              )}
                             </button>
+
+                            <div
+                              style={{ marginLeft: "20px", display: "inline" }}
+                            >
+                              {/* <a className='text-success' href={`https://api.whatsapp.com/send?text=${encodeURIComponent(referralLink)}`} target="_blank"> */}
+
+                              <BsWhatsapp
+                                style={{
+                                  height: "28px",
+                                  width: "28px",
+                                  color: "green",
+                                }}
+                                onClick={handleWhatsAppClick}
+                              />
+                              <div>
+                                <QRCodeGenerator userId={data.userId} />
+                              </div>
+                            </div>
+                          </div>
+                          {/*  */}
+                        </div>
+                      </div>
+                    </div>
+                    {/* Referal section End */}
+                    {/* Extra information */}
+
+                    {/* New Support */}
+                    <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
+                      <h3
+                        style={{
+                          color: "#01b7ff",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        Supports
+                      </h3>
+
+                      <div
+                        className="contact-us mt-5"
+                        style={{ marginLeft: "-15px" }}
+                      >
+                        <div className="row">
+                          <div className="col-3">
+                            <Link
+                              to={`tel:${contactInfoList.mobile}`}
+                              className="contact-icon col-2"
+                            >
+                              <IoCall className="contact-svg" />
+                            </Link>
+                          </div>
+
+                          <div className="col-3">
+                            <Link
+                              to={`mailto:${contactInfoList.email}`}
+                              className="contact-icon col-2"
+                            >
+                              <MdEmail className="contact-svg" />
+                            </Link>
+                          </div>
+
+                          <div className="col-3">
+                            <Link
+                              to={
+                                `https://wa.me/${contactInfoList.mobile}/?text=Hi!%20I'm%20interested%20to%20know%20more.`
+                              }
+                              className="contact-icon col-2"
+                            >
+                              <ImWhatsapp className="contact-svg" />
+                            </Link>
+                          </div>
+
+                          <div className="col-3">
+                            {/* <img src="https://cdn-icons-png.flaticon.com/128/1828/1828249.png" height='45px' width='45px' alt="" /> */}
+                            <Link
+                              to={contactInfoList.telegramLink}
+                              className="contact-icon col-2"
+                            >
+                              <BsTelegram className="contact-svg" />
+                            </Link>
+                          </div>
+                        </div>
+
+                        <div>
+                          <h6
+                            className="text-center text-light"
+                            style={{ textDecoration: "underline" }}
+                          >
+                            Join WhatsApp Group
+                          </h6>
+                          <div className="m-1 p-3">
+                            <Link
+                              to={contactInfoList.whatsAppGroupLink} // Assuming groupLink is a property in contactInfo
+                              className="contact-icon col-2"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <MdGroups2 className="contact-svg" />
+                            </Link>
                           </div>
                         </div>
                       </div>
                     </div>
-
-                    {/* TOP-UP NEW MODEL END */}
                   </div>
-                </div>
-              </div>
-
-              {/*Withdrawal section end  */}
-              {/* Referral Section */}
-              <div className="row rowBalanceCard">
-                <div className="col-12 col-sm-9 col-md-5 col-lg-4 ">
-                  <div className="card mb-3 referralCard">
-                    <div
-                      className="card-heading"
-                      style={{ color: "darkorchid" }}
+                  <div className="time_update">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUYEr6dGrRfmPzVp03_uHsktADr47VhHqtJBEDDqDZ9YpccdmnNyfQRwMhiXgZi4EVvw&usqp=CAU"
+                      height="60px"
+                      width="65px"
+                      style={{ borderRadius: "50%" }}
+                      alt=""
+                    />
+                    <h6
+                      className=" mt-3 ms-3 "
+                      style={{ width: "180px", color: "#fff" }}
                     >
-                      Referral Link
-                    </div>
-                    <div>
-                      <div className="form_input">
-                        <input
-                          type="text"
-                          value={referralLink}
-                          readOnly
-                          style={{ color: "#eee" }}
-                        />
-                      </div>
-
-                      <button className="referral-button" onClick={handleCopy}>
-                        {copied ? (
-                          <div className="text-light">Copied!</div>
-                        ) : (
-                          <>
-                            {/* <h6 className='text-dark' style={{paddingTop:"5px"}}>COPY LINK</h6> */}
-                            <img
-                              src="https://cdn-icons-png.flaticon.com/128/1828/1828249.png"
-                              height="25px"
-                              width="25px"
-                              alt=""
-                            />
-                          </>
-                        )}
-                      </button>
-
-                      <div style={{ marginLeft: "20px", display: "inline" }}>
-                        {/* <a className='text-success' href={`https://api.whatsapp.com/send?text=${encodeURIComponent(referralLink)}`} target="_blank"> */}
-
-                        <BsWhatsapp
-                          style={{
-                            height: "28px",
-                            width: "28px",
-                            color: "green",
-                          }}
-                          onClick={handleWhatsAppClick}
-                        />
-                        <div>
-                          <QRCodeGenerator userId={data.userId} />
+                      Last update: {realTimeDate}
+                    </h6>
+                  </div>
+                  <div
+                    className="bottom_section "
+                    style={{ marginTop: "90px" }}
+                  >
+                    <div
+                      className="row  footer_row_content "
+                      style={{
+                        background: "#000428",
+                        height: "90px",
+                        color: "cyan",
+                      }}
+                    >
+                      <div className="col-12">
+                        <div className="footer_container">
+                          <div className="footer_content">
+                            <Link
+                              to="/dashboard"
+                              className="footer_icon"
+                              style={{ color: "cyan" }}
+                            >
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/128/9187/9187555.png"
+                                alt="account Activation"
+                                height="35px"
+                                width="35px"
+                              />
+                              <h6 className=" mt-1">Home</h6>
+                            </Link>
+                            <Link
+                              to="/wallet"
+                              style={{ color: "cyan" }}
+                              className="footer_icon"
+                            >
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/128/9181/9181081.png"
+                                alt="wallet"
+                                height="35px"
+                                width="35px"
+                              />
+                              <h6 className=" mt-1">Wallet</h6>
+                            </Link>
+                            <Link
+                              to="/game/colorpridiction"
+                              className="footer_icon"
+                              style={{ color: "cyan" }}
+                            >
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/128/8002/8002123.png"
+                                alt="fund"
+                                height="35px"
+                                width="35px"
+                              />
+                              <h6 className=" mt-1">Game</h6>
+                            </Link>
+                            <Link to="/setting" className="footer_icon">
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/128/3953/3953226.png"
+                                alt="account Activation"
+                                height="35px"
+                                width="35px"
+                              />
+                              <h6 className="mt-1" style={{ color: "cyan" }}>
+                                Setting
+                              </h6>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    {/*  */}
                   </div>
-                </div>
-              </div>
-              {/* Referal section End */}
-              {/* Extra information */}
-             
-              {/* New Support */}
-              <div className="col-sm-12 col-md-6 col-lg-5 contact-section-1">
-                <h3 style={{ color: "#01b7ff", textDecoration: "underline" }}>
-                  Supports
-                </h3>
-
-                <div
-                  className="contact-us mt-5"
-                  style={{ marginLeft: "-15px" }}
-                >
-                  <div className="row">
-                    <div className="col-3">
-                      <Link
-                        to={"tel:+91 9565404470"}
-                        className="contact-icon col-2"
-                      >
-                        <IoCall className="contact-svg" />
-                      </Link>
-                    </div>
-
-                    <div className="col-3">
-                      <Link
-                        to={"mailto:powerfulindia850@gmail.com"}
-                        className="contact-icon col-2"
-                      >
-                        <MdEmail className="contact-svg" />
-                      </Link>
-                    </div>
-
-                    <div className="col-3">
-                      <Link
-                        to={
-                          "https://wa.me/919565404470/?text=Hi!%20I'm%20interested%20to%20know%20more."
-                        }
-                        className="contact-icon col-2"
-                      >
-                        <ImWhatsapp className="contact-svg" />
-                      </Link>
-                    </div>
-
-                    <div className="col-3">
-                      {/* <img src="https://cdn-icons-png.flaticon.com/128/1828/1828249.png" height='45px' width='45px' alt="" /> */}
-                      <Link
-                        to="https://t.me/+UPKVZrsgU-NlZTdl"
-                        className="contact-icon col-2"
-                      >
-                        <BsTelegram className="contact-svg" />
-                      </Link>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h6
-                      className="text-center text-light"
-                      style={{ textDecoration: "underline" }}
-                    >
-                      Join WhatsApp Group
-                    </h6>
-                    <div className="m-1 p-3">
-                      <Link
-                        to="https://chat.whatsapp.com/KLYUMefsR6x7ALmNkw7kGh"
-                        className="contact-icon col-2"
-                      >
-                        <MdGroups2 className="contact-svg" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  {/*  */}
+                </>
+              ) : (
+                <h1>Your session has expired. Please log in again.</h1>
+              )}
             </div>
-            <div className="time_update">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUYEr6dGrRfmPzVp03_uHsktADr47VhHqtJBEDDqDZ9YpccdmnNyfQRwMhiXgZi4EVvw&usqp=CAU"
-                height="60px"
-                width="65px"
-                style={{ borderRadius: "50%" }}
-                alt=""
-              />
-              <h6
-                className=" mt-3 ms-3 "
-                style={{ width: "180px", color: "#fff" }}
-              >
-                Last update: {realTimeDate}
-              </h6>
-            </div>
-            <div className="bottom_section " style={{ marginTop: "90px" }}>
-              <div
-                className="row  footer_row_content "
-                style={{
-                  background: "#000428",
-                  height: "90px",
-                  color: "cyan",
-                }}
-              >
-                <div className="col-12">
-                  <div className="footer_container">
-                    <div className="footer_content">
-                      <Link
-                        to="/dashboard"
-                        className="footer_icon"
-                        style={{ color: "cyan" }}
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/9187/9187555.png"
-                          alt="account Activation"
-                          height="35px"
-                          width="35px"
-                        />
-                        <h6 className=" mt-1">Home</h6>
-                      </Link>
-                      <Link
-                        to="/wallet"
-                        style={{ color: "cyan" }}
-                        className="footer_icon"
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/9181/9181081.png"
-                          alt="wallet"
-                          height="35px"
-                          width="35px"
-                        />
-                        <h6 className=" mt-1">Wallet</h6>
-                      </Link>
-                      <Link
-                        to="/game/colorpridiction"
-                        className="footer_icon"
-                        style={{ color: "cyan" }}
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/8002/8002123.png"
-                          alt="fund"
-                          height="35px"
-                          width="35px"
-                        />
-                        <h6 className=" mt-1">Game</h6>
-                      </Link>
-                      <Link to="/setting" className="footer_icon">
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/3953/3953226.png"
-                          alt="account Activation"
-                          height="35px"
-                          width="35px"
-                        />
-                        <h6 className="mt-1" style={{ color: "cyan" }}>
-                          Setting
-                        </h6>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/*  */}
           </>
-        ) : (
-          <h1>Your session has expired. Please log in again.</h1>
         )}
       </div>
-      </>
-      )}
-      </div>
-      
     </div>
   );
 };

@@ -16,7 +16,7 @@ import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
-const NewGame = () => {
+const NewGame = ({contactInfoList}) => {
   const [targetColor, setTargetColor] = useState("");
   const [targetNumber, setTargetNumber] = useState("");
   const [targetLetter, setTargetLetter] = useState("");
@@ -1109,7 +1109,7 @@ const NewGame = () => {
                   textAlign: "center",
                 }}
               >
-                <Link to={"https://wa.me/918102256637/?text=Hi"}>
+                <Link to={`https://wa.me/${contactInfoList.mobile}/?text=Hi`}>
                   <ImWhatsapp
                     className="contact-svg"
                     style={{
@@ -1612,12 +1612,10 @@ const NewGame = () => {
                           </h6>
                           <ul className="dropdown-menu">
                             <li>
-                              <h6
-                                className="dropdown-item"
-                                onClick={handleShow}
+                              <a href="/depositform/game"
                               >
                                 Deposit
-                              </h6>
+                              </a>
                             </li>
                             <li>
                               <h6

@@ -9,7 +9,20 @@ function  GameDeposit() {
   const [gameHistory, setGameHistory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [showImage, setShowImage] = useState(null);
 
+  // Open the modal to display the selected image
+  const openImage = (image) => {
+    setShowImage(image);
+    setShowModal(true);
+  };
+
+  // Close the modal
+  const closeImage = () => {
+    setShowImage(null);
+    setShowModal(false);
+  };
   const [statistics, setStatistics] = useState({
     sevenDayTotalAmount: 0,
     sevenDayPendingAmount: 0,
@@ -67,25 +80,29 @@ function  GameDeposit() {
   const id = gameHistory._id;
   
   const handleApprove = async (id, amount) => {
-    const alreadyApprovedItem = gameHistory.find(item => item._id === id && item.approved === "Approved");
+    const alreadyApprovedItem = gameHistory.find(item => item._id === id && item.isApproved);
   
-  if (alreadyApprovedItem) {
-    alert("Already approved!");
-    return;
-  }
+    if (alreadyApprovedItem) {
+      alert("Already approved!");
+      return;
+    }
+  
     try {
       const response = await axios.put(`https://mlm-production.up.railway.app/api/approve/${id}`, { amount });
       alert(response.data.message);
-       // Update the status in the gameHistory array
-       const updatedGameHistory = gameHistory.map((item) =>
-       item._id === id ? { ...item, approved: "Approved" } : item
-     );
-     // Set the updated gameHistory in the state
-     setGameHistory(updatedGameHistory);
+      
+      // Update the status in the gameHistory array
+      const updatedGameHistory = gameHistory.map((item) =>
+        item._id === id ? { ...item, isApproved: true } : item
+      );
+  
+      // Set the updated gameHistory in the state
+      setGameHistory(updatedGameHistory);
     } catch (error) {
       console.log(error.response.data.message);
     }
   };
+  
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -131,6 +148,7 @@ function  GameDeposit() {
               <th>UserId</th>
               <th>Amount</th>
               <th>UTR</th>
+              <th>View</th>
               <th>Status</th>
               
             </tr>
@@ -140,15 +158,38 @@ function  GameDeposit() {
               <tr key={item._id}>
                 <td>{item.name}</td>
                 <td>{item.userId}</td>
-                <td>{item.amount}</td>
-                <td>{item.UTR}</td>
-                <td> <Button onClick={()=>handleApprove(item._id, item.amount)} className="ms-1">{item.approved}</Button></td>
+                <td>{item.depositAmount}</td>
+                <td>{item.transactionId}</td>
+                <td>
+                <div className="image-list m-5">
+                  {item.images.map((image) => (
+                    <div key={image.public_id}>
+                      <Button variant="warning" onClick={() => openImage(image)} style={{width:'110px',height:'40px'}}>View</Button>
+                    </div>
+                  ))}
+                </div>
+              </td>
+                <td> <Button onClick={()=>handleApprove(item._id, item.depositAmount)} className="ms-1">{item.isApproved?'Approved':'Pending'}</Button></td>
                 {/* Add more table data cells as needed */}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {showModal && showImage && (
+        <div className="modal modalImage">
+          <div className="modal-content modal-contentImage">
+            <div className="close" onClick={closeImage}>&times;</div>
+            <img
+              src={`https://res.cloudinary.com/dmoukvc5o/image/upload/${showImage.public_id}.jpg`}
+              alt="Selected"
+              height='500px'
+              width='300px'
+              className="centered-image"
+            />
+          </div>
+        </div>
+      )}
       <div className="pagination">
         <Button  variant="outline-primary" className='ms-1'
           onClick={() => handlePageChange(currentPage - 1)}

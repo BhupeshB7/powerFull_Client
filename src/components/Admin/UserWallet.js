@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import NavbarComponent from "./NavbarComponent";
+import ContactInfo from "../ContactInfo";
 
 const UserWallet = () => {
   const [isTokenValid, setIsTokenValid] = useState(true);
@@ -87,6 +88,7 @@ const UserWallet = () => {
       (
           <div >
             <NavbarComponent/>
+            <ContactInfo />
           <Container>
             <div className="form_container pt-5">
               <form>

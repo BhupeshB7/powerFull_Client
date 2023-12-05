@@ -41,12 +41,20 @@ import TopUpHistory from './pages/TopUpHistory';
 import LiveGame from './pages/LiveGame';
 import AdminLive from './pages/AdminLive';
 import TeamTaskReport from './components/TteamTaskReport';
+import GameDepositForm from './pages/GameDepositForm';
+import axios from 'axios';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
 
   
   const [token, setToken] = useState("");
+  const [contactInfoList, setContactInfoList] = useState([]);
+
+  useEffect(() => {
+    // Fetch contact info details on component mount
+    axios.get('https://mlm-production.up.railway.app/api/contactInfo').then((response) => setContactInfoList(response.data));
+  }, []);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -73,7 +81,7 @@ function App() {
         </script>
       </Helmet>
         <Routes>
-          <Route  path="/" element={<Home/>} />
+          <Route  path="/" element={<Home contactInfoList={contactInfoList}/>} />
           <Route  path="/image" element={<ProfileImage/>} />
           <Route  path="/register" element={<RegisterForm/>} />
 
@@ -89,7 +97,7 @@ function App() {
         <Route path="/admin-login" element={<Login />} />
           <Route  path="/login" element={<LoginPage/>} LoginPage={setToken}/>
           {/* <Route  path="/admin-login" element={<Login/>} /> */}
-          <Route  path="/dashboard" element={<Dashboard/>}/>
+          <Route  path="/dashboard" element={<Dashboard contactInfoList={contactInfoList}/>}/>
           <Route  path="/task" element={<Task/>}/>
           {/* <Route  path="/admin/dashboard" element={<AdminDashboard/>} /> */}
           <Route  path="/admin/dashboard" element={<DashboardAdmin/>} />
@@ -103,7 +111,7 @@ function App() {
           <Route path='/wallet' element={<Wallet/>}/>
           <Route path='/game' element={<Game/>} />
           <Route path='/game/colorpridictions' element={<ColorPredictionGame/>} />
-          <Route path='/game/colorpridiction' element={<NewGame/>} />
+          <Route path='/game/colorpridiction' element={<NewGame contactInfoList={contactInfoList}/>} />
           <Route path='/game/colorpridiction/live' element={<LiveGame/>} />
           <Route path='/game/colorpridiction/admin/live' element={<AdminLive/>} />
           <Route path='/game/spinWheel' element={<SpinGame/>} />
@@ -122,6 +130,7 @@ function App() {
           <Route path='/task-report-user' element={<TeamTaskReport />}/>
           <Route path='/tasks/:taskId' element={<Task/>}/>
           <Route path='/depositform' element={<DepositForm/>}/>
+          <Route path='/depositform/game' element={<GameDepositForm/>}/>
           <Route path='/deposithistory' element={<DepsoitHistory/>}/>
           <Route  path="*" element={<Error/>} />
 

@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ContactForm from "../pages/ContactUs";
 import { useInView } from "react-intersection-observer";
 // import NewUsersChart from "./Admin/NewUsersChart";
-const Home = () => {
+const Home = ({ contactInfoList }) => {
   const [ref, inView] = useInView({
     triggerOnce: true, // Only trigger the animation once
   });
@@ -41,7 +41,12 @@ const Home = () => {
               fontWeight: "bolder",
             }}
           >
-            <img src="https://cdn-icons-png.flaticon.com/128/1625/1625674.png" height='50px' width='50px' alt="logo"/>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/1625/1625674.png"
+              height="50px"
+              width="50px"
+              alt="logo"
+            />
           </a>
           {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon" />dssv
@@ -83,7 +88,11 @@ const Home = () => {
               <div className="home_navbar" id="navbarNav">
                 <ul className="ms-auto navbar-nav ">
                   <li className="nav-item">
-                    <a className="nav-link active text-dark" aria-current="page" href="/">
+                    <a
+                      className="nav-link active text-dark"
+                      aria-current="page"
+                      href="/"
+                    >
                       Home
                     </a>
                   </li>{" "}
@@ -92,7 +101,7 @@ const Home = () => {
                     <hr />{" "}
                   </div>
                   <li className="nav-item">
-                      <a className="nav-link " href="/login">
+                    <a className="nav-link " href="/login">
                       Login
                     </a>
                   </li>{" "}
@@ -140,6 +149,8 @@ const Home = () => {
       {/* Navbar End... */}
       {/* Home section */}
       {/* <NewUsersChart/> */}
+      
+     
       <div className="home-content">
         {/* Home Section */}
         <div className="home-section">
@@ -149,7 +160,13 @@ const Home = () => {
             <h6>Please, Login to continue...</h6>
             <div>
               <a className="home-button" href="/register">
-                Get Started <img src="https://cdn-icons-png.flaticon.com/128/1634/1634158.png" height='25px' width='25px' alt="right_arrow"/>
+                Get Started{" "}
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1634/1634158.png"
+                  height="25px"
+                  width="25px"
+                  alt="right_arrow"
+                />
                 {/* Get Started → */}
               </a>
             </div>
@@ -161,7 +178,12 @@ const Home = () => {
       <div className="about-content">
         <div className="about-container head-container">
           <h3 style={{ textAlign: "center" }}>About Us</h3>
-          <div ref={ref} className={`row about-row-section contentOfRow2 ${isActive ? 'slide-in active' : 'slide-in'}`}>
+          <div
+            ref={ref}
+            className={`row about-row-section contentOfRow2 ${
+              isActive ? "slide-in active" : "slide-in"
+            }`}
+          >
             <div className="col-12 col-sm-12 col-md-6 col-lg-5 about-col-section-1 about-col-section">
               <p>
                 {" "}
@@ -183,7 +205,12 @@ const Home = () => {
               />
             </div>
           </div>
-          <div ref={ref}  className={` row about-row-section flex-column-reverse flex-md-row contentOfRow ${isActive ? 'slide-in active' : 'slide-in'}`}>
+          <div
+            ref={ref}
+            className={` row about-row-section flex-column-reverse flex-md-row contentOfRow ${
+              isActive ? "slide-in active" : "slide-in"
+            }`}
+          >
             <div className="col-12 col-sm-12 col-md-6 col-lg-6 about-col-section-3 about-col-section">
               <img
                 src="https://img.freepik.com/free-vector/illustration-diverse-people_53876-28662.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph"
@@ -223,7 +250,7 @@ const Home = () => {
                 </div>
                 <div className="contact-details col-10">
                   <a href="/" className="p-text">
-                    Rajasthan 
+                    Rajasthan
                   </a>
                   {/* <a href="tel:+91 8581869783" className="p-text">+91 8581869783</a> */}
                 </div>
@@ -233,8 +260,8 @@ const Home = () => {
                   <IoCall className="contact-svg" />
                 </div>
                 <div className="contact-details col-10">
-                  <a href="tel:+91 9565404470" className="p-text">
-                  +91 9565404470
+                  <a href={`tel:${contactInfoList.mobile}`} className="p-text">
+                    {contactInfoList.mobile}
                   </a>
                 </div>
               </div>
@@ -244,10 +271,10 @@ const Home = () => {
                 </div>
                 <div className="contact-details col-10">
                   <a
-                    href="mailto:powerfulindia850@gmail.com"
+                    href={`mailto:${contactInfoList.email}`}
                     className="p-text"
                   >
-                    PowerFulIndia850@gmail.com
+                    {contactInfoList.email}
                   </a>
                 </div>
               </div>
@@ -257,7 +284,7 @@ const Home = () => {
                 </div>
                 <div className="contact-details col-10">
                   <a
-                    href="https://wa.me/918102256637/?text=Hi!%20I'm%20interested%20to%20know%20more."
+                    href={`https://wa.me/${contactInfoList.whatsAppNumber}/?text=Hi!%20I'm%20interested%20to%20know%20more.`}
                     className="p-text"
                     target="_blank"
                     rel="noreferrer"
@@ -268,7 +295,10 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="col-sm-12 col-12 col-md-6 col-lg-7 " style={{marginLeft:'-30px'}}>
+          <div
+            className="col-sm-12 col-12 col-md-6 col-lg-7 "
+            style={{ marginLeft: "-30px" }}
+          >
             <ContactForm />
           </div>
         </div>
@@ -287,8 +317,7 @@ const Home = () => {
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div className="Faq" style={{ width: "90vw" }}>
-          
-        <Accordion>
+          <Accordion>
             <AccordionSummary
               expandIcon={<MdExpandMore />}
               aria-controls="panel1a-content"
@@ -296,16 +325,21 @@ const Home = () => {
               className="faqBody"
               style={{ marginTop: "10px" }}
             >
-              <Typography>How can I play the color prediction games?</Typography>
+              <Typography>
+                How can I play the color prediction games?
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-              To play the color prediction games, you need to create an account and deposit a certain amount. Once your account is funded, you can start predicting the colors and potentially win rewards based on your predictions.
+                To play the color prediction games, you need to create an
+                account and deposit a certain amount. Once your account is
+                funded, you can start predicting the colors and potentially win
+                rewards based on your predictions.
               </Typography>
             </AccordionDetails>
           </Accordion>
-{/*  */}
-<Accordion>
+          {/*  */}
+          <Accordion>
             <AccordionSummary
               expandIcon={<MdExpandMore />}
               aria-controls="panel1ab-content"
@@ -316,7 +350,9 @@ const Home = () => {
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-              Yes, we prioritize the safety and security of our users. We use encryption to protect your personal and financial information, and we have measures in place to ensure fair gameplay.
+                Yes, we prioritize the safety and security of our users. We use
+                encryption to protect your personal and financial information,
+                and we have measures in place to ensure fair gameplay.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -328,12 +364,14 @@ const Home = () => {
               id="panel1a-header"
               style={{ marginTop: "10px" }}
             >
-              <Typography>Why PowerFul India? or IT is trustable or not!</Typography>
+              <Typography>
+                Why PowerFul India? or IT is trustable or not!
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
-                PowerFul India is 100% genuine platform , where you can
-                earn by watching video daily.
+                PowerFul India is 100% genuine platform , where you can earn by
+                watching video daily.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -362,7 +400,10 @@ const Home = () => {
               <Typography>Minimum withdrawal Amount.</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>First Withdrawal :200 <br/> Second Withdrawal :500 and, <br/> After then unlimited withdrawal above 800</Typography>
+              <Typography>
+                First Withdrawal :200 <br /> Second Withdrawal :500 and, <br />{" "}
+                After then unlimited withdrawal above 800
+              </Typography>
             </AccordionDetails>
           </Accordion>
           <Accordion>
