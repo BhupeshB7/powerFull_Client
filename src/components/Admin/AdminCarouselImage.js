@@ -16,10 +16,10 @@ const App = () => {
 
     if (selectedFile) {
       // Check if the file size is within the limit (500KB)
-      if (selectedFile.size <= 500 * 1024) {
+      if (selectedFile.size <= 300 * 1024) {
         setImage(selectedFile);
       } else {
-        alert('File size exceeds 500KB. Please choose a smaller file.');
+        alert('File size exceeds 300KB. Please choose a smaller file.');
         // Optionally, you can clear the input field
         event.target.value = null;
         setImage(null);
