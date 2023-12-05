@@ -448,7 +448,7 @@ const LiveGame = () => {
         choosenColor: userChoice,
         choosenLetter: userChoiceLetter,
       };
-      console.log(gameDetails);
+      // console.log(gameDetails);
       try {
         const response = await axios.post(
           "https://mlm-production.up.railway.app/api/liveGame/saveGame",

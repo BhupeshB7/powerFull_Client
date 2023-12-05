@@ -788,22 +788,6 @@ const NewGame = ({contactInfoList}) => {
                   </div>
                 </Col>
               </Row>
-              {gameResult && (
-                <Row>
-                  <Col sm={12} md={6} lg={6}>
-                    <div className="text-center">
-                      <h5 className="mt-3 text-success">{gameResult}</h5>
-                      {gameResult === "You Win ₹ 0" ? (
-                        <p>You didn't place a bet.</p>
-                      ) : (
-                        <p className="text-center text-success">
-                          Winning Amount: ₹ {winningAmount}
-                        </p>
-                      )}
-                    </div>
-                  </Col>
-                </Row>
-              )}
               <Row className="p-3">
                 <Col
                   sm={12}
