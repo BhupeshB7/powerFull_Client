@@ -1378,3 +1378,10 @@ color: green !important;
 .blockeduser{
   flex-direction: column;
 }
+.threeMinuteGame{
+  background-image: url('https://img.freepik.com/free-photo/abstract-grunge-decorative-relief-navy-blue-stucco-wall-texture-wide-angle-rough-colored-background_1258-28311.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=sph');
+  background-image: url('https://img.freepik.com/free-photo/red-light-round-podium-black-background-mock-up_43614-950.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=sph');
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

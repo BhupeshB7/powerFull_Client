@@ -43,6 +43,7 @@ import AdminLive from './pages/AdminLive';
 import TeamTaskReport from './components/TteamTaskReport';
 import GameDepositForm from './pages/GameDepositForm';
 import axios from 'axios';
+import ColorPredictGame from './pages/ColorPredictGame';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -112,6 +113,7 @@ function App() {
           <Route path='/game' element={<Game/>} />
           <Route path='/game/colorpridictions' element={<ColorPredictionGame/>} />
           <Route path='/game/colorpridiction' element={<NewGame contactInfoList={contactInfoList}/>} />
+          <Route path='/game/colorpridiction/3minutes' element={<ColorPredictGame />} />
           <Route path='/game/colorpridiction/live' element={<LiveGame/>} />
           <Route path='/game/colorpridiction/admin/live' element={<AdminLive/>} />
           <Route path='/game/spinWheel' element={<SpinGame/>} />

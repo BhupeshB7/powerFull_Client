@@ -610,6 +610,12 @@ const NewGame = ({contactInfoList}) => {
   const handleLive = () => {
     window.location.href = "/game/colorpridiction/live";
   };
+  const handleLive2 = () => {
+    window.location.href = "/game/colorpridiction/3minutes";
+  };
+  const handleLive1 = () => {
+    window.location.href = "/game/colorpridiction";
+  };
   // function WithLabelExample() {
   return (
     <>
@@ -698,8 +704,19 @@ const NewGame = ({contactInfoList}) => {
                           width="50px"
                           height="50px"
                           alt="time"
+                          onClick={handleLive1}
                         />
                         <br /> <h6 className="text-warning">1 min</h6>
+                      </div>
+                      <div className="part1 p-3">
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/4836/4836989.png"
+                          width="50px"
+                          height="50px"
+                          alt="time"
+                          onClick={handleLive2}
+                        />
+                        <br /> <h6 className="text-warning">min</h6>
                       </div>
                       <div className="part2">
                         <img
