@@ -3,8 +3,9 @@ import axios from "axios";
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
 import io from "socket.io-client";
 import spinner from "../assets/spinner2.gif";
+import ThreeMinuteHistory from "./ThreeMinuteHistory";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://mlm-production.up.railway.app");
 const ColorPredictGame = () => {
   // State variables
   const [time, setTime] = useState(120);
@@ -30,16 +31,6 @@ const ColorPredictGame = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
   //   const [message, setMessage] = useState('');
-  const [show, setShow] = useState(true); // Set show to true initially
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  useEffect(() => {
-    // This effect runs when the component mounts
-    handleShow(); // Show the modal when the component mounts
-  }, []); // Empty dependency array ensures that the effect runs only once
-
 
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
@@ -91,7 +82,7 @@ const ColorPredictGame = () => {
     fetchData();
   }, [token]);
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const socket = io("https://mlm-production.up.railway.app");
 
     socket.on("testEvent", (data) => {
       console.log("Test event received:", data);
@@ -101,13 +92,12 @@ const ColorPredictGame = () => {
     socket.on("timerUpdate", (update) => {
       // console.log("Timer update received:", update);
       setTimer(update.countdown);
-    
-      if (update.countdown === 59) {
-        console.log("Countdown is 59. Invoking handleTimerEnd()");
+
+      if (update.countdown === 177) {
+        console.log("Countdown is 58. Invoking handleTimerEnd()");
         handleTimerEnd();
       }
     });
-    
 
     // Cleanup the socket connection when the component unmounts
     return () => {
@@ -119,18 +109,26 @@ const ColorPredictGame = () => {
     // Event listener for initial data
     socket.on("initialData", (data) => {
       setRealTimeData(data);
+      console.log('Initial Data:-');
+      console.log(data);
+     
     });
 
     // Event listener for new data
     socket.on("newData", (data) => {
       setRealTimeData(data);
+      console.log('New Data');
+      console.log(data);
+      localStorage.setItem('choiceColor', data.color);
+      localStorage.setItem('choiceNumber', data.number);
+      localStorage.setItem('choiceLetter', data.letter);
     });
 
     // Event listener for timer countdown
     socket.on("timerCountdown", (countdown) => {
       setTimerCountdown(countdown);
     });
-         
+
     // Clean up the event listeners when the component unmounts
     return () => {
       socket.off("initialData");
@@ -174,9 +172,30 @@ const ColorPredictGame = () => {
 
     setButtonColors(randomColors);
   }, []); // The empty dependency array ensures this effect runs only once
+  useEffect(() => {
+    const timer1 = setInterval(() => {
+      if (timer > 0) {
+        if (timer <=7) {
+          setContentDisabled(true);
+          setShowModal(false);
+          setShowNumberModal(false);
+          setShowLetterModal(false);
+        } else {
+          setTimerBlink(false);
+        }
+        if (time === 1) {
+          setContentDisabled(false);
+        }
+      } else {
+        setContentDisabled(false);
+        setTimerBlink(false);
+      }
+    }, 1000);
 
+    return () => clearInterval(timer1);
+  }, [timer]);
   // Functions
-  const handleBet = async() => {
+  const handleBet = async () => {
     if (betAmount < 1) {
       alert("Bet Amount Should be greater than 1Rs.😌");
       // handleAlert("Bet Amount Should be greater than 1Rs.😌");
@@ -193,7 +212,7 @@ const ColorPredictGame = () => {
       return;
     } else {
       // Save choices in local storage
-      
+
       localStorage.setItem("userChoice", userChoice);
       localStorage.setItem("userChoiceNumber", userChoiceNumber);
       localStorage.setItem("userChoiceLetter", userChoiceLetter);
@@ -219,9 +238,9 @@ const ColorPredictGame = () => {
       } catch (error) {
         console.error(error);
       }
-      console.log(userChoice);
-      console.log(userChoiceNumber);
-      console.log(userChoiceLetter);
+      // console.log(userChoice);
+      // console.log(userChoiceNumber);
+      // console.log(userChoiceLetter);
       // Reset the game after 10 seconds
       setTimeout(() => {
         setGameResult("");
@@ -280,43 +299,54 @@ const ColorPredictGame = () => {
   };
 
   const handleButtonClick = (multiplier) => {
+    // handleNumberSelect();
     if (betAmount === 0) {
       setBetAmount(1);
     } else {
       setBetAmount(betAmount * multiplier);
     }
   };
-  const handleTimerEnd = async() => {
+  const handleTimerEnd = async () => {
     // Retrieve user choices from local storage
     const userChoice = localStorage.getItem("userChoice");
     const userChoiceNumber = localStorage.getItem("userChoiceNumber");
     const userChoiceLetter = localStorage.getItem("userChoiceLetter");
     const betAmount = localStorage.getItem("betAmount");
-        console.log(userChoiceLetter);
-        console.log(betAmount);
-        console.log(realTimeData.letter);
-        console.log(realTimeData.number);
-        console.log(realTimeData.color);
+    const choiceColor = localStorage.getItem("choiceColor");
+    const choiceNumber = localStorage.getItem("choiceNumber");
+    const choiceLetter = localStorage.getItem("choiceLetter");  
+    // console.log(userChoiceLetter);
+    // console.log(betAmount);
+    // console.log(choiceColor);
+    // console.log(choiceNumber);
+    // console.log(choiceLetter);
+    // localStorage.removeItem("userChoice");
+    // localStorage.removeItem("userChoiceNumber");
+    // localStorage.removeItem("userChoiceLetter");
+    // localStorage.removeItem("betAmount");
+    // localStorage.removeItem("choiceColor");
+    // localStorage.removeItem("choiceNumber");
+    // localStorage.removeItem("choiceLetter");
     // Check for matches
     if (
-      userChoice === realTimeData.color ||
-      userChoiceNumber === realTimeData.number ||
-      userChoiceLetter === realTimeData.letter
+      userChoice === choiceColor ||
+      userChoiceNumber === choiceNumber ||
+      userChoiceLetter === choiceLetter
     ) {
       let multiplier = 1;
 
       // Determine multiplier based on the type of match
       if (
-        userChoice === realTimeData.color ||
-        userChoiceLetter === realTimeData.letter
+        userChoice === choiceColor ||
+        userChoiceLetter === choiceLetter
       ) {
         multiplier = 2;
-      } else if (userChoiceNumber === realTimeData.number) {
+      } else if (userChoiceNumber === choiceNumber) {
         multiplier = 4;
       }
 
       // Update balance
-      const currentBalance = parseFloat(localStorage.getItem("betAmount")) ||0;
+      const currentBalance = parseFloat(localStorage.getItem("betAmount")) || 0;
       const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
       try {
         const response = await axios.post(
@@ -335,16 +365,16 @@ const ColorPredictGame = () => {
         console.error(error);
       }
 
-         alert(winnings);
       // Remove user choices from local storage
-      localStorage.setItem("balance", winnings.toString());
-   
+      // localStorage.setItem("balance", winnings.toString());
     }
     localStorage.removeItem("userChoice");
     localStorage.removeItem("userChoiceNumber");
     localStorage.removeItem("userChoiceLetter");
     localStorage.removeItem("betAmount");
-
+    localStorage.removeItem("choiceColor");
+    localStorage.removeItem("choiceNumber");
+    localStorage.removeItem("choiceLetter");
     // Update the balance in local storage
   };
   if (isLoading) {
@@ -383,109 +413,112 @@ const ColorPredictGame = () => {
   const handleLive1 = () => {
     window.location.href = "/game/colorpridiction";
   };
+  const currentDate = new Date();
+const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get current month with leading zero
+const currentDay = currentDate.getDate().toString().padStart(2, '0'); // Get current day with leading zero
+const currentMinutes = currentDate.getMinutes().toString().padStart(2, '0'); // Get current minutes with leading zero
+const sessionPrefix = 'PI11-';
+const session = `${sessionPrefix}${currentMonth}${currentDay}-00${currentMinutes}`;
+const timerSeconds = timer; // Replace this with your actual timer value
+
+// Convert seconds to minutes and seconds
+const minutes = Math.floor(timerSeconds / 60);
+const seconds = timerSeconds % 60;
+// Format minutes and seconds as two digits
+const formattedMinutes = String(minutes).padStart(2, '0');
+const formattedSeconds = String(seconds).padStart(2, '0');
+
+// Display the formatted minutes and seconds
+console.log(`${formattedMinutes}:${formattedSeconds}`);
   return (
     <div className="threeMinuteGame">
-     <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title className="text-danger">Notification</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-         <div className="text-primary">
-          Please, do not make any bet , Because it's working ... After sometime Try again... <br/>
-          <b className="text-success">Thank You</b>
-         </div>
-         <h6 className="text-secondary">
-          <b className="text-danger">Note: </b>If yoy place your bet at this moment then Powerfull India will not be responsible
-         </h6>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>Understood</Button>
-        </Modal.Footer>
-      </Modal>
-       <div className="game_box">
-              <div
-                className="d-flex justify-content-center  align-items-center buttonDW"
-                style={{ flexDirection: "row", background: "transparent" }}
-              >
-              </div>
-              <div className="wallet">
-                <div className="content">
+      <div className="game_box">
+        <div
+          className="d-flex justify-content-center  align-items-center buttonDW"
+          style={{ flexDirection: "row", background: "transparent" }}
+        ></div>
+        <div className="wallet">
+          <div className="content">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/10149/10149458.png"
+              height="40px"
+              width="50px"
+              alt="wallet"
+            />
+            <b className="text-light">
+              wallet <br /> {profile.balance} ₹
+            </b>{" "}
+            {/* <p className="text-secondary">wallet</p> */}
+          </div>
+          <div className="content">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/9715/9715374.png"
+              height="40px"
+              width="50px"
+              alt="wallet"
+            />
+            <b className="text-light">
+              Income <br /> {profile.totalwin} ₹
+            </b>{" "}
+            {/* <p className="text-secondary">Income </p> */}
+          </div>
+        </div>
+      </div>
+      <Container>
+        <Row>
+          <Col sm={12}>
+            {/* <WithLabelExample/> */}
+            <div className="time_box">
+              <div className="time_box_2">
+                <div className="part1 p-3">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/128/10149/10149458.png"
-                    height="40px"
+                    src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png"
                     width="50px"
-                    alt="wallet"
+                    height="50px"
+                    alt="time"
+                    onClick={handleLive1}
                   />
-                  <b className="text-light">
-                    wallet <br /> {profile.balance} ₹
-                  </b>{" "}
-                  {/* <p className="text-secondary">wallet</p> */}
+                  <br /> <h6 className="text-warning">1 min</h6>
                 </div>
-                <div className="content">
+                <div className="part1 p-3">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/128/9715/9715374.png"
-                    height="40px"
+                    src="https://cdn-icons-png.flaticon.com/128/4836/4836989.png"
                     width="50px"
-                    alt="wallet"
+                    height="50px"
+                    alt="time"
+                    onClick={handleLive2}
                   />
-                  <b className="text-light">Income <br/> {profile.totalwin} ₹</b>{" "}
-                  {/* <p className="text-secondary">Income </p> */}
+                  <br /> <h6 className="text-warning">min</h6>
+                </div>
+                <div className="part2">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/9364/9364070.png?ga=GA1.1.260354095.1700988836"
+                    width="80px"
+                    height="70px"
+                    alt="time"
+                    onClick={handleLive}
+                  />
                 </div>
               </div>
             </div>
-            <Container>
-              <Row>
-                <Col sm={12}>
-                  {/* <WithLabelExample/> */}
-                  <div className="time_box">
-                    <div className="time_box_2">
-                      <div className="part1 p-3">
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/3395/3395472.png"
-                          width="50px"
-                          height="50px"
-                          alt="time"
-                          onClick={handleLive1}
-                        />
-                        <br /> <h6 className="text-warning">1 min</h6>
-                      </div>
-                      <div className="part1 p-3">
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/4836/4836989.png"
-                          width="50px"
-                          height="50px"
-                          alt="time"
-                          onClick={handleLive2}
-                        />
-                        <br /> <h6 className="text-warning">min</h6>
-                      </div>
-                      <div className="part2">
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/9758/9758679.png"
-                          width="80px"
-                          height="70px"
-                          alt="time"
-                          onClick={handleLive}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
+          </Col>
+        </Row>
+      </Container>
       {/* Your game UI components go here */}
+      <Container className="m-auto d-flex justify-content-center mt-2">
+
+          <h6 className="text-light p-2" style={{ textAlign: "center", border:'1px solid orange', color:'white', padding:'10px 14px', width:'140px' }}>
+                3 Minutes
+              </h6>
+      </Container>
       <Container className="pt-5">
         <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
           <Col sm={12} md={6} lg={6} className="game_session">
             <div>
               <h6 className="text-light p-2" style={{ textAlign: "end" }}>
-                Game Session
+                Left time to buy
               </h6>
+              
               <div>
                 <style>
                   {`
@@ -502,45 +535,41 @@ const ColorPredictGame = () => {
           }
         `}
                 </style>
-
                 <div className="timer">
-                        {timer <= 5 ? (
-                          <div className="blur-background">
-                            <div
-                              className="remaining"
-                              style={{ display: "flex" }}
-                            >
-                              <h1
-                                className="text-danger"
-                                style={{ fontSize: "66px", fontWeight: "bold" }}
-                              >{`00:${timer.toString().padStart(2, "0")}`}</h1>
-                            </div>
-                          </div>
-                        ) : null}
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          {/* <p className="text-warning">{uniqueId}</p> */}
-                          <h1 style={{ color: "#bbb" }}>
-                            {" "}
-                            <b
-                              style={
-                                timer <= 5
-                                  ? {
-                                      display: "none",
-                                      fontSize: "30px !important",
-                                    }
-                                  : timerStyle
-                              }
-                            >
-                             00: {" "}{timer} S remaining
-                            </b>
-                          </h1>
-                        </div>
+                  {timer <= 5 ? (
+                    <div className="blur-background">
+                      <div className="remaining" style={{ display: "flex" }}>
+                        <h1
+                          className="text-danger"
+                          style={{ fontSize: "66px", fontWeight: "bold" }}
+                        >{`00:${timer.toString().padStart(2, "0")}`}</h1>
                       </div>
+                    </div>
+                  ) : null}
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <p className="text-warning">{session}</p>
+                    <h1 style={{ color: "#bbb" }}>
+                      {" "}
+                      <b
+                        style={
+                          timer <= 5
+                            ? {
+                                display: "none",
+                                fontSize: "30px !important",
+                              }
+                            : timerStyle
+                        }
+                      >
+                        {formattedMinutes}:{formattedSeconds}
+                      </b>
+                    </h1>
+                  </div>
+                </div>
               </div>
             </div>
           </Col>
@@ -631,10 +660,16 @@ const ColorPredictGame = () => {
                     onClick={() =>
                       handleNumberSelect(color, buttonColors[index])
                     }
-                    className="game_button"
+                    // className="game_button"
+                    className={`game_button ${color === "5" ||color ==="0" ? "half-circle" : ""}`}
+
                     disabled={gameResult !== ""}
                   >
+                    <div className={`${color === "5" ||color ==="0" ?"number-overlay" : ""}`}
+>
+
                     {color}
+                    </div>
                   </button>
                 ))}
               </div>
@@ -730,7 +765,7 @@ const ColorPredictGame = () => {
         </Row>
         {/*Number-End  */}
       </Container>
-
+  <ThreeMinuteHistory/>
       {/* Modal */}
       <Modal
         show={showModal}

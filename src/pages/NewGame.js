@@ -720,7 +720,7 @@ const NewGame = ({contactInfoList}) => {
                       </div>
                       <div className="part2">
                         <img
-                          src="https://cdn-icons-png.flaticon.com/128/9758/9758679.png"
+                          src="https://cdn-icons-png.flaticon.com/128/9364/9364070.png?ga=GA1.1.260354095.1700988836"
                           width="80px"
                           height="70px"
                           alt="time"

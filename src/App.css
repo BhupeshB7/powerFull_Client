@@ -820,7 +820,7 @@ gap: 30px;
   display: flex;
   justify-content: space-around;
   margin: 30px;
-  gap: 90px;
+  gap: 40px;
   width: 80%;
   height: 100%;
   align-items: center;
@@ -1384,4 +1384,8 @@ color: green !important;
   background-position: center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+.half-circle {
+  /* Create a linear gradient for the background */
+  background: linear-gradient( 120deg, rgb(214, 150, 31) 50%, rgb(107, 212, 107) 50%);
 }

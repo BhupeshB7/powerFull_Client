@@ -298,7 +298,7 @@ function Setting() {
                       />
                       <h6 className="mt-1" style={{color:'cyan'}}>Wallet</h6>
                     </Link>
-                    <Link to='/game'  className="footer_icon" style={{color:'cyan'}}>
+                    <Link to='/game/colorpridiction'  className="footer_icon" style={{color:'cyan'}}>
                       <img
                         src="https://cdn-icons-png.flaticon.com/128/8002/8002123.png"
                         alt="fund"
