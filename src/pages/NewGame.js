@@ -54,7 +54,7 @@ const NewGame = ({contactInfoList}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShowDeposit = () =>{window.location.href='/depositform/game'};
 
   useEffect(() => {
     if (time === 5) {
@@ -650,7 +650,7 @@ const NewGame = ({contactInfoList}) => {
                     borderRadius: "20px",
                     width: "110px",
                   }}
-                  onClick={handleShow}
+                  onClick={handleShowDeposit}
                 >
                   Deposit
                 </Button>
