@@ -858,7 +858,10 @@ gap: 30px;
   animation: fadeInAnimation ease 4s;
   animation-iteration-count:1;
   animation-fill-mode:backwards;
-  background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  background-image: linear-gradient(to top, #91763c 0%, #89bbbe 100%);
+  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+ background-blend-mode: multiply;
    height: 120px;
   width: 100%;
   margin: auto;
@@ -867,8 +870,8 @@ gap: 30px;
   align-items: center;
 }
 .game_choice_Number{
-  height: 150px;
-  background-image: url('https://img.freepik.com/free-vector/magic-portal-mountain-top-alien-planet-surface-futuristic-landscape-background-with-glowing-entrance-rock-starry-sky-fantasy-book-computer-game-scene-cartoon-vector-illustration_107791-4566.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais');
+  height: 100%;
+  /* background-image: url('https://img.freepik.com/free-vector/online-games-concept_23-2148514180.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais'); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -879,6 +882,11 @@ gap: 30px;
   width: 100%;
   padding: 5px;
   background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  /* background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%); */
+  background: url('https://img.freepik.com/free-vector/online-games-concept_23-2148514180.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
     border-radius: 8px;
 }
 .upDown{
@@ -903,7 +911,7 @@ gap: 30px;
   align-items: center; */
 }
 .modal-center {
-  margin-top: 150px;
+  margin-top: 140px;
 }
 /* For small devices, display 3 color boxes in one line */
 @media (max-width: 767px) {
@@ -1299,10 +1307,17 @@ gap: 30px;
  transition: all 0.3s ease-in-out;
 }
 
-.modal-center{
+/* .modal-center{
   position: fixed;
   top: 27% !important;
+} */
+.modal-center {
+  position: fixed;
+  bottom: 0; /* Position at the bottom of the viewport */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
 }
+
 /* .table-hover:hover, .table-hover:focus, .table-hover:active{
 color: green !important;
 } */
@@ -1388,4 +1403,11 @@ color: green !important;
 .half-circle {
   /* Create a linear gradient for the background */
   background: linear-gradient( 120deg, rgb(214, 150, 31) 50%, rgb(107, 212, 107) 50%);
+}
+.notification-area{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
 }

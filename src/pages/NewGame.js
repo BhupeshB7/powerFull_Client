@@ -16,7 +16,7 @@ import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
-const NewGame = ({contactInfoList}) => {
+const NewGame = ({ contactInfoList }) => {
   const [targetColor, setTargetColor] = useState("");
   const [targetNumber, setTargetNumber] = useState("");
   const [targetLetter, setTargetLetter] = useState("");
@@ -54,7 +54,9 @@ const NewGame = ({contactInfoList}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShowDeposit = () =>{window.location.href='/depositform/game'};
+  const handleShowDeposit = () => {
+    window.location.href = "/depositform/game";
+  };
 
   useEffect(() => {
     if (time === 5) {
@@ -684,7 +686,9 @@ const NewGame = ({contactInfoList}) => {
                     width="50px"
                     alt="wallet"
                   />
-                  <b className="text-light">Income <br/> {profile.totalwin} ₹</b>{" "}
+                  <b className="text-light">
+                    Income <br /> {profile.totalwin} ₹
+                  </b>{" "}
                   {/* <p className="text-secondary">Income </p> */}
                 </div>
               </div>
@@ -1050,18 +1054,21 @@ const NewGame = ({contactInfoList}) => {
                 </tbody>
               </table>
               {/* Pagination */}
-              <div className="pagination">
+              <div className="pagination d-flex justify-content-center align-items-center pb-2" style={{marginTop:'-5px', background:'#0234'}}>
                 <Button
-                  variant="warning"
+                  variant="dark"
                   className="m-1"
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
                 >
                   Previous
                 </Button>
-
+                {/* Display page number and items per page information */}
+                <div className="text-light">
+                  {currentPage} <b className="text-warning">/</b> {totalPages}
+                </div>
                 <Button
-                  variant="warning"
+                  variant="dark"
                   className="m-1"
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
@@ -1069,16 +1076,8 @@ const NewGame = ({contactInfoList}) => {
                   Next
                 </Button>
               </div>
-
-              {/* Display page number and items per page information */}
-              <div className="text-light">
-                Page {currentPage} of {totalPages}
-              </div>
             </div>
-            <div
-              className="notification-container"
-              style={{ marginTop: "-80px" }}
-            >
+            <div className="notification-area">
               <div className="notification">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/2058/2058148.png"
@@ -1088,15 +1087,6 @@ const NewGame = ({contactInfoList}) => {
                   onClick={openMessageModal}
                 />
               </div>
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                width: "100%",
-              }}
-            >
               <div
                 style={{
                   display: "flex",
@@ -1613,10 +1603,7 @@ const NewGame = ({contactInfoList}) => {
                           </h6>
                           <ul className="dropdown-menu">
                             <li>
-                              <a href="/depositform/game"
-                              >
-                                Deposit
-                              </a>
+                              <a href="/depositform/game">Deposit</a>
                             </li>
                             <li>
                               <h6
@@ -1714,7 +1701,9 @@ const NewGame = ({contactInfoList}) => {
                       }}
                     />
                   </div>
-                  <h6 className="text-info">UPI: powerfullindia849@khdfcbank</h6>
+                  <h6 className="text-info">
+                    UPI: powerfullindia849@khdfcbank
+                  </h6>
                   <form onSubmit={handleSubmit} className="deposit_Form">
                     <label>UserId:</label>
                     <input

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
 import io from "socket.io-client";
+import LOGO from "../assets/icon.png";
 import spinner from "../assets/spinner2.gif";
 import ThreeMinuteHistory from "./ThreeMinuteHistory";
 
@@ -431,7 +432,10 @@ const formattedSeconds = String(seconds).padStart(2, '0');
 // Display the formatted minutes and seconds
 console.log(`${formattedMinutes}:${formattedSeconds}`);
   return (
-    <div className="threeMinuteGame">
+    <div className="threeMinuteGame colorbackGround">
+      <div className="logo">
+              <img src={LOGO} alt="logo" height="70px" width="100px" />
+            </div>
       <div className="game_box">
         <div
           className="d-flex justify-content-center  align-items-center buttonDW"
@@ -507,7 +511,7 @@ console.log(`${formattedMinutes}:${formattedSeconds}`);
       {/* Your game UI components go here */}
       <Container className="m-auto d-flex justify-content-center mt-2">
 
-          <h6 className="text-light p-2" style={{ textAlign: "center", border:'1px solid orange', color:'white', padding:'10px 14px', width:'140px' }}>
+          <h6 className="text-light p-2" style={{ textAlign: "center", border:'1px solid orange', color:'white', padding:'10px 14px', width:'140px', borderTopRightRadius:'20px', borderBottomLeftRadius:'20px' }}>
                 3 Minutes
               </h6>
       </Container>
@@ -573,11 +577,6 @@ console.log(`${formattedMinutes}:${formattedSeconds}`);
               </div>
             </div>
           </Col>
-          <Col sm={12} md={6}>
-            <div>
-              <h6 className="p-2 text-warning">Predict a Color</h6>
-            </div>
-          </Col>
         </Row>
         <Row className="p-3">
           <Col
@@ -604,7 +603,7 @@ console.log(`${formattedMinutes}:${formattedSeconds}`);
                       : `1.5px solid ${color.toLowerCase()}`,
                   }}
                   onClick={() => handleColorSelect(color)}
-                  className="game_button text-light"
+                  className="game_button text-dark"
                   disabled={gameResult !== ""}
                 >
                   {color}
@@ -685,7 +684,7 @@ console.log(`${formattedMinutes}:${formattedSeconds}`);
               style={{
                 opacity: contentDisabled ? 0.7 : 1,
                 pointerEvents: contentDisabled ? "none" : "auto",
-                height: "50px",
+                height: "60px",
               }}
             >
               {/* <div className="color-options" style={{height:'40px !important'}}> */}
@@ -878,7 +877,7 @@ console.log(`${formattedMinutes}:${formattedSeconds}`);
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={() => setShowModal(false)}>
+          <Button variant="danger" style={{width:'200px'}} onClick={() => setShowModal(false)}>
             Cancel
           </Button>
           <Button
