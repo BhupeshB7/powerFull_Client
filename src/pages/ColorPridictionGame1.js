@@ -552,7 +552,7 @@ const scrollToTop = () => {
       <Container className="m-auto d-flex justify-content-center mt-2">
 
           <h6 className="text-light p-2" style={{ textAlign: "center", border:'1px solid orange', color:'white', padding:'10px 14px', width:'140px', borderTopRightRadius:'20px', borderBottomLeftRadius:'20px' }}>
-                3 Minutes
+                1 Minutes
               </h6>
       </Container>
       <Container className="pt-5">
