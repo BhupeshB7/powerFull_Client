@@ -96,12 +96,15 @@ const ColorPredictGame = () => {
     socket.on("timerUpdate", (update) => {
       // console.log("Timer update received:", update);
       setTimer(update.countdown);
-        //  console.log(update.countdown)
-      if (update.countdown === 177) {
-        console.log("Countdown is 58. Invoking handleTimerEnd()");
-        handleTimerEnd();
+      // console.log(update.countdown)
+  
+      // Check if the time is 02:57 (177 seconds)
+      const secondsUntil0257 = 2 * 60 * 60 + 57 * 60;
+      if (update.countdown === secondsUntil0257) {
+          console.log("Countdown is 02:57. Invoking handleTimerEnd()");
+          handleTimerEnd();
       }
-    });
+  });
 
     // Cleanup the socket connection when the component unmounts
     return () => {

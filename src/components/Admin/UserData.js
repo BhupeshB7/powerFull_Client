@@ -343,7 +343,6 @@
 
 // export default UserData;
 
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Col, Container, Modal, Row, Table } from "react-bootstrap";
@@ -377,7 +376,6 @@ function UserData() {
       });
   }, []);
 
- 
   const getUsers = async (page = 1) => {
     try {
       const response = await axios.get(
@@ -400,7 +398,6 @@ function UserData() {
     // console.log(user)
     setSelectedUser(user);
   };
-
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -487,44 +484,45 @@ function UserData() {
   //     // Reset the confirmationUserId
   //     setConfirmationUserId(null);
   //   }
-    
+
   // };
   const confirmAction = async () => {
     setShowConfirmation(false);
-    
+
     if (confirmationUserId !== null) {
-      const updatedUsers = await Promise.all(users.map(async (user) => {
-        if (user._id === confirmationUserId) {
-          const endpoint = user.isBlocked
-            ? `https://mlm-production.up.railway.app/api/auth/unblock/${confirmationUserId}`
-            : `https://mlm-production.up.railway.app/api/auth/block/${confirmationUserId}`;
-  
-          try {
-            const response = await axios.put(endpoint);
-            return response.data;
-          } catch (error) {
-            console.error(error);
-            return user; // Return the original user in case of an error
+      const updatedUsers = await Promise.all(
+        users.map(async (user) => {
+          if (user._id === confirmationUserId) {
+            const endpoint = user.isBlocked
+              ? `https://mlm-production.up.railway.app/api/auth/unblock/${confirmationUserId}`
+              : `https://mlm-production.up.railway.app/api/auth/block/${confirmationUserId}`;
+
+            try {
+              const response = await axios.put(endpoint);
+              return response.data;
+            } catch (error) {
+              console.error(error);
+              return user; // Return the original user in case of an error
+            }
+          } else {
+            return user; // Return unchanged users
           }
-        } else {
-          return user; // Return unchanged users
-        }
-      }));
-  
+        })
+      );
+
       // Update the state with the updated users
       setUsers(updatedUsers);
-  
+
       // Reset the confirmationUserId
       setConfirmationUserId(null);
     }
   };
-  
-  
+
   return (
     <div className="container-fluid" style={{ backgroundColor: "#fbffde" }}>
       <Container>
-        <UserChart/>
-        <NewUsersChart/>
+        <UserChart />
+        <NewUsersChart />
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
             <div>
@@ -559,10 +557,10 @@ function UserData() {
             </div>
           </Col>
           {/* https://cdn-icons-png.flaticon.com/128/11533/11533705.png */}
-         </Row>
+        </Row>
       </Container>
-      <AdminCarouselImage/>
-         <UserBalance/>
+      <AdminCarouselImage />
+      <UserBalance />
       <h4 className="text-center text-dark p-2">User Details</h4>
       <input
         type="text"
@@ -595,7 +593,7 @@ function UserData() {
                 <td>{index + 1}</td>
                 <td>
                   <button
-                  style={{minWidth:'130px'}}
+                    style={{ minWidth: "130px" }}
                     className="btn btn-primary"
                     onClick={() => handleViewDetails(user._id)}
                   >
@@ -610,11 +608,17 @@ function UserData() {
                 <td>{user.is_active ? "Active" : "Deactive"}</td>
                 <td className="text-center">
                   {user.isBlocked ? (
-                    <button className="btn btn-danger" onClick={() => handleUnblock(user._id)}>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleUnblock(user._id)}
+                    >
                       Blocked
                     </button>
                   ) : (
-                    <button className="btn btn-dark" onClick={() => handleBlock(user._id)}>
+                    <button
+                      className="btn btn-dark"
+                      onClick={() => handleBlock(user._id)}
+                    >
                       UnBlocked
                     </button>
                   )}
@@ -655,60 +659,58 @@ function UserData() {
         </table>
       </div>
       {/*  */}
-        {/* React Modal for displaying user details */}
-        <Modal
-        show={modalIsOpen}
-        onHide={() => setModalIsOpen(false)}
-        
-      >
+      {/* React Modal for displaying user details */}
+      <Modal show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
         <Modal.Header closeButton>
           <Modal.Title>
-             <h6>{selectedUser &&(selectedUser.userId)} All Details...</h6>  
+            <h6>{selectedUser && selectedUser.userId} All Details...</h6>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-      {selectedUser && (
-        <Table striped bordered hover>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td>{selectedUser.name}</td>
-            </tr>
-            <tr>
-              <td>UserId</td>
-              <td>{selectedUser.userId}</td>
-            </tr>
-            <tr>
-              <td>Balance</td>
-              <td>{selectedUser.balance}</td>
-            </tr>
-            <tr>
-              <td>Income</td>
-              <td>{selectedUser.income}</td>
-            </tr>
-            <tr>
-              <td>Self Income</td>
-              <td>{selectedUser.selfIncome}</td>
-            </tr>
-            <tr>
-              <td>Team Income</td>
-              <td>{selectedUser.teamIncome}</td>
-            </tr>
-            <tr>
-              <td>Topup Wallet</td>
-              <td>{selectedUser.topupWallet}</td>
-            </tr>
-            <tr>
-              <td>Withdrawal</td>
-              <td>{selectedUser.withdrawal}</td>
-            </tr>
-            {/* Add other details as needed */}
-          </tbody>
-        </Table>
-      )}
-    </Modal.Body>
+          {selectedUser && (
+            <Table striped bordered hover>
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>{selectedUser.name}</td>
+                </tr>
+                <tr>
+                  <td>UserId</td>
+                  <td>{selectedUser.userId}</td>
+                </tr>
+                <tr>
+                  <td>Balance</td>
+                  <td>{selectedUser.balance}</td>
+                </tr>
+                <tr>
+                  <td>Income</td>
+                  <td>{selectedUser.income}</td>
+                </tr>
+                <tr>
+                  <td>Self Income</td>
+                  <td>{selectedUser.selfIncome}</td>
+                </tr>
+                <tr>
+                  <td>Team Income</td>
+                  <td>{selectedUser.teamIncome}</td>
+                </tr>
+                <tr>
+                  <td>Topup Wallet</td>
+                  <td>{selectedUser.topupWallet}</td>
+                </tr>
+                <tr>
+                  <td>Withdrawal</td>
+                  <td>{selectedUser.withdrawal}</td>
+                </tr>
+                {/* Add other details as needed */}
+              </tbody>
+            </Table>
+          )}
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setModalIsOpen(false)}>Close</Button>
+          <Button variant="secondary" onClick={() => setModalIsOpen(false)}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
       <Container>
@@ -719,20 +721,33 @@ function UserData() {
                 className="pagination"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <li
-                    key={i}
-                    className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
+                <li
+                  className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+                >
+                  <Button
+                    variant="outline-primary m-2"
+                    className="page-link"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
                   >
-                    <Button
-                      variant="outline-primary m-2"
-                      className="page-link "
-                      onClick={() => handlePageChange(i + 1)}
-                    >
-                      {i + 1}
-                    </Button>
-                  </li>
-                ))}
+                    Previous
+                  </Button>
+                </li>
+
+                <li
+                  className={`page-item ${
+                    currentPage === totalPages ? "disabled" : ""
+                  }`}
+                >
+                  <Button
+                    variant="outline-primary m-2"
+                    className="page-link"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </Button>
+                </li>
               </ul>
             </nav>
           </Col>
@@ -746,7 +761,10 @@ function UserData() {
         </Modal.Header>
         <Modal.Body>Are you sure you want to Blocked/UnBlocked?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmation(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmation(false)}
+          >
             Cancel
           </Button>
           <Button variant="success" onClick={confirmAction}>

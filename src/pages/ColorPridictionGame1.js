@@ -298,6 +298,7 @@ const ColorPridictionGame1 = () => {
   //     console.log(randomData);
   //     saveToMongoDB(randomData);
   //   };
+  console.log(data.userId)
   const incrementBetAmount = () => {
     setBetAmount((prevAmount) => prevAmount + 5);
   };
@@ -326,77 +327,144 @@ const ColorPridictionGame1 = () => {
       setBetAmount(betAmount * multiplier);
     }
   };
+  // const handleTimerEnd = async () => {
+  //   // Retrieve user choices from local storage
+  //   const userChoice = localStorage.getItem("userChoice");
+  //   const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+  //   const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+  //   const betAmount = localStorage.getItem("betAmount");
+  //   const choiceColor = localStorage.getItem("choiceColor");
+  //   const choiceNumber = localStorage.getItem("choiceNumber");
+  //   const choiceLetter = localStorage.getItem("choiceLetter");  
+  //   // console.log(userChoiceLetter);
+  //   // console.log(betAmount);
+  //   // console.log(choiceColor);
+  //   // console.log(choiceNumber);
+  //   // console.log(choiceLetter);
+  //   // localStorage.removeItem("userChoice");
+  //   // localStorage.removeItem("userChoiceNumber");
+  //   // localStorage.removeItem("userChoiceLetter");
+  //   // localStorage.removeItem("betAmount");
+  //   // localStorage.removeItem("choiceColor");
+  //   // localStorage.removeItem("choiceNumber");
+  //   // localStorage.removeItem("choiceLetter");
+  //   // Check for matches
+  //   if (
+  //     userChoice === choiceColor ||
+  //     userChoiceNumber === choiceNumber ||
+  //     userChoiceLetter === choiceLetter
+  //   ) {
+  //     let multiplier = 1;
+
+  //     // Determine multiplier based on the type of match
+  //     if (
+  //       userChoice === choiceColor ||
+  //       userChoiceLetter === choiceLetter
+  //     ) {
+  //       multiplier = 2;
+  //     } else if (userChoiceNumber === choiceNumber) {
+  //       multiplier = 4;
+  //     }
+
+  //     // Update balance
+  //     const currentBalance = parseFloat(localStorage.getItem("betAmount")) || 0;
+  //     const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
+  //     console.log(winnings);
+  //     try {
+  //       const response = await axios.post(
+  //         "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
+  //         {
+  //           userId: data.userId, // Make sure userId is defined or passed as a prop
+  //           winnings: winnings,
+  //         }
+  //       );
+
+  //       // Assuming the response contains updated balance data
+  //       const updatedTotalWin = response.data.totalwin;
+  //       // Make sure you have defined setProfile elsewhere
+  //       setProfile({ ...profile, totalwin: updatedTotalWin });
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+
+  //     // Remove user choices from local storage
+  //     // localStorage.setItem("balance", winnings.toString());
+  //   }
+  //   localStorage.removeItem("userChoice");
+  //   localStorage.removeItem("userChoiceNumber");
+  //   localStorage.removeItem("userChoiceLetter");
+  //   localStorage.removeItem("betAmount");
+  //   localStorage.removeItem("choiceColor");
+  //   localStorage.removeItem("choiceNumber");
+  //   localStorage.removeItem("choiceLetter");
+  //   // Update the balance in local storage
+  // };
   const handleTimerEnd = async () => {
-    // Retrieve user choices from local storage
-    const userChoice = localStorage.getItem("userChoice");
-    const userChoiceNumber = localStorage.getItem("userChoiceNumber");
-    const userChoiceLetter = localStorage.getItem("userChoiceLetter");
-    const betAmount = localStorage.getItem("betAmount");
-    const choiceColor = localStorage.getItem("choiceColor");
-    const choiceNumber = localStorage.getItem("choiceNumber");
-    const choiceLetter = localStorage.getItem("choiceLetter");  
-    // console.log(userChoiceLetter);
-    // console.log(betAmount);
-    // console.log(choiceColor);
-    // console.log(choiceNumber);
-    // console.log(choiceLetter);
-    // localStorage.removeItem("userChoice");
-    // localStorage.removeItem("userChoiceNumber");
-    // localStorage.removeItem("userChoiceLetter");
-    // localStorage.removeItem("betAmount");
-    // localStorage.removeItem("choiceColor");
-    // localStorage.removeItem("choiceNumber");
-    // localStorage.removeItem("choiceLetter");
-    // Check for matches
-    if (
-      userChoice === choiceColor ||
-      userChoiceNumber === choiceNumber ||
-      userChoiceLetter === choiceLetter
-    ) {
-      let multiplier = 1;
+    try {
+        // Retrieve user choices from local storage
+        const userChoice = localStorage.getItem("userChoice");
+        const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+        const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+        const betAmount = localStorage.getItem("betAmount");
+        const choiceColor = localStorage.getItem("choiceColor");
+        const choiceNumber = localStorage.getItem("choiceNumber");
+        const choiceLetter = localStorage.getItem("choiceLetter");
 
-      // Determine multiplier based on the type of match
-      if (
-        userChoice === choiceColor ||
-        userChoiceLetter === choiceLetter
-      ) {
-        multiplier = 2;
-      } else if (userChoiceNumber === choiceNumber) {
-        multiplier = 4;
-      }
+        // Check for matches
+        if (
+            userChoice === choiceColor ||
+            userChoiceNumber === choiceNumber ||
+            userChoiceLetter === choiceLetter
+        ) {
+            let multiplier = 1;
 
-      // Update balance
-      const currentBalance = parseFloat(localStorage.getItem("betAmount")) || 0;
-      const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-      try {
-        const response = await axios.post(
-          "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
-          {
-            userId: data.userId, // Make sure userId is defined or passed as a prop
-            winnings: winnings,
-          }
-        );
+            // Determine multiplier based on the type of match
+            if (
+                userChoice === choiceColor ||
+                userChoiceLetter === choiceLetter
+            ) {
+                multiplier = 2;
+            } else if (userChoiceNumber === choiceNumber) {
+                multiplier = 4;
+            }
 
-        // Assuming the response contains updated balance data
-        const updatedTotalWin = response.data.totalwin;
-        // Make sure you have defined setProfile elsewhere
-        setProfile({ ...profile, totalwin: updatedTotalWin });
-      } catch (error) {
-        console.error(error);
-      }
+            // Update balance
+            const currentBalance = parseFloat(betAmount) || 0;
+            const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
 
-      // Remove user choices from local storage
-      // localStorage.setItem("balance", winnings.toString());
+            // Ensure required data is available before making the API call
+            if (winnings) {
+                const response = await axios.post(
+                    "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
+                    {
+                        userId: data.userId,
+                        winnings: winnings,
+                    }
+                );
+
+                // Assuming the response contains updated balance data
+                const updatedTotalWin = response.data.totalwin;
+
+                // Make sure you have defined setProfile elsewhere
+                setProfile({ ...profile, totalwin: updatedTotalWin });
+
+                // Remove user choices from local storage
+                localStorage.removeItem("userChoice");
+                localStorage.removeItem("userChoiceNumber");
+                localStorage.removeItem("userChoiceLetter");
+                localStorage.removeItem("betAmount");
+                localStorage.removeItem("choiceColor");
+                localStorage.removeItem("choiceNumber");
+                localStorage.removeItem("choiceLetter");
+            } else {
+                console.error("Invalid or missing user data");
+            }
+        }
+    } catch (error) {
+        console.error("An error occurred:", error);
     }
-    localStorage.removeItem("userChoice");
-    localStorage.removeItem("userChoiceNumber");
-    localStorage.removeItem("userChoiceLetter");
-    localStorage.removeItem("betAmount");
-    localStorage.removeItem("choiceColor");
-    localStorage.removeItem("choiceNumber");
-    localStorage.removeItem("choiceLetter");
-    // Update the balance in local storage
-  };
+};
+
   if (isLoading) {
     return (
       <h6
