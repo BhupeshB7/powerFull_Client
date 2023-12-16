@@ -1411,3 +1411,6 @@ color: green !important;
   justify-content: space-around;
   margin: auto;
 }
+.topUPClass{
+  width: 310px !important;
+}

@@ -2240,6 +2240,7 @@ const Dashboard = ({contactInfoList}) => {
                                             UserID
                                           </label>
                                           <input
+                                            className="topUPClass"
                                             type="text"
                                             value={userId}
                                             onChange={(e) =>
