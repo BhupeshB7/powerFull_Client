@@ -13,8 +13,8 @@ const OneMinuteHistory = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/randomData1?page=${currentPage}`
-        //   `https://mlm-production.up.railway.app/api/randomData1?page=${currentPage}`
+          // `http://localhost:5000/api/randomData1?page=${currentPage}`
+          `https://mlm-production.up.railway.app/api/randomData1?page=${currentPage}`
         );
         setData(response.data.data);
         setTotalPages(response.data.totalPages);
