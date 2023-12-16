@@ -4,11 +4,11 @@ import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
 import io from "socket.io-client";
 import LOGO from "../assets/icon.png";
 import spinner from "../assets/spinner2.gif";
-import ThreeMinuteHistory from "./ThreeMinuteHistory";
+import OneMinuteHistory from "./OneMinuteHistory";
 
 const socket = io("https://mlm-production.up.railway.app");
 // const socket = io("http://localhost:5000");
-const ColorPredictGame = () => {
+const ColorPridictionGame1 = () => {
   // State variables
   const [time, setTime] = useState(120);
   const [contentDisabled, setContentDisabled] = useState(false);
@@ -93,11 +93,11 @@ const ColorPredictGame = () => {
       // setMessage(data.message);
     });
 
-    socket.on("timerUpdate", (update) => {
+    socket.on("timerUpdate1", (update) => {
       // console.log("Timer update received:", update);
       setTimer(update.countdown);
-        //  console.log(update.countdown)
-      if (update.countdown === 177) {
+
+      if (update.countdown === 58) {
         console.log("Countdown is 58. Invoking handleTimerEnd()");
         handleTimerEnd();
       }
@@ -111,7 +111,7 @@ const ColorPredictGame = () => {
 
   useEffect(() => {
     // Event listener for initial data
-    socket.on("initialData", (data) => {
+    socket.on("initialData1", (data) => {
       setRealTimeData(data);
       console.log('Initial Data:-');
       console.log(data);
@@ -119,7 +119,7 @@ const ColorPredictGame = () => {
     });
 
     // Event listener for new data
-    socket.on("newData", (data) => {
+    socket.on("newData1", (data) => {
       setRealTimeData(data);
       // console.log('New Data');
       // console.log(data);
@@ -129,31 +129,15 @@ const ColorPredictGame = () => {
     });
 
     // Event listener for timer countdown
-    socket.on("timerCountdown", (countdown) => {
+    socket.on("timerCountdown1", (countdown) => {
       setTimerCountdown(countdown);
     });
 
     // Clean up the event listeners when the component unmounts
     return () => {
-      socket.off("initialData");
-      socket.off("newData");
-      socket.off("timerCountdown");
-    };
-  }, []);
-  // Listen to the scroll event to show/hide the button
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset > 100) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+      socket.off("initialData1");
+      socket.off("newData1");
+      socket.off("timerCountdown1");
     };
   }, []);
   // Constants
@@ -214,6 +198,22 @@ const ColorPredictGame = () => {
 
     return () => clearInterval(timer1);
   }, [timer]);
+  // Listen to the scroll event to show/hide the button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   // Functions
   const handleBet = async () => {
     if (betAmount < 1) {
@@ -431,7 +431,7 @@ const ColorPredictGame = () => {
     window.location.href = "/game/colorpridiction/3minutes";
   };
   const handleLive1 = () => {
-    window.location.href = "/game/colorpridiction/1minutes";
+    window.location.href = "/game/colorpridiction/3minutes";
   };
   const handleBack = () => {
     window.location.href = "/game/colorpridiction";
@@ -454,14 +454,14 @@ const formattedSeconds = String(seconds).padStart(2, '0');
 // Display the formatted minutes and seconds
 console.log(`${formattedMinutes}:${formattedSeconds}`);
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth", // Adds smooth scrolling animation
-  });
-};
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Adds smooth scrolling animation
+    });
+  };
   return (
     <div className="threeMinuteGame colorbackGround">
-      <div
+        <div
         className="d-flex justify-content-end"
         style={{ position: "absolute", right: "20px", top: "30px" }}
       >
@@ -826,8 +826,7 @@ const scrollToTop = () => {
                 />
               </div>
       </div>
-      
-  <ThreeMinuteHistory/>
+  <OneMinuteHistory/>
       {/* Modal */}
       <Modal
         show={showModal}
@@ -1202,4 +1201,4 @@ const scrollToTop = () => {
   );
 };
 
-export default ColorPredictGame;
+export default ColorPridictionGame1;

@@ -30,7 +30,6 @@ import Wallet from './pages/Wallet';
 import ProfileImage from './extra/App';
 import DashboardAdmin from './components/Admin/DashboardAdmin';
 import AdminTask from './components/Admin/AdminTask';
-import NewGame from './pages/NewGame';
 import GameDeposit from './components/Admin/GameDeposit';
 import SpinGame from './pages/SpinGame';
 import UserWallet from './components/Admin/UserWallet';
@@ -44,6 +43,8 @@ import TeamTaskReport from './components/TteamTaskReport';
 import GameDepositForm from './pages/GameDepositForm';
 import axios from 'axios';
 import ColorPredictGame from './pages/ColorPredictGame';
+import ColorPridictionGame1 from './pages/ColorPridictionGame1';
+import PredictGame from './pages/PredictGame';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -112,8 +113,9 @@ function App() {
           <Route path='/wallet' element={<Wallet/>}/>
           <Route path='/game' element={<Game/>} />
           <Route path='/game/colorpridictions' element={<ColorPredictionGame/>} />
-          <Route path='/game/colorpridiction' element={<NewGame contactInfoList={contactInfoList}/>} />
+          <Route path='/game/colorpridiction' element={<PredictGame contactInfoList={contactInfoList}/>} />
           <Route path='/game/colorpridiction/3minutes' element={<ColorPredictGame />} />
+          <Route path='/game/colorpridiction/1minutes' element={<ColorPridictionGame1 />} />
           <Route path='/game/colorpridiction/live' element={<LiveGame/>} />
           <Route path='/game/colorpridiction/admin/live' element={<AdminLive/>} />
           <Route path='/game/spinWheel' element={<SpinGame/>} />
