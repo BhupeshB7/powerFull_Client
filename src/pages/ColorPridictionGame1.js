@@ -11,6 +11,8 @@ const socket = io("https://mlm-production.up.railway.app");
 const ColorPridictionGame1 = () => {
   // State variables
   const [time, setTime] = useState(120);
+  const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const [buttonNumbers, setButtonNumbers] = useState(predefinedNumbers);
   const [contentDisabled, setContentDisabled] = useState(false);
   const [userChoice, setUserChoice] = useState("");
   const [userChoiceNumber, setUserChoiceNumber] = useState("");
@@ -143,7 +145,7 @@ const ColorPridictionGame1 = () => {
   // Constants
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
-  const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const predefinedColors1 = ["green", "orange", "purple"];
 
   // Styles
@@ -277,9 +279,15 @@ const ColorPridictionGame1 = () => {
   };
 
   const handleNumberSelect = (color, buttonColor) => {
+    
     setUserChoiceNumber(color);
     setUserChoiceButtonNumber(buttonColor);
     setShowNumberModal(true);
+    if(timer<7){
+      setShowNumberModal(false);
+      setShowLetterModal(false);
+      setShowModal(false);
+    }
   };
 
   const handleLetterSelect = (letter, buttonColor) => {
@@ -527,6 +535,34 @@ const scrollToTop = () => {
       behavior: "smooth", // Adds smooth scrolling animation
     });
   };
+  const handleRandomize = () => {
+    // Show numbers in a random order for 3 seconds
+    const initialShuffle = [...predefinedNumbers].sort(() => Math.random() - 0.5);
+    setButtonNumbers(initialShuffle);
+  
+    // Vibrate for 3 seconds
+    if ("vibrate" in navigator) {
+      navigator.vibrate([1000, 500, 1000]);
+    }
+  
+    // Rearrange the numbers randomly after 3 seconds
+    setTimeout(() => {
+      const shuffledNumbers = [...predefinedNumbers].sort(() => Math.random() - 0.5);
+      const shuffleColors = [...predefinedColors1].sort(() => Math.random() - 0.5);
+  
+      // Set the rearranged numbers and enable content
+      setButtonNumbers(shuffledNumbers);
+  
+      // Automatically select the first number after rearranging
+      handleNumberSelect(shuffledNumbers[0], shuffleColors[0]);
+  
+      // Stop vibrating
+      if ("vibrate" in navigator) {
+        navigator.vibrate(0);
+      }
+    }, 2000); // Total duration of vibration plus the time for rearrangement
+  };
+  
   return (
     <div className="threeMinuteGame colorbackGround">
         <div
@@ -742,7 +778,7 @@ const scrollToTop = () => {
                 pointerEvents: contentDisabled ? "none" : "auto",
               }}
             >
-              <div className="color-options number-options">
+              {/* <div className="color-options number-options">
                 {predefinedNumbers.map((color, index) => (
                   <button
                     key={color}
@@ -779,7 +815,38 @@ const scrollToTop = () => {
                     </div>
                   </button>
                 ))}
-              </div>
+              </div> */}
+              <div className="color-options number-options">
+        {buttonNumbers.map((number, index) => (
+          <button
+            key={number}
+            style={{
+              backgroundColor: contentDisabled ? "#ffe7d9" : buttonColors[index],
+              margin: "5px",
+              border: contentDisabled ? "2px solid gray" : "1.5px solid transparent",
+              color: "white",
+              fontWeight: "bold",
+              borderRadius: "50%",
+              width: "53px",
+              height: "53px",
+              boxShadow: contentDisabled
+                ? "0 0 0 2px red"
+                : `0 0 0 1px ${buttonColors[index]}`,
+              backgroundClip: "content-box",
+            }}
+            onClick={() =>
+              handleNumberSelect(number, buttonColors[index])
+            }
+            className={`game_button ${number === "5" || number === "0" ? "half-circle" : ""}`}
+            disabled={contentDisabled || gameResult !== ""}
+          >
+            <div className={`${number === "5" || number === "0" ? "number-overlay" : ""}`}>
+              {number}
+            </div>
+          </button>
+        ))}
+      </div>
+
             </div>
             <div
               className={`mt-1 game_choice_color game_choice_Number  ${
@@ -834,31 +901,36 @@ const scrollToTop = () => {
               </div>
             </div>
             <div className="p-1 betAmountMultiple">
+            <Button variant="light" style={{border:'1.4px solid black'}}  onClick={handleRandomize}>Random</Button>
               <Button
-                variant="secondary"
-                className="fw-bold m-1"
+                variant="dark"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(1)}
+                style={{border:'1px solid white'}}
               >
                 1x
               </Button>
               <Button
-                variant="primary"
-                className="fw-bold m-1"
+                variant="dark"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(2)}
+                style={{border:'1px solid white'}}
               >
                 2x
               </Button>
               <Button
-                variant="success"
-                className="fw-bold m-1"
+                variant="dark"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(3)}
+                style={{border:'1px solid white'}}
               >
                 3x
               </Button>
               <Button
-                variant="danger"
-                className="fw-bold m-1"
+                variant="dark"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(4)}
+                style={{border:'1px solid white'}}
               >
                 4x
               </Button>
