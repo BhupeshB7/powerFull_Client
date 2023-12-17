@@ -11,6 +11,8 @@ const Task = () => {
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState([]);
   const [sponsorId, setSponsorId] = useState([]);
+  const [mobile, setMobile] = useState([]);
+  const [name, setName] = useState([]);
   const [task, setTask] = useState(null);
   const [userTaskStatus, setUserTaskStatus] = useState(false); // Initialize userTaskStatus as false
   const [timerActive, setTimerActive] = useState(false); // Initialize timerActive as false
@@ -31,8 +33,22 @@ const Task = () => {
         setData(data);
         const userId = data?.userId;
         const sponsorId = data?.sponsorId;
+        const mobile = data?.mobile;
+        const name = data?.name;
         console.log(`Token Data user Id - ${userId}`)
         console.log(`Token Data sponsor Id - ${sponsorId}`)
+        if (mobile) {
+          setMobile(mobile);
+      }
+       else {
+        throw new Error('Mobile is missing from response data');
+      }
+      if (name) {
+        setName(name);
+    }
+     else {
+      throw new Error('Name is missing from response data');
+    }
         if (sponsorId) {
           setSponsorId(sponsorId);
       }
@@ -92,7 +108,7 @@ const Task = () => {
   const handleTaskCompletion = async () => {
       try {
         // const userId = data._id; // Replace this with the actual user ID of the logged-in user
-      await api.patch(`/tasks/${taskId}/complete`, { userId,sponsorId });
+      await api.patch(`/tasks/${taskId}/complete`, { userId,sponsorId,name,mobile });
       setUserTaskStatus(true); // Update the userTaskStatus in the state
       setTimerActive(false); // Reset the timerActive state to false
     } catch (error) {

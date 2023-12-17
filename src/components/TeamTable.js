@@ -33,7 +33,7 @@ const TeamTable = ({ userId }) => {
   const renderChain = (member) => (
     <div key={member.userId}>
       <div className='text-light'>
-        <strong className='text-warning'>Level:</strong> {member.level} | <strong>User ID:</strong> {member.userId} | <strong>Status:</strong> {member.status}
+        <strong className='text-warning'>Level:</strong> {member.level} | <strong>User ID:</strong> {member.userId} | <strong>User ID:</strong> {member.userId} | <strong>Name:</strong> {member.name} | <strong>Mobile:</strong> {member.mobile} | <strong>Status:</strong> {member.status}
       </div>
       {member.downline.length > 0 && (
         <div style={{ marginLeft: '30px',color:'white' }}>
