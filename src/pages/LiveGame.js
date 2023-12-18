@@ -591,13 +591,13 @@ const LiveGame = () => {
                         width: "53px",
                         height: "53px",
                         boxShadow: `0 0 0 1px ${predefinedColors1[index]}`,
-                        backgroundClip: "content-box",
+                        backgroundClip: "content-box" ,
                       }}
                       onClick={() => {
                         setUserChoiceButtonNumber(predefinedColors1[index]);
                         handleChoiceNumber(color);
                       }}
-                      className={`game_button ${color === "5" || color === "0" ? "half-circle" : ""}`}
+                      className={`game_button ${color === "5" || color === "0" ? "half-circle" : ""}`} 
                     >
                       {color}
                     </button>
