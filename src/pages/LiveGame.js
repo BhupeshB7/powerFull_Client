@@ -597,7 +597,7 @@ const LiveGame = () => {
                         setUserChoiceButtonNumber(predefinedColors1[index]);
                         handleChoiceNumber(color);
                       }}
-                      className="game_button"
+                      className={`game_button ${number === "5" || number === "0" ? "half-circle" : ""}`}
                     >
                       {color}
                     </button>
