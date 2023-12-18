@@ -572,8 +572,8 @@ const LiveGame = () => {
                         border: color.toLowerCase(),
                       }}
                       onClick={() => handleChoice(color)}
-                      className="game_button"
-                    > {color.toLowerCase() === "blueViolet" ? "Blue" : color}</button>
+                      className="game_button text-lght"
+                    > {color.toLowerCase() === "BlueViolet" ? "Blue" : color}</button>
                   ))}
                 </div>
 
