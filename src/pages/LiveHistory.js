@@ -165,7 +165,16 @@ const LiveHistory = () => {
                   <tr key={user._id} className="text-light">
                     <td>{index + 1}</td>
                     <td>{user.sessionId}</td>
-                    <td>{user.color}</td>
+                    <td className="text-center">
+                  <div
+                    style={{
+                      background: user.color,
+                      width: "20px",
+                      height: "20px",
+                      borderRadius: "50%",
+                    }}
+                  ></div>
+                </td>
                     <td>{user.number}</td>
                     <td>{user.size}</td>
                   </tr>
