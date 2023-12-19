@@ -381,20 +381,20 @@ const RegisterForm = () => {
                             <h6 className='text-center text-info' style={{fontWeight:"bold"}}>SponsorID: {sponsorId}</h6>
                             <h6 className='text-center text-danger' style={{fontWeight:"bold"}}>Password: {password}</h6> */}
                 <div
-                  className="table_align "
+                  className="table_align mt-3"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
                   <table
                     className=" responsive "
-                    style={{ width: "290px", border: "2px solid #ddd" }}
+                    style={{ width: "280px", boxShadow:'0  1px 6px rgba(0,0,0,0.35)', borderRadius:'7px' }}
                   >
                     <thead>
                       <tr
                         className="text-center text-secondary"
                         style={{ height: "35px" }}
                       >
-                        <th>USERID</th>
-                        <td className="text-dark">{userId}</td>
+                        <th>*USERID</th>
+                        <td className="text-dark fw-bold">{userId}</td>
                       </tr>
                     </thead>
                     <tbody>
@@ -404,7 +404,7 @@ const RegisterForm = () => {
                       >
                         <th>SponsorID</th>
                         <td
-                          className="text-primary"
+                          className="text-secondary"
                           style={{ fontStyle: "700" }}
                         >
                           {sponsorId}

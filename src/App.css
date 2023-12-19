@@ -919,13 +919,11 @@ gap: 30px;
   align-items: center; */
 }
 .modal-center {
-  margin-top: 140px;
+  margin-top: 200px;
 }
 /* For small devices, display 3 color boxes in one line */
 @media (max-width: 767px) {
-  .modal-center{
-    top: 40% !important;
-  }
+  
   .color-optionsText {
     display: flex;
     flex-wrap: wrap;

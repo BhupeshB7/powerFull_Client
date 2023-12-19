@@ -29,7 +29,7 @@ const ColorPridictionGame1 = () => {
   const [balance, setBalance] = useState(100);
   const [realTimeData, setRealTimeData] = useState(null);
   const [timerCountdown, setTimerCountdown] = useState(0);
-  const [timer, setTimer] = useState("Loading...");
+  const [timer, setTimer] = useState('Loading...');
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -179,26 +179,24 @@ const ColorPridictionGame1 = () => {
     setButtonColors(randomColors);
   }, []); // The empty dependency array ensures this effect runs only once
   useEffect(() => {
-    const timer1 = setInterval(() => {
-      if (timer > 0) {
-        if (timer <=7) {
-          setContentDisabled(true);
-          setShowModal(false);
-          setShowNumberModal(false);
-          setShowLetterModal(false);
-        } else {
-          setTimerBlink(false);
-        }
-        if (time === 1) {
-          setContentDisabled(false);
-        }
-      } else {
-        setContentDisabled(false);
-        setTimerBlink(false);
-      }
+    // Update the timer logic as needed
+    // For demonstration purposes, this example assumes that timer is a number
+    // and updates it every second
+    const intervalId = setInterval(() => {
+      setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
     }, 1000);
 
-    return () => clearInterval(timer1);
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    // Check if the timer is less than 7, and update the showModal state accordingly
+    if (timer < 7) {
+      setShowModal(false);
+      setShowLetterModal(false);
+      setShowNumberModal(false);
+    } 
   }, [timer]);
   // Listen to the scroll event to show/hide the button
   useEffect(() => {
@@ -279,17 +277,17 @@ const ColorPridictionGame1 = () => {
   };
 
   const handleNumberSelect = (color, buttonColor) => {
-    
-    setUserChoiceNumber(color);
-    setUserChoiceButtonNumber(buttonColor);
-    setShowNumberModal(true);
-    if(timer<7){
+    if(timer<40){
+      // alert(timer)
       setShowNumberModal(false);
       setShowLetterModal(false);
       setShowModal(false);
     }
+    setUserChoiceNumber(color);
+    setUserChoiceButtonNumber(buttonColor);
+    setShowNumberModal(true);
+    
   };
-
   const handleLetterSelect = (letter, buttonColor) => {
     setUserChoiceLetter(letter);
     setUserChoiceButtonNumber(buttonColor);
