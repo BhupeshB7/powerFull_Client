@@ -414,7 +414,7 @@ const PredictGame = ({ contactInfoList }) => {
     <>
       {isTokenValid ? (
         <>
-          <div className="colorbackGround">
+          <div className="colorbackGround predictGame">
             <div className="alert">
               {showAlert && (
                 <Alert
