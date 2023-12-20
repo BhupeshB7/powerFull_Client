@@ -1081,6 +1081,11 @@ gap: 30px;
   background: #0f1126;
   border: 2px solid #107f7f !important;
 }
+@media (max-width: 510px){
+  .form_transfer{
+    max-width: 310px ;
+  }
+}
 .contact-row {
   display: flex;
   justify-content: center;

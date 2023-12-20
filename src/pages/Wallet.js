@@ -59,7 +59,7 @@ function Setting() {
     {
       data.isBlocked?(
       <>
-      <h3 className="text-center text-danger m-3">Sorry, you are blocked from accessing this content.</h3>
+      <h3 className="text-center text-danger m-3">Sorry, your Account is now, Blocked.Please Contact us to Admin</h3>
       </>
       ):(
       <>

@@ -83,7 +83,7 @@ const TransferForm = ({ sourceUserId }) => {
       <div className="transferWallet">
         {message && <p style={{ color: "green" }}>{message}</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <form onSubmit={handleTransfer}>
+        <div className="form_transfer">
           <div>
             <label>User ID:</label>
             <br />
@@ -135,10 +135,10 @@ const TransferForm = ({ sourceUserId }) => {
               required
             />
           </div>
-          <Button variant="info" className="mt-2" type="submit">
+          <Button variant="info" className="mt-2" type="submit" handleTransfer>
             Transfer
           </Button>
-        </form>
+        </div>
       </div>
     </div>
   );
