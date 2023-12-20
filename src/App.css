@@ -611,8 +611,8 @@ ul li:nth-child(3) {
 .color-options {
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  padding: 10px;
+  width: 100%;
+  padding: 11px;
 }
 .number-options{
   display: flex;
