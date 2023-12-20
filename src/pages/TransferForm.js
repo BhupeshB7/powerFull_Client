@@ -83,7 +83,7 @@ const TransferForm = ({ sourceUserId }) => {
       <div className="transferWallet">
         {message && <p style={{ color: "green" }}>{message}</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <div className="form_transfer">
+        <div className=" ">
           <div>
             <label>User ID:</label>
             <br />
