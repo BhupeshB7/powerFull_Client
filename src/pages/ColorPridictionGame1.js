@@ -349,7 +349,6 @@ const ColorPridictionGame1 = () => {
   //   };
   // }, []); // Empty dependency array to run the effect only once on mount
 
-  
   // const handleTimerEnd = async () => {
   //   // Retrieve user choices from local storage
   //   const userChoice = localStorage.getItem("userChoice");
@@ -490,9 +489,9 @@ const ColorPridictionGame1 = () => {
   // };
 
   const handleTimerEnd = async () => {
-    console.log('Invoked function hadleRInerEbd Part1')
+    console.log("Invoked function hadleRInerEbd Part1");
     try {
-      console.log('Invoked function hadleRInerEbd ')
+      console.log("Invoked function hadleRInerEbd ");
       // Retrieve user choices from local storage
       const userChoice = localStorage.getItem("userChoice");
       const userChoiceNumber = localStorage.getItem("userChoiceNumber");
@@ -520,34 +519,35 @@ const ColorPridictionGame1 = () => {
         // Update balance
         const currentBalance = parseFloat(betAmount) || 0;
         const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-      
-          // Make the fetch request
-          const response = await fetch(
-            "http://localhost:5000/api/game/winningGame/user",
-            // "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                userId: data.userId, // Make sure userId is defined or passed as a prop
-                winnings: winnings,
-              }),
-            }
-          );
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+        // Make the fetch request
+        const response = await fetch(
+          "https://mlm-production.up.railway.app/api/game/winningGame/user",
+          // "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: data.userId, // Make sure userId is defined or passed as a prop
+              winnings: winnings,
+            }),
           }
+        );
 
-          const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-          // Assuming the response contains updated balance data
-          const updatedTotalWin = responseData.totalwin;
-          // Make sure you have defined setProfile elsewhere
-          setProfile({ ...profile, totalwin: updatedTotalWin });
-        
+        const responseData = await response.json();
+
+        // Assuming the response contains updated balance data
+        const updatedTotalWin = responseData.totalwin;
+        // Make sure you have defined setProfile elsewhere
+        setProfile({ ...profile, totalwin: updatedTotalWin });
+        // Log a message indicating successful wallet update
+        console.log("Wallet updated successfully!");
       }
 
       // Remove user choices from local storage
