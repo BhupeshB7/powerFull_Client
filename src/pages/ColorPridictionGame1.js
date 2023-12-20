@@ -67,25 +67,33 @@ const ColorPridictionGame1 = () => {
           }
         );
         const result = await response.json();
-        // const userLevel = getUserLevel(result.level);
-        // setLevel(userLevel);
 
-        if (result.role) {
-          const userrole = result.role;
-
-          if (userrole === "admin") {
-            localStorage.setItem("check", "nfwnwen");
-          }
+        // Store userId in localStorage
+        if (result.userId) {
+          localStorage.setItem("userId", result.userId);
         }
-        if (result.userId) setData(result);
 
+        // Handle role-specific logic
+        if (result.role === "admin") {
+          localStorage.setItem("check", "nfwnwen");
+        }
+
+        setData(result);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchData();
+
+    // Cleanup function
+    return () => {
+      // Remove userId from localStorage when component unmounts
+      localStorage.removeItem("userId");
+    };
   }, [token]);
+
   useEffect(() => {
     const socket = io("https://mlm-production.up.railway.app");
     // const socket = io("http://localhost:5000");
