@@ -752,8 +752,8 @@ const handleRandomize = () => {
               color: "white",
               fontWeight: "bold",
               borderRadius: "50%",
-              width: "53px",
-              height: "53px",
+              width: "45px",
+              height: "45px",
               boxShadow: contentDisabled
                 ? "0 0 0 2px red"
                 : `0 0 0 1px ${buttonColors[index]}`,
