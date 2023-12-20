@@ -437,38 +437,36 @@ const ColorPridictionGame1 = () => {
             // Update balance
             const currentBalance = parseFloat(betAmount) || 0;
             const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-
-            // Ensure required data is available before making the API call
-            if (winnings) {
-                const response = await axios.post(
-                    "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
-                    {
-                        userId: data.userId,
-                        winnings: winnings,
-                    }
-                );
-
-                // Assuming the response contains updated balance data
-                const updatedTotalWin = response.data.totalwin;
-
-                // Make sure you have defined setProfile elsewhere
-                setProfile({ ...profile, totalwin: updatedTotalWin });
-
-                // Remove user choices from local storage
-                localStorage.removeItem("userChoice");
-                localStorage.removeItem("userChoiceNumber");
-                localStorage.removeItem("userChoiceLetter");
-                localStorage.removeItem("betAmount");
-                localStorage.removeItem("choiceColor");
-                localStorage.removeItem("choiceNumber");
-                localStorage.removeItem("choiceLetter");
-            } else {
-                console.error("Invalid or missing user data");
+            try {
+              const response = await axios.post(
+                "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
+                {
+                  userId: data.userId, // Make sure userId is defined or passed as a prop
+                  winnings: winnings,
+                }
+              );
+    
+              // Assuming the response contains updated balance data
+              const updatedTotalWin = response.data.totalwin;
+              // Make sure you have defined setProfile elsewhere
+              setProfile({ ...profile, totalwin: updatedTotalWin });
+            } catch (error) {
+              console.error(error);
             }
+           
+            }
+          
+          // Remove user choices from local storage
+          localStorage.removeItem("userChoice");
+          localStorage.removeItem("userChoiceNumber");
+          localStorage.removeItem("userChoiceLetter");
+          localStorage.removeItem("betAmount");
+          localStorage.removeItem("choiceColor");
+          localStorage.removeItem("choiceNumber");
+          localStorage.removeItem("choiceLetter");
+        } catch (error) {
+          console.error("An error occurred:", error);
         }
-    } catch (error) {
-        console.error("An error occurred:", error);
-    }
 };
 
   if (isLoading) {
