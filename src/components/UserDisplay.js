@@ -898,6 +898,19 @@ const Dashboard = ({contactInfoList}) => {
     setAmount(event.target.value);
   };
 
+  // const handleFundMoveSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const response = await axios.post(
+  //       `https://mlm-production.up.railway.app/api/transfer/${data._id}`,
+  //       { amount: parseFloat(amount) }
+  //     );
+  //     setMessage(response.data.message);
+  //     alert(response.data.message);
+  //   } catch (error) {
+  //     setMessage(error.response.data.error);
+  //   }
+  // };
   const handleFundMoveSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -905,12 +918,22 @@ const Dashboard = ({contactInfoList}) => {
         `https://mlm-production.up.railway.app/api/transfer/${data._id}`,
         { amount: parseFloat(amount) }
       );
-      setMessage(response.data.message);
-      alert(response.data.message);
+  
+      if (response.data.error) {
+        // Handle error messages
+        setMessage(response.data.error);
+        alert(response.data.error);
+      } else {
+        // Handle success message
+        setMessage(response.data.message);
+        alert(response.data.message);
+      }
     } catch (error) {
-      setMessage(error.response.data.error);
+      // Handle network or unexpected errors
+      setMessage("An error occurred. Please try again later.");
     }
   };
+  
   //Fund move API and Function End
 
   const handleClick = async () => {

@@ -29,7 +29,7 @@ const ColorPridictionGame1 = () => {
   const [balance, setBalance] = useState(100);
   const [realTimeData, setRealTimeData] = useState(null);
   const [timerCountdown, setTimerCountdown] = useState(0);
-  const [timer, setTimer] = useState('Loading...');
+  const [timer, setTimer] = useState("Loading...");
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -115,9 +115,8 @@ const ColorPridictionGame1 = () => {
     // Event listener for initial data
     socket.on("initialData1", (data) => {
       setRealTimeData(data);
-      console.log('Initial Data:-');
+      console.log("Initial Data:-");
       console.log(data);
-     
     });
 
     // Event listener for new data
@@ -125,9 +124,9 @@ const ColorPridictionGame1 = () => {
       setRealTimeData(data);
       // console.log('New Data');
       // console.log(data);
-      localStorage.setItem('choiceColor', data.color);
-      localStorage.setItem('choiceNumber', data.number);
-      localStorage.setItem('choiceLetter', data.letter);
+      localStorage.setItem("choiceColor", data.color);
+      localStorage.setItem("choiceNumber", data.number);
+      localStorage.setItem("choiceLetter", data.letter);
     });
 
     // Event listener for timer countdown
@@ -196,7 +195,7 @@ const ColorPridictionGame1 = () => {
       setShowModal(false);
       setShowLetterModal(false);
       setShowNumberModal(false);
-    } 
+    }
   }, [timer]);
   // Listen to the scroll event to show/hide the button
   useEffect(() => {
@@ -277,7 +276,7 @@ const ColorPridictionGame1 = () => {
   };
 
   const handleNumberSelect = (color, buttonColor) => {
-    if(timer<40){
+    if (timer < 40) {
       // alert(timer)
       setShowNumberModal(false);
       setShowLetterModal(false);
@@ -286,7 +285,6 @@ const ColorPridictionGame1 = () => {
     setUserChoiceNumber(color);
     setUserChoiceButtonNumber(buttonColor);
     setShowNumberModal(true);
-    
   };
   const handleLetterSelect = (letter, buttonColor) => {
     setUserChoiceLetter(letter);
@@ -304,7 +302,7 @@ const ColorPridictionGame1 = () => {
   //     console.log(randomData);
   //     saveToMongoDB(randomData);
   //   };
-  console.log(data.userId)
+  // console.log(data.userId);
   const incrementBetAmount = () => {
     setBetAmount((prevAmount) => prevAmount + 5);
   };
@@ -333,6 +331,25 @@ const ColorPridictionGame1 = () => {
       setBetAmount(betAmount * multiplier);
     }
   };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await handleTimerEnd();
+  //   };
+
+  //   // Initial fetch
+  //   fetchData();
+
+  //   // Set up interval to fetch data every 30 seconds
+  //   const intervalId = setInterval(fetchData, 10000);
+
+  //   // Cleanup logic if needed
+  //   return () => {
+  //     clearInterval(intervalId); // Clear the interval when the component unmounts
+  //     // Additional cleanup code
+  //   };
+  // }, []); // Empty dependency array to run the effect only once on mount
+
+  
   // const handleTimerEnd = async () => {
   //   // Retrieve user choices from local storage
   //   const userChoice = localStorage.getItem("userChoice");
@@ -341,7 +358,7 @@ const ColorPridictionGame1 = () => {
   //   const betAmount = localStorage.getItem("betAmount");
   //   const choiceColor = localStorage.getItem("choiceColor");
   //   const choiceNumber = localStorage.getItem("choiceNumber");
-  //   const choiceLetter = localStorage.getItem("choiceLetter");  
+  //   const choiceLetter = localStorage.getItem("choiceLetter");
   //   // console.log(userChoiceLetter);
   //   // console.log(betAmount);
   //   // console.log(choiceColor);
@@ -405,69 +422,146 @@ const ColorPridictionGame1 = () => {
   //   localStorage.removeItem("choiceLetter");
   //   // Update the balance in local storage
   // };
+  //   const handleTimerEnd = async () => {
+  //     try {
+  //         // Retrieve user choices from local storage
+  //         const userChoice = localStorage.getItem("userChoice");
+  //         const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+  //         const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+  //         const betAmount = localStorage.getItem("betAmount");
+  //         const choiceColor = localStorage.getItem("choiceColor");
+  //         const choiceNumber = localStorage.getItem("choiceNumber");
+  //         const choiceLetter = localStorage.getItem("choiceLetter");
+
+  //         // Check for matches
+  //         if (
+  //             userChoice === choiceColor ||
+  //             userChoiceNumber === choiceNumber ||
+  //             userChoiceLetter === choiceLetter
+  //         ) {
+  //             let multiplier = 1;
+
+  //             // Determine multiplier based on the type of match
+  //             if (
+  //                 userChoice === choiceColor ||
+  //                 userChoiceLetter === choiceLetter
+  //             ) {
+  //                 multiplier = 2;
+  //             } else if (userChoiceNumber === choiceNumber) {
+  //                 multiplier = 4;
+  //             }
+
+  //             // Update balance
+  //             const currentBalance = parseFloat(betAmount) || 0;
+  //             const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
+  //             try {
+  //               console.log("Sending request to API...");
+  //               const response = await axios.post(
+  //                 "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
+  //                 {
+  //                   userId: data.userId, // Make sure userId is defined or passed as a prop
+  //                   winnings: winnings,
+  //                 }
+  //               );
+
+  //               console.log("API response:", response);
+
+  //               // Assuming the response contains updated balance data
+  //               const updatedTotalWin = response.data.totalwin;
+  //               // Make sure you have defined setProfile elsewhere
+  //               setProfile({ ...profile, totalwin: updatedTotalWin });
+  //             } catch (error) {
+  //               console.error("Error in API request:", error);
+  //             }
+
+  //             }
+
+  //           // Remove user choices from local storage
+  //           localStorage.removeItem("userChoice");
+  //           localStorage.removeItem("userChoiceNumber");
+  //           localStorage.removeItem("userChoiceLetter");
+  //           localStorage.removeItem("betAmount");
+  //           localStorage.removeItem("choiceColor");
+  //           localStorage.removeItem("choiceNumber");
+  //           localStorage.removeItem("choiceLetter");
+  //         } catch (error) {
+  //           console.error("An error occurred:", error);
+  //         }
+  // };
+
   const handleTimerEnd = async () => {
+    console.log('Invoked function hadleRInerEbd Part1')
     try {
-        // Retrieve user choices from local storage
-        const userChoice = localStorage.getItem("userChoice");
-        const userChoiceNumber = localStorage.getItem("userChoiceNumber");
-        const userChoiceLetter = localStorage.getItem("userChoiceLetter");
-        const betAmount = localStorage.getItem("betAmount");
-        const choiceColor = localStorage.getItem("choiceColor");
-        const choiceNumber = localStorage.getItem("choiceNumber");
-        const choiceLetter = localStorage.getItem("choiceLetter");
+      console.log('Invoked function hadleRInerEbd ')
+      // Retrieve user choices from local storage
+      const userChoice = localStorage.getItem("userChoice");
+      const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+      const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+      const betAmount = localStorage.getItem("betAmount");
+      const choiceColor = localStorage.getItem("choiceColor");
+      const choiceNumber = localStorage.getItem("choiceNumber");
+      const choiceLetter = localStorage.getItem("choiceLetter");
 
-        // Check for matches
-        if (
-            userChoice === choiceColor ||
-            userChoiceNumber === choiceNumber ||
-            userChoiceLetter === choiceLetter
-        ) {
-            let multiplier = 1;
+      // Check for matches
+      if (
+        userChoice === choiceColor ||
+        userChoiceNumber === choiceNumber ||
+        userChoiceLetter === choiceLetter
+      ) {
+        let multiplier = 1;
 
-            // Determine multiplier based on the type of match
-            if (
-                userChoice === choiceColor ||
-                userChoiceLetter === choiceLetter
-            ) {
-                multiplier = 2;
-            } else if (userChoiceNumber === choiceNumber) {
-                multiplier = 4;
-            }
-
-            // Update balance
-            const currentBalance = parseFloat(betAmount) || 0;
-            const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-            try {
-              const response = await axios.post(
-                "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
-                {
-                  userId: data.userId, // Make sure userId is defined or passed as a prop
-                  winnings: winnings,
-                }
-              );
-    
-              // Assuming the response contains updated balance data
-              const updatedTotalWin = response.data.totalwin;
-              // Make sure you have defined setProfile elsewhere
-              setProfile({ ...profile, totalwin: updatedTotalWin });
-            } catch (error) {
-              console.error(error);
-            }
-           
-            }
-          
-          // Remove user choices from local storage
-          localStorage.removeItem("userChoice");
-          localStorage.removeItem("userChoiceNumber");
-          localStorage.removeItem("userChoiceLetter");
-          localStorage.removeItem("betAmount");
-          localStorage.removeItem("choiceColor");
-          localStorage.removeItem("choiceNumber");
-          localStorage.removeItem("choiceLetter");
-        } catch (error) {
-          console.error("An error occurred:", error);
+        // Determine multiplier based on the type of match
+        if (userChoice === choiceColor || userChoiceLetter === choiceLetter) {
+          multiplier = 2;
+        } else if (userChoiceNumber === choiceNumber) {
+          multiplier = 4;
         }
-};
+
+        // Update balance
+        const currentBalance = parseFloat(betAmount) || 0;
+        const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
+      
+          // Make the fetch request
+          const response = await fetch(
+            "http://localhost:5000/api/game/winningGame/user",
+            // "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userId: data.userId, // Make sure userId is defined or passed as a prop
+                winnings: winnings,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const responseData = await response.json();
+
+          // Assuming the response contains updated balance data
+          const updatedTotalWin = responseData.totalwin;
+          // Make sure you have defined setProfile elsewhere
+          setProfile({ ...profile, totalwin: updatedTotalWin });
+        
+      }
+
+      // Remove user choices from local storage
+      localStorage.removeItem("userChoice");
+      localStorage.removeItem("userChoiceNumber");
+      localStorage.removeItem("userChoiceLetter");
+      localStorage.removeItem("betAmount");
+      localStorage.removeItem("choiceColor");
+      localStorage.removeItem("choiceNumber");
+      localStorage.removeItem("choiceLetter");
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -509,23 +603,23 @@ const ColorPridictionGame1 = () => {
     window.location.href = "/game/colorpridiction";
   };
   const currentDate = new Date();
-const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get current month with leading zero
-const currentDay = currentDate.getDate().toString().padStart(2, '0'); // Get current day with leading zero
-const currentMinutes = currentDate.getMinutes().toString().padStart(2, '0'); // Get current minutes with leading zero
-const sessionPrefix = 'PI11-';
-const session = `${sessionPrefix}${currentMonth}${currentDay}-00${currentMinutes}`;
-const timerSeconds = timer; // Replace this with your actual timer value
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Get current month with leading zero
+  const currentDay = currentDate.getDate().toString().padStart(2, "0"); // Get current day with leading zero
+  const currentMinutes = currentDate.getMinutes().toString().padStart(2, "0"); // Get current minutes with leading zero
+  const sessionPrefix = "PI11-";
+  const session = `${sessionPrefix}${currentMonth}${currentDay}-00${currentMinutes}`;
+  const timerSeconds = timer; // Replace this with your actual timer value
 
-// Convert seconds to minutes and seconds
-const minutes = Math.floor(timerSeconds / 60);
-const seconds = timerSeconds % 60;
-// Format minutes and seconds as two digits
-const formattedMinutes = String(minutes).padStart(2, '0');
-const formattedSeconds = String(seconds).padStart(2, '0');
+  // Convert seconds to minutes and seconds
+  const minutes = Math.floor(timerSeconds / 60);
+  const seconds = timerSeconds % 60;
+  // Format minutes and seconds as two digits
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
 
-// Display the formatted minutes and seconds
-console.log(`${formattedMinutes}:${formattedSeconds}`);
-const scrollToTop = () => {
+  // Display the formatted minutes and seconds
+  console.log(`${formattedMinutes}:${formattedSeconds}`);
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth", // Adds smooth scrolling animation
@@ -533,35 +627,41 @@ const scrollToTop = () => {
   };
   const handleRandomize = () => {
     // Show numbers in a random order for 3 seconds
-    const initialShuffle = [...predefinedNumbers].sort(() => Math.random() - 0.5);
+    const initialShuffle = [...predefinedNumbers].sort(
+      () => Math.random() - 0.5
+    );
     setButtonNumbers(initialShuffle);
-  
+
     // Vibrate for 3 seconds
     if ("vibrate" in navigator) {
       navigator.vibrate([1000, 500, 1000]);
     }
-  
+
     // Rearrange the numbers randomly after 3 seconds
     setTimeout(() => {
-      const shuffledNumbers = [...predefinedNumbers].sort(() => Math.random() - 0.5);
-      const shuffleColors = [...predefinedColors1].sort(() => Math.random() - 0.5);
-  
+      const shuffledNumbers = [...predefinedNumbers].sort(
+        () => Math.random() - 0.5
+      );
+      const shuffleColors = [...predefinedColors1].sort(
+        () => Math.random() - 0.5
+      );
+
       // Set the rearranged numbers and enable content
       setButtonNumbers(shuffledNumbers);
-  
+
       // Automatically select the first number after rearranging
       handleNumberSelect(shuffledNumbers[0], shuffleColors[0]);
-  
+
       // Stop vibrating
       if ("vibrate" in navigator) {
         navigator.vibrate(0);
       }
     }, 2000); // Total duration of vibration plus the time for rearrangement
   };
-  
+
   return (
     <div className="threeMinuteGame colorbackGround">
-        <div
+      <div
         className="d-flex justify-content-end"
         style={{ position: "absolute", right: "20px", top: "30px" }}
       >
@@ -574,8 +674,8 @@ const scrollToTop = () => {
         />
       </div>
       <div className="logo">
-              <img src={LOGO} alt="logo" height="70px" width="100px" />
-            </div>
+        <img src={LOGO} alt="logo" height="70px" width="100px" />
+      </div>
       <div className="game_box">
         <div
           className="d-flex justify-content-center  align-items-center buttonDW"
@@ -650,10 +750,20 @@ const scrollToTop = () => {
       </Container>
       {/* Your game UI components go here */}
       <Container className="m-auto d-flex justify-content-center mt-2">
-
-          <h6 className="text-light p-2" style={{ textAlign: "center", border:'1px solid orange', color:'white', padding:'10px 14px', width:'140px', borderTopRightRadius:'20px', borderBottomLeftRadius:'20px' }}>
-                1 Minutes
-              </h6>
+        <h6
+          className="text-light p-2"
+          style={{
+            textAlign: "center",
+            border: "1px solid orange",
+            color: "white",
+            padding: "10px 14px",
+            width: "140px",
+            borderTopRightRadius: "20px",
+            borderBottomLeftRadius: "20px",
+          }}
+        >
+          1 Minutes
+        </h6>
       </Container>
       <Container className="pt-5">
         <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -662,7 +772,7 @@ const scrollToTop = () => {
               <h6 className="text-light p-2" style={{ textAlign: "end" }}>
                 Left time to buy
               </h6>
-              
+
               <div>
                 <style>
                   {`
@@ -813,36 +923,45 @@ const scrollToTop = () => {
                 ))}
               </div> */}
               <div className="color-options number-options">
-        {buttonNumbers.map((number, index) => (
-          <button
-            key={number}
-            style={{
-              backgroundColor: contentDisabled ? "#ffe7d9" : buttonColors[index],
-              margin: "5px",
-              border: contentDisabled ? "2px solid gray" : "1.5px solid transparent",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: "50%",
-              width: "53px",
-              height: "53px",
-              boxShadow: contentDisabled
-                ? "0 0 0 2px red"
-                : `0 0 0 1px ${buttonColors[index]}`,
-              backgroundClip: "content-box",
-            }}
-            onClick={() =>
-              handleNumberSelect(number, buttonColors[index])
-            }
-            className={`game_button ${number === "5" || number === "0" ? "half-circle" : ""}`}
-            disabled={contentDisabled || gameResult !== ""}
-          >
-            <div className={`${number === "5" || number === "0" ? "number-overlay" : ""}`}>
-              {number}
-            </div>
-          </button>
-        ))}
-      </div>
-
+                {buttonNumbers.map((number, index) => (
+                  <button
+                    key={number}
+                    style={{
+                      backgroundColor: contentDisabled
+                        ? "#ffe7d9"
+                        : buttonColors[index],
+                      margin: "5px",
+                      border: contentDisabled
+                        ? "2px solid gray"
+                        : "1.5px solid transparent",
+                      color: "white",
+                      fontWeight: "bold",
+                      borderRadius: "50%",
+                      width: "53px",
+                      height: "53px",
+                      boxShadow: contentDisabled
+                        ? "0 0 0 2px red"
+                        : `0 0 0 1px ${buttonColors[index]}`,
+                      backgroundClip: "content-box",
+                    }}
+                    onClick={() =>
+                      handleNumberSelect(number, buttonColors[index])
+                    }
+                    className={`game_button ${
+                      number === "5" || number === "0" ? "half-circle" : ""
+                    }`}
+                    disabled={contentDisabled || gameResult !== ""}
+                  >
+                    <div
+                      className={`${
+                        number === "5" || number === "0" ? "number-overlay" : ""
+                      }`}
+                    >
+                      {number}
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
             <div
               className={`mt-1 game_choice_color game_choice_Number  ${
@@ -897,12 +1016,18 @@ const scrollToTop = () => {
               </div>
             </div>
             <div className="p-1 betAmountMultiple">
-            <Button variant="light" style={{border:'1.4px solid black'}}  onClick={handleRandomize}>Random</Button>
+              <Button
+                variant="light"
+                style={{ border: "1.4px solid black" }}
+                onClick={handleRandomize}
+              >
+                Random
+              </Button>
               <Button
                 variant="dark"
                 className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(1)}
-                style={{border:'1px solid white'}}
+                style={{ border: "1px solid white" }}
               >
                 1x
               </Button>
@@ -910,7 +1035,7 @@ const scrollToTop = () => {
                 variant="dark"
                 className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(2)}
-                style={{border:'1px solid white'}}
+                style={{ border: "1px solid white" }}
               >
                 2x
               </Button>
@@ -918,7 +1043,7 @@ const scrollToTop = () => {
                 variant="dark"
                 className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(3)}
-                style={{border:'1px solid white'}}
+                style={{ border: "1px solid white" }}
               >
                 3x
               </Button>
@@ -926,7 +1051,7 @@ const scrollToTop = () => {
                 variant="dark"
                 className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(4)}
-                style={{border:'1px solid white'}}
+                style={{ border: "1px solid white" }}
               >
                 4x
               </Button>
@@ -936,33 +1061,37 @@ const scrollToTop = () => {
         </Row>
         {/*Number-End  */}
       </Container>
-      <div style={{
-                  position:'fixed',
-                  right:'2%',
-                  bottom:'5%', zIndex:'1000'}}>
       <div
-                className={`scroll-to-top ${isVisible ? "visible" : ""}`}
-                onClick={scrollToTop}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "#fff",
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  margin: "20px",
-                }}
-              >
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png"
-                  height="35px"
-                  width="35px"
-                  alt="scrollToTop"
-                />
-              </div>
+        style={{
+          position: "fixed",
+          right: "2%",
+          bottom: "5%",
+          zIndex: "1000",
+        }}
+      >
+        <div
+          className={`scroll-to-top ${isVisible ? "visible" : ""}`}
+          onClick={scrollToTop}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#fff",
+            borderRadius: "50%",
+            width: "50px",
+            height: "50px",
+            margin: "20px",
+          }}
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png"
+            height="35px"
+            width="35px"
+            alt="scrollToTop"
+          />
+        </div>
       </div>
-  <OneMinuteHistory/>
+      <OneMinuteHistory />
       {/* Modal */}
       <Modal
         show={showModal}
@@ -1075,7 +1204,11 @@ const scrollToTop = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" style={{width:'200px'}} onClick={() => setShowModal(false)}>
+          <Button
+            variant="danger"
+            style={{ width: "200px" }}
+            onClick={() => setShowModal(false)}
+          >
             Cancel
           </Button>
           <Button
