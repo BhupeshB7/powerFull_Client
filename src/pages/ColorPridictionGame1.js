@@ -70,7 +70,7 @@ const ColorPridictionGame1 = () => {
 
         // Store userId in localStorage
         if (result.userId) {
-          localStorage.setItem("userId", result.userId);
+          localStorage.setItem("GameuserId", result.userId);
         }
 
         // Handle role-specific logic
@@ -527,9 +527,9 @@ const ColorPridictionGame1 = () => {
         // Update balance
         const currentBalance = parseFloat(betAmount) || 0;
         const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-  
+           const gameId = localStorage.getItem("GameUserId");
         // Make the API call to update balance
-        await updateBalance(data.userId, winnings);
+        await updateBalance(gameId, winnings);
   
         // Log a message indicating successful wallet update
         console.log("Wallet updated successfully!");
