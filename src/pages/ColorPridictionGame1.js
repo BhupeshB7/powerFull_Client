@@ -529,6 +529,7 @@ const ColorPridictionGame1 = () => {
         const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
            const gameId = localStorage.getItem("GameUserId");
         // Make the API call to update balance
+        console.log('Before Wallet updated', gameId)
         await updateBalance(gameId, winnings);
   
         // Log a message indicating successful wallet update
