@@ -543,6 +543,7 @@ const ColorPridictionGame1 = () => {
   };
   
   const updateBalance = async (userId, winnings) => {
+    console.log('GameID of the user',userId);
     try {
       const response = await fetch(
         "https://mlm-production.up.railway.app/api/game/winningGame/user",
