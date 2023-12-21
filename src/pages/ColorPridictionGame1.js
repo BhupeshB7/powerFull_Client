@@ -70,7 +70,7 @@ const ColorPridictionGame1 = () => {
 
         // Store userId in localStorage
         if (result.userId) {
-          localStorage.setItem("GameuserId", result.userId);
+          localStorage.setItem("GameUserId", result.userId);
         }
 
         // Handle role-specific logic
