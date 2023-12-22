@@ -820,7 +820,7 @@ const PredictGame = ({ contactInfoList }) => {
                 <div className="modal-dialog">
                   <div
                     className="modal-content topUPBg"
-                    style={{ maxHeight: "600px" }}
+                    style={{ maxHeight: "750px" }}
                   >
                     <div className="modal-header">
                       <h1
