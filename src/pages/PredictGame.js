@@ -56,16 +56,16 @@ const PredictGame = ({ contactInfoList }) => {
     window.location.href = "/depositform/game";
   };
 
-//   useEffect(() => {
-//     if (time === 5) {
-//       // Start the audio when time is equal to 5
-//       audio.play();
-//     } else if (time === 0) {
-//       // Stop and reset the audio when time is equal to 0
-//       audio.pause();
-//       audio.currentTime = 0;
-//     }
-//   }, [time, audio]);
+  //   useEffect(() => {
+  //     if (time === 5) {
+  //       // Start the audio when time is equal to 5
+  //       audio.play();
+  //     } else if (time === 0) {
+  //       // Stop and reset the audio when time is equal to 0
+  //       audio.pause();
+  //       audio.currentTime = 0;
+  //     }
+  //   }, [time, audio]);
   // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({
@@ -267,7 +267,6 @@ const PredictGame = ({ contactInfoList }) => {
   //   fetchGameHistory();
   // }, [userId]);
 
-
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const handleButtonClick = (multiplier) => {
@@ -282,9 +281,6 @@ const PredictGame = ({ contactInfoList }) => {
     setAlertMessage(message);
     setShowAlert(true);
   };
- 
- 
- 
 
   const fetchWithdrawalHistory = async () => {
     try {
@@ -314,7 +310,6 @@ const PredictGame = ({ contactInfoList }) => {
   useEffect(() => {
     fetchDepositHistory();
   }, [data.userId]);
-
 
   // useEffect(() => {
   //   const timer = setInterval(() => {
@@ -374,7 +369,6 @@ const PredictGame = ({ contactInfoList }) => {
     getGamerProfile();
   }, [data.userId]);
 
- 
   // Function to shuffle an array in place
 
   if (isLoading) {
@@ -489,13 +483,22 @@ const PredictGame = ({ contactInfoList }) => {
             </div> */}
 
             <Container>
-                <h6 className="text-light mt-3">Welcome Back,{profile.name}</h6>
-                <h6 className="text-warning p-2">Have  a Good Luck 👍</h6>
-                <Row>
-                    <Col sm={12} className="d-flex justify-content-center align-items-center">
-                        <Button className="m-2" variant="warning" onClick={handleGamePlay}>Start a New Game </Button>
-                    </Col>
-                </Row>
+              <h6 className="text-light mt-3">Welcome Back,{profile.name}</h6>
+              <h6 className="text-warning p-2">Have a Good Luck 👍</h6>
+              <Row>
+                <Col
+                  sm={12}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <Button
+                    className="m-2"
+                    variant="warning"
+                    onClick={handleGamePlay}
+                  >
+                    Start a New Game{" "}
+                  </Button>
+                </Col>
+              </Row>
             </Container>
             <div className="notification-area">
               <div className="notification">
@@ -1034,19 +1037,18 @@ const PredictGame = ({ contactInfoList }) => {
                                 {withdrawal.userId}
                               </td>
                               <td className="text-warning">
-                                {withdrawal.amount}
+                                {withdrawal.depositAmount}
                               </td>
                               <td
                                 className={
-                                  withdrawal.approved === "Pending"
-                                    ? "text-warning"
-                                    : withdrawal.approved === "Approved"
+                                  withdrawal.isApproved
                                     ? "text-success"
                                     : "text-danger"
                                 }
                               >
-                                {withdrawal.approved}
+                                {withdrawal.isApproved ? "Approved" : "Pending"}
                               </td>
+
                               <td className="text-secondary">
                                 {new Date(
                                   withdrawal.createdAt

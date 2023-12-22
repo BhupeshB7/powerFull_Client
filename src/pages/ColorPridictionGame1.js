@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import LOGO from "../assets/icon.png";
 import spinner from "../assets/spinner2.gif";
 import OneMinuteHistory from "./OneMinuteHistory";
+import UserGameRecord from "./UserGameRecord";
 
 const socket = io("https://mlm-production.up.railway.app");
 // const socket = io("http://localhost:5000");
@@ -135,6 +136,7 @@ const ColorPridictionGame1 = () => {
       localStorage.setItem("choiceColor", data.color);
       localStorage.setItem("choiceNumber", data.number);
       localStorage.setItem("choiceLetter", data.letter);
+      localStorage.setItem("session", data.session);
     });
 
     // Event listener for timer countdown
@@ -150,6 +152,7 @@ const ColorPridictionGame1 = () => {
     };
   }, []);
   // Constants
+  const sessionDetail =  localStorage.getItem("session");
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
   // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -168,6 +171,7 @@ const ColorPridictionGame1 = () => {
       );
       const result = response.data;
       setProfile(result);
+
       // console.log(result);
     } catch (error) {
       console.error(error);
@@ -240,7 +244,7 @@ const ColorPridictionGame1 = () => {
     } else {
       // Save choices in local storage
 
-      localStorage.setItem("userChoice", userChoice);
+      localStorage.setItem("userChoiceColor", userChoice);
       localStorage.setItem("userChoiceNumber", userChoiceNumber);
       localStorage.setItem("userChoiceLetter", userChoiceLetter);
       localStorage.setItem("betAmount", betAmount);
@@ -495,90 +499,143 @@ const ColorPridictionGame1 = () => {
   //           console.error("An error occurred:", error);
   //         }
   // };
-
+  const gameId = localStorage.getItem("GameUserId");
   const handleTimerEnd = async () => {
     console.log("Invoked function handleTimerEnd Part1");
     try {
       console.log("Invoked function handleTimerEnd");
       // Retrieve user choices from local storage
-      const userChoice = localStorage.getItem("userChoice");
+      const userChoiceColor = localStorage.getItem("userChoiceColor");
       const userChoiceNumber = localStorage.getItem("userChoiceNumber");
       const userChoiceLetter = localStorage.getItem("userChoiceLetter");
       const betAmount = localStorage.getItem("betAmount");
       const choiceColor = localStorage.getItem("choiceColor");
       const choiceNumber = localStorage.getItem("choiceNumber");
       const choiceLetter = localStorage.getItem("choiceLetter");
-  
+      const gameId = localStorage.getItem("GameUserId");
+      await sendGameRecord(gameId);
       // Check for matches
       if (
-        userChoice === choiceColor ||
+        userChoiceColor === choiceColor ||
         userChoiceNumber === choiceNumber ||
         userChoiceLetter === choiceLetter
       ) {
         let multiplier = 1;
-  
+
         // Determine multiplier based on the type of match
-        if (userChoice === choiceColor || userChoiceLetter === choiceLetter) {
+        if (userChoiceColor === choiceColor || userChoiceLetter === choiceLetter) {
           multiplier = 2;
         } else if (userChoiceNumber === choiceNumber) {
           multiplier = 4;
         }
-  
+       
         // Update balance
         const currentBalance = parseFloat(betAmount) || 0;
         const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-           const gameId = localStorage.getItem("GameUserId");
+        const gameId = localStorage.getItem("GameUserId");
+       
         // Make the API call to update balance
-        console.log('Before Wallet updated', gameId)
-        await updateBalance(gameId, winnings);
-  
+        // console.log("Before Wallet updated", gameId);
+        // await updateBalance(gameId, winnings);
+
         // Log a message indicating successful wallet update
-        console.log("Wallet updated successfully!");
+        // console.log("Wallet updated successfully!");
       }
-  
+
       // Remove user choices from local storage
-      clearUserChoices();
+       clearUserChoices();
     } catch (error) {
+       clearUserChoices();
       console.error("An error occurred:", error);
     }
   };
-  
-  const updateBalance = async (userId, winnings) => {
-    console.log('GameID of the user',userId);
-    try {
-      const response = await fetch(
-        "https://mlm-production.up.railway.app/api/game/winningGame/user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: userId,
-            winnings: winnings,
-          }),
-        }
-      );
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+  const sendGameRecord = async (gameID) => {
+    console.log("Game Record called")
+    const userId = gameID; // Replace with the actual user id
+    const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+    const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+    const userChoiceColor = localStorage.getItem("userChoiceColor");
+    const betAmount = localStorage.getItem("betAmount");
+    const choiceLetter = localStorage.getItem("choiceLetter");
+    const choiceNumber = localStorage.getItem("choiceNumber");
+    const choiceColor = localStorage.getItem("choiceColor");
+    const session = localStorage.getItem("session");
+    
+    if (userChoiceLetter || userChoiceColor || userChoiceNumber) {
+      try {
+        const response = await axios.post(
+          "https://mlm-production.up.railway.app/api/gameProfile/checkChoices",
+          {
+            userId,
+            userChoiceLetter,
+            userChoiceNumber,
+            userChoiceColor,
+            betAmount,
+            choiceLetter,
+            choiceNumber,
+            choiceColor,
+            session,
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
       }
-  
-      const responseData = await response.json();
-  
-      // Assuming the response contains updated balance data
-      const updatedTotalWin = responseData.totalwin;
-      // Make sure you have defined setProfile elsewhere
-      setProfile({ ...profile, totalwin: updatedTotalWin });
-    } catch (error) {
-      console.error("Error updating balance:", error);
-      throw error; // Re-throw the error to be caught by the calling function
     }
+    localStorage.removeItem("userChoiceColor");
+    localStorage.removeItem("userChoiceNumber");
+    localStorage.removeItem("userChoiceLetter");
+    localStorage.removeItem("betAmount");
+    localStorage.removeItem("choiceColor");
+    localStorage.removeItem("choiceNumber");
+    localStorage.removeItem("choiceLetter");
+    clearUserChoices();
   };
-  
+
+  // const updateBalance = async (userId, winnings) => {
+  //   console.log("GameID of the user", userId);
+  //   try {
+  //     const response = await fetch(
+  //       "https://mlm-production.up.railway.app/api/game/winningGame/user",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userId: userId,
+  //           winnings: winnings,
+  //         }),
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! Status: ${response.status}`);
+  //     }
+
+  //     const responseData = await response.json();
+
+  //     // Assuming the response contains updated balance data
+  //     const updatedTotalWin = responseData.totalwin;
+  //     // Make sure you have defined setProfile elsewhere
+  //     setProfile({ ...profile, totalwin: updatedTotalWin });
+  //     localStorage.removeItem("userChoice");
+  //     localStorage.removeItem("userChoiceNumber");
+  //     localStorage.removeItem("userChoiceLetter");
+  //     localStorage.removeItem("betAmount");
+  //     localStorage.removeItem("choiceColor");
+  //     localStorage.removeItem("choiceNumber");
+  //     localStorage.removeItem("choiceLetter");
+  //   } catch (error) {
+  //     console.error("Error updating balance:", error);
+  //     throw error; // Re-throw the error to be caught by the calling function
+  //   }
+  // };
+
   const clearUserChoices = () => {
     // Remove user choices from local storage
-    localStorage.removeItem("userChoice");
+    console.log("clear user choice")
+    localStorage.removeItem("userChoiceColor");
     localStorage.removeItem("userChoiceNumber");
     localStorage.removeItem("userChoiceLetter");
     localStorage.removeItem("betAmount");
@@ -586,7 +643,6 @@ const ColorPridictionGame1 = () => {
     localStorage.removeItem("choiceNumber");
     localStorage.removeItem("choiceLetter");
   };
-  
 
   if (isLoading) {
     return (
@@ -773,6 +829,7 @@ const ColorPridictionGame1 = () => {
           </Col>
         </Row>
       </Container>
+      
       {/* Your game UI components go here */}
       <Container className="m-auto d-flex justify-content-center mt-2">
         <h6
@@ -831,7 +888,8 @@ const ColorPridictionGame1 = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <p className="text-warning">{session}</p>
+                    {/* <p className="text-warning">{session}</p> */}
+                    <p className="text-warning">{sessionDetail}</p>
                     <h1 style={{ color: "#bbb" }}>
                       {" "}
                       <b
@@ -1116,6 +1174,9 @@ const ColorPridictionGame1 = () => {
           />
         </div>
       </div>
+      <Container>
+        <UserGameRecord userId={gameId}/>
+      </Container>
       <OneMinuteHistory />
       {/* Modal */}
       <Modal

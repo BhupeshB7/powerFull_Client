@@ -647,7 +647,8 @@ ul li:nth-child(3) {
   color: white;
 }
 .deposit_Form input{
-  border: 1.3px solid #000428;;
+  border: 1.3px solid #000428;
+  width: 310px;
 }
 .bgDepositHeader{
   background:#330867 !important;
@@ -1429,4 +1430,19 @@ color: green !important;
 }
 .text-lght-button{
   color: whitesmoke !important;
+}
+.gameRecord {
+  background-color: black;
+  color: white; /* Set text color to white or any other suitable color */
+}
+
+.gameRecord .modal-content {
+  background-color: transparent; /* Make the modal content background transparent */
+  border: none; /* Remove the modal content border */
+}
+
+.gameRecord .modal-header,
+.gameRecord .modal-body,
+.gameRecord .modal-footer {
+  border-color: transparent; /* Remove borders from header, body, and footer */
 }
