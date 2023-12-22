@@ -54,6 +54,8 @@ const GameHistory = () => {
                 <th>UserId</th>
                 <th>Amount</th>
                 <th>UPI</th>
+                <th>Account No</th>
+                <th>IFSCCODE</th>
                 <th>Status</th>
                 
               </tr>
@@ -65,6 +67,8 @@ const GameHistory = () => {
                   <td>{item.userId}</td>
                   <td>{item.amount}</td>
                   <td>{item.UPI}</td>
+                  <td>{item.accountNo}</td>
+                  <td>{item.IFSCCODE}</td>
                   <td> <Button variant="warning" className="ms-1" onClick={()=>handleApprove(item._id)}>{item.approved}</Button></td>
                   {/* Add more table data cells as needed */}
                 </tr>
