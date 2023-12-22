@@ -142,6 +142,8 @@ const PredictGame = ({ contactInfoList }) => {
     name: "",
     amount: "",
     UPI: "",
+    accountNo:"",
+    IFSCCODE:"",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -874,6 +876,26 @@ const PredictGame = ({ contactInfoList }) => {
                           name="UPI"
                           placeholder="Payment UPI "
                           value={formData1.UPI}
+                          onChange={handleChange1}
+                          required
+                        />
+                        <br />
+                        <label>Account No:</label>
+                        <input
+                          type="text"
+                          name="accountNo"
+                          placeholder="Account No"
+                          value={formData1.accountNo}
+                          onChange={handleChange1}
+                          required
+                        />
+                        <br />
+                        <label>IFSCCODE</label>
+                        <input
+                          type="text"
+                          name="IFSCCODE"
+                          placeholder="IFSCCODE..."
+                          value={formData1.IFSCCODE}
                           onChange={handleChange1}
                           required
                         />
