@@ -6,7 +6,7 @@ const UserGameRecord = ({ userId }) => {
   const [userDetails, setUserDetails] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const [lastPage, setLastPage] = useState(false); 
+  const [lastPage, setLastPage] = useState(false);
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -52,11 +52,11 @@ const UserGameRecord = ({ userId }) => {
       </Button>
 
       {/* React Bootstrap Modal */}
-      <Modal show={showModal} onHide={handleClose} >
-        <Modal.Header closeButton className='gameRecord'>
-          <Modal.Title>User Game Record</Modal.Title>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton className="gameRecord">
+          <Modal.Title>Game Record of {userId}</Modal.Title>
         </Modal.Header>
-        <Modal.Body className='gameRecord'>
+        <Modal.Body className="gameRecord">
           {/* Display user details in a table */}
           <div className="table-responsive">
             <Table striped bordered hover>
@@ -67,7 +67,7 @@ const UserGameRecord = ({ userId }) => {
                   <th>Achiever</th>
                   <th>Amount</th>
                   <th>Result</th>
-                  <th>Time</th>
+                  <th style={{ width: "270px" }}>Time</th>
                 </tr>
               </thead>
               <tbody>
@@ -91,7 +91,13 @@ const UserGameRecord = ({ userId }) => {
                     >
                       {userDetail.result}
                     </td>
-                    <td className="text-light">{formatTimestampToIST(userDetail.createdAt)}</td>
+                    {/* <td className="text-light game_record-time">{formatTimestampToIST(userDetail.createdAt)}</td> */}
+                    <td
+                      className="text-light game_record-time"
+                      style={{ width: "160px", minWidth: "160px" }}
+                    >
+                      {formatTimestampToIST(userDetail.createdAt)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -100,19 +106,26 @@ const UserGameRecord = ({ userId }) => {
 
           <div className=" mt-3 d-flex align-items-center justify-content-center">
             {/* Pagination controls */}
-            <Button variant="dark" className='m-1'
+            <Button
+              variant="dark"
+              className="m-1"
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
             >
               Previous
             </Button>
             <h6 className="m-2">{currentPage} </h6>
-            <Button variant="dark" className='m-1' onClick={() => setCurrentPage(currentPage + 1)} disabled={lastPage}>
-            Next
-          </Button>
+            <Button
+              variant="dark"
+              className="m-1"
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={lastPage}
+            >
+              Next
+            </Button>
           </div>
         </Modal.Body>
-        <Modal.Footer className='gameRecord'>
+        <Modal.Footer className="gameRecord">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>

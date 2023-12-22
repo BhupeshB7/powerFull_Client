@@ -1446,3 +1446,6 @@ color: green !important;
 .gameRecord .modal-footer {
   border-color: transparent; /* Remove borders from header, body, and footer */
 }
+.game_record-time{
+  width: 300px !important;
+}
