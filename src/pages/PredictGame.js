@@ -955,6 +955,8 @@ const PredictGame = ({ contactInfoList }) => {
                             <th>UserId</th>
                             <th>Amount</th>
                             <th>UPI</th>
+                            <th>Account No</th>
+                            <th>IFSC CODE</th>
                             <th>status</th>
                             <th>Date</th>
                           </tr>
@@ -973,6 +975,8 @@ const PredictGame = ({ contactInfoList }) => {
                                 {withdrawal.amount}
                               </td>
                               <td className="text-success">{withdrawal.UPI}</td>
+                              <td className="text-success">{withdrawal.accountNo}</td>
+                              <td className="text-success">{withdrawal.IFSCCODE}</td>
                               <td
                                 className={
                                   withdrawal.approved === "Pending"
