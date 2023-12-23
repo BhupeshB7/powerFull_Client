@@ -72,6 +72,7 @@ const TransferForm = ({ sourceUserId }) => {
       // Reset the form
       setTargetUserId("");
       setAmount("");
+      // console.log(error)
     }
   };
 
@@ -135,7 +136,7 @@ const TransferForm = ({ sourceUserId }) => {
               required
             />
           </div>
-          <Button variant="info" className="mt-2" type="submit" handleTransfer>
+          <Button variant="info" className="mt-2" type="submit" onClick={handleTransfer} >
             Transfer
           </Button>
         </div>
