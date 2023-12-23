@@ -54,6 +54,20 @@ function  WithdrawalRequests() {
       alert("An error occurred while deleting the user.");
     }
   };
+  const handleReject = async (id) => {
+    try {
+      const response = await axios.put(
+        `https://mlm-production.up.railway.app/api/withdraw/withdrawals/reject/${id}`
+      );
+      setWithdrawalRequests(
+        withdrawalRequests.map((request) =>
+          request._id === id ? response.data : request
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
      
@@ -112,12 +126,20 @@ function  WithdrawalRequests() {
                 </td>
                 <td>
                   {request.status === "pending" && (
-                    <button
-                      className="btn btn-success"
-                      onClick={() => handleApprove(request._id)}
-                    >
-                      Approve
-                    </button>
+                    <>
+                      <button
+                        className="btn btn-success"
+                        onClick={() => handleApprove(request._id)}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className="btn btn-danger ms-1"
+                        onClick={() => handleReject(request._id)}
+                      >
+                        Reject
+                      </button>
+                    </>
                   )}
                 </td>
                 <td>
