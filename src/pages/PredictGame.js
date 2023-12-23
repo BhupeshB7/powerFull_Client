@@ -964,7 +964,7 @@ const PredictGame = ({ contactInfoList }) => {
                         <tbody>
                           {withdrawalHistory.map((withdrawal, index) => (
                             <tr key={index}>
-                              <td className="text-info">{index}</td>
+                              <td className="text-info">{index+1}</td>
                               <td className="text-primary">
                                 {withdrawal.name}
                               </td>
@@ -1055,7 +1055,7 @@ const PredictGame = ({ contactInfoList }) => {
                         <tbody>
                           {depositHistory.map((withdrawal, index) => (
                             <tr key={index}>
-                              <td className="text-info">{index}</td>
+                              <td className="text-info">{index+1}</td>
                               <td className="text-primary">
                                 {withdrawal.name}
                               </td>
