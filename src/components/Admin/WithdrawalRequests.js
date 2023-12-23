@@ -57,15 +57,16 @@ function  WithdrawalRequests() {
   const handleReject = async (id) => {
     try {
       const response = await axios.put(
+        // `http://localhost:5000/api/withdraw/withdrawals/reject/${id}`
         `https://mlm-production.up.railway.app/api/withdraw/withdrawals/reject/${id}`
       );
-      setWithdrawalRequests(
-        withdrawalRequests.map((request) =>
-          request._id === id ? response.data : request
+      setWithdrawalRequests((prevRequests) =>
+        prevRequests.map((request) =>
+          request._id === id ? { ...request, status: response.data.status } : request
         )
       );
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
