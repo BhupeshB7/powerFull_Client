@@ -164,7 +164,7 @@ const ColorPredictGame = () => {
   // Constants
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
-  const predefinedColors1 = ["green", "orange", "purple"];
+  const predefinedColors1 = ["green", "red", "violet"];
 
   // Styles
   const timerStyle = {

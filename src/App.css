@@ -1416,7 +1416,7 @@ color: green !important;
 }
 .half-circle {
   /* Create a linear gradient for the background */
-  background: linear-gradient( 120deg, rgb(214, 150, 31) 50%, rgb(107, 212, 107) 50%);
+  background: linear-gradient( 120deg, rgb(239, 54, 54) 50%, rgb(107, 212, 107) 50%);
 }
 .notification-area{
   display: flex;

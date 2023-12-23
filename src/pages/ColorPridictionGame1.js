@@ -156,7 +156,7 @@ const ColorPridictionGame1 = () => {
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
   // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  const predefinedColors1 = ["green", "orange", "purple"];
+  const predefinedColors1 = ["green", "red", "violet"];
 
   // Styles
   const timerStyle = {
