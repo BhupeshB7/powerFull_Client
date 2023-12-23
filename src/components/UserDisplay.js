@@ -930,7 +930,7 @@ const Dashboard = ({contactInfoList}) => {
       }
     } catch (error) {
       // Handle network or unexpected errors
-      setMessage(response.data.error);
+      setMessage(data.error);
     }
   };
   
