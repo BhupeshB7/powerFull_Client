@@ -219,14 +219,16 @@ function  GameDeposit() {
           </div>
         </div>
       )}
-      <div className="pagination">
+      <div className="pagination d-flex justify-content-center align-items-center">
         <Button  variant="outline-primary" className='ms-1'
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
           Previous
         </Button>
-       
+        <p>
+           {currentPage} <b>/</b> {totalPages}
+        </p>
         <Button variant="outline-primary" className='ms-1'
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
@@ -234,9 +236,7 @@ function  GameDeposit() {
           Next
         </Button>
       </div>
-        <p>
-          Page {currentPage} of {totalPages}
-        </p>
+        
         <GameHistory/>
         </Container>
     </div>
