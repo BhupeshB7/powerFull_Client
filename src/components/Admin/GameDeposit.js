@@ -226,9 +226,9 @@ function  GameDeposit() {
         >
           Previous
         </Button>
-        <p>
+        <h6 className="m-1">
            {currentPage} <b>/</b> {totalPages}
-        </p>
+        </h6>
         <Button variant="outline-primary" className='ms-1'
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}

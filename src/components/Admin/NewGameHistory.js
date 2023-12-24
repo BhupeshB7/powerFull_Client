@@ -100,7 +100,7 @@ const GameHistory = () => {
         >
           Previous
         </Button>
-        <h6>
+        <h6 className="m-1">
           {currentPage}
           <b>/</b>
           {totalPages}
