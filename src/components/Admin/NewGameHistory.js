@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 const GameHistory = () => {
   const [gameHistory, setGameHistory] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(4); // Number of items per page
+  const [perPage] = useState(15); // Number of items per page
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
@@ -77,17 +77,20 @@ const GameHistory = () => {
           </table>
         </div>
       
-      <div className="pagination">
-        {/* Render pagination controls */}
-        {Array.from({ length: totalPages }, (_, index) => (
-          <Button variant='outline-secondary'
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={`ms-2 currentPage === index + 1 ? 'active' : ''`}
-          >
-            {index + 1}
-          </Button>
-        ))}
+        <div className="pagination">
+        <Button  variant="outline-primary" className='ms-1'
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </Button>
+       
+        <Button variant="outline-primary" className='ms-1'
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </Button>
       </div>
     </div>
   );
