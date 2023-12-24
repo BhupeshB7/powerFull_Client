@@ -223,7 +223,7 @@ const PredictGame = ({ contactInfoList }) => {
   };
   const handleSubmitWithdrawal = async (e) => {
     if (formData1.amount < 110) {
-      alert("Minimum Withdrawal Amount 110");
+      alert("Minimum Withdrawal Amount is 110");
       return;
     }
     e.preventDefault();
@@ -235,27 +235,35 @@ const PredictGame = ({ contactInfoList }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...formData1 }), // Set type to 'Deposit'
+          body: JSON.stringify({ ...formData1 }),
         }
       );
-
+  
       if (response.ok) {
         alert("Withdrawal request submitted successfully");
       } else {
         const responseData = await response.json();
-        if (responseData.message === "Insufficient Balance") {
-          alert("Insufficient Balance. Please check your wallet.");
-        } if (responseData.error === 'Withdrawal not allowed before 11 AM.') {
-          Alert('Withdrawal not allowed before 11 AM.');
-        } else if (responseData.error === 'Withdrawal not allowed after 3 PM.') {
-          alert('Withdrawal not allowed after 3 PM.');
-        } 
+        handleWithdrawalError(responseData);
       }
     } catch (error) {
-      alert("Error submitting withdrawal request", error);
       console.error(error);
+      alert("Error submitting withdrawal request. Please try again.");
     }
   };
+  
+  const handleWithdrawalError = (responseData) => {
+    if (responseData.message === "Insufficient Balance") {
+      alert("Insufficient Balance. Please check your wallet.");
+    } else if (
+      responseData.error === "Withdrawal not allowed before 11 AM." ||
+      responseData.error === "Withdrawal not allowed after 3 PM."
+    ) {
+      alert(responseData.error);
+    } else {
+      alert("Error submitting withdrawal request. Please try again.");
+    }
+  };
+  
   // const fetchGameHistory = async () => {
   //   try {
   //     const response = await axios.get(
