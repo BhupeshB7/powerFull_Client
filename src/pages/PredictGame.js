@@ -245,9 +245,9 @@ const PredictGame = ({ contactInfoList }) => {
         const responseData = await response.json();
         if (responseData.message === "Insufficient Balance") {
           alert("Insufficient Balance. Please check your wallet.");
-        } if (data.error === 'Withdrawal not allowed before 11 AM.') {
+        } if (responseData.error === 'Withdrawal not allowed before 11 AM.') {
           Alert('Withdrawal not allowed before 11 AM.');
-        } else if (data.error === 'Withdrawal not allowed after 3 PM.') {
+        } else if (responseData.error === 'Withdrawal not allowed after 3 PM.') {
           alert('Withdrawal not allowed after 3 PM.');
         } 
       }
