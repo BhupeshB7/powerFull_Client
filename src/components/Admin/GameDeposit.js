@@ -122,7 +122,7 @@ function  GameDeposit() {
       );
       // console.log('Deposit deleted');
       alert(response.data);
-      window.location.href = "/admin/dashboard";
+      window.location.href = "/admin/dashboard/game";
     } catch (error) {
       alert(error.response.data);
       console.log(error);
