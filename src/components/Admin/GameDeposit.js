@@ -106,7 +106,28 @@ function  GameDeposit() {
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
+  const handleDeleteDeposit = (id) => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this deposit?"
+    );
+    if (shouldDelete) {
+      deleteDeposit(id);
+    }
+  };
 
+  const deleteDeposit = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://mlm-production.up.railway.app/api/gameDeposit/delete/${id}`
+      );
+      // console.log('Deposit deleted');
+      alert(response.data);
+      window.location.href = "/admin/dashboard";
+    } catch (error) {
+      alert(error.response.data);
+      console.log(error);
+    }
+  };
   return (
     <>
     {isTokenValid ?(
@@ -150,7 +171,7 @@ function  GameDeposit() {
               <th>UTR</th>
               <th>View</th>
               <th>Status</th>
-              
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -170,6 +191,14 @@ function  GameDeposit() {
                 </div>
               </td>
                 <td> <Button onClick={()=>handleApprove(item._id, item.depositAmount)} className="ms-1">{item.isApproved?'Approved':'Pending'}</Button></td>
+                <td>
+                <Button
+                  className="btn btn-danger sm m-1"
+                  onClick={() => handleDeleteDeposit(item._id)}
+                >
+                  Delete
+                </Button >
+              </td>
                 {/* Add more table data cells as needed */}
               </tr>
             ))}
