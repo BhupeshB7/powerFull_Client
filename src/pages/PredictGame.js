@@ -245,12 +245,14 @@ const PredictGame = ({ contactInfoList }) => {
         const responseData = await response.json();
         if (responseData.message === "Insufficient Balance") {
           alert("Insufficient Balance. Please check your wallet.");
-        } else {
-          alert("Error submitting withdrawal request");
-        }
+        } if (data.error === 'Withdrawal not allowed before 11 AM.') {
+          Alert('Withdrawal not allowed before 11 AM.');
+        } else if (data.error === 'Withdrawal not allowed after 3 PM.') {
+          alert('Withdrawal not allowed after 3 PM.');
+        } 
       }
     } catch (error) {
-      alert("Error submitting deposit request", error);
+      alert("Error submitting withdrawal request", error);
       console.error(error);
     }
   };
