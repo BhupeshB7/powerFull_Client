@@ -1449,3 +1449,38 @@ color: green !important;
 .game_record-time{
   width: 300px !important;
 }
+.GamerComponent{
+background-color: #000;
+height:500px;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-around;
+flex-direction: column;
+}
+.GamerComponent .gamer-form{
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+}
+ .details{
+  width: 300px;
+  height: 500px !important;
+ border-radius: 8px !important;
+ display: flex;
+ align-items: center;
+ justify-content: center !important;;
+ flex-direction: row-reverse;
+ margin: 20px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+.balance_update{
+  margin: auto !important;
+  
+}
+.balance_update h6{
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-size: 22px !important;
+  font-weight: 600;
+}

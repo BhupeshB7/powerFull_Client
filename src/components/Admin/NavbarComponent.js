@@ -16,6 +16,7 @@ function  NavbarComponent() {
             <Nav.Link className='text-primary' href="/task/deposit">Task/Deposit</Nav.Link>
             <Nav.Link className='text-primary' href="/dashboard">DashBoard</Nav.Link>
             <Nav.Link className='text-primary' href="/admin/dashboard/userAccount">User Account</Nav.Link>
+            <Nav.Link className='text-primary' href="/admin/dashboard/gameAccount">Gamer Account</Nav.Link>
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

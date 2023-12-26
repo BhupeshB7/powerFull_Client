@@ -45,6 +45,7 @@ import axios from 'axios';
 import ColorPredictGame from './pages/ColorPredictGame';
 import ColorPridictionGame1 from './pages/ColorPridictionGame1';
 import PredictGame from './pages/PredictGame';
+import GameBalanceUpdate from './components/Admin/GameBalanceUpdate';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
           <Route  path="/admin/dashboard" element={<DashboardAdmin/>} />
           <Route  path="/admin/dashboard/game" element={<GameDeposit/>} />
           <Route  path="/admin/dashboard/userAccount" element={<UserWallet/>} />
+          <Route  path="/admin/dashboard/gameAccount" element={<GameBalanceUpdate/>} />
           {/* <Route path="/admin/dashboard" component={AdminDashboard} /> */}
           <Route path="/task/deposit" element={<AdminTask/>} />
            {/* Profile Route */}
