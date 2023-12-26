@@ -29,6 +29,9 @@ function  GameDeposit() {
     sevenDayApprovedAmount: 0,
     yesterdayApprovedAmount: 0,
     yesterdayTotalAmount: 0,
+    yesterdayTotalWithdrawalAmount: 0,
+    yesterdayWithdrawalAmount: 0,
+    yesterdayWithdrawalPendingAmount: 0,
   });
   const [isTokenValid, setIsTokenValid] = useState(true);
   const getTokenExpireTime = () => {
@@ -160,6 +163,19 @@ function  GameDeposit() {
        <h6>Yesterday Deposit Amount</h6>
        <h6>{statistics.yesterdayTotalAmount}</h6>
      </Col>
+     <Col sm={12} md={4} lg={4} className="balanceCard1" >
+       <h6>Yesterday Withdrawal Amount</h6>
+       <h6>{statistics.yesterdayTotalWithdrawalAmount}</h6>
+     </Col>
+     <Col sm={12} md={4} lg={4} className="balanceCard1" >
+       <h6>Yesterday Withdrawal Approved</h6>
+       <h6>{statistics.yesterdayWithdrawalAmount}</h6>
+     </Col>
+     <Col sm={12} md={4} lg={4} className="balanceCard1" >
+       <h6>Yesterday Withdrawal Pending</h6>
+       <h6>{statistics.yesterdayWithdrawalPendingAmount}</h6>
+     </Col>
+     
     
     
       </Row>
