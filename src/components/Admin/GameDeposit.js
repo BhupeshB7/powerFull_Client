@@ -144,11 +144,15 @@ function  GameDeposit() {
        <h6>{statistics.sevenDayTotalAmount}</h6>
      </Col>
      <Col sm={12} md={4} lg={4} className="balanceCard1 " >
-       <h6>Previous 7 Day Profit</h6>
+       <h6>Previous 7 Day Approved Deposit</h6>
        <h6>{statistics.sevenDayApprovedAmount}</h6>
      </Col>
+     <Col sm={12} md={4} lg={4} className="balanceCard1 " >
+       <h6>Previous 7 Day Pending Deposit</h6>
+       <h6>{statistics.sevenDayPendingAmount}</h6>
+     </Col>
      <Col sm={12} md={4} lg={4} className="balanceCard1" >
-       <h6>Yesterday Profit</h6>
+       <h6>Yesterday Deposit Approved</h6>
        <h6>{statistics.yesterdayApprovedAmount}</h6>
      </Col>
      <Col sm={12} md={4} lg={4} className="balanceCard1" >
