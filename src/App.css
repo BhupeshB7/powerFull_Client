@@ -1132,7 +1132,23 @@ gap: 30px;
 } */
 .Register_Container {
   background-color: #2884b8;
-  background-image: linear-gradient(315deg, #2884b8 0%, #d1bad2 74%);
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+  background-image: url('https://img.freepik.com/premium-vector/gradient-letter-logo-design-template-with-halloween-elements_470367-7406.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.Register_Container input {
+  border: 1px solid salmon;
+}
+.Register_Container label{
+  color: sandybrown;
+}
+.Register_Container input::placeholder{
+color: rgb(77, 68, 60) !important;
+}
+.Register_Container input:focus::placeholder,.Register_Container input:active::placeholder{
+color: brown !important;;
 }
 .loginBG {
   background-color: hsla(0, 100%, 50%, 1);

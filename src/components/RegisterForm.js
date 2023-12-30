@@ -9,6 +9,7 @@ import "./LoginSuccess.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "react-bootstrap";
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -132,8 +133,9 @@ const RegisterForm = () => {
       {!userId ? (
         <div className="Register_Container"
         style={{
-          backgroundImage:'linear-gradient(to right, #fa709a 0%, #fee140 100%)',
-          height: "100vh",
+          // backgroundImage:"url('https://pin.it/4orZ87g')",
+          // backgroundImage:'linear-gradient(to right, #fa709a 0%, #fee140 100%)',
+          height: "100%",
           // background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
         }}>
 
@@ -151,7 +153,7 @@ const RegisterForm = () => {
             <div className="form_data">
               <form className="register_img mt-3" onSubmit={handleSubmit}>
                 <div className="formInput register">
-                  <div className="form_section">
+                  <div className="form_section mt-4">
                     <div className="img" style={{marginLeft:'20px'}}>
                       <img
                         src={logo}
@@ -160,15 +162,15 @@ const RegisterForm = () => {
                         alt="Logo"
                       />
                     </div>
-                    <div className="content">
+                    <div className="content ">
                       <div
-                        className="heading"
+                        className="heading "
                         style={{
                           fontSize: "19px",
                           fontWeight: "600",
                           marginTop: "16px",
                           marginBottom: "-15px",
-                          color: "#000428",
+                          color: "salmon",
                         }}
                       >
                         Welcome
@@ -176,7 +178,7 @@ const RegisterForm = () => {
                       <hr style={{fontWeight:'bold', height:'2px', color:'pink'}}/>
                       <div
                         className="body"
-                        style={{ fontSize: "16px", marginTop: "-15px", color:'#000356' }}
+                        style={{ fontSize: "16px", marginTop: "-15px", color:'sandybrown' }}
                       >
                         Register to continue
                       </div>
@@ -238,13 +240,13 @@ const RegisterForm = () => {
                         // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
                       />
                       <button
-                        className="password-button"
+                        className="password-button "
                         onClick={togglePasswordVisibility}
                       >
                         {showPassword ? (
-                          <AiFillEyeInvisible style={{ fontSize: "23px" }} />
+                          <AiFillEyeInvisible style={{ fontSize: "23px", color:'sandyBrown' }} />
                         ) : (
-                          <AiFillEye style={{ fontSize: "23px" }} />
+                          <AiFillEye style={{ fontSize: "23px",color:'sandyBrown' }} />
                         )}
                       </button>
                     </div>
@@ -334,9 +336,9 @@ const RegisterForm = () => {
                     {isSubmitting ? "processing..." : "Register"}
                   </button> */}
 
-                  <button type="submit"  disabled={!sponsorName} className='btn text-light m-3' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03'}} >
+                  <Button variant="success" type="submit"  disabled={!sponsorName} className='btn text-light m-3' style={{ letterSpacing:'4px', scale:'1.03'}} >
       {isSubmitting? 'processing...':'Register'}
-      </button>
+      </Button>
                   <Link
                     style={{ color: "white", marginBottom: "8px" }}
                     to={"/login"}

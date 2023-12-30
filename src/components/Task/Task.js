@@ -90,7 +90,7 @@ const Task = () => {
     window.open(videoLink,'_blank');
     setTimerActive(true);
     // Set the timer duration in seconds (e.g., 120 seconds)
-    const timerDuration = 30;
+    const timerDuration = 10;
 
     // Start the timer
     setTimeLeft(timerDuration);
