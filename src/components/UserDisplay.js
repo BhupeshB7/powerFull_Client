@@ -644,8 +644,8 @@ const isTokenExpired = () => {
 const HappyNewYearAnimation = () => {
   return (
     <div className="d-flex justify-content-center align-items-center">
-      <div style={{ width: '100%' }}>
-      <div style={{ height: 0, paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
+      <div style={{ width: '100%', height:'800px' }}>
+      <div style={{ height: '100%', paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
         <iframe
           title="Happy New Year Animation"
           src="https://giphy.com/embed/mJQdWQD4mWuC1NrzC2/video"
