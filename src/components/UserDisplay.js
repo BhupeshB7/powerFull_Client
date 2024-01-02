@@ -644,20 +644,23 @@ const isTokenExpired = () => {
 const HappyNewYearAnimation = () => {
   return (
     <div className="d-flex justify-content-center align-items-center">
-    <div className="bg-dark"style={{height: "100vh", width: "100vw", borderRadius:'7px'}}>
-      <h6 className="text-secondary">8. "New year—a new chapter, new verse, or just the same old story? Ultimately we write it. The choice is ours.” —Alex Morritt
-        9. “I like the dreams of the future better than the history of the past.” —Thomas Jefferson</h6>
-    <iframe 
-      title="Happy New Year Animation"
-      src="https://giphy.com/embed/H7D6lLXNWCM4AU94Um"
-      // width="100vw"
-      // height="100vh"
-      frameBorder="0"
-      className="giphy-embed"
-      allowFullScreen
-      style={{height: "400px", width: "90vw"}}
-    ></iframe>
-  </div>
+      <div style={{ width: '100%' }}>
+      <div style={{ height: 0, paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
+        <iframe
+          title="Happy New Year Animation"
+          src="https://giphy.com/embed/mJQdWQD4mWuC1NrzC2/video"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          allowFullScreen
+          style={{ left: 0, position: 'absolute', top: 0 }}
+        ></iframe>
+      </div>
+    </div>
+
+
+export default HappyNewYearAnimation;
+
     </div>
   );
 };
