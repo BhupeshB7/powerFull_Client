@@ -39,11 +39,32 @@ const UserGameRecord = ({ userId }) => {
     setShowModal(false);
   };
 
+  // const formatTimestampToIST = (timestamp) => {
+  //   const date = new Date(timestamp);
+  //   return date.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" });
+  // };
   const formatTimestampToIST = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" });
+  
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+      timeZone: 'Asia/Kolkata'
+    };
+  
+    return date.toLocaleString("en-IN", options);
   };
-
+  
+  // // Example usage:
+  // const timestamp = Date.now(); // Replace this with your actual timestamp
+  // const formattedDateTime = formatTimestampToIST(timestamp);
+  // console.log(formattedDateTime);
+  
   return (
     <div>
       {/* Show Game Record button */}
