@@ -9,7 +9,7 @@ import "./LoginSuccess.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -115,7 +115,6 @@ const RegisterForm = () => {
       setIsSubmitting(false);
       alert("User Registered SucceccFully!");
     } catch (error) {
-      
       if (error.response && error.response.status === 400) {
         toast.error("Email or mobile number already in use.");
       } else if (error.response && error.response.status === 404) {
@@ -131,157 +130,178 @@ const RegisterForm = () => {
   return (
     <>
       {!userId ? (
-        <div className="Register_Container"
-        style={{
-          // backgroundImage:"url('https://pin.it/4orZ87g')",
-          // backgroundImage:'linear-gradient(to right, #fa709a 0%, #fee140 100%)',
-          height: "100%",
-          // background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
-        }}>
-
-
-          <div
-            className="form_container"
-            // style={{
-            //   // backgroundImage: `url('https://img.freepik.com/free-photo/bank-card-mobile-phone-online-payment_107791-16646.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')`,
-            //    backgroundImage: `url(${registerImage})`,
-            //   backgroundRepeat: "no-repeat",
-            //   backgroundSize: "100% 100vh",
-             
-            // }}
+        <div className="register_content">
+          <Container
+            className="Register_Container"
+            style={{
+              // backgroundImage:"url('https://pin.it/4orZ87g')",
+              // backgroundImage:'linear-gradient(to right, #fa709a 0%, #fee140 100%)',
+              height: "100%", width:'90%', borderRadius:'7px'
+              // background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+            }}
           >
-            <div className="form_data">
-              <form className="register_img mt-3" onSubmit={handleSubmit}>
-                <div className="formInput register">
-                  <div className="form_section mt-4">
-                    <div className="img" style={{marginLeft:'20px'}}>
-                      <img
-                        src={logo}
-                        height={"100px"}
-                        width={"100px"}
-                        alt="Logo"
-                      />
-                    </div>
-                    <div className="content ">
-                      <div
-                        className="heading "
-                        style={{
-                          fontSize: "19px",
-                          fontWeight: "600",
-                          marginTop: "16px",
-                          marginBottom: "-15px",
-                          color: "salmon",
-                        }}
-                      >
-                        Welcome
-                      </div>{" "}
-                      <hr style={{fontWeight:'bold', height:'2px', color:'pink'}}/>
-                      <div
-                        className="body"
-                        style={{ fontSize: "16px", marginTop: "-15px", color:'sandybrown' }}
-                      >
-                        Register to continue
+            <div
+              className="form_container"
+              // style={{
+              //   // backgroundImage: `url('https://img.freepik.com/free-photo/bank-card-mobile-phone-online-payment_107791-16646.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')`,
+              //    backgroundImage: `url(${registerImage})`,
+              //   backgroundRepeat: "no-repeat",
+              //   backgroundSize: "100% 100vh",
+
+              // }}
+            >
+              <div className="form_data">
+                <form className="register_img mt-3" onSubmit={handleSubmit}>
+                  <div className="formInput register">
+                    <div className="form_section mt-4">
+                      <div className="img" style={{ marginLeft: "20px" }}>
+                        <img
+                          src={logo}
+                          height={"100px"}
+                          width={"100px"}
+                          alt="Logo"
+                        />
+                      </div>
+                      <div className="content ">
+                        <div
+                          className="heading "
+                          style={{
+                            fontSize: "19px",
+                            fontWeight: "600",
+                            marginTop: "16px",
+                            marginBottom: "-15px",
+                            color: "salmon",
+                          }}
+                        >
+                          Welcome
+                        </div>{" "}
+                        <hr
+                          style={{
+                            fontWeight: "bold",
+                            height: "2px",
+                            color: "pink",
+                          }}
+                        />
+                        <div
+                          className="body"
+                          style={{
+                            fontSize: "16px",
+                            marginTop: "-15px",
+                            color: "sandybrown",
+                          }}
+                        >
+                          Register to continue
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="form_input">
-                    <label htmlFor="name" className="form-label">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Enter Your Name"
-                      className={`form-input ${
-                        errors.name ? "is-invalid" : ""
-                      }`}
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="form_input">
-                    <label htmlFor="email" className="form-label">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Enter Your Email"
-                      // className={`form-input ${errors.email ? 'is-invalid' : ''}`}
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      onBlur={handleFocus}
-                      focused={focused.toString()}
-                    />
-                    <span>Enter correct Email ID</span>
-                  </div>
-                  <div className="form_input">
-                    <label htmlFor="password" className="form-label">
-                      Password
-                    </label>
-                    <div>
-                    <div className="password_input-container">
+                    <div className="form_input">
+                      <label htmlFor="name" className="form-label">
+                        Name
+                      </label>
                       <input
-                        type={showPassword ? "text" : "password"}
-                        id="password "
-                        name="password"
-                        placeholder="Enter Password"
-                        // className={`form-input input-field ${errors.password ? 'is-invalid' : ''}`}
-                        value={formData.password}
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter Your Name"
+                        className={`form-input ${
+                          errors.name ? "is-invalid" : ""
+                        }`}
+                        value={formData.name}
                         onChange={handleChange}
-                        minLength="5"
-                        // required
+                        required
+                      />
+                    </div>
+                    <div className="form_input">
+                      <label htmlFor="email" className="form-label">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter Your Email"
+                        // className={`form-input ${errors.email ? 'is-invalid' : ''}`}
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
                         onBlur={handleFocus}
                         focused={focused.toString()}
-                        // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
                       />
-                      <button
-                        className="password-button "
-                        onClick={togglePasswordVisibility}
-                      >
-                        {showPassword ? (
-                          <AiFillEyeInvisible style={{ fontSize: "23px", color:'sandyBrown' }} />
-                        ) : (
-                          <AiFillEye style={{ fontSize: "23px",color:'sandyBrown' }} />
-                        )}
-                      </button>
+                      <span>Enter correct Email ID</span>
                     </div>
-                      <span className="text-danger">
-                        {/* Password must contain 1 Capital, 1 Small letter, 1number
+                    <div className="form_input">
+                      <label htmlFor="password" className="form-label">
+                        Password
+                      </label>
+                      <div>
+                        <div className="password_input-container">
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            id="password "
+                            name="password"
+                            placeholder="Enter Password"
+                            // className={`form-input input-field ${errors.password ? 'is-invalid' : ''}`}
+                            value={formData.password}
+                            onChange={handleChange}
+                            minLength="5"
+                            // required
+                            onBlur={handleFocus}
+                            focused={focused.toString()}
+                            // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+                          />
+                          <button
+                            className="password-button "
+                            onClick={togglePasswordVisibility}
+                          >
+                            {showPassword ? (
+                              <AiFillEyeInvisible
+                                style={{
+                                  fontSize: "23px",
+                                  color: "sandyBrown",
+                                }}
+                              />
+                            ) : (
+                              <AiFillEye
+                                style={{
+                                  fontSize: "23px",
+                                  color: "sandyBrown",
+                                }}
+                              />
+                            )}
+                          </button>
+                        </div>
+                        <span className="text-danger">
+                          {/* Password must contain 1 Capital, 1 Small letter, 1number
 
                       and 1 special character. */}
-                        Enter Password
-                      </span>
+                          Enter Password
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="form_input">
-                    <label htmlFor="mobile" className="form-label">
-                      Mobile
-                    </label>
-                    <input
-                      type="text"
-                      id="mobile"
-                      name="mobile"
-                      placeholder="Enter Mobile No"
-                      // className={`form-input ${errors.mobile ? 'is-invalid' : ''}`}
-                      value={formData.mobile}
-                      onChange={handleChange}
-                      pattern="[0-9]{1}[0-9]{9}"
-                      onBlur={handleFocus}
-                      focused={focused.toString()}
-                      // required
-                    />
-                    <span>Mobile No should be 10 Digit, Or only number</span>
-                  </div>
-                  <div className="form_input">
-                    <label htmlFor="sponsorId" className="form-label">
-                      Sponsor ID
-                    </label>
-                    {/* <input
+                    <div className="form_input">
+                      <label htmlFor="mobile" className="form-label">
+                        Mobile
+                      </label>
+                      <input
+                        type="text"
+                        id="mobile"
+                        name="mobile"
+                        placeholder="Enter Mobile No"
+                        // className={`form-input ${errors.mobile ? 'is-invalid' : ''}`}
+                        value={formData.mobile}
+                        onChange={handleChange}
+                        pattern="[0-9]{1}[0-9]{9}"
+                        onBlur={handleFocus}
+                        focused={focused.toString()}
+                        // required
+                      />
+                      <span>Mobile No should be 10 Digit, Or only number</span>
+                    </div>
+                    <div className="form_input">
+                      <label htmlFor="sponsorId" className="form-label">
+                        Sponsor ID
+                      </label>
+                      {/* <input
                     type="text"
                     id="sponsorId"
                     name="sponsorId"
@@ -296,39 +316,39 @@ const RegisterForm = () => {
                     defaultValue={location.search.substring(1)}
                   /> */}
 
-                    <input
-                      type="text"
-                      id="sponsorId"
-                      name="sponsorId"
-                      placeholder="Enter Sponsor ID"
-                      className={`form-input ${
-                        errors.sponsorId ? "is-invalid" : ""
-                      }`}
-                      value={formData.sponsorId}
-                      onChange={handleChange}
-                      required={!location.search}
-                      onBlur={() => {
-                        handleFocus();
-                        fetchSponsorName(); // Fetch sponsor name when input loses focus
-                      }}
-                      readOnly={location.search ? true : false}
-                      defaultValue={location.search.substring(1)}
-                    />
-                  </div>
-                  {sponsorName ? (
-                    <div className="sponsor-name">
-                      Sponsor Name: {sponsorName}
+                      <input
+                        type="text"
+                        id="sponsorId"
+                        name="sponsorId"
+                        placeholder="Enter Sponsor ID"
+                        className={`form-input ${
+                          errors.sponsorId ? "is-invalid" : ""
+                        }`}
+                        value={formData.sponsorId}
+                        onChange={handleChange}
+                        required={!location.search}
+                        onBlur={() => {
+                          handleFocus();
+                          fetchSponsorName(); // Fetch sponsor name when input loses focus
+                        }}
+                        readOnly={location.search ? true : false}
+                        defaultValue={location.search.substring(1)}
+                      />
                     </div>
-                  ) : (
-                    <div className="text-center text-danger">
-                      Sponsor Name Not Found
+                    {sponsorName ? (
+                      <div className="sponsor-name">
+                        Sponsor Name: {sponsorName}
+                      </div>
+                    ) : (
+                      <div className="text-center text-danger">
+                        Sponsor Name Not Found
+                      </div>
+                    )}
+                    <div className="captcha">
+                      {/* <ReCAPTCHA sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' onChange={onChange} /> */}
                     </div>
-                  )}
-                  <div className="captcha">
-                    {/* <ReCAPTCHA sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' onChange={onChange} /> */}
-                  </div>
 
-                  {/* <button
+                    {/* <button
                     type="submit"
                     className="btn btn-success mt-2"
                     disabled={!sponsorName}
@@ -336,28 +356,35 @@ const RegisterForm = () => {
                     {isSubmitting ? "processing..." : "Register"}
                   </button> */}
 
-                  <Button variant="success" type="submit"  disabled={!sponsorName} className='btn text-light m-3' style={{ letterSpacing:'4px', scale:'1.03'}} >
-      {isSubmitting? 'processing...':'Register'}
-      </Button>
-                  <Link
-                    style={{ color: "white", marginBottom: "8px" }}
-                    to={"/login"}
-                  >
-                    Already registered{" "}
-                    <b style={{ textDecoration: "underline" }}>Login</b>
-                  </Link>
-                </div>
-                <div style={{ height: "50px" }}></div>
-              </form>
-              <ToastContainer />
-              {/* {userId && (
+                    <Button
+                      variant="success"
+                      type="submit"
+                      disabled={!sponsorName}
+                      className="btn text-light m-3"
+                      style={{ letterSpacing: "4px", scale: "1.03" }}
+                    >
+                      {isSubmitting ? "processing..." : "Register"}
+                    </Button>
+                    <Link
+                      style={{ color: "white", marginBottom: "8px" }}
+                      to={"/login"}
+                    >
+                      Already registered{" "}
+                      <b style={{ textDecoration: "underline" }}>Login</b>
+                    </Link>
+                  </div>
+                  <div style={{ height: "50px" }}></div>
+                </form>
+                <ToastContainer />
+                {/* {userId && (
       <div className="user-display">
         <h2>User ID: {userId}</h2>
         <h3>Email Id: {emailId}</h3>
       </div>
     )}  */}
+              </div>
             </div>
-          </div>
+          </Container>
         </div>
       ) : (
         <div className="row loginSuccessCard mt-5">
@@ -388,7 +415,11 @@ const RegisterForm = () => {
                 >
                   <table
                     className=" responsive "
-                    style={{ width: "280px", boxShadow:'0  1px 6px rgba(0,0,0,0.35)', borderRadius:'7px' }}
+                    style={{
+                      width: "280px",
+                      boxShadow: "0  1px 6px rgba(0,0,0,0.35)",
+                      borderRadius: "7px",
+                    }}
                   >
                     <thead>
                       <tr
