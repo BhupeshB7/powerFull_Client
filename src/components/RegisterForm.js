@@ -136,7 +136,7 @@ const RegisterForm = () => {
             style={{
               // backgroundImage:"url('https://pin.it/4orZ87g')",
               // backgroundImage:'linear-gradient(to right, #fa709a 0%, #fee140 100%)',
-              height: "100%", width:'90%', borderRadius:'7px'
+              height: "800px", width:'90%', borderRadius:'7px'
               // background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
             }}
           >
