@@ -658,9 +658,6 @@ const HappyNewYearAnimation = () => {
       </div>
     </div>
 
-
-export default HappyNewYearAnimation;
-
     </div>
   );
 };
