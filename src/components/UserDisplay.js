@@ -652,10 +652,8 @@ const HappyNewYearAnimation = () => {
       frameBorder="0"
       className="giphy-embed"
       allowFullScreen
+      style={{height: "100vh", width: "100vw"}}
     ></iframe>
-    <p>
-      <a href="https://giphy.com/gifs/new-year-2024-happy-H7D6lLXNWCM4AU94Um">via GIPHY</a>
-    </p>
   </div>
   );
 };
@@ -1099,6 +1097,7 @@ const Dashboard1 = ({contactInfoList}) => {
 
   // For User LogOut
   const handleLogout = () => {
+    localStorage.removeItem('hasAnimationShownBefore');
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     window.location.href = "/login";
