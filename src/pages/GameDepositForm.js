@@ -71,7 +71,7 @@ const GameDepositForm = () => {
     <div className="topUPBg depositFormC">
       <h5 className="p-3 text-center text-warning">Deposit</h5>
       <h6 className="text-secondary p-2">Recharge Amount</h6>
-      <h6 className="text-light p-2">Rs 850/-</h6>
+      <h6 className="text-light p-2">Rs 100/-</h6>
       <div
         className="d-flex justify-content-end"
         style={{ position: "absolute", right: "20px", top: "30px" }}
