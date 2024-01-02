@@ -9,23 +9,43 @@ const OneMinuteHistory = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         // `http://localhost:5000/api/randomData1?page=${currentPage}`
+  //         `https://mlm-production.up.railway.app/api/randomData1?page=${currentPage}`
+  //       );
+  //       setData(response.data.data);
+  //       setTotalPages(response.data.totalPages);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [currentPage]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://mlm-production.up.railway.app/api/randomData1?page=${currentPage}`
+      );
+      setData(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          // `http://localhost:5000/api/randomData1?page=${currentPage}`
-          `https://mlm-production.up.railway.app/api/randomData1?page=${currentPage}`
-        );
-        setData(response.data.data);
-        setTotalPages(response.data.totalPages);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    fetchData(); // Initial data fetch
 
-    fetchData();
+    // Set up an interval to fetch data every 60 seconds
+    const intervalId = setInterval(fetchData, 60000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
   }, [currentPage]);
-
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
