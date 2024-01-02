@@ -39,7 +39,7 @@ const LoginForm = ({ setToken }) => {
       }
 
       const { token } = await response.json();
-
+      localStorage.removeItem('hasAnimationShownBefore');
       localStorage.setItem("token", token);
       // token will expire in 6 hours
       localStorage.setItem("tokenExpire", Date.now() + 21600000); //86400000 for 24
