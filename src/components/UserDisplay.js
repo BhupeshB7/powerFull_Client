@@ -640,8 +640,60 @@ const isTokenExpired = () => {
   const expireTime = getTokenExpireTime();
   return expireTime ? expireTime < Date.now() : true;
 };
+// 
+const HappyNewYearAnimation = () => {
+  return (
+    <div>
+    <iframe 
+      title="Happy New Year Animation"
+      src="https://giphy.com/embed/H7D6lLXNWCM4AU94Um"
+      // width="100vw"
+      // height="100vh"
+      frameBorder="0"
+      className="giphy-embed"
+      allowFullScreen
+    ></iframe>
+    <p>
+      <a href="https://giphy.com/gifs/new-year-2024-happy-H7D6lLXNWCM4AU94Um">via GIPHY</a>
+    </p>
+  </div>
+  );
+};
 
 const Dashboard = ({contactInfoList}) => {
+  const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    // Check if the flag is present in local storage
+    const hasAnimationShownBefore = localStorage.getItem('hasAnimationShownBefore');
+
+    if (hasAnimationShownBefore) {
+      // Animation has been shown before, don't show it again
+      setShowAnimation(false);
+    } else {
+      // Set a timer to hide the animation after 5 seconds
+      const timer = setTimeout(() => {
+        setShowAnimation(false);
+        // Set the flag in local storage to indicate that the animation has been shown
+        localStorage.setItem('hasAnimationShownBefore', true);
+      }, 5000);
+
+      // Clear the timer when the component is unmounted
+      return () => clearTimeout(timer);
+    }
+  }, []);
+  return (
+    <div>
+      {showAnimation ? (
+        <HappyNewYearAnimation />
+      ) : (
+        <Dashboard1 contactInfoList={contactInfoList}/>
+      )}
+    </div>
+  );
+};
+// 
+const Dashboard1 = ({contactInfoList}) => {
   // State declarations
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
