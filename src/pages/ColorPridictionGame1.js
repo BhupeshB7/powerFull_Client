@@ -153,6 +153,19 @@ const ColorPridictionGame1 = () => {
   }, []);
   // Constants
   const sessionDetail =  localStorage.getItem("session");
+  // Original session number
+const sessionNumber = sessionDetail;
+
+// Extract non-numeric and numeric parts
+const nonNumericPart = sessionNumber.slice(0, -4);
+const numericPart = parseInt(sessionNumber.slice(-4), 10);
+
+// Increment the numeric part by 1
+const newNumericPart = numericPart + 1;
+
+// Combine the parts to get the new session number
+const newSessionNumber = nonNumericPart + newNumericPart.toString().padStart(4, '0');
+
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
   // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -889,7 +902,7 @@ const ColorPridictionGame1 = () => {
                     }}
                   >
                     {/* <p className="text-warning">{session}</p> */}
-                    <p className="text-warning">{sessionDetail}</p>
+                    <p className="text-warning">{newSessionNumber}</p>
                     <h1 style={{ color: "#bbb" }}>
                       {" "}
                       <b
