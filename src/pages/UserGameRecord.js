@@ -7,14 +7,17 @@ const UserGameRecord = ({ userId }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [lastPage, setLastPage] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
           `https://mlm-production.up.railway.app/api/gameProfile/userDetails/${userId}/${currentPage}`
         );
-        setUserDetails(response.data);
-        setLastPage(response.data.length === 0);
+        setUserDetails(response.data.userResults);
+        setTotalPages(response.data.totalPages);
+        setLastPage(response.data.userResults.length === 0);
       } catch (error) {
         console.error(error);
       }
@@ -39,10 +42,6 @@ const UserGameRecord = ({ userId }) => {
     setShowModal(false);
   };
 
-  // const formatTimestampToIST = (timestamp) => {
-  //   const date = new Date(timestamp);
-  //   return date.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata" });
-  // };
   const formatTimestampToIST = (timestamp) => {
     const date = new Date(timestamp);
   
@@ -59,12 +58,7 @@ const UserGameRecord = ({ userId }) => {
   
     return date.toLocaleString("en-IN", options);
   };
-  
-  // // Example usage:
-  // const timestamp = Date.now(); // Replace this with your actual timestamp
-  // const formattedDateTime = formatTimestampToIST(timestamp);
-  // console.log(formattedDateTime);
-  
+
   return (
     <div>
       {/* Show Game Record button */}
@@ -112,7 +106,6 @@ const UserGameRecord = ({ userId }) => {
                     >
                       {userDetail.result}
                     </td>
-                    {/* <td className="text-light game_record-time">{formatTimestampToIST(userDetail.createdAt)}</td> */}
                     <td
                       className="text-light game_record-time"
                       style={{ width: "160px", minWidth: "250px" }}
@@ -135,12 +128,12 @@ const UserGameRecord = ({ userId }) => {
             >
               Previous
             </Button>
-            <h6 className="m-2">{currentPage} </h6>
+            <h6 className="m-2">{currentPage} / {totalPages} </h6>
             <Button
               variant="dark"
               className="m-1"
               onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={lastPage}
+              disabled={currentPage ===totalPages}
             >
               Next
             </Button>
