@@ -115,7 +115,7 @@ const UserGameRecord = ({ userId }) => {
                     {/* <td className="text-light game_record-time">{formatTimestampToIST(userDetail.createdAt)}</td> */}
                     <td
                       className="text-light game_record-time"
-                      style={{ width: "160px", minWidth: "160px" }}
+                      style={{ width: "160px", minWidth: "250px" }}
                     >
                       {formatTimestampToIST(userDetail.createdAt)}
                     </td>
