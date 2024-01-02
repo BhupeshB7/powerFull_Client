@@ -681,7 +681,7 @@ const Dashboard = ({contactInfoList}) => {
         setShowAnimation(false);
         // Set the flag in local storage to indicate that the animation has been shown
         localStorage.setItem('hasAnimationShownBefore', true);
-      }, 5000);
+      }, 8000);
 
       // Clear the timer when the component is unmounted
       return () => clearTimeout(timer);
