@@ -37,7 +37,29 @@ const ColorPridictionGame1 = () => {
   const [profile, setProfile] = useState({});
   const [isVisible, setIsVisible] = useState(false);
   //   const [message, setMessage] = useState('');
+  const [counter, setCounter] = useState(0);
+let updatedSessionNumber
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Increment the counter by 1 every 60 seconds
+      setCounter(prevCounter => prevCounter + 1);
+      const currentDate = new Date();
 
+      // Get current month, day, and minute
+      const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+      const currentDay = currentDate.getDate().toString().padStart(2, '0');
+      const currentMinute = currentDate.getMinutes().toString().padStart(2, '0');
+
+      // Construct the new session number
+       updatedSessionNumber = `PI${currentMonth}${currentDay}${currentMinute}${counter.toString().padStart(3, '0')}955`;
+
+      // Display the new session number
+      // console.log(newSessionNumber);
+    }, 60000); // 60000 milliseconds = 60 seconds
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  }, [counter]);
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
     return tokenExpire ? parseInt(tokenExpire) : null;
@@ -185,7 +207,7 @@ if (sessionDetail) {
   console.log(newSessionNumber);
 } else {
   // Handle the case where sessionDetail is not found
-  newSessionNumber = sessionDetail;
+  newSessionNumber = updatedSessionNumber;
 }
 
   const predefinedColors = ["Violet", "Red", "Green"];
