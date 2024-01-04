@@ -1118,9 +1118,9 @@ const Dashboard1 = ({contactInfoList}) => {
 
   const customModalStyles = {
     content: {
-      width: "98%", // Set the width of the modal here
-      height: "700px",
-      left: "2px",
+      width: "100%", // Set the width of the modal here
+      height: "400px",
+      // left: "2px",
     },
   };
 
