@@ -645,7 +645,7 @@ const HappyNewYearAnimation = () => {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div style={{ width: '100%', height:'800px' }}>
-      <div style={{ height: '100%', paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
+       {/* <div style={{ height: '100%', paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
         <iframe
           title="Happy New Year Animation"
           src="https://giphy.com/embed/mJQdWQD4mWuC1NrzC2/video"
@@ -655,8 +655,10 @@ const HappyNewYearAnimation = () => {
           allowFullScreen
           style={{ left: 0, position: 'absolute', top: 0 }}
         ></iframe>
-      </div>
+      </div> */}
+      <h6 className="text-secondary text-center">Loading...</h6>
     </div>
+    
 
     </div>
   );
@@ -678,7 +680,7 @@ const Dashboard = ({contactInfoList}) => {
         setShowAnimation(false);
         // Set the flag in local storage to indicate that the animation has been shown
         localStorage.setItem('hasAnimationShownBefore', true);
-      }, 8000);
+      }, 1000);
 
       // Clear the timer when the component is unmounted
       return () => clearTimeout(timer);
