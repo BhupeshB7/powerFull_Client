@@ -1120,7 +1120,9 @@ const Dashboard1 = ({contactInfoList}) => {
     content: {
       width: "100%", // Set the width of the modal here
       height: "400px",
-      // left: "2px",
+      left: "2px",
+      zIndex:"9999",
+      bottom:"0px"
     },
   };
 
