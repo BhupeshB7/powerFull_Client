@@ -4,6 +4,8 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { Alert, Button } from "react-bootstrap";
 import ButtonToggle from "./ButtonToggle";
+import LiveGameTimer from "./LiveGameTimer";
+import LiveGameTimerShow from "./LiveGameTimerShow";
 
 const generateSessionId = () => {
   const getCurrentYear = () => new Date().getFullYear();
@@ -92,6 +94,8 @@ const AdminLiveGame = () => {
         </Alert>
       )}
       <ButtonToggle/>
+      <LiveGameTimer/>
+      <LiveGameTimerShow/>
       <form className="LiveGameDashboard p-2" ref={formRef}>
         <div>
           <p>Session ID: {newSessionId}</p>

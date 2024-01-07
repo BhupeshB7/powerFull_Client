@@ -265,6 +265,7 @@ import spinner from "../assets/spinner2.gif";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import LiveHistory from "./LiveHistory";
+import LiveGameTimerShow from "./LiveGameTimerShow";
 const LiveGame = () => {
   const predefinedColors = ["Blueviolet", "Red", "Green"];
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -295,7 +296,32 @@ const LiveGame = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const token = localStorage.getItem("token");
   const [isActive, setIsActive] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(0);
 
+  const fetchTimer = async () => {
+    try {
+      const response = await axios.get(
+        "https://mlm-production.up.railway.app/api/user/getTimer"
+      );
+      console.log(response.data); // Log the response data
+      setRemainingTime(response.data.time);
+    } catch (error) {
+      console.error(error);
+      // Handle error (optional)
+    }
+  };
+  useEffect(() => {
+    // Fetch timer data initially
+    fetchTimer();
+
+    // Set up an interval to fetch updated data every 5 seconds (adjust as needed)
+    const intervalId = setInterval(fetchTimer, 2000);
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+  
+  
   useEffect(() => {
     const fetchButtonState = async () => {
       const response = await axios.get(
@@ -552,8 +578,8 @@ const LiveGame = () => {
                 </div>
               </div>
             </div>
-
-            <Container>
+            <LiveGameTimerShow />
+            <Container className={`${remainingTime <= 10 ? 'disabledLiveGame' : ''}`}>
               <div
                 style={{
                   height: "100%",
@@ -561,6 +587,7 @@ const LiveGame = () => {
                     "linear-gradient(to right, #ffecd2 0%, #fcb69f 100%)",
                   borderRadius: "7px",
                 }}
+               
               >
                 <div className="color-options">
                   {predefinedColors.map((color) => (
@@ -573,7 +600,10 @@ const LiveGame = () => {
                       }}
                       onClick={() => handleChoice(color)}
                       className="game_button text-lght-button"
-                    > {color === "BlueViolet" ? "Blue" : color}</button>
+                    >
+                      {" "}
+                      {color === "BlueViolet" ? "Blue" : color}
+                    </button>
                   ))}
                 </div>
 
@@ -591,13 +621,15 @@ const LiveGame = () => {
                         width: "53px",
                         height: "53px",
                         boxShadow: `0 0 0 1px ${predefinedColors1[index]}`,
-                        backgroundClip: "content-box" ,
+                        backgroundClip: "content-box",
                       }}
                       onClick={() => {
                         setUserChoiceButtonNumber(predefinedColors1[index]);
                         handleChoiceNumber(color);
                       }}
-                      className={`game_button ${color === "5" || color === "0" ? "half-circle" : ""}`} 
+                      className={`game_button ${
+                        color === "5" || color === "0" ? "half-circle" : ""
+                      }`}
                     >
                       {color}
                     </button>
@@ -897,31 +929,34 @@ const LiveGame = () => {
         </>
       ) : (
         <div className="topUPBg" style={{ height: "789px" }}>
-           <div
-        className="d-flex justify-content-end "
-        style={{ position: "absolute", right: "20px", top: "30px" }}
-      >
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/189/189254.png"
-          height="40px"
-          width="40px"
-          onClick={dashboard}
-          alt="back"
-        />
-      </div>
-      <div className="pt-5">
-          <h6 className="text-center pt-5 text-light "> Game is not started yet!</h6>
-          <h5 className="text-center text-warning p-2 ">
-            Please wait , until the game Start{" "}
-          </h5>
-      </div>
+          <div
+            className="d-flex justify-content-end "
+            style={{ position: "absolute", right: "20px", top: "30px" }}
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/189/189254.png"
+              height="40px"
+              width="40px"
+              onClick={dashboard}
+              alt="back"
+            />
+          </div>
+          <div className="pt-5">
+            <h6 className="text-center pt-5 text-light ">
+              {" "}
+              Game is not started yet!
+            </h6>
+            <h5 className="text-center text-warning p-2 ">
+              Please wait , until the game Start{" "}
+            </h5>
+          </div>
           <div className="d-flex justify-content-center align-items-center m-auto">
             <img
               src="https://img.freepik.com/free-photo/hands-holding-words-thank-you_53876-30955.jpg?size=626&ext=jpg&uid=R124466029&ga=GA1.1.393936886.1688825666&semt=ais"
               height="80px"
               width="230px"
               alt="thankYou"
-              style={{borderRadius:'10px'}}
+              style={{ borderRadius: "10px" }}
             />
           </div>
         </div>

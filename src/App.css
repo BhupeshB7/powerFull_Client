@@ -1517,3 +1517,8 @@ flex-direction: column;
   width: 100vw !important;
   height: 800px !important;
 }
+.disabledLiveGame{
+  opacity: 0.4;
+  cursor: none;
+  pointer-events: none;
+}
