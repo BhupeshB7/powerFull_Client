@@ -1053,7 +1053,7 @@ const Dashboard1 = ({contactInfoList}) => {
 
       if (responseData.success) {
         // display success message or update user balance
-        alert("UserID Activated Successfully");
+        alert("Account  Activated Successfully");
         window.location.href = "/dashboard";
       } else {
         // display error message
