@@ -1551,3 +1551,9 @@ flex-direction: column;
 opacity: 1 !important;
   z-index: 1000 !important;
 }
+.form_containers input{
+color: #172289 !important;
+}
+.form_containers input:active,.form_containers input:focus{
+  color: #8e3d00 !important;
+  }

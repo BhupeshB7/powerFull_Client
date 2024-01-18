@@ -178,7 +178,7 @@ const remainingUpdate = maxUpdateLimit -updateCount;
           </div>
           
           <div className="form_input">
-            <label htmlFor="accountHolderName">AccountHolderName:</label>
+            <label htmlFor="accountHolderName">Account Holder Name:</label>
             <input
               type="text"
               id="accountHolderName"
@@ -188,7 +188,7 @@ const remainingUpdate = maxUpdateLimit -updateCount;
             />
           </div>
           <div className="form_input">
-            <label htmlFor="accountNo">AccountNo:</label>
+            <label htmlFor="accountNo">Account No:</label>
             <input
               type="text"
               id="accountNo"
@@ -198,7 +198,7 @@ const remainingUpdate = maxUpdateLimit -updateCount;
             />
           </div>
           <div className="form_input">
-            <label htmlFor="ifscCode">IFSCCode:</label>
+            <label htmlFor="ifscCode">IFSC Code:</label>
             <input
               type="text"
               id="ifscCode"
@@ -208,7 +208,7 @@ const remainingUpdate = maxUpdateLimit -updateCount;
             />
           </div>
           <div className="form_input">
-            <label htmlFor="GPay">GPay:</label>
+            <label htmlFor="GPay">Google Pay:</label>
             <input
               type="text"
               id="GPay"
