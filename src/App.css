@@ -1523,3 +1523,31 @@ flex-direction: column;
   cursor: none;
   pointer-events: none;
 }
+
+.profile-update {
+  position: relative;
+}
+
+.profileUpdate {
+  background-image: url('https://img.freepik.com/free-vector/personal-settings-concept-illustration_114360-2659.jpg?size=626&ext=jpg&ga=GA1.2.260354095.1700988836&semt=ais');
+  background-size: cover; /* Use 'cover' to ensure the image covers the entire background */
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  opacity: 0.4;
+  height: 100%; /* Make sure it covers the entire container */
+  width: 100%;
+}
+
+/* Add the following new CSS for the form container */
+.form_containers {
+  position: relative;
+  z-index: 1; /* Ensure the form is above the background image */
+  background-color: transparent; /* Add a semi-transparent white background to improve readability */
+  padding: 20px;
+  border-radius: 8px; /* Add some border-radius for a rounded appearance */
+}
+.updateRemainig{
+opacity: 1 !important;
+  z-index: 1000 !important;
+}
