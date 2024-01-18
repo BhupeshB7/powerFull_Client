@@ -1530,7 +1530,7 @@ flex-direction: column;
 
 .profileUpdate {
   background-image: url('https://img.freepik.com/free-vector/personal-settings-concept-illustration_114360-2659.jpg?size=626&ext=jpg&ga=GA1.2.260354095.1700988836&semt=ais');
-  background-size: cover; /* Use 'cover' to ensure the image covers the entire background */
+  background-size: 100% 100%; /* Use 'cover' to ensure the image covers the entire background */
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;

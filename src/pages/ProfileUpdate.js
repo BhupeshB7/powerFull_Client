@@ -145,9 +145,10 @@ const ProfileUpdate = () => {
 const remainingUpdate = maxUpdateLimit -updateCount;
   return (
     <div className='profile-Update'>
-        <h6 className='text-center text-success mt-2'> Please, Update Your Profile</h6>
+        <h6 className='text-start text-dark fw-bold m-2'> Hello, {profileData.name}</h6>
+        <h6 className='text-center text-success mt-1'> Update Your Profile</h6>
       <div className='updateRemainig'>
-      <h6 className='text-end text-danger mt-1 ' style={{zIndex:'1'}}>*You have {remainingUpdate} Attempts left to  update your Profile</h6>
+      <h6 className='text-end text-danger mt-1 ' style={{zIndex:'1'}}>*You have {remainingUpdate} Attempts Remaining to update your Profile</h6>
       </div>
     <div className='profileUpdate'>
     </div>
