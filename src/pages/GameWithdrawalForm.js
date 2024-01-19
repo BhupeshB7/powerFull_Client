@@ -238,14 +238,14 @@ const fetchData = async () => {
 
               <Button
                 type="submit"
-                className="updateButton m-1 w-100"
+                className="updateButton p-1 m-1 w-100"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Updating..." : "Update"}
               </Button>
 
               <Button
-                className=" updateButton m-1 w-100"
+                className=" updateButton p-1 m-1 w-100"
                 onClick={handleProfile}
               >
                 Go Back

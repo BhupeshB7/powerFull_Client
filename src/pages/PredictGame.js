@@ -10,8 +10,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ImWhatsapp } from "react-icons/im";
-import welcome from "../assets/gameWelcome.png";
+import support from "../assets/support.png";
 import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
@@ -178,33 +177,32 @@ const PredictGame = ({ contactInfoList }) => {
   };
   const handleChange1 = (e) => {
     const { name, value } = e.target;
-  
+
     // Check if the field is 'accountNo' and gameData is available
-    if (name === 'accountNo') {
+    if (name === "accountNo") {
       setFormData1({
         ...formData1,
         [name]: gameData.accountNo, // Set the value from gameData
       });
     }
-    if (name === 'UPI') {
+    if (name === "UPI") {
       setFormData1({
         ...formData1,
         [name]: gameData.GPay, // Set the value from gameData
       });
     }
-    if (name === 'name') {
+    if (name === "name") {
       setFormData1({
         ...formData1,
         [name]: gameData.name, // Set the value from gameData
       });
     }
-    if (name === 'userId') {
+    if (name === "userId") {
       setFormData1({
         ...formData1,
         [name]: gameData.userId, // Set the value from gameData
       });
-    }
-     else {
+    } else {
       setFormData1({
         ...formData1,
         [name]: value,
@@ -587,7 +585,7 @@ const PredictGame = ({ contactInfoList }) => {
                   textAlign: "center",
                 }}
               >
-                <Link to={`https://wa.me/${contactInfoList.mobile}/?text=Hi`}>
+                {/* <Link to={`https://wa.me/${contactInfoList.mobile}/?text=Hi`}>
                   <ImWhatsapp
                     className="contact-svg"
                     style={{
@@ -596,6 +594,14 @@ const PredictGame = ({ contactInfoList }) => {
                       color: "green",
                       margin: "auto",
                     }}
+                  />
+                </Link> */}
+                <Link to={`https://wa.me/${contactInfoList.mobile}/?text=Hi`}>
+                  <img
+                    src={support} // Replace this with the path to your local image
+                    alt="WhatsApp"
+                    height="56px" width="56px"
+                    className="contact-img" // Add any additional styling classes if needed
                   />
                 </Link>
               </div>
@@ -935,7 +941,11 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="name"
                           placeholder="Name"
-                          value={gameData ? gameData.accountHolderName : formData1.name}
+                          value={
+                            gameData
+                              ? gameData.accountHolderName
+                              : formData1.name
+                          }
                           onChange={handleChange1}
                           disabled={gameData ? true : false}
                           required
@@ -969,7 +979,9 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="accountNo"
                           placeholder="Account No"
-                          value={gameData ? gameData.accountNo : formData1.accountNo}
+                          value={
+                            gameData ? gameData.accountNo : formData1.accountNo
+                          }
                           onChange={handleChange1}
                           disabled={gameData ? true : false} // Disable the input if gameData is available
                           required
@@ -982,14 +994,19 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="IFSCCODE"
                           placeholder="IFSCCODE..."
-                          value={gameData ? gameData.ifscCode : formData1.IFSCCODE}
+                          value={
+                            gameData ? gameData.ifscCode : formData1.IFSCCODE
+                          }
                           onChange={handleChange1}
                           disabled={gameData ? true : false}
                           required
                           className="Game_withdrawal_form"
                         />
                         <br />
-                      <p className="text-light m-1"><b className="text-danger">Note:</b>Please, Updated with own Details  </p>
+                        <p className="text-light m-1">
+                          <b className="text-danger">Note:</b>Please, Updated
+                          with own Details{" "}
+                        </p>
                         <button type="submit" className="btn btn-warning">
                           Submit
                         </button>
