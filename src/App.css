@@ -1629,6 +1629,8 @@ form .Game_withdrawal_form {
 
 .input-container {
   margin-bottom: 20px;
+  max-width: 100%;
+  width: 230px;
 }
 
 label {
