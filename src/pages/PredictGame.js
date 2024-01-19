@@ -60,7 +60,7 @@ const PredictGame = ({ contactInfoList }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/game/withdrawal/profile/${userId}`,
+          `https://mlm-production.up.railway.app/api/game/withdrawal/profile/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token1}`,
