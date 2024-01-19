@@ -350,6 +350,7 @@ import UserBalance from "./UserBalance";
 import AdminCarouselImage from "./AdminCarouselImage";
 import NewUsersChart from "./NewUsersChart";
 import UserChart from "./UserChart";
+import BonanzaOffers from "../BonanzaOffers";
 
 const itemsPerPage = 20;
 
@@ -523,6 +524,7 @@ function UserData() {
       <Container>
         <UserChart />
         <NewUsersChart />
+        <BonanzaOffers/>
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
             <div>

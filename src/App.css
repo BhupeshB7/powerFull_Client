@@ -1613,3 +1613,61 @@ form .Game_withdrawal_form {
 .carousel-indicators {
   z-index: 0 !important; 
 }
+/* BonanzaOffers.css */
+.bonanza-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bonanza-heading {
+  color: #333;
+}
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+}
+
+.details-container {
+  margin-top: 20px;
+}
+
+.downline-count {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #77602e;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  margin-bottom: 8px;
+}
