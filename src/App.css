@@ -1606,3 +1606,6 @@ form .Game_withdrawal_form {
   background-color: #6a2606 !important;
   border: 1px solid #f87f64 !important;
 }
+.carousel-indicators {
+  z-index: 0 !important; 
+}
