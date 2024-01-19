@@ -9,7 +9,7 @@ const formatActivationTime = (activationTime) => {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    timeZone: 'Asia/Kolkata', // IST timezone
+    timeZone: 'Asia/Kolkata', 
   };
   return new Date(activationTime).toLocaleString('en-IN', options);
 };
