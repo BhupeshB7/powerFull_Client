@@ -755,8 +755,12 @@ const Dashboard1 = ({contactInfoList}) => {
         const result = await response.json();
         // const userLevel = getUserLevel(result.level);
         // setLevel(userLevel);
+        // Store userId in localStorage
+        if (result.userId) {
+          localStorage.setItem("GamerUserId", result.userId);
+        }
         if (result.role) {
-          const userrole = result.role;
+          const userrole = result.role; 
           // console.log(userrole);
           if (userrole === "admin") {
             localStorage.setItem("check", "nfwnwen");

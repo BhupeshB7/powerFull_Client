@@ -46,6 +46,7 @@ import ColorPredictGame from './pages/ColorPredictGame';
 import ColorPridictionGame1 from './pages/ColorPridictionGame1';
 import PredictGame from './pages/PredictGame';
 import GameBalanceUpdate from './components/Admin/GameBalanceUpdate';
+import GameWithdrawalForm from './pages/GameWithdrawalForm';
 // import PrivateRoute from './components/Admin/PrivateRoute';
 
 function App() {
@@ -137,6 +138,7 @@ function App() {
           <Route path='/tasks/:taskId' element={<Task/>}/>
           <Route path='/depositform' element={<DepositForm/>}/>
           <Route path='/depositform/game' element={<GameDepositForm/>}/>
+          <Route path='/withdrawalform/game' element={<GameWithdrawalForm/>}/>
           <Route path='/deposithistory' element={<DepsoitHistory/>}/>
           <Route  path="*" element={<Error/>} />
 

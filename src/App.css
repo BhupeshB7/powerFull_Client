@@ -22,7 +22,8 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;min-width: 300px;
+  flex-direction: column;
+  min-width: 300px;
   /* margin-top: 20px; */
   /* background: linear-gradient(
       rgba(255, 255, 255, 0.7),
@@ -608,20 +609,19 @@ ul li:nth-child(3) {
   list-style: none !important;
 }
 
-
 .color-options {
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 11px;
 }
-.number-options{
+.number-options {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin: auto;
 }
-.color-options button{
+.color-options button {
   width: 90px;
   height: 40px;
   border-top-right-radius: 20px;
@@ -629,7 +629,7 @@ ul li:nth-child(3) {
   border: 2px solid ffe7d9;
   /* color: #ffe7d9; */
 }
-.color-options button:nth-child(2){
+.color-options button:nth-child(2) {
   border-top-right-radius: none !important;
   border-bottom-left-radius: none !important;
   border-radius: 10px;
@@ -644,32 +644,32 @@ ul li:nth-child(3) {
   flex-direction: column;
   align-items: flex-start;
 }
-.deposit_Form label{
+.deposit_Form label {
   color: white;
 }
-.deposit_Form input{
+.deposit_Form input {
   border: 1.3px solid #000428;
   width: 310px;
 }
-.bgDepositHeader{
-  background:#330867 !important;
+.bgDepositHeader {
+  background: #330867 !important;
 }
-.bgDepositGame{
+.bgDepositGame {
   background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
-  
 }
-.buttonDW{
-   margin-bottom: -23px;
+.buttonDW {
+  margin-bottom: -23px;
 }
 .modal-header .btn-close {
-  padding: 0.1rem ;
-  margin:  -0.5rem -0.5rem -0.5rem auto;
-  background: url('https://cdn-icons-png.flaticon.com/128/463/463612.png')   center/1em auto no-repeat !important;
-    border: 0;
-    height: 27px;
-    width: 27px;
-    opacity: 1  !important;
-    background-size: 100% !important;
+  padding: 0.1rem;
+  margin: -0.5rem -0.5rem -0.5rem auto;
+  background: url("https://cdn-icons-png.flaticon.com/128/463/463612.png")
+    center/1em auto no-repeat !important;
+  border: 0;
+  height: 27px;
+  width: 27px;
+  opacity: 1 !important;
+  background-size: 100% !important;
 }
 .imageContainer {
   display: flex;
@@ -752,7 +752,7 @@ ul li:nth-child(3) {
   font-size: 14px;
   font-weight: 600;
 }
-.colorbackGround .logo{
+.colorbackGround .logo {
   background-image: linear-gradient(60deg, #29323c 0%, #1d1f20 100%);
   height: 100px;
   width: 100%;
@@ -765,31 +765,38 @@ ul li:nth-child(3) {
   height: 300px;
   width: 100%;
   /* background: rgb(237, 202, 75); */
-  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+  background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(0, 0, 0, 0.25) 200%
+    );
   background-blend-mode: multiply;
   border-bottom-left-radius: 25px !important;
- border-bottom-right-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
   display: flex;
   flex-direction: column;
   padding: 20px;
 }
-.logo img{
+.logo img {
   animation: fadeInAnimation ease-in 5s;
-  animation-iteration-count:1;
-  animation-fill-mode:backwards;
+  animation-iteration-count: 1;
+  animation-fill-mode: backwards;
 }
-.game_box .wallet, .wallet{
+.game_box .wallet,
+.wallet {
   display: flex;
   height: 150px;
-  background-image: linear-gradient(to left, #434343 0%, rgb(15, 14, 14) 100%); border-radius: 10px;
+  background-image: linear-gradient(to left, #434343 0%, rgb(15, 14, 14) 100%);
+  border-radius: 10px;
   animation: fadeInAnimation ease 3s;
-  animation-iteration-count:1;
-  animation-fill-mode:backwards;
+  animation-iteration-count: 1;
+  animation-fill-mode: backwards;
   width: 100%;
-margin: 30px;
-flex-direction: column;
+  margin: 30px;
+  flex-direction: column;
 }
-.betAmountMultiple{
+.betAmountMultiple {
   width: 70%;
   display: flex;
   flex-direction: row;
@@ -797,7 +804,7 @@ flex-direction: column;
   margin: auto;
   align-items: center;
 }
-.betAmountMultiple .button123{
+.betAmountMultiple .button123 {
   height: 45px;
   width: 45px;
   display: flex;
@@ -805,27 +812,27 @@ flex-direction: column;
   justify-content: center;
   border-radius: 50%;
 }
-.wallet .content{
+.wallet .content {
   width: 200px;
-display: flex;
-padding-left: 40px;
-padding-top: 20px;
-flex-direction: row;
-gap: 30px;
-  
+  display: flex;
+  padding-left: 40px;
+  padding-top: 20px;
+  flex-direction: row;
+  gap: 30px;
 }
-.time_box{
+.time_box {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 90%;
-  padding:20px;
+  padding: 20px;
   border-radius: 20px;
   margin-top: -55px;
   height: 125px;
- 
-  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);}
-.time_box_2{
+
+  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+.time_box_2 {
   display: flex;
   justify-content: space-around;
   margin: 30px;
@@ -841,7 +848,6 @@ gap: 30px;
   margin-left: 20px;
   position: absolute;
   top: 30px;
-
 }
 .game_session {
   height: 115px;
@@ -865,46 +871,53 @@ gap: 30px;
 }
 .game_choice_color {
   animation: fadeInAnimation ease 4s;
-  animation-iteration-count:1;
-  animation-fill-mode:backwards;
+  animation-iteration-count: 1;
+  animation-fill-mode: backwards;
   background-image: linear-gradient(to top, #91763c 0%, #89bbbe 100%);
   background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
-  background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
- background-blend-mode: multiply;
-   height: 120px;
+  background: linear-gradient(to bottom, #323232 0%, #3f3f3f 40%, #1c1c1c 150%),
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(0, 0, 0, 0.25) 200%
+    );
+  background-blend-mode: multiply;
+  height: 120px;
   width: 100%;
   margin: auto;
   border-radius: 10px;
   display: flex;
   align-items: center;
 }
-.game_choice_Number{
+.game_choice_Number {
   height: 100%;
   /* background-image: url('https://img.freepik.com/free-vector/online-games-concept_23-2148514180.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais'); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
-.backgroundOfColorPrediction{
+.backgroundOfColorPrediction {
   margin-top: -20px;
   height: 100%;
   width: 100%;
   padding: 5px;
   background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
   /* background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%); */
-  background: url('https://img.freepik.com/free-vector/online-games-concept_23-2148514180.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais');
+  background: url("https://img.freepik.com/free-vector/online-games-concept_23-2148514180.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-    border-radius: 8px;
+  border-radius: 8px;
 }
-.upDown{
-  border-color:none !important;
+.upDown {
+  border-color: none !important;
   box-shadow: none !important;
 }
 
-.upDown:active, .upDown:hover, .upDown:focus{
-  border-color:none !important;
+.upDown:active,
+.upDown:hover,
+.upDown:focus {
+  border-color: none !important;
   box-shadow: none !important;
   background-color: none !important;
 }
@@ -924,7 +937,6 @@ gap: 30px;
 }
 /* For small devices, display 3 color boxes in one line */
 @media (max-width: 767px) {
-  
   .color-optionsText {
     display: flex;
     flex-wrap: wrap;
@@ -938,7 +950,7 @@ gap: 30px;
 
 /* For larger devices, display all boxes in one line */
 @media (min-width: 768px) {
-  .game_choice_Number{
+  .game_choice_Number {
     height: 120px;
   }
   .color-optionsText {
@@ -956,9 +968,8 @@ gap: 30px;
   /* background-image: url("https://img.freepik.com/free-vector/watercolor-stains-abstract-background_23-2149107181.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
-
 }
-.predictGame{
+.predictGame {
   min-height: 800px;
 }
 .bg-spin {
@@ -967,25 +978,24 @@ gap: 30px;
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  background-image:url('https://img.freepik.com/free-vector/gradient-hexagonal-background_52683-62359.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais');
+  background-image: url("https://img.freepik.com/free-vector/gradient-hexagonal-background_52683-62359.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=ais");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   /* margin-top: -80px; */
 }
-.alert{
+.alert {
   position: absolute;
   top: 28%;
   left: 2%;
   right: 2%;
   z-index: 1000;
-
 }
-.notification-container{
+.notification-container {
   display: flex;
   justify-content: flex-end;
   margin-right: 50px !important;
 }
-.notification{
+.notification {
   height: 60px;
   width: 60px;
   border-radius: 50%;
@@ -993,8 +1003,8 @@ gap: 30px;
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(60deg, #29323c 0%, #1d1f20 100%);
-  }
-.bg-spin .gameLogo{
+}
+.bg-spin .gameLogo {
   width: 100%;
   background-image: linear-gradient(60deg, #29323c 0%, #1d1f20 100%);
   display: flex;
@@ -1004,28 +1014,29 @@ gap: 30px;
   top: 0;
   z-index: 100;
 }
-.bg-spin .balanceCard, .bg-spin .game{
+.bg-spin .balanceCard,
+.bg-spin .game {
   animation: fadeInAnimation ease-in 3s;
-  animation-iteration-count:1;
+  animation-iteration-count: 1;
   transition: all 0.3s ease-in-out;
 }
 @keyframes fadeInAnimation {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
-.bg-spin .container{
+.bg-spin .container {
   background: transparent;
   border: 1px solid gray;
-  box-shadow: 2px 4px  6px rgba(246, 238, 238, 0.25);
+  box-shadow: 2px 4px 6px rgba(246, 238, 238, 0.25);
   animation: fadeInAnimation ease-in 2s;
-  animation-iteration-count:1;
+  animation-iteration-count: 1;
   transition: all 0.3s ease-in-out;
 }
-.bg-spin .container .box{
+.bg-spin .container .box {
   display: flex;
   width: 100%;
   align-items: center;
@@ -1085,9 +1096,9 @@ gap: 30px;
   background: #0f1126;
   border: 2px solid #107f7f !important;
 }
-@media (max-width: 510px){
-  .form_transfer{
-    max-width: 310px ;
+@media (max-width: 510px) {
+  .form_transfer {
+    max-width: 310px;
   }
 }
 .contact-row {
@@ -1131,7 +1142,7 @@ gap: 30px;
 /* .register label{
   color: #1de2c4;
 } */
-.register_content{
+.register_content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1142,26 +1153,27 @@ gap: 30px;
 .Register_Container {
   background-color: #2884b8;
   background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
-  background-image: url('https://img.freepik.com/premium-vector/gradient-letter-logo-design-template-with-halloween-elements_470367-7406.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais');
+  background-image: url("https://img.freepik.com/premium-vector/gradient-letter-logo-design-template-with-halloween-elements_470367-7406.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais");
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   height: 780px !important;
-box-shadow: 0 2px 6px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 6px rgba(255, 255, 255, 0.6);
 }
 .Register_Container input {
   border: 1px solid salmon;
   color: sandybrown;
   max-width: 300px !important;
 }
-.Register_Container label{
+.Register_Container label {
   color: sandybrown;
 }
-.Register_Container input::placeholder{
-color: rgb(77, 68, 60) !important;
+.Register_Container input::placeholder {
+  color: rgb(77, 68, 60) !important;
 }
-.Register_Container input:focus::placeholder,.Register_Container input:active::placeholder{
-color: brown !important;;
+.Register_Container input:focus::placeholder,
+.Register_Container input:active::placeholder {
+  color: brown !important;
 }
 .loginBG {
   background-color: hsla(0, 100%, 50%, 1);
@@ -1236,6 +1248,11 @@ color: brown !important;;
   /* background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%); */
   background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 }
+.topUPBg1 {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to left, #1d6363 0%, #330867 100%);
+}
 .depositFormC {
   display: flex;
   flex-direction: column;
@@ -1285,7 +1302,7 @@ color: brown !important;;
   margin-right: 30px;
   cursor: pointer;
 }
-.changePassword{
+.changePassword {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1295,24 +1312,26 @@ color: brown !important;;
   align-items: center;
   border-radius: 9px;
   padding: 14px;
-  background-image: linear-gradient(-20deg, #d558c8 0%, #24d292 100%);}
-.changePassword input{
+  background-image: linear-gradient(-20deg, #d558c8 0%, #24d292 100%);
+}
+.changePassword input {
   width: 100%;
   min-width: 300px !important;
-   color: #000428;
-   border: 2px solid #000428 !important;
+  color: #000428;
+  border: 2px solid #000428 !important;
 }
-.changePassword input:active, .changePassword input:focus{
+.changePassword input:active,
+.changePassword input:focus {
   background: #c0f0cc;
   border: 2px solid #313132 !important;
 }
-.changePassword label{
+.changePassword label {
   font-weight: 650;
   font-size: 14px;
   color: #000428;
 }
 
-.changePasswordButton{
+.changePasswordButton {
   margin: 10px;
   width: 150px;
   color: #fccb90;
@@ -1335,7 +1354,7 @@ color: brown !important;;
   justify-content: center;
   align-items: center;
 }
-.remaining{
+.remaining {
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -1347,7 +1366,7 @@ color: brown !important;;
   background: #e2dcdc;
   height: 300px;
   width: 300px;
- transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 /* .modal-center{
@@ -1364,15 +1383,15 @@ color: brown !important;;
 /* .table-hover:hover, .table-hover:focus, .table-hover:active{
 color: green !important;
 } */
-.liveGame, .adminLive{
-  
-  background-image: url('https://img.freepik.com/free-vector/hand-painted-watercolor-abstract-watercolor-background_23-2148999934.jpg?w=996&t=st=1699479758~exp=1699480358~hmac=ca23036ead199cc90d009e62b12a114f02c12e5b6c190c1f2d3de150beb3236e');
-  background-image: url('https://img.freepik.com/premium-photo/futuristic-technology-background_828075-4616.jpg?size=626&ext=jpg&uid=R124466029&ga=GA1.1.393936886.1688825666&semt=ais');
+.liveGame,
+.adminLive {
+  background-image: url("https://img.freepik.com/free-vector/hand-painted-watercolor-abstract-watercolor-background_23-2148999934.jpg?w=996&t=st=1699479758~exp=1699480358~hmac=ca23036ead199cc90d009e62b12a114f02c12e5b6c190c1f2d3de150beb3236e");
+  background-image: url("https://img.freepik.com/premium-photo/futuristic-technology-background_828075-4616.jpg?size=626&ext=jpg&uid=R124466029&ga=GA1.1.393936886.1688825666&semt=ais");
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
-.LiveGameDashboard{
+.LiveGameDashboard {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -1380,15 +1399,23 @@ color: green !important;
   flex-direction: column;
   width: 100%;
   height: 300px;
-  background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+  background-image: linear-gradient(
+    to right,
+    #ff8177 0%,
+    #ff867a 0%,
+    #ff8c7f 21%,
+    #f99185 52%,
+    #cf556c 78%,
+    #b12a5b 100%
+  );
   border-radius: 10px;
 }
-.LiveGameDashboard label{
+.LiveGameDashboard label {
   font-size: 19px !important;
   color: #000428;
   padding: 3px;
 }
-.Update_Balance{
+.Update_Balance {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1398,29 +1425,37 @@ color: green !important;
   height: 350px;
   color: #000428 !important;
 
-  background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+  background-image: linear-gradient(
+    to right,
+    #ff8177 0%,
+    #ff867a 0%,
+    #ff8c7f 21%,
+    #f99185 52%,
+    #cf556c 78%,
+    #b12a5b 100%
+  );
   border-radius: 10px;
-
 }
-.Update_Balance input{
+.Update_Balance input {
   border: 1px solid #000428;
 }
-.AlertBalance{
+.AlertBalance {
   position: relative;
   top: -350px !important;
 }
-.teamStructure_background{
+.teamStructure_background {
   background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%);
   color: rgb(211, 246, 211);
 }
-.CarouselImage{
+.CarouselImage {
   display: flex;
   width: 100%;
   justify-content: center;
   margin: 10px;
   flex-wrap: wrap;
 }
-.apexcharts-datalabel, .apexcharts-datalabels span {
+.apexcharts-datalabel,
+.apexcharts-datalabels span {
   display: block !important;
   font-size: 14px !important; /* Adjust the font size as needed */
   font-weight: bold !important; /* Adjust the font weight as needed */
@@ -1430,34 +1465,38 @@ color: green !important;
   font-size: 14px !important; /* Adjust the font size as needed */
   font-weight: bold !important;
 }
-.LineChart{
+.LineChart {
   width: 600px !important;
 }
-.blockeduser{
+.blockeduser {
   flex-direction: column;
 }
-.threeMinuteGame{
-  background-image: url('https://img.freepik.com/free-photo/abstract-grunge-decorative-relief-navy-blue-stucco-wall-texture-wide-angle-rough-colored-background_1258-28311.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=sph');
-  background-image: url('https://img.freepik.com/free-photo/red-light-round-podium-black-background-mock-up_43614-950.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=sph');
+.threeMinuteGame {
+  background-image: url("https://img.freepik.com/free-photo/abstract-grunge-decorative-relief-navy-blue-stucco-wall-texture-wide-angle-rough-colored-background_1258-28311.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=sph");
+  background-image: url("https://img.freepik.com/free-photo/red-light-round-podium-black-background-mock-up_43614-950.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=sph");
   background-position: center;
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 .half-circle {
   /* Create a linear gradient for the background */
-  background: linear-gradient( 120deg, rgb(239, 54, 54) 50%, rgb(107, 212, 107) 50%);
+  background: linear-gradient(
+    120deg,
+    rgb(239, 54, 54) 50%,
+    rgb(107, 212, 107) 50%
+  );
 }
-.notification-area{
+.notification-area {
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
   margin: auto;
 }
-.topUPClass{
+.topUPClass {
   width: 310px !important;
 }
-.text-lght-button{
+.text-lght-button {
   color: whitesmoke !important;
 }
 .gameRecord {
@@ -1475,69 +1514,55 @@ color: green !important;
 .gameRecord .modal-footer {
   border-color: transparent; /* Remove borders from header, body, and footer */
 }
-.game_record-time{
+.game_record-time {
   width: 300px !important;
 }
-.GamerComponent{
-background-color: #000;
-height:500px;
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: space-around;
-flex-direction: column;
+.GamerComponent {
+  background-color: #000;
+  height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
-.GamerComponent .gamer-form{
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+.GamerComponent .gamer-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
- .details{
+.details {
   width: 300px;
   height: 500px !important;
- border-radius: 8px !important;
- display: flex;
- align-items: center;
- justify-content: center !important;;
- flex-direction: row-reverse;
- margin: 20px;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center !important;
+  flex-direction: row-reverse;
+  margin: 20px;
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
 }
-.balance_update{
+.balance_update {
   margin: auto !important;
-  
 }
-.balance_update h6{
-  font-family:Georgia, 'Times New Roman', Times, serif;
+.balance_update h6 {
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 22px !important;
   font-weight: 600;
 }
 
-.giphy-embed{
+.giphy-embed {
   width: 100vw !important;
   height: 800px !important;
 }
-.disabledLiveGame{
+.disabledLiveGame {
   opacity: 0.4;
   cursor: none;
   pointer-events: none;
 }
 
-.profile-update {
-  position: relative;
-}
 
-.profileUpdate {
-  background-image: url('https://img.freepik.com/free-vector/personal-settings-concept-illustration_114360-2659.jpg?size=626&ext=jpg&ga=GA1.2.260354095.1700988836&semt=ais');
-  background-size: 100% 100%; /* Use 'cover' to ensure the image covers the entire background */
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-  opacity: 0.4;
-  height: 100%; /* Make sure it covers the entire container */
-  width: 100%;
-}
 
 /* Add the following new CSS for the form container */
 .form_containers {
@@ -1547,13 +1572,35 @@ flex-direction: column;
   padding: 20px;
   border-radius: 8px; /* Add some border-radius for a rounded appearance */
 }
-.updateRemainig{
-opacity: 1 !important;
+.updateRemainig {
+  opacity: 1 !important;
   z-index: 1000 !important;
 }
-.form_containers input{
-color: #172289 !important;
+.form_containers input {
+  color: #a7afff !important;
 }
-.form_containers input:active,.form_containers input:focus{
+.form_containers input:active,
+.form_containers input:focus {
   color: #8e3d00 !important;
-  }
+}
+.gameProfile-Update {
+  background-image: linear-gradient(to top, #1d6363 0%, #330867 100%);
+  height: 750px;
+  width: 100%;
+}
+form .Game_withdrawal_form {
+  color: #ff760d;
+  border: 1px solid #ccc;
+}
+.updateButton{
+  border-radius: 3px !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  background-color: #000428 !important;
+  color: rgb(255, 207, 76) !important;;
+ border: 1px solid #64cef8 !important;
+}
+.updateButton:hover{
+  background-color: #6a2606 !important;
+  border: 1px solid #f87f64 !important;
+}

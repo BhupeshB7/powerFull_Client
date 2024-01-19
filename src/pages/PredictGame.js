@@ -17,31 +17,32 @@ import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
 const PredictGame = ({ contactInfoList }) => {
-  const [targetColor, setTargetColor] = useState("");
-  const [targetNumber, setTargetNumber] = useState("");
-  const [targetLetter, setTargetLetter] = useState("");
-  const [userChoice, setUserChoice] = useState("");
-  const [userChoiceNumber, setUserChoiceNumber] = useState("");
-  const [userChoiceLetter, setUserChoiceLetter] = useState("");
-  const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState("");
-  const [gameResult, setGameResult] = useState("");
+  // const [targetColor, setTargetColor] = useState("");
+  // const [targetNumber, setTargetNumber] = useState("");
+  // const [targetLetter, setTargetLetter] = useState("");
+  // const [userChoice, setUserChoice] = useState("");
+  // const [userChoiceNumber, setUserChoiceNumber] = useState("");
+  // const [userChoiceLetter, setUserChoiceLetter] = useState("");
+  // const [userChoiceButtonNumber, setUserChoiceButtonNumber] = useState("");
+  // const [gameResult, setGameResult] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showNumberModal, setShowNumberModal] = useState(false);
   const [showLetterModal, setShowLetterModal] = useState(false);
   const [betAmount, setBetAmount] = useState(0);
-  const [winningAmount, setWinningAmount] = useState("");
+  // const [winningAmount, setWinningAmount] = useState("");
   const [profile, setProfile] = useState({});
   const [time, setTime] = useState(60);
   const [contentDisabled, setContentDisabled] = useState(false);
   const [timerBlink, setTimerBlink] = useState(false);
-  const predefinedColors = ["Blueviolet", "Red", "Green"];
-  const predefinedLetter = ["Small", "Big"];
+  // const predefinedColors = ["Blueviolet", "Red", "Green"];
+  // const predefinedLetter = ["Small", "Big"];
   const predefinedColors1 = ["green", "orange", "purple"];
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [withdrawalHistory, setWithdrawalHistory] = useState([]);
   const [depositHistory, setDepositHistory] = useState([]);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
+  const [gameData, setGameData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [buttonColors, setButtonColors] = useState([]);
@@ -52,6 +53,29 @@ const PredictGame = ({ contactInfoList }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
+
+  const token1 = localStorage.getItem("token");
+
+  const userId = localStorage.getItem("GamerUserId");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/game/withdrawal/profile/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token1}`,
+            },
+          }
+        );
+        // console.log(response.data);
+        setGameData(response.data);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
+    fetchData();
+  }, [token1]);
   const handleShowDeposit = () => {
     window.location.href = "/depositform/game";
   };
@@ -142,8 +166,8 @@ const PredictGame = ({ contactInfoList }) => {
     name: "",
     amount: "",
     UPI: "",
-    accountNo:"",
-    IFSCCODE:"",
+    accountNo: "",
+    IFSCCODE: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -154,10 +178,38 @@ const PredictGame = ({ contactInfoList }) => {
   };
   const handleChange1 = (e) => {
     const { name, value } = e.target;
-    setFormData1({
-      ...formData1,
-      [name]: value,
-    });
+  
+    // Check if the field is 'accountNo' and gameData is available
+    if (name === 'accountNo') {
+      setFormData1({
+        ...formData1,
+        [name]: gameData.accountNo, // Set the value from gameData
+      });
+    }
+    if (name === 'UPI') {
+      setFormData1({
+        ...formData1,
+        [name]: gameData.GPay, // Set the value from gameData
+      });
+    }
+    if (name === 'name') {
+      setFormData1({
+        ...formData1,
+        [name]: gameData.name, // Set the value from gameData
+      });
+    }
+    if (name === 'userId') {
+      setFormData1({
+        ...formData1,
+        [name]: gameData.userId, // Set the value from gameData
+      });
+    }
+     else {
+      setFormData1({
+        ...formData1,
+        [name]: value,
+      });
+    }
   };
 
   useEffect(() => {
@@ -238,7 +290,7 @@ const PredictGame = ({ contactInfoList }) => {
           body: JSON.stringify({ ...formData1 }),
         }
       );
-  
+
       if (response.ok) {
         alert("Withdrawal request submitted successfully");
       } else {
@@ -250,7 +302,7 @@ const PredictGame = ({ contactInfoList }) => {
       alert("Error submitting withdrawal request. Please try again.");
     }
   };
-  
+
   const handleWithdrawalError = (responseData) => {
     if (responseData.message === "Insufficient Balance") {
       alert("Insufficient Balance. Please check your wallet.");
@@ -263,7 +315,7 @@ const PredictGame = ({ contactInfoList }) => {
       alert("Error submitting withdrawal request. Please try again.");
     }
   };
-  
+
   // const fetchGameHistory = async () => {
   //   try {
   //     const response = await axios.get(
@@ -665,7 +717,22 @@ const PredictGame = ({ contactInfoList }) => {
                           </h6>
                           <ul className="dropdown-menu">
                             <li>
-                              <a href="/depositform/game">Deposit</a>
+                              <h6 className="dropdown-item">
+                                <a
+                                  className="text-dark"
+                                  href="/depositform/game"
+                                >
+                                  Deposit
+                                </a>
+                              </h6>
+                            </li>
+                            <li>
+                              <a
+                                className="dropdown-item text-dark"
+                                href="/withdrawalform/game"
+                              >
+                                Account Update
+                              </a>
                             </li>
                             <li>
                               <h6
@@ -673,7 +740,7 @@ const PredictGame = ({ contactInfoList }) => {
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop2"
                               >
-                                Withdrawal
+                                WITHDRAWAL
                               </h6>
                             </li>
                             <li>
@@ -682,7 +749,7 @@ const PredictGame = ({ contactInfoList }) => {
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop3"
                               >
-                                Withdrawal History
+                                WITHDRAWAL HISTORY
                               </h6>
                             </li>
                             <li>
@@ -691,7 +758,7 @@ const PredictGame = ({ contactInfoList }) => {
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop4"
                               >
-                                Deposit History
+                                DEPOSIT HISTORY
                               </h6>
                             </li>
                           </ul>
@@ -829,7 +896,7 @@ const PredictGame = ({ contactInfoList }) => {
               >
                 <div className="modal-dialog">
                   <div
-                    className="modal-content topUPBg"
+                    className="modal-content topUPBg1"
                     style={{ maxHeight: "750px" }}
                   >
                     <div className="modal-header">
@@ -855,20 +922,24 @@ const PredictGame = ({ contactInfoList }) => {
                         <input
                           type="text"
                           name="userId"
-                          value={formData1.userId}
                           placeholder="UserId"
+                          value={gameData ? gameData.userId : formData1.userId}
                           onChange={handleChange1}
+                          disabled={gameData ? true : false}
                           // disabled
                           required
+                          className="Game_withdrawal_form"
                         />
                         <label>Name:</label>
                         <input
                           type="text"
                           name="name"
                           placeholder="Name"
-                          value={formData1.name}
+                          value={gameData ? gameData.accountHolderName : formData1.name}
                           onChange={handleChange1}
+                          disabled={gameData ? true : false}
                           required
+                          className="Game_withdrawal_form"
                         />
 
                         <label>Amount:</label>
@@ -879,15 +950,18 @@ const PredictGame = ({ contactInfoList }) => {
                           value={formData1.amount}
                           onChange={handleChange1}
                           required
+                          className="Game_withdrawal_form"
                         />
                         <label>UPI:</label>
                         <input
                           type="text"
-                          name="UPI"
+                          name="GPay"
                           placeholder="Payment UPI "
-                          value={formData1.UPI}
+                          value={gameData ? gameData.GPay : formData1.UPI}
                           onChange={handleChange1}
+                          disabled={gameData ? true : false}
                           required
+                          className="Game_withdrawal_form"
                         />
                         <br />
                         <label>Account No:</label>
@@ -895,21 +969,27 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="accountNo"
                           placeholder="Account No"
-                          value={formData1.accountNo}
+                          value={gameData ? gameData.accountNo : formData1.accountNo}
                           onChange={handleChange1}
+                          disabled={gameData ? true : false} // Disable the input if gameData is available
                           required
+                          className="Game_withdrawal_form"
                         />
+
                         <br />
                         <label>IFSCCODE</label>
                         <input
                           type="text"
                           name="IFSCCODE"
                           placeholder="IFSCCODE..."
-                          value={formData1.IFSCCODE}
+                          value={gameData ? gameData.ifscCode : formData1.IFSCCODE}
                           onChange={handleChange1}
+                          disabled={gameData ? true : false}
                           required
+                          className="Game_withdrawal_form"
                         />
                         <br />
+                      <p className="text-light m-1"><b className="text-danger">Note:</b>Please, Updated with own Details  </p>
                         <button type="submit" className="btn btn-warning">
                           Submit
                         </button>
@@ -974,7 +1054,7 @@ const PredictGame = ({ contactInfoList }) => {
                         <tbody>
                           {withdrawalHistory.map((withdrawal, index) => (
                             <tr key={index}>
-                              <td className="text-info">{index+1}</td>
+                              <td className="text-info">{index + 1}</td>
                               <td className="text-primary">
                                 {withdrawal.name}
                               </td>
@@ -985,8 +1065,12 @@ const PredictGame = ({ contactInfoList }) => {
                                 {withdrawal.amount}
                               </td>
                               <td className="text-success">{withdrawal.UPI}</td>
-                              <td className="text-success">{withdrawal.accountNo}</td>
-                              <td className="text-success">{withdrawal.IFSCCODE}</td>
+                              <td className="text-success">
+                                {withdrawal.accountNo}
+                              </td>
+                              <td className="text-success">
+                                {withdrawal.IFSCCODE}
+                              </td>
                               <td
                                 className={
                                   withdrawal.approved === "Pending"
@@ -1065,7 +1149,7 @@ const PredictGame = ({ contactInfoList }) => {
                         <tbody>
                           {depositHistory.map((withdrawal, index) => (
                             <tr key={index}>
-                              <td className="text-info">{index+1}</td>
+                              <td className="text-info">{index + 1}</td>
                               <td className="text-primary">
                                 {withdrawal.name}
                               </td>

@@ -144,14 +144,12 @@ const ProfileUpdate = () => {
   }
 const remainingUpdate = maxUpdateLimit -updateCount;
   return (
-    <div className='profile-Update'>
-        <h6 className='text-start text-dark fw-bold m-2'> Hello, {profileData.name}</h6>
+    <div className='gameProfile-Update'>
+        <h6 className='text-start text-info fw-bold p-2'> Hello, {profileData.name}</h6>
         <h6 className='text-center text-success mt-1'> Update Your Profile</h6>
       <div className='updateRemainig'>
-      <h6 className='text-end text-danger mt-1 ' style={{zIndex:'1'}}>*You have {remainingUpdate} Attempts Remaining to update your Profile</h6>
+      <h6 className='text-end text-danger m-1 ' style={{zIndex:'1'}}>*You have {remainingUpdate} Attempts Remaining to update your Profile</h6>
       </div>
-    <div className='profileUpdate'>
-    </div>
     <Container>
     <div className="form_container form_containers">
       <div className="form_data">
@@ -222,11 +220,11 @@ const remainingUpdate = maxUpdateLimit -updateCount;
 
           {errorMessage && <p>{errorMessage}</p>}
 
-          <Button variant='dark' type="submit"className='m-1 w-100' disabled={isSubmitting}>
+          <Button  type="submit"className='updateButton m-1 w-100' disabled={isSubmitting}>
             {isSubmitting ? 'Updating...' : 'Update'}
           </Button>
 
-          <Button variant='secondary 'className='m-1 w-100' onClick={handleProfile}>
+          <Button className='updateButton m-1 w-100' onClick={handleProfile}>
             Profile
           </Button>
         </form>

@@ -107,8 +107,8 @@ function Profile() {
                           <td>{data.userId}</td>
                         </tr>
                         <tr>
-                          <td>Address:</td>
-                          <td>{data.address}</td>
+                          <td>Biography:</td>
+                          <td>{data.bio}</td>
                         </tr>
                         <tr>
                           <td>Account No:</td>
