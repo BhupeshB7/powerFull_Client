@@ -1622,7 +1622,10 @@ form .Game_withdrawal_form {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+.bonanza-container input{
+  width: 230px;
+  max-width: 100%;
+}
 .bonanza-heading {
   color: #333;
 }
