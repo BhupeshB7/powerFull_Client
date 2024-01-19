@@ -1082,10 +1082,14 @@ ul li:nth-child(3) {
   border-radius: 7px;
   border: 1px solid #01b7ff;
   box-shadow: 0 2px 4x rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .transferWallet label,
 .transferWallet input {
   color: #01b7ff !important;
+  width: 300px !important;
 }
 .transferWallet input {
   border: 1px solid #01b7ff !important;

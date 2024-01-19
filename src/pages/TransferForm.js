@@ -43,7 +43,7 @@ const TransferForm = ({ sourceUserId }) => {
     e.preventDefault();
     if (sourceUserId === targetUserId) {
       setError("Please enter different user IDs. Both are the same user ID.");
-    return;
+      return;
     }
     try {
       // Send a request to the backend API
@@ -136,7 +136,12 @@ const TransferForm = ({ sourceUserId }) => {
               required
             />
           </div>
-          <Button variant="info" className="mt-2" type="submit" onClick={handleTransfer} >
+          <Button
+            variant="info"
+            className="mt-2"
+            type="submit"
+            onClick={handleTransfer}
+          >
             Transfer
           </Button>
         </div>
