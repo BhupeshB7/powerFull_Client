@@ -58,10 +58,10 @@ const AdminGift = () => {
   return (
     <div className='admiGift-container'>
       <div className='adminGift'>
-        <h2>Generate Code</h2>
+        <h2>Gift Rewards</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <label>
-          Amount:<br/>
+           Max Amount:<br/>
           <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
         </label>
         <br />
@@ -70,7 +70,7 @@ const AdminGift = () => {
           <input type="number" value={giftTime} onChange={(e) => setGiftTime(e.target.value)} />
         </label>
         <br />
-        <button onClick={handleGenerateCode}>Generate Code</button>
+        <button onClick={handleGenerateCode}>Get Code</button>
         <br />
         {generatedCode && (
           <div>

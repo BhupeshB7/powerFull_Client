@@ -208,6 +208,7 @@ const Rewards = () => {
           <input
             type="text"
             value={code}
+            placeholder="Enter Your Code"
             onChange={(e) => setCode(e.target.value)}
           />
         </label>
