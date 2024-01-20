@@ -176,6 +176,7 @@ const fetchData = async () => {
   const remainingUpdate = maxUpdateLimit - updateCount;
   return (
     <div className="gameProfile-Update">
+     
       <h6 className="text-center text-success pt-3">
         {" "}
         Update Your Game Profile

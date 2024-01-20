@@ -15,6 +15,7 @@ import spinner from "../assets/spinner2.gif";
 import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
+import Rewards from "./Rewards";
 const PredictGame = ({ contactInfoList }) => {
   // const [targetColor, setTargetColor] = useState("");
   // const [targetNumber, setTargetNumber] = useState("");
@@ -562,6 +563,7 @@ const PredictGame = ({ contactInfoList }) => {
                 </Col>
               </Row>
             </Container>
+            <Rewards/>
             <div className="notification-area">
               <div className="notification">
                 <img
@@ -723,49 +725,47 @@ const PredictGame = ({ contactInfoList }) => {
                           </h6>
                           <ul className="dropdown-menu">
                             <li>
-                              <h6 className="dropdown-item">
                                 <a
-                                  className="text-dark"
+                                  className=" dropdown-item"
                                   href="/depositform/game"
                                 >
                                   Deposit
                                 </a>
-                              </h6>
                             </li>
                             <li>
                               <a
-                                className="dropdown-item text-dark"
+                                className="dropdown-item "
                                 href="/withdrawalform/game"
                               >
                                 Account Update
                               </a>
                             </li>
                             <li>
-                              <h6
+                              <a href="#staticBackdrop2"
                                 className="dropdown-item"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop2"
                               >
-                                WITHDRAWAL
-                              </h6>
+                                Withdrawal
+                              </a>
                             </li>
                             <li>
-                              <h6
+                              <a href="#staticBackdrop3"
                                 className="dropdown-item"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop3"
                               >
-                                WITHDRAWAL HISTORY
-                              </h6>
+                                Withdrawal History
+                              </a>
                             </li>
                             <li>
-                              <h6
+                              <a href="#staticBackdrop4"
                                 className="dropdown-item"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop4"
                               >
-                                DEPOSIT HISTORY
-                              </h6>
+                                Deposit History
+                              </a>
                             </li>
                           </ul>
                         </div>
