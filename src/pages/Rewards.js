@@ -324,7 +324,7 @@ const Rewards = () => {
       >
         <div className="d-flex align-tems-center" style={{flexDirection:'row-reverse'}}>
 
-        <button  className="btn btn-danger p-2 m-1 fw-bold" style={{fontSize:'29px', height:'38px',width:'38px'}} onClick={closeModal}>X</button>
+        <button  className="btn btn-danger text-center p-2 m-1 fw-bold" style={{fontSize:'29px', height:'38px',width:'38px'}} onClick={closeModal}>X</button>
         </div>
         <table
           className="table"

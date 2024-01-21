@@ -75,7 +75,7 @@ h1 {
 .form_input {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  max-width: 290px;
 }
 .password_input-container {
   /* position: relative;
@@ -471,7 +471,7 @@ canvas {
 .task_container {
   display: flex;
   height: 110px;
-  width: 350px;
+  width: 340px;     
   align-items: flex-start;
   justify-content: flex-start;
   /* background: #000; */
