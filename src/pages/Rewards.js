@@ -229,7 +229,8 @@ const Rewards = () => {
       position: "absolute", // or "fixed" depending on your layout
       top: "auto",
       bottom: "0px",
-      borderRadius:"4px"
+      borderRadius:"4px",
+      background:"#000"
     },
   };
   return (
@@ -323,7 +324,7 @@ const Rewards = () => {
       >
         <div className="d-flex align-tems-center" style={{flexDirection:'row-reverse'}}>
 
-        <button  className="btn btn-danger p-2 m-1 fw-bold" style={{fontSize:'29px', height:'45px',width:'45px'}} onClick={closeModal}>X</button>
+        <button  className="btn btn-danger p-2 m-1 fw-bold" style={{fontSize:'29px', height:'38px',width:'38px'}} onClick={closeModal}>X</button>
         </div>
         <table
           className="table"
@@ -334,6 +335,7 @@ const Rewards = () => {
           <thead className="text-light text-center" style={{ height: "55px" }}>
             <tr>
               {/* <th>#</th> */}
+               <th>#</th>
               <th>Code</th>
               <th>Rewards</th>
             </tr>
@@ -342,8 +344,9 @@ const Rewards = () => {
             style={{ color: "#FFD700" }}
             className="table-hover text-center"
           >
-            {giftRewards.map((item) => (
+            {giftRewards.map((item,index) => (
               <tr key={item._id}>
+                <td>{index+1}</td>
                 <td>{item.code}</td>
                 {/* <td>{item.color}</td> */}
                 <td>{item.reward}</td>
