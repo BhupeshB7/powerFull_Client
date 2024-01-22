@@ -35,13 +35,14 @@ function Topup() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          // `http://localhost:5000/api/topupHistory/${userId}`
-          `https://mlm-production.up.railway.app/api/topupUser/${data.userId}`
+          // `http://localhost:5000/api/topupHistory/${data.userId}`
+          `https://mlm-production.up.railway.app/api/topupUser/${data.userId}?page=${currentPage}`
+          // `https://mlm-production.up.railway.app/api/topupUser/${data.userId}?${currentPage}`
         );
-        const { topUpdata, currentPage, totalPages } = response.data;
+        const { topUpdata, currentPage:fetchedPage, totalPages } = response.data;
         // console.log(topUpdata);
         settopUpData(topUpdata);
-        setCurrentPage(currentPage);
+        setCurrentPage(fetchedPage);
         setTotalPages(totalPages);
       } catch (error) {
         console.error(error);
@@ -61,9 +62,9 @@ function Topup() {
     window.location.href = "/dashboard";
   };
   return (
-    <div>
+    <div className="bg-primary " style={{height:'100vh'}}>
       {token ? (
-        <div className="topUPBg">
+        <div className="topUPBg1"style={{height:'100vh'}}>
           <h4 className="text-center text-warning pt-4">Hello, {data.name}</h4>
           <h6 className="text-center text-light">TopUp History...</h6>
           <div
@@ -95,7 +96,7 @@ function Topup() {
                         <th className="text-center">UserId</th>
                         {/* <th className="text-center">Name</th> */}
                         <th className="text-center">TopUp Id</th>
-                        <th>Date</th>
+                        <th className="topUpHistoryDate">Date</th>
                         {/* Add more table headers for additional fields */}
                       </tr>
                     </thead>
@@ -108,7 +109,7 @@ function Topup() {
                           {/* <td>{item.name}</td> */}
                           <td>{item.targetUserId}</td>
                           {/* <td>{item.createdAt}</td> */}
-                          <td>
+                          <td className="topUpHistoryDate">
                             {new Date(item.createdAt).toLocaleString("en-IN", {
                               timeZone: "Asia/Kolkata",
                             })}

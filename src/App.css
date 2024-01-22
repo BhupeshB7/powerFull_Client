@@ -1754,3 +1754,6 @@ margin: auto;
 box-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
 color: rgb(255, 179, 179);
 }
+.topUpHistoryDate{
+  min-width:230px !important;
+}
