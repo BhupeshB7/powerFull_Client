@@ -509,7 +509,6 @@ background-repeat: no-repeat;
   justify-content: center;
   flex-direction: column;
   height: 100%;
-  width: 400px;
   align-items: center;
 }
 
