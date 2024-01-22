@@ -31,7 +31,7 @@ function Topup() {
     fetchData();
   }, [token]);
 
-  useEffect(() => {
+  useEffect(() => { 
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -124,7 +124,7 @@ function Topup() {
             </Container>
           </div>
 
-          <div>
+          <div className="d-flex justify-content-center align-items-center ">
             <Button
               variant="warning"
               className="m-1"

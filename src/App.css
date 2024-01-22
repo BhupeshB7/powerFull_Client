@@ -471,14 +471,16 @@ canvas {
 .task_container {
   display: flex;
   height: 110px;
-  width: 340px;     
+  /* width: 340px;      */
   align-items: flex-start;
   justify-content: flex-start;
   /* background: #000; */
   flex-direction: column;
   background-image: url("https://t4.ftcdn.net/jpg/06/10/97/29/240_F_610972994_nxNYinofmMB0Kt9ukNVWWro10wa2qpPM.jpg");
   /* background: linear-gradient(45deg, #000850 0%, #000320 100%), radial-gradient(100% 225% at 100% 0%, #FF6928 0%, #000000 100%), linear-gradient(225deg, #FF7A00 0%, #000000 100%), linear-gradient(135deg, #CDFFEB 10%, #CDFFEB 35%, #009F9D 35%, #009F9D 60%, #07456F 60%, #07456F 67%, #0F0A3C 67%, #0F0A3C 100%); */
-
+background-size: 100% 100% !important;
+background-position: center;
+background-repeat: no-repeat;
   box-shadow: 1px 2px 4px rgba(255, 255, 255, 0.6);
   margin: 20px;
   padding: 15px;
