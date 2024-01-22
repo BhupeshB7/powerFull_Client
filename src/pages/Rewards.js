@@ -204,11 +204,12 @@ const Rewards = () => {
       setIsValid(true);
       setRandomNumber(data.randomNumber);
       setError("");
-      setShowCelebration(true); // Set showCelebration to true when code is valid
+      setShowCelebration(true);
+      // Set showCelebration to true when code is valid
       // Reload the page after 10 seconds
       setTimeout(() => {
         window.location.reload();
-      }, 10000);
+      }, 5000);
     } catch (error) {
       setIsValid(false);
       setRandomNumber(null);
@@ -234,14 +235,14 @@ const Rewards = () => {
     },
   };
   return (
-    <div className="checkCode">
+    <div  className="checkCode" >
       <Container className="checkCode-container">
         {showCelebration && (
           <ConfettiAnimation
             onCelebrationComplete={handleCelebrationComplete}
           />
         )}
-
+<div>
         <h4
           className="text-center text-light fw-bold"
           style={{ fontStyle: "italic" }}
@@ -269,17 +270,23 @@ const Rewards = () => {
           <button onClick={openModal}>History</button>
         </div>
         {isValid !== null && (
-          <div>
-            {isValid ? (
-              <div>
-                {/* <p>Code is valid.</p> */}
-                {/* {lastAmount !== null && <p>Last Amount: {lastAmount}</p>} */}
-                {randomNumber !== null && (
-                  <p className="text-light  fw-bold">
+          <div className="reward-result">
+          {isValid ? (
+            <div>
+              {randomNumber !== null && (
+                <div className="reward-image-container">
+                  <img
+                    src="https://img.freepik.com/free-vector/gradient-raksha-bandhan-background_23-2149508427.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais"
+                    alt="Gift Reward"
+                    className="reward-image"
+                    style={{borderRadius:'7px',zIndex:'1000'}}
+                  />
+                  <p className="reward-amount text-light fw-bold">
                     Rewards {randomNumber} Rs
                   </p>
-                )}
-              </div>
+                </div>
+              )}
+            </div>
             ) : (
               <div>
                 {error && (
@@ -310,7 +317,7 @@ const Rewards = () => {
             )}
           </div>
         )}
-
+</div>
 <div>
     <Modal
       isOpen={modalIsOpen}
