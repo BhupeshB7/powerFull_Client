@@ -150,7 +150,7 @@ const Rewards = () => {
     const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   
- 
+  
       const fetchData = async () => {
         try {
           setLoading(true);
@@ -266,8 +266,8 @@ const Rewards = () => {
         </label>
         <br />
         <div className="d-flex justify-content-center align-items-center pb-2" style={{gap:'30px',}}>
-          <button  onClick={handleCheckCode}>Claim</button>
-          <button onClick={openModal}>History</button>
+          <button className="btn btn-danger"  onClick={handleCheckCode}>Claim</button>
+          <button className="btn btn-success" onClick={openModal}>History</button>
         </div>
         {isValid !== null && (
           <div className="reward-result">
@@ -275,6 +275,7 @@ const Rewards = () => {
             <div>
               {randomNumber !== null && (
                 <div className="reward-image-container">
+                 
                   <img
                     src="https://img.freepik.com/free-vector/gradient-raksha-bandhan-background_23-2149508427.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais"
                     alt="Gift Reward"
@@ -284,6 +285,7 @@ const Rewards = () => {
                   <p className="reward-amount text-light fw-bold">
                     Rewards {randomNumber} Rs
                   </p>
+
                 </div>
               )}
             </div>

@@ -530,9 +530,9 @@ const handleRandomize = () => {
               width="50px"
               alt="wallet"
             />
-            <b className="text-light">
-              Income <br /> {profile.totalwin} ₹
-            </b>{" "}
+              <b className="text-light">
+    Income <br /> {profile.totalwin ? Number(profile.totalwin.toFixed(2)) : 0} ₹
+</b>{" "}
             {/* <p className="text-secondary">Income </p> */}
           </div>
         </div>

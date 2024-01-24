@@ -301,10 +301,13 @@ if (sessionDetail) {
     } else {
       // Save choices in local storage
 
+      // Calculate 2.1% of betAmount
+      const reducedBetAmount = betAmount - (betAmount * 2.1) / 100;
+
       localStorage.setItem("userChoiceColor", userChoice);
       localStorage.setItem("userChoiceNumber", userChoiceNumber);
       localStorage.setItem("userChoiceLetter", userChoiceLetter);
-      localStorage.setItem("betAmount", betAmount);
+      localStorage.setItem("betAmount", reducedBetAmount);
       // Close the modal after placing the bet
       setShowNumberModal(false);
       setShowLetterModal(false);
@@ -839,9 +842,9 @@ if (sessionDetail) {
               width="50px"
               alt="wallet"
             />
-            <b className="text-light">
-              Income <br /> {profile.totalwin} ₹
-            </b>{" "}
+              <b className="text-light">
+    Income <br /> {profile.totalwin ? Number(profile.totalwin.toFixed(2)) : 0} ₹
+</b>{" "}
             {/* <p className="text-secondary">Income </p> */}
           </div>
         </div>

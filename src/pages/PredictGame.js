@@ -534,9 +534,10 @@ const PredictGame = ({ contactInfoList }) => {
                     width="50px"
                     alt="wallet"
                   />
-                  <b className="text-light">
-                    Income <br /> {profile.totalwin} ₹
-                  </b>{" "}
+              <b className="text-light">
+    Income <br /> {profile.totalwin ? Number(profile.totalwin.toFixed(2)) : 0} ₹
+</b>
+{" "}
                   {/* <p className="text-secondary">Income </p> */}
                 </div>
               </div>
@@ -563,7 +564,7 @@ const PredictGame = ({ contactInfoList }) => {
                 </Col>
               </Row>
             </Container>
-            <Rewards/>
+            <Rewards />
             <div className="notification-area">
               <div className="notification">
                 <img
@@ -602,7 +603,8 @@ const PredictGame = ({ contactInfoList }) => {
                   <img
                     src={support} // Replace this with the path to your local image
                     alt="WhatsApp"
-                    height="56px" width="56px"
+                    height="56px"
+                    width="56px"
                     className="contact-img" // Add any additional styling classes if needed
                   />
                 </Link>
@@ -725,12 +727,12 @@ const PredictGame = ({ contactInfoList }) => {
                           </h6>
                           <ul className="dropdown-menu">
                             <li>
-                                <a
-                                  className=" dropdown-item"
-                                  href="/depositform/game"
-                                >
-                                  Deposit
-                                </a>
+                              <a
+                                className=" dropdown-item"
+                                href="/depositform/game"
+                              >
+                                Deposit
+                              </a>
                             </li>
                             <li>
                               <a
@@ -741,7 +743,8 @@ const PredictGame = ({ contactInfoList }) => {
                               </a>
                             </li>
                             <li>
-                              <a href="#staticBackdrop2"
+                              <a
+                                href="#staticBackdrop2"
                                 className="dropdown-item"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop2"
@@ -750,7 +753,8 @@ const PredictGame = ({ contactInfoList }) => {
                               </a>
                             </li>
                             <li>
-                              <a href="#staticBackdrop3"
+                              <a
+                                href="#staticBackdrop3"
                                 className="dropdown-item"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop3"
@@ -759,7 +763,8 @@ const PredictGame = ({ contactInfoList }) => {
                               </a>
                             </li>
                             <li>
-                              <a href="#staticBackdrop4"
+                              <a
+                                href="#staticBackdrop4"
                                 className="dropdown-item"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop4"

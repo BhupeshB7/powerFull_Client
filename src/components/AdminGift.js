@@ -70,14 +70,14 @@ const AdminGift = () => {
           <input type="number" value={giftTime} onChange={(e) => setGiftTime(e.target.value)} />
         </label>
         <br />
-        <button onClick={handleGenerateCode}>Get Code</button>
+        <button className='btn btn-success' onClick={handleGenerateCode}>Get Code</button>
         <br />
         {generatedCode && (
           <div>
             <p>Generated Code:</p>
             <div className='gift-code'>
             <input type="text" style={{border:'none', background:'transparent', width:'130px'}} value={generatedCode} id="generatedCode" readOnly />
-            <button style={{width:'130px'}} onClick={handleCopyCode}>{copyMessage || 'Copy Code'}</button>
+            <button className='btn btn-success' style={{width:'130px'}} onClick={handleCopyCode}>{copyMessage || 'Copy Code'}</button>
             </div>
             <p>Expiration Time: {expirationTime}</p>
           </div>

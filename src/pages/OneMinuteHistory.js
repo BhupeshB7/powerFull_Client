@@ -41,7 +41,7 @@ const OneMinuteHistory = () => {
     fetchData(); // Initial data fetch
 
     // Set up an interval to fetch data every 40 seconds
-    const intervalId = setInterval(fetchData, 40000);
+    const intervalId = setInterval(fetchData, 4000);
 
     // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
