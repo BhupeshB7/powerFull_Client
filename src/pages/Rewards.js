@@ -136,7 +136,7 @@ import ConfettiAnimation from "../components/ConfettiAnimation";
 import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 import Modal from "react-modal";
-
+import { MdClose } from 'react-icons/md';
 const Rewards = () => {
   const [code, setCode] = useState("");
   const [isValid, setIsValid] = useState(null);
@@ -333,7 +333,13 @@ const Rewards = () => {
       >
         <div className="d-flex align-tems-center" style={{flexDirection:'row-reverse'}}>
 
-        <button  className="btn btn-danger text-center p-2 m-1 fw-bold" style={{fontSize:'29px', height:'38px',width:'38px'}} onClick={closeModal}>X</button>
+        <button
+  type="button"
+  className="btn btn-danger text-center p-2 m-1 fw-bold"
+  onClick={closeModal}
+>
+  <MdClose />
+</button>
         </div>
         <table
           className="table"

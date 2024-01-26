@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
+import io from "socket.io-client";
 import LOGO from "../assets/icon.png";
 import spinner from "../assets/spinner2.gif";
 import OneMinuteHistory from "./OneMinuteHistory";
 import UserGameRecord from "./UserGameRecord";
+import OneMinuteGameTimerShow from "./OneMinuteGameTimerShow";
 
+const socket = io("https://mlm-production.up.railway.app");
+// const socket = io("http://localhost:5000");
 const ColorPridictionGame1 = () => {
   // State variables
+  const [time, setTime] = useState(120);
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [buttonNumbers, setButtonNumbers] = useState(predefinedNumbers);
   const [contentDisabled, setContentDisabled] = useState(false);
@@ -22,24 +27,30 @@ const ColorPridictionGame1 = () => {
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
   const [buttonColors, setButtonColors] = useState([]);
   const [gameResult, setGameResult] = useState("");
-  const [remainingTime, setRemainingTime] = useState(0);
-  const [isBlinking, setIsBlinking] = useState(false);
+  const [timerBlink, setTimerBlink] = useState(false);
+  const [balance, setBalance] = useState(100);
+  const [realTimeData, setRealTimeData] = useState(null);
+  const [timerCountdown, setTimerCountdown] = useState(0);
+  const [timer, setTimer] = useState("Loading...");
+  const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
   const [isVisible, setIsVisible] = useState(false);
+  //   const [message, setMessage] = useState('');
+  const [counter, setCounter] = useState(0);
   const [sessionInfo, setSessionInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const fetchSessionInfo = async () => {
     try {
       const response = await axios.get(
-        "https://mlm-production.up.railway.app/getLatestSession"
+        "http://localhost:5500/getLatestSession"
       );
       setSessionInfo(response.data);
     } catch (error) {
       console.error("Error fetching session info:", error);
-      setError("Refresh The Page");
+      setError("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -55,51 +66,36 @@ const ColorPridictionGame1 = () => {
     // Cleanup interval when the component is unmounted
     return () => clearInterval(intervalId);
   }, []);
-  const fetchTimer = async () => {
-    try {
-      const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/user/getTimer/${sessionInfo.sessionId}`
-      );
-      setRemainingTime(response.data.time);
-    } catch (error) {
-      console.error(error);
-      // Handle error (optional)
-    }
-  };
 
+  let updatedSessionNumber;
   useEffect(() => {
-    // Fetch timer data initially
-    fetchTimer();
+    const interval = setInterval(() => {
+      // Increment the counter by 1 every 60 seconds
+      setCounter((prevCounter) => prevCounter + 1);
+      const currentDate = new Date();
 
-    // Set up an interval to fetch updated data every 5 seconds (adjust as needed)
-    const intervalId = setInterval(fetchTimer, 1000);
+      // Get current month, day, and minute
+      const currentMonth = (currentDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0");
+      const currentDay = currentDate.getDate().toString().padStart(2, "0");
+      const currentMinute = currentDate
+        .getMinutes()
+        .toString()
+        .padStart(2, "0");
 
-    // Cleanup function to clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, [sessionInfo.sessionId]); // Add sessionId as a dependency
+      // Construct the new session number
+      updatedSessionNumber = `PI${currentMonth}${currentDay}${currentMinute}${counter
+        .toString()
+        .padStart(3, "0")}955`;
 
-  useEffect(() => {
-    // Set isBlinking to true when remaining time is 10 seconds or less
-    setIsBlinking(remainingTime <= 10);
+      // Display the new session number
+      // console.log(newSessionNumber);
+    }, 60000); // 60000 milliseconds = 60 seconds
 
-    // Create a timer to update remaining time every second
-    const timer = setInterval(() => {
-      setRemainingTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
-    }, 1000);
-
-    // Clear the timer when the component unmounts
-    return () => clearInterval(timer);
-  }, [remainingTime]);
-
-  const minutes = Math.floor(remainingTime / 60);
-  const seconds = remainingTime % 60;
-
-  const timerStyle = {
-    color: isBlinking ? "red" : "white",
-    fontSize: "24px",
-  };
-  //save time
-
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  }, [counter]);
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
     return tokenExpire ? parseInt(tokenExpire) : null;
@@ -156,11 +152,112 @@ const ColorPridictionGame1 = () => {
       localStorage.removeItem("userId");
     };
   }, [token]);
+
+  useEffect(() => {
+    const socket = io("https://mlm-production.up.railway.app");
+    // const socket = io("http://localhost:5000");
+
+    socket.on("testEvent", (data) => {
+      console.log("Test event received:", data);
+      // setMessage(data.message);
+    });
+
+    socket.on("timerUpdate1", (update) => {
+      // console.log("Timer update received:", update);
+      setTimer(update.countdown);
+
+      if (update.countdown === 58) {
+        console.log("Countdown is 58. Invoking handleTimerEnd()");
+        handleTimerEnd();
+      }
+    });
+
+    // Cleanup the socket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Event listener for initial data
+    socket.on("initialData1", (data) => {
+      setRealTimeData(data);
+      console.log("Initial Data:-");
+      console.log(data);
+    });
+
+    // Event listener for new data
+    socket.on("newData1", (data) => {
+      setRealTimeData(data);
+      // console.log('New Data');
+      // console.log(data);
+      localStorage.setItem("choiceColor", data.color);
+      localStorage.setItem("choiceNumber", data.number);
+      localStorage.setItem("choiceLetter", data.letter);
+      localStorage.setItem("session", data.session);
+    });
+
+    // Event listener for timer countdown
+    socket.on("timerCountdown1", (countdown) => {
+      setTimerCountdown(countdown);
+    });
+
+    // Clean up the event listeners when the component unmounts
+    return () => {
+      socket.off("initialData1");
+      socket.off("newData1");
+      socket.off("timerCountdown1");
+    };
+  }, []);
+  // Constants
+  // const sessionDetail =  localStorage.getItem("session");
+  // Original session number
+  // const sessionNumber = sessionDetail;
+
+  // // Extract non-numeric and numeric parts
+  // const nonNumericPart = sessionNumber.slice(0, -4);
+  // const numericPart = parseInt(sessionNumber.slice(-4), 10);
+
+  // // Increment the numeric part by 1
+  // const newNumericPart = numericPart + 1;
+
+  // // Combine the parts to get the new session number
+  // const newSessionNumber = nonNumericPart + newNumericPart.toString().padStart(4, '0');
+  const sessionDetail = localStorage.getItem("session");
+  let newSessionNumber;
+  if (sessionDetail) {
+    // Original session number
+    const sessionNumber = sessionDetail;
+
+    // Extract non-numeric and numeric parts
+    const nonNumericPart = sessionNumber.slice(0, -4);
+    const numericPart = parseInt(sessionNumber.slice(-4), 10);
+
+    // Increment the numeric part by 1
+    const newNumericPart = numericPart + 1;
+
+    // Combine the parts to get the new session number
+    newSessionNumber =
+      nonNumericPart + newNumericPart.toString().padStart(4, "0");
+
+    // Use newSessionNumber as needed
+    console.log(newSessionNumber);
+  } else {
+    // Handle the case where sessionDetail is not found
+    newSessionNumber = updatedSessionNumber;
+  }
+
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
   // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const predefinedColors1 = ["green", "red", "violet"];
 
+  // Styles
+  const timerStyle = {
+    fontSize: timerBlink && time <= 5 ? "40px" : "19px",
+    color: timerBlink && time <= 5 ? "red" : "white",
+    animation: timerBlink && time <= 5 ? "blink 1s infinite" : "none",
+  };
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
@@ -186,29 +283,27 @@ const ColorPridictionGame1 = () => {
 
     setButtonColors(randomColors);
   }, []); // The empty dependency array ensures this effect runs only once
+  useEffect(() => {
+    // Update the timer logic as needed
+    // For demonstration purposes, this example assumes that timer is a number
+    // and updates it every second
+    const intervalId = setInterval(() => {
+      setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+    }, 1000);
+
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
-    // Check if the remainingTime is less than 7, and update the showModal state accordingly
-    if (remainingTime < 7) {
+    // Check if the timer is less than 7, and update the showModal state accordingly
+    if (timer < 7) {
       setShowModal(false);
       setShowLetterModal(false);
       setShowNumberModal(false);
     }
-  }, [remainingTime]);
+  }, [timer]);
   // Listen to the scroll event to show/hide the button
-  useEffect(()=>{
-  // Fetch data initially
-  if(remainingTime===2){
-    try {
-      const response = axios.post('https://mlm-production.up.railway.app/oneMinuteuserResult',{
-      sessionId:sessionInfo.sessionId,
-      userId:data.userId
-    });
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  },[remainingTime])
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 100) {
@@ -227,7 +322,6 @@ const ColorPridictionGame1 = () => {
   // Functions
   const handleBet = async () => {
     if (betAmount < 1) {
-      alert(remainingTime,sessionInfo.sessionId,data.userId)
       alert("Bet Amount Should be greater than 1Rs.😌");
       // handleAlert("Bet Amount Should be greater than 1Rs.😌");
       setShowModal(false);
@@ -258,22 +352,6 @@ const ColorPridictionGame1 = () => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://mlm-production.up.railway.app/oneMinuteHistory",
-          {
-            userId: data.userId,
-            betAmount: reducedBetAmount,
-            sessionId: sessionInfo.sessionId,
-            userChoice: userChoice,
-            userChoiceLetter: userChoiceLetter,
-            userChoiceNumber: userChoiceNumber,
-          }
-        );
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-      try {
-        const response = await axios.post(
           "https://mlm-production.up.railway.app/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
@@ -288,6 +366,10 @@ const ColorPridictionGame1 = () => {
       } catch (error) {
         console.error(error);
       }
+      // console.log(userChoice);
+      // console.log(userChoiceNumber);
+      // console.log(userChoiceLetter);
+      // Reset the game after 10 seconds
       setTimeout(() => {
         setGameResult("");
         setUserChoice("");
@@ -303,7 +385,7 @@ const ColorPridictionGame1 = () => {
   };
 
   const handleNumberSelect = (color, buttonColor) => {
-    if (remainingTime < 40) {
+    if (timer < 40) {
       // alert(timer)
       setShowNumberModal(false);
       setShowLetterModal(false);
@@ -318,6 +400,18 @@ const ColorPridictionGame1 = () => {
     setUserChoiceButtonNumber(buttonColor);
     setShowLetterModal(true);
   };
+
+  //   const generateAndSaveRandomData = () => {
+  //     const randomData = {
+  //       color: getRandomColor(),
+  //       number: getRandomNumber(),
+  //       size: getRandomLetter(),
+  //       timestamp: new Date(),
+  //     };
+  //     console.log(randomData);
+  //     saveToMongoDB(randomData);
+  //   };
+  // console.log(data.userId);
   const incrementBetAmount = () => {
     setBetAmount((prevAmount) => prevAmount + 5);
   };
@@ -348,7 +442,117 @@ const ColorPridictionGame1 = () => {
   };
 
   const gameId = localStorage.getItem("GameUserId");
+  const handleTimerEnd = async () => {
+    console.log("Invoked function handleTimerEnd Part1");
+    try {
+      console.log("Invoked function handleTimerEnd");
+      // Retrieve user choices from local storage
+      const userChoiceColor = localStorage.getItem("userChoiceColor");
+      const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+      const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+      const betAmount = localStorage.getItem("betAmount");
+      const choiceColor = localStorage.getItem("choiceColor");
+      const choiceNumber = localStorage.getItem("choiceNumber");
+      const choiceLetter = localStorage.getItem("choiceLetter");
+      const gameId = localStorage.getItem("GameUserId");
+      await sendGameRecord(gameId);
+      // Check for matches
+      if (
+        userChoiceColor === choiceColor ||
+        userChoiceNumber === choiceNumber ||
+        userChoiceLetter === choiceLetter
+      ) {
+        let multiplier = 1;
 
+        // Determine multiplier based on the type of match
+        if (
+          userChoiceColor === choiceColor ||
+          userChoiceLetter === choiceLetter
+        ) {
+          multiplier = 2;
+        } else if (userChoiceNumber === choiceNumber) {
+          multiplier = 4;
+        }
+
+        // Update balance
+        const currentBalance = parseFloat(betAmount) || 0;
+        const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
+        const gameId = localStorage.getItem("GameUserId");
+
+        // Make the API call to update balance
+        // console.log("Before Wallet updated", gameId);
+        // await updateBalance(gameId, winnings);
+
+        // Log a message indicating successful wallet update
+        // console.log("Wallet updated successfully!");
+      }
+
+      // Remove user choices from local storage
+      clearUserChoices();
+    } catch (error) {
+      clearUserChoices();
+      console.error("An error occurred:", error);
+    }
+  };
+  const sendGameRecord = async (gameID) => {
+    console.log("Game Record called");
+    const userId = gameID; // Replace with the actual user id
+    const userChoiceLetter = localStorage.getItem("userChoiceLetter");
+    const userChoiceNumber = localStorage.getItem("userChoiceNumber");
+    const userChoiceColor = localStorage.getItem("userChoiceColor");
+    const betAmount = localStorage.getItem("betAmount");
+    const choiceLetter = localStorage.getItem("choiceLetter");
+    const choiceNumber = localStorage.getItem("choiceNumber");
+    const choiceColor = localStorage.getItem("choiceColor");
+    const session = localStorage.getItem("session");
+
+    if (userChoiceLetter || userChoiceColor || userChoiceNumber) {
+      try {
+        const response = await axios.post(
+          "https://mlm-production.up.railway.app/api/gameProfile/checkChoices",
+          {
+            userId,
+            userChoiceLetter,
+            userChoiceNumber,
+            userChoiceColor,
+            betAmount,
+            choiceLetter,
+            choiceNumber,
+            choiceColor,
+            session,
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    localStorage.removeItem("userChoiceColor");
+    localStorage.removeItem("userChoiceNumber");
+    localStorage.removeItem("userChoiceLetter");
+    localStorage.removeItem("betAmount");
+    localStorage.removeItem("choiceColor");
+    localStorage.removeItem("choiceNumber");
+    localStorage.removeItem("choiceLetter");
+    clearUserChoices();
+  };
+
+  const clearUserChoices = () => {
+    // Remove user choices from local storage
+    console.log("clear user choice");
+    localStorage.removeItem("userChoiceColor");
+    localStorage.removeItem("userChoiceNumber");
+    localStorage.removeItem("userChoiceLetter");
+    localStorage.removeItem("betAmount");
+    localStorage.removeItem("choiceColor");
+    localStorage.removeItem("choiceNumber");
+    localStorage.removeItem("choiceLetter");
+  };
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
 
   if (isLoading) {
     return (
@@ -389,6 +593,23 @@ const ColorPridictionGame1 = () => {
   const handleBack = () => {
     window.location.href = "/game/colorpridiction";
   };
+  const currentDate = new Date();
+  const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Get current month with leading zero
+  const currentDay = currentDate.getDate().toString().padStart(2, "0"); // Get current day with leading zero
+  const currentMinutes = currentDate.getMinutes().toString().padStart(2, "0"); // Get current minutes with leading zero
+  const sessionPrefix = "PI11-";
+  const session = `${sessionPrefix}${currentMonth}${currentDay}-00${currentMinutes}`;
+  const timerSeconds = timer; // Replace this with your actual timer value
+
+  // Convert seconds to minutes and seconds
+  const minutes = Math.floor(timerSeconds / 60);
+  const seconds = timerSeconds % 60;
+  // Format minutes and seconds as two digits
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
+
+  // Display the formatted minutes and seconds
+  console.log(`${formattedMinutes}:${formattedSeconds}`);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -562,7 +783,7 @@ const ColorPridictionGame1 = () => {
         `}
                 </style>
                 <div className="timer">
-                  {remainingTime <= 5 ? (
+                  {timer <= 10 ? (
                     <div className="blur-background">
                       <div className="remaining" style={{ display: "flex" }}>
                         <h1
@@ -570,13 +791,10 @@ const ColorPridictionGame1 = () => {
                           style={{ fontSize: "66px", fontWeight: "bold" }}
                         >
                           {/* {`00:${timer.toString().padStart(2, "0")}`} */}
-                          <p className="text-center text-light">
-                            <b style={timerStyle}>
-                              {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-                            </b>{" "}
-                            (MM:SS)
-                          </p>
-                        </h1>
+                          <OneMinuteGameTimerShow
+                            sessionId={sessionInfo.sessionId}
+                          />
+                          </h1>
                       </div>
                     </div>
                   ) : null}
@@ -591,13 +809,10 @@ const ColorPridictionGame1 = () => {
                       {loading ? (
                         <p>Loading...</p>
                       ) : error ? (
-                        <p className="text-danger">{error}</p>
+                        <p>{error}</p>
                       ) : (
                         <>
-                          <p className="text-warning">
-                            {" "}
-                            {sessionInfo.sessionId}
-                          </p>
+                          <p className="text-warning"> {sessionInfo.sessionId}</p>
                         </>
                       )}
                     </div>
@@ -608,7 +823,7 @@ const ColorPridictionGame1 = () => {
                       {" "}
                       <b
                         style={
-                          remainingTime <= 1
+                          timer <= 10
                             ? {
                                 display: "none",
                                 fontSize: "30px !important",
@@ -617,12 +832,9 @@ const ColorPridictionGame1 = () => {
                         }
                       >
                         {/* {formattedMinutes}:{formattedSeconds} */}
-                        <p className="text-center text-light">
-                          <b style={timerStyle}>
-                            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-                          </b>{" "}
-                          (MM:SS)
-                        </p>
+                        <OneMinuteGameTimerShow
+                            sessionId={sessionInfo.sessionId}
+                          />
                       </b>
                     </h1>
                   </div>
@@ -663,6 +875,16 @@ const ColorPridictionGame1 = () => {
                 </button>
               ))}
             </div>
+
+            {/* <div
+              style={{
+                backgroundColor: targetColor.toLowerCase(),
+                width: "50px",
+                height: "50px",
+                display: "inline-block",
+                margin: "5px",
+              }}
+            /> */}
           </Col>
         </Row>
         {/*Number-start  */}
@@ -677,6 +899,44 @@ const ColorPridictionGame1 = () => {
                 pointerEvents: contentDisabled ? "none" : "auto",
               }}
             >
+              {/* <div className="color-options number-options">
+                {predefinedNumbers.map((color, index) => (
+                  <button
+                    key={color}
+                    style={{
+                      backgroundColor: contentDisabled
+                        ? "#ffe7d9"
+                        : buttonColors[index],
+                      margin: "5px",
+                      border: contentDisabled
+                        ? "2px solid gray"
+                        : "1.5px solid transparent",
+                      color: "white",
+                      fontWeight: "bold",
+                      borderRadius: "50%",
+                      width: "53px",
+                      height: "53px",
+                      boxShadow: contentDisabled
+                        ? "0 0 0 2px red"
+                        : `0 0 0 1px ${buttonColors[index]}`,
+                      backgroundClip: "content-box",
+                    }}
+                    onClick={() =>
+                      handleNumberSelect(color, buttonColors[index])
+                    }
+                    // className="game_button"
+                    className={`game_button ${color === "5" ||color ==="0" ? "half-circle" : ""}`}
+
+                    disabled={gameResult !== ""}
+                  >
+                    <div className={`${color === "5" ||color ==="0" ?"number-overlay" : ""}`}
+>
+
+                    {color}
+                    </div>
+                  </button>
+                ))}
+              </div> */}
               <div className="color-options number-options">
                 {buttonNumbers.map((number, index) => (
                   <button

@@ -28,7 +28,7 @@ const OneMinuteHistory = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/randomData1?page=${currentPage}`
+        `https://mlm-production.up.railway.app/oneMinuteResultHistory?page=${currentPage}`
       );
       setData(response.data.data);
       setTotalPages(response.data.totalPages);
@@ -77,7 +77,7 @@ const OneMinuteHistory = () => {
           >
             {data.map((item) => (
               <tr key={item._id}>
-                <td>{item.session}</td>
+                <td>{item.sessionIds}</td>
                 <td>{item.number}</td>
                 {/* <td>{item.color}</td> */}
                 <td>{item.letter}</td>

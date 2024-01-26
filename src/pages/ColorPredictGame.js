@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
-import io from "socket.io-client";
 import LOGO from "../assets/icon.png";
 import spinner from "../assets/spinner2.gif";
-import ThreeMinuteHistory from "./ThreeMinuteHistory";
+import OneMinuteHistory from "./ThreeMinuteHistory";
+import ThreeMinuteGameRecord from "./ThreeMinuteGameRecord";
 
-const socket = io("https://mlm-production.up.railway.app");
-// const socket = io("http://localhost:5000");
 const ColorPredictGame = () => {
   // State variables
-  const [time, setTime] = useState(120);
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const [buttonNumbers, setButtonNumbers] = useState(predefinedNumbers);
   const [contentDisabled, setContentDisabled] = useState(false);
@@ -25,17 +22,83 @@ const ColorPredictGame = () => {
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
   const [buttonColors, setButtonColors] = useState([]);
   const [gameResult, setGameResult] = useState("");
-  const [timerBlink, setTimerBlink] = useState(false);
-  const [balance, setBalance] = useState(100);
-  const [realTimeData, setRealTimeData] = useState(null);
-  const [timerCountdown, setTimerCountdown] = useState(0);
-  const [timer, setTimer] = useState("Loading...");
-  const [isTokenValid, setIsTokenValid] = useState(true);
+  const [remainingTime, setRemainingTime] = useState(0);
+  const [isBlinking, setIsBlinking] = useState(false);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
   const [isVisible, setIsVisible] = useState(false);
-  //   const [message, setMessage] = useState('');
+  const [sessionInfo, setSessionInfo] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const fetchSessionInfo = async () => {
+    try {
+      const response = await axios.get(
+        "https://mlm-production.up.railway.app/three/getLatestSession"
+      );
+      setSessionInfo(response.data);
+    } catch (error) {
+      console.error("Error fetching session info:", error);
+      setError("Refresh The Page");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch data initially
+    fetchSessionInfo();
+
+    // Fetch updated data every 10 seconds
+    const intervalId = setInterval(fetchSessionInfo, 1 * 1000);
+
+    // Cleanup interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, []);
+  const fetchTimer = async () => {
+    try {
+      const response = await axios.get(
+        `https://mlm-production.up.railway.app/three/api/user/getTimer/${sessionInfo.sessionId}`
+      );
+      setRemainingTime(response.data.time);
+    } catch (error) {
+      console.error(error);
+      // Handle error (optional)
+    }
+  };
+
+  useEffect(() => {
+    // Fetch timer data initially
+    fetchTimer();
+
+    // Set up an interval to fetch updated data every 5 seconds (adjust as needed)
+    const intervalId = setInterval(fetchTimer, 1000);
+
+    // Cleanup function to clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [sessionInfo.sessionId]); // Add sessionId as a dependency
+
+  useEffect(() => {
+    // Set isBlinking to true when remaining time is 10 seconds or less
+    setIsBlinking(remainingTime <= 10);
+
+    // Create a timer to update remaining time every second
+    const timer = setInterval(() => {
+      setRemainingTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+    }, 1000);
+
+    // Clear the timer when the component unmounts
+    return () => clearInterval(timer);
+  }, [remainingTime]);
+
+  const minutes = Math.floor(remainingTime / 60);
+  const seconds = remainingTime % 60;
+
+  const timerStyle = {
+    color: isBlinking ? "red" : "white",
+    fontSize: "24px",
+  };
+  //save time
 
   const getTokenExpireTime = () => {
     const tokenExpire = localStorage.getItem("tokenExpire");
@@ -67,111 +130,37 @@ const ColorPredictGame = () => {
           }
         );
         const result = await response.json();
-        // const userLevel = getUserLevel(result.level);
-        // setLevel(userLevel);
 
-        if (result.role) {
-          const userrole = result.role;
-
-          if (userrole === "admin") {
-            localStorage.setItem("check", "nfwnwen");
-          }
+        // Store userId in localStorage
+        if (result.userId) {
+          localStorage.setItem("GameUserId", result.userId);
         }
-        if (result.userId) setData(result);
 
+        // Handle role-specific logic
+        if (result.role === "admin") {
+          localStorage.setItem("check", "nfwnwen");
+        }
+
+        setData(result);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchData();
+
+    // Cleanup function
+    return () => {
+      // Remove userId from localStorage when component unmounts
+      localStorage.removeItem("userId");
+    };
   }, [token]);
-  useEffect(() => {
-    const socket = io("https://mlm-production.up.railway.app");
-    // const socket = io("http://localhost:5000");
-
-    socket.on("testEvent", (data) => {
-      console.log("Test event received:", data);
-      // setMessage(data.message);
-    });
-
-    socket.on("timerUpdate", (update) => {
-      // console.log("Timer update received:", update);
-      setTimer(update.countdown);
-      // console.log(update.countdown)
-  
-      // Check if the time is 02:57 (177 seconds)
-      const secondsUntil0257 = 2 * 60 * 60 + 57 * 60;
-      if (update.countdown === secondsUntil0257) {
-          console.log("Countdown is 02:57. Invoking handleTimerEnd()");
-          handleTimerEnd();
-      }
-  });
-
-    // Cleanup the socket connection when the component unmounts
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    // Event listener for initial data
-    socket.on("initialData", (data) => {
-      setRealTimeData(data);
-      console.log('Initial Data:-');
-      console.log(data);
-     
-    });
-
-    // Event listener for new data
-    socket.on("newData", (data) => {
-      setRealTimeData(data);
-      // console.log('New Data');
-      // console.log(data);
-      localStorage.setItem('choiceColor', data.color);
-      localStorage.setItem('choiceNumber', data.number);
-      localStorage.setItem('choiceLetter', data.letter);
-    });
-
-    // Event listener for timer countdown
-    socket.on("timerCountdown", (countdown) => {
-      setTimerCountdown(countdown);
-    });
-
-    // Clean up the event listeners when the component unmounts
-    return () => {
-      socket.off("initialData");
-      socket.off("newData");
-      socket.off("timerCountdown");
-    };
-  }, []);
-  // Listen to the scroll event to show/hide the button
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.pageYOffset > 100) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  // Constants
   const predefinedColors = ["Violet", "Red", "Green"];
   const predefinedLetter = ["Small", "Big"];
+  // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const predefinedColors1 = ["green", "red", "violet"];
 
-  // Styles
-  const timerStyle = {
-    fontSize: timerBlink && time <= 5 ? "40px" : "19px",
-    color: timerBlink && time <= 5 ? "red" : "white",
-    animation: timerBlink && time <= 5 ? "blink 1s infinite" : "none",
-  };
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
@@ -179,6 +168,7 @@ const ColorPredictGame = () => {
       );
       const result = response.data;
       setProfile(result);
+
       // console.log(result);
     } catch (error) {
       console.error(error);
@@ -196,29 +186,48 @@ const ColorPredictGame = () => {
 
     setButtonColors(randomColors);
   }, []); // The empty dependency array ensures this effect runs only once
-  useEffect(() => {
-    // Update the timer logic as needed
-    // For demonstration purposes, this example assumes that timer is a number
-    // and updates it every second
-    const intervalId = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
-    }, 1000);
-
-    // Clean up the interval when the component is unmounted
-    return () => clearInterval(intervalId);
-  }, []);
 
   useEffect(() => {
-    // Check if the timer is less than 7, and update the showModal state accordingly
-    if (timer < 7) {
+    // Check if the remainingTime is less than 7, and update the showModal state accordingly
+    if (remainingTime < 7) {
       setShowModal(false);
       setShowLetterModal(false);
       setShowNumberModal(false);
-    } 
-  }, [timer]);
+    }
+  }, [remainingTime]);
+  // Listen to the scroll event to show/hide the button
+  useEffect(()=>{
+  // Fetch data initially
+  if(remainingTime===2){
+    try {
+      const response = axios.post('https://mlm-production.up.railway.app/three/MinuteuserResult',{
+      sessionId:sessionInfo.sessionId,
+      userId:data.userId
+    });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  },[remainingTime])
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   // Functions
   const handleBet = async () => {
     if (betAmount < 1) {
+      alert(remainingTime,sessionInfo.sessionId,data.userId)
       alert("Bet Amount Should be greater than 1Rs.😌");
       // handleAlert("Bet Amount Should be greater than 1Rs.😌");
       setShowModal(false);
@@ -235,15 +244,34 @@ const ColorPredictGame = () => {
     } else {
       // Save choices in local storage
 
-      localStorage.setItem("userChoice", userChoice);
+      // Calculate 2.1% of betAmount
+      const reducedBetAmount = betAmount - (betAmount * 2.1) / 100;
+
+      localStorage.setItem("userChoiceColor", userChoice);
       localStorage.setItem("userChoiceNumber", userChoiceNumber);
       localStorage.setItem("userChoiceLetter", userChoiceLetter);
-      localStorage.setItem("betAmount", betAmount);
+      localStorage.setItem("betAmount", reducedBetAmount);
       // Close the modal after placing the bet
       setShowNumberModal(false);
       setShowLetterModal(false);
       setShowModal(false);
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
+      try {
+        const response = await axios.post(
+          "https://mlm-production.up.railway.app/three/oneMinuteHistory",
+          {
+            userId: data.userId,
+            betAmount: reducedBetAmount,
+            sessionId: sessionInfo.sessionId,
+            userChoice: userChoice,
+            userChoiceLetter: userChoiceLetter,
+            userChoiceNumber: userChoiceNumber,
+          }
+        );
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
       try {
         const response = await axios.post(
           "https://mlm-production.up.railway.app/api/gameProfile/startGame",
@@ -260,10 +288,6 @@ const ColorPredictGame = () => {
       } catch (error) {
         console.error(error);
       }
-      // console.log(userChoice);
-      // console.log(userChoiceNumber);
-      // console.log(userChoiceLetter);
-      // Reset the game after 10 seconds
       setTimeout(() => {
         setGameResult("");
         setUserChoice("");
@@ -279,27 +303,21 @@ const ColorPredictGame = () => {
   };
 
   const handleNumberSelect = (color, buttonColor) => {
+    if (remainingTime < 40) {
+      // alert(timer)
+      setShowNumberModal(false);
+      setShowLetterModal(false);
+      setShowModal(false);
+    }
     setUserChoiceNumber(color);
     setUserChoiceButtonNumber(buttonColor);
     setShowNumberModal(true);
   };
-
   const handleLetterSelect = (letter, buttonColor) => {
     setUserChoiceLetter(letter);
     setUserChoiceButtonNumber(buttonColor);
     setShowLetterModal(true);
   };
-
-  //   const generateAndSaveRandomData = () => {
-  //     const randomData = {
-  //       color: getRandomColor(),
-  //       number: getRandomNumber(),
-  //       size: getRandomLetter(),
-  //       timestamp: new Date(),
-  //     };
-  //     console.log(randomData);
-  //     saveToMongoDB(randomData);
-  //   };
   const incrementBetAmount = () => {
     setBetAmount((prevAmount) => prevAmount + 5);
   };
@@ -328,77 +346,10 @@ const ColorPredictGame = () => {
       setBetAmount(betAmount * multiplier);
     }
   };
-  const handleTimerEnd = async () => {
-    // Retrieve user choices from local storage
-    const userChoice = localStorage.getItem("userChoice");
-    const userChoiceNumber = localStorage.getItem("userChoiceNumber");
-    const userChoiceLetter = localStorage.getItem("userChoiceLetter");
-    const betAmount = localStorage.getItem("betAmount");
-    const choiceColor = localStorage.getItem("choiceColor");
-    const choiceNumber = localStorage.getItem("choiceNumber");
-    const choiceLetter = localStorage.getItem("choiceLetter");  
-    // console.log(userChoiceLetter);
-    // console.log(betAmount);
-    // console.log(choiceColor);
-    // console.log(choiceNumber);
-    // console.log(choiceLetter);
-    // localStorage.removeItem("userChoice");
-    // localStorage.removeItem("userChoiceNumber");
-    // localStorage.removeItem("userChoiceLetter");
-    // localStorage.removeItem("betAmount");
-    // localStorage.removeItem("choiceColor");
-    // localStorage.removeItem("choiceNumber");
-    // localStorage.removeItem("choiceLetter");
-    // Check for matches
-    if (
-      userChoice === choiceColor ||
-      userChoiceNumber === choiceNumber ||
-      userChoiceLetter === choiceLetter
-    ) {
-      let multiplier = 1;
 
-      // Determine multiplier based on the type of match
-      if (
-        userChoice === choiceColor ||
-        userChoiceLetter === choiceLetter
-      ) {
-        multiplier = 2;
-      } else if (userChoiceNumber === choiceNumber) {
-        multiplier = 4;
-      }
+  const gameId = localStorage.getItem("GameUserId");
 
-      // Update balance
-      const currentBalance = parseFloat(localStorage.getItem("betAmount")) || 0;
-      const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
-      try {
-        const response = await axios.post(
-          "https://mlm-production.up.railway.app/api/gameProfile/winningGame",
-          {
-            userId: data.userId, // Make sure userId is defined or passed as a prop
-            winnings: winnings,
-          }
-        );
 
-        // Assuming the response contains updated balance data
-        const updatedTotalWin = response.data.totalwin;
-        // Make sure you have defined setProfile elsewhere
-        setProfile({ ...profile, totalwin: updatedTotalWin });
-      } catch (error) {
-        console.error(error);
-      }
-
-      // Remove user choices from local storage
-      // localStorage.setItem("balance", winnings.toString());
-    }
-    localStorage.removeItem("userChoice");
-    localStorage.removeItem("userChoiceNumber");
-    localStorage.removeItem("userChoiceLetter");
-    localStorage.removeItem("betAmount");
-    localStorage.removeItem("choiceColor");
-    localStorage.removeItem("choiceNumber");
-    localStorage.removeItem("choiceLetter");
-    // Update the balance in local storage
-  };
   if (isLoading) {
     return (
       <h6
@@ -438,56 +389,46 @@ const ColorPredictGame = () => {
   const handleBack = () => {
     window.location.href = "/game/colorpridiction";
   };
-  const currentDate = new Date();
-const currentMonth = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Get current month with leading zero
-const currentDay = currentDate.getDate().toString().padStart(2, '0'); // Get current day with leading zero
-const currentMinutes = currentDate.getMinutes().toString().padStart(2, '0'); // Get current minutes with leading zero
-const sessionPrefix = 'PI11-';
-const session = `${sessionPrefix}${currentMonth}${currentDay}-00${currentMinutes}`;
-const timerSeconds = timer; // Replace this with your actual timer value
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Adds smooth scrolling animation
+    });
+  };
+  const handleRandomize = () => {
+    // Show numbers in a random order for 3 seconds
+    const initialShuffle = [...predefinedNumbers].sort(
+      () => Math.random() - 0.5
+    );
+    setButtonNumbers(initialShuffle);
 
-// Convert seconds to minutes and seconds
-const minutes = Math.floor(timerSeconds / 60);
-const seconds = timerSeconds % 60;
-// Format minutes and seconds as two digits
-const formattedMinutes = String(minutes).padStart(2, '0');
-const formattedSeconds = String(seconds).padStart(2, '0');
-
-// Display the formatted minutes and seconds
-console.log(`${formattedMinutes}:${formattedSeconds}`);
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth", // Adds smooth scrolling animation
-  });
-};
-const handleRandomize = () => {
-  // Show numbers in a random order for 3 seconds
-  const initialShuffle = [...predefinedNumbers].sort(() => Math.random() - 0.5);
-  setButtonNumbers(initialShuffle);
-
-  // Vibrate for 3 seconds
-  if ("vibrate" in navigator) {
-    navigator.vibrate([1000, 500, 1000]);
-  }
-
-  // Rearrange the numbers randomly after 3 seconds
-  setTimeout(() => {
-    const shuffledNumbers = [...predefinedNumbers].sort(() => Math.random() - 0.5);
-    const shuffleColors = [...predefinedColors1].sort(() => Math.random() - 0.5);
-
-    // Set the rearranged numbers and enable content
-    setButtonNumbers(shuffledNumbers);
-
-    // Automatically select the first number after rearranging
-    handleNumberSelect(shuffledNumbers[0], shuffleColors[0]);
-
-    // Stop vibrating
+    // Vibrate for 3 seconds
     if ("vibrate" in navigator) {
-      navigator.vibrate(0);
+      navigator.vibrate([1000, 500, 1000]);
     }
-  }, 2000); // Total duration of vibration plus the time for rearrangement
-};
+
+    // Rearrange the numbers randomly after 3 seconds
+    setTimeout(() => {
+      const shuffledNumbers = [...predefinedNumbers].sort(
+        () => Math.random() - 0.5
+      );
+      const shuffleColors = [...predefinedColors1].sort(
+        () => Math.random() - 0.5
+      );
+
+      // Set the rearranged numbers and enable content
+      setButtonNumbers(shuffledNumbers);
+
+      // Automatically select the first number after rearranging
+      handleNumberSelect(shuffledNumbers[0], shuffleColors[0]);
+
+      // Stop vibrating
+      if ("vibrate" in navigator) {
+        navigator.vibrate(0);
+      }
+    }, 2000); // Total duration of vibration plus the time for rearrangement
+  };
+
   return (
     <div className="threeMinuteGame colorbackGround">
       <div
@@ -503,8 +444,8 @@ const handleRandomize = () => {
         />
       </div>
       <div className="logo">
-              <img src={LOGO} alt="logo" height="70px" width="100px" />
-            </div>
+        <img src={LOGO} alt="logo" height="70px" width="100px" />
+      </div>
       <div className="game_box">
         <div
           className="d-flex justify-content-center  align-items-center buttonDW"
@@ -530,9 +471,10 @@ const handleRandomize = () => {
               width="50px"
               alt="wallet"
             />
-              <b className="text-light">
-    Income <br /> {profile.totalwin ? Number(profile.totalwin.toFixed(2)) : 0} ₹
-</b>{" "}
+            <b className="text-light">
+              Income <br />{" "}
+              {profile.totalwin ? Number(profile.totalwin.toFixed(2)) : 0} ₹
+            </b>{" "}
             {/* <p className="text-secondary">Income </p> */}
           </div>
         </div>
@@ -577,12 +519,23 @@ const handleRandomize = () => {
           </Col>
         </Row>
       </Container>
+
       {/* Your game UI components go here */}
       <Container className="m-auto d-flex justify-content-center mt-2">
-
-          <h6 className="text-light p-2" style={{ textAlign: "center", border:'1px solid orange', color:'white', padding:'10px 14px', width:'140px', borderTopRightRadius:'20px', borderBottomLeftRadius:'20px' }}>
-                3 Minutes
-              </h6>
+        <h6
+          className="text-light p-2"
+          style={{
+            textAlign: "center",
+            border: "1px solid orange",
+            color: "white",
+            padding: "10px 14px",
+            width: "140px",
+            borderTopRightRadius: "20px",
+            borderBottomLeftRadius: "20px",
+          }}
+        >
+          3 Minutes
+        </h6>
       </Container>
       <Container className="pt-5">
         <Row style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -591,7 +544,7 @@ const handleRandomize = () => {
               <h6 className="text-light p-2" style={{ textAlign: "end" }}>
                 Left time to buy
               </h6>
-              
+
               <div>
                 <style>
                   {`
@@ -609,13 +562,21 @@ const handleRandomize = () => {
         `}
                 </style>
                 <div className="timer">
-                  {timer <= 5 ? (
+                  {remainingTime <= 5 ? (
                     <div className="blur-background">
                       <div className="remaining" style={{ display: "flex" }}>
                         <h1
                           className="text-danger"
                           style={{ fontSize: "66px", fontWeight: "bold" }}
-                        >{`00:${timer.toString().padStart(2, "0")}`}</h1>
+                        >
+                          {/* {`00:${timer.toString().padStart(2, "0")}`} */}
+                          <p className="text-center text-light">
+                            <b style={timerStyle}>
+                              {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+                            </b>{" "}
+                            (MM:SS)
+                          </p>
+                        </h1>
                       </div>
                     </div>
                   ) : null}
@@ -625,12 +586,29 @@ const handleRandomize = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <p className="text-warning">{session}</p>
+                    {/* new session */}
+                    <div>
+                      {loading ? (
+                        <p>Loading...</p>
+                      ) : error ? (
+                        <p className="text-danger">{error}</p>
+                      ) : (
+                        <>
+                          <p className="text-warning">
+                            {" "}
+                            {sessionInfo.sessionId}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    {/* new session */}
+                    {/* <p className="text-warning">{session}</p> */}
+                    {/* <p className="text-warning">{newSessionNumber}</p> */}
                     <h1 style={{ color: "#bbb" }}>
                       {" "}
                       <b
                         style={
-                          timer <= 5
+                          remainingTime <= 1
                             ? {
                                 display: "none",
                                 fontSize: "30px !important",
@@ -638,7 +616,13 @@ const handleRandomize = () => {
                             : timerStyle
                         }
                       >
-                        {formattedMinutes}:{formattedSeconds}
+                        {/* {formattedMinutes}:{formattedSeconds} */}
+                        <p className="text-center text-light">
+                          <b style={timerStyle}>
+                            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+                          </b>{" "}
+                          (MM:SS)
+                        </p>
                       </b>
                     </h1>
                   </div>
@@ -679,16 +663,6 @@ const handleRandomize = () => {
                 </button>
               ))}
             </div>
-
-            {/* <div
-              style={{
-                backgroundColor: targetColor.toLowerCase(),
-                width: "50px",
-                height: "50px",
-                display: "inline-block",
-                margin: "5px",
-              }}
-            /> */}
           </Col>
         </Row>
         {/*Number-start  */}
@@ -703,10 +677,10 @@ const handleRandomize = () => {
                 pointerEvents: contentDisabled ? "none" : "auto",
               }}
             >
-              {/* <div className="color-options number-options">
-                {predefinedNumbers.map((color, index) => (
+              <div className="color-options number-options">
+                {buttonNumbers.map((number, index) => (
                   <button
-                    key={color}
+                    key={number}
                     style={{
                       backgroundColor: contentDisabled
                         ? "#ffe7d9"
@@ -726,52 +700,23 @@ const handleRandomize = () => {
                       backgroundClip: "content-box",
                     }}
                     onClick={() =>
-                      handleNumberSelect(color, buttonColors[index])
+                      handleNumberSelect(number, buttonColors[index])
                     }
-                    // className="game_button"
-                    className={`game_button ${color === "5" ||color ==="0" ? "half-circle" : ""}`}
-
-                    disabled={gameResult !== ""}
+                    className={`game_button ${
+                      number === "5" || number === "0" ? "half-circle" : ""
+                    }`}
+                    disabled={contentDisabled || gameResult !== ""}
                   >
-                    <div className={`${color === "5" ||color ==="0" ?"number-overlay" : ""}`}
->
-
-                    {color}
+                    <div
+                      className={`${
+                        number === "5" || number === "0" ? "number-overlay" : ""
+                      }`}
+                    >
+                      {number}
                     </div>
                   </button>
                 ))}
-              </div> */}
-               <div className="color-options number-options">
-        {buttonNumbers.map((number, index) => (
-          <button
-            key={number}
-            style={{
-              backgroundColor: contentDisabled ? "#ffe7d9" : buttonColors[index],
-              margin: "5px",
-              border: contentDisabled ? "2px solid gray" : "1.5px solid transparent",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: "50%",
-              width: "45px",
-              height: "45px",
-              boxShadow: contentDisabled
-                ? "0 0 0 2px red"
-                : `0 0 0 1px ${buttonColors[index]}`,
-              backgroundClip: "content-box",
-            }}
-            onClick={() =>
-              handleNumberSelect(number, buttonColors[index])
-            }
-            className={`game_button ${number === "5" || number === "0" ? "half-circle" : ""}`}
-            disabled={contentDisabled || gameResult !== ""}
-          >
-            <div className={`${number === "5" || number === "0" ? "number-overlay" : ""}`}>
-              {number}
-            </div>
-          </button>
-        ))}
-      </div>
-
+              </div>
             </div>
             <div
               className={`mt-1 game_choice_color game_choice_Number  ${
@@ -826,32 +771,42 @@ const handleRandomize = () => {
               </div>
             </div>
             <div className="p-1 betAmountMultiple">
-            <Button variant="light" style={{border:'1.4px solid black'}}  onClick={handleRandomize}>Random</Button>
+              <Button
+                variant="light"
+                style={{ border: "1.4px solid black" }}
+                onClick={handleRandomize}
+              >
+                Random
+              </Button>
               <Button
                 variant="dark"
-                className="fw-bold m-1"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(1)}
+                style={{ border: "1px solid white" }}
               >
                 1x
               </Button>
               <Button
                 variant="dark"
-                className="fw-bold m-1"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(2)}
+                style={{ border: "1px solid white" }}
               >
                 2x
               </Button>
               <Button
                 variant="dark"
-                className="fw-bold m-1"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(3)}
+                style={{ border: "1px solid white" }}
               >
                 3x
               </Button>
               <Button
                 variant="dark"
-                className="fw-bold m-1"
+                className="fw-bold m-1 button123"
                 onClick={() => handleButtonClick(4)}
+                style={{ border: "1px solid white" }}
               >
                 4x
               </Button>
@@ -861,34 +816,40 @@ const handleRandomize = () => {
         </Row>
         {/*Number-End  */}
       </Container>
-      <div style={{
-                  position:'fixed',
-                  right:'2%',
-                  bottom:'5%', zIndex:'1000'}}>
       <div
-                className={`scroll-to-top ${isVisible ? "visible" : ""}`}
-                onClick={scrollToTop}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "#fff",
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  margin: "20px",
-                }}
-              >
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png"
-                  height="35px"
-                  width="35px"
-                  alt="scrollToTop"
-                />
-              </div>
+        style={{
+          position: "fixed",
+          right: "2%",
+          bottom: "5%",
+          zIndex: "1000",
+        }}
+      >
+        <div
+          className={`scroll-to-top ${isVisible ? "visible" : ""}`}
+          onClick={scrollToTop}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#fff",
+            borderRadius: "50%",
+            width: "50px",
+            height: "50px",
+            margin: "20px",
+          }}
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/3272/3272638.png"
+            height="35px"
+            width="35px"
+            alt="scrollToTop"
+          />
+        </div>
       </div>
-      
-  <ThreeMinuteHistory/>
+      <Container>
+        <ThreeMinuteGameRecord userId={gameId} />
+      </Container>
+      <OneMinuteHistory />
       {/* Modal */}
       <Modal
         show={showModal}
@@ -1001,7 +962,11 @@ const handleRandomize = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" style={{width:'200px'}} onClick={() => setShowModal(false)}>
+          <Button
+            variant="danger"
+            style={{ width: "200px" }}
+            onClick={() => setShowModal(false)}
+          >
             Cancel
           </Button>
           <Button

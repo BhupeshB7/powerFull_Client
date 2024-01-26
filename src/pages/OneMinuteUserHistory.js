@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Modal, Button, Table } from "react-bootstrap";
 
-const UserGameRecord = ({ userId }) => {
+const OneMinuteUserHistory = ({ userId }) => {
   const [userDetails, setUserDetails] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +13,7 @@ const UserGameRecord = ({ userId }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-production.up.railway.app/api/gameProfile/userDetails/${userId}/${currentPage}`
+          `https://mlm-production.up.railway.app/api/gameProfile/userDetails/history/${userId}/${currentPage}`
         );
         setUserDetails(response.data.userResults);
         setTotalPages(response.data.totalPages);
@@ -78,10 +78,8 @@ const UserGameRecord = ({ userId }) => {
               <thead>
                 <tr className="text-light">
                   <th>Session</th>
-                  <th>Selected</th>
-                  <th>Achiever</th>
+                  <th>Choice</th>
                   <th>Amount</th>
-                  <th>Result</th>
                   <th style={{ width: "270px" }}>Time</th>
                 </tr>
               </thead>
@@ -90,21 +88,8 @@ const UserGameRecord = ({ userId }) => {
                   <tr key={userDetail._id}>
                     <td className="text-warning">{userDetail.sessionId}</td>
                     <td className="text-primary">{userDetail.userChoice}</td>
-                    <td className="text-info">{userDetail.winningChoice}</td>
-                    <td
-                      style={{
-                        color: userDetail.result === "failed" ? "red" : "green",
-                      }}
-                    >
-                      {userDetail.result === "failed" ? "-" : "+"}{" "}
+                    <td className="text-primary">
                       {userDetail.betAmount}
-                    </td>
-                    <td
-                      style={{
-                        color: userDetail.result === "failed" ? "red" : "green",
-                      }}
-                    >
-                      {userDetail.result}
                     </td>
                     <td
                       className="text-light game_record-time"
@@ -149,4 +134,4 @@ const UserGameRecord = ({ userId }) => {
   );
 };
 
-export default UserGameRecord;
+export default OneMinuteUserHistory;

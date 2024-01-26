@@ -23,7 +23,7 @@ const LiveGameTimerShow = () => {
     fetchTimer();
 
     // Set up an interval to fetch updated data every 5 seconds (adjust as needed)
-    const intervalId = setInterval(fetchTimer, 2000);
+    const intervalId = setInterval(fetchTimer, 1000);
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(intervalId);
