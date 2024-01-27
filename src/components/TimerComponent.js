@@ -62,16 +62,40 @@ const TimerComponent = ({ activationTime }) => {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+
+  const [prevDays, setPrevDays] = useState(0);
+  const [prevHours, setPrevHours] = useState(0);
   const [prevMinutes, setPrevMinutes] = useState(0);
-  const [slideDirection, setSlideDirection] = useState('slide-left');
-  const [animationKey, setAnimationKey] = useState(0);
+  const [prevSeconds, setPrevSeconds] = useState(0);
+
+  const [slideDirectionDays, setSlideDirectionDays] = useState('slide-left');
+  const [animationKeyDays, setAnimationKeyDays] = useState(0);
+
+  const [slideDirectionHours, setSlideDirectionHours] = useState('slide-left');
+  const [animationKeyHours, setAnimationKeyHours] = useState(0);
+
+  const [slideDirectionMinutes, setSlideDirectionMinutes] = useState('slide-left');
+  const [animationKeyMinutes, setAnimationKeyMinutes] = useState(0);
+
+  const [slideDirectionSeconds, setSlideDirectionSeconds] = useState('slide-left');
+  const [animationKeySeconds, setAnimationKeySeconds] = useState(0);
+
+  const [timerActive, setTimerActive] = useState(true);
 
   useEffect(() => {
+    let timerInterval;
+
     const calculateTimeRemaining = () => {
-      const threeMonthsFromActivation = new Date(activationTime);
-      threeMonthsFromActivation.setMonth(threeMonthsFromActivation.getMonth() + 3);
+      const fourDaysFromActivation = new Date(activationTime);
+      fourDaysFromActivation.setDate(fourDaysFromActivation.getDate() + 4);
       const currentDate = new Date();
-      const timeRemaining = threeMonthsFromActivation - currentDate;
+      const timeRemaining = fourDaysFromActivation - currentDate;
+
+      if (timeRemaining <= 0) {
+        setTimerActive(false);
+        clearInterval(timerInterval);
+        return;
+      }
 
       const calculatedDays = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
       const calculatedHours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -83,45 +107,93 @@ const TimerComponent = ({ activationTime }) => {
       setMinutes(calculatedMinutes);
       setSeconds(calculatedSeconds);
 
+      // Slide animation based on changes in each component
+      if (prevDays !== calculatedDays) {
+        setSlideDirectionDays((prevDirection) => (prevDirection === 'slide-left' ? 'slide-right' : 'slide-left'));
+        setPrevDays(calculatedDays);
+        setAnimationKeyDays((prevKey) => prevKey + 1);
+      }
+
+      if (prevHours !== calculatedHours) {
+        setSlideDirectionHours((prevDirection) => (prevDirection === 'slide-left' ? 'slide-right' : 'slide-left'));
+        setPrevHours(calculatedHours);
+        setAnimationKeyHours((prevKey) => prevKey + 1);
+      }
+
       if (prevMinutes !== calculatedMinutes) {
-        setSlideDirection((prevDirection) => (prevDirection === 'slide-left' ? 'slide-right' : 'slide-left'));
+        setSlideDirectionMinutes((prevDirection) => (prevDirection === 'slide-left' ? 'slide-right' : 'slide-left'));
         setPrevMinutes(calculatedMinutes);
-        setAnimationKey((prevKey) => prevKey + 1);
+        setAnimationKeyMinutes((prevKey) => prevKey + 1);
+      }
+
+      if (prevSeconds !== calculatedSeconds) {
+        setSlideDirectionSeconds((prevDirection) => (prevDirection === 'slide-left' ? 'slide-right' : 'slide-left'));
+        setPrevSeconds(calculatedSeconds);
+        setAnimationKeySeconds((prevKey) => prevKey + 1);
       }
     };
 
     calculateTimeRemaining();
 
-    const timerInterval = setInterval(() => {
+    timerInterval = setInterval(() => {
       calculateTimeRemaining();
     }, 1000);
 
     return () => clearInterval(timerInterval);
-  }, [activationTime, prevMinutes]);
+  }, [activationTime, prevDays, prevHours, prevMinutes, prevSeconds, timerActive]);
 
   const timeHours = hours.toString().padStart(2, '0');
   const timeMinutesStr = minutes.toString().padStart(2, '0');
-  const timeSeconds = seconds.toString().padStart(2, '0');
+  const timeSecondsStr = seconds.toString().padStart(2, '0');
 
   return (
     <div className="timer-container">
-      <motion.div
-        className={`timer-text ${slideDirection}`}
-        key={animationKey}
-        initial={{ opacity: 0, x: '-50%', rotateY: -90 }}
-        animate={{ opacity: 1, x: '0%', rotateY: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <p className='timer-content'>{days}</p>
-        <b>::</b>
-        <p className='timer-content'>{timeHours}</p>
-        <b>:</b>
-        <motion.p className='timer-content' key={timeMinutesStr}>
-          {timeMinutesStr}
-        </motion.p>
-        <b>:</b>
-        <p className='timer-content'>{timeSeconds}</p>
-      </motion.div>
+      {days > 0 && (
+        <motion.div
+          className={`timer-text ${slideDirectionDays}`}
+          key={animationKeyDays}
+          initial={{ opacity: 0, x: '-50%', rotateY: -90 }}
+          animate={{ opacity: 1, x: '0%', rotateY: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className='timer-content'>{days}</p>
+        </motion.div>
+      )}
+      {hours > 0 && (
+        <motion.div
+          className={`timer-text ${slideDirectionHours}`}
+          key={animationKeyHours}
+          initial={{ opacity: 0, x: '-50%', rotateY: -90 }}
+          animate={{ opacity: 1, x: '0%', rotateY: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className='timer-content'>{timeHours}</p>
+        </motion.div>
+      )}
+      {minutes > 0 && (
+        <motion.div
+          className={`timer-text ${slideDirectionMinutes}`}
+          key={animationKeyMinutes}
+          initial={{ opacity: 0, y: '50%', rotateX: -90 }}
+          animate={{ opacity: 1, y: '0%', rotateX: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.p className='timer-content' key={timeMinutesStr}>
+            {timeMinutesStr}
+          </motion.p>
+        </motion.div>
+      )}
+      {seconds > 0 && (
+        <motion.div
+          className={`timer-text ${slideDirectionSeconds}`}
+          key={animationKeySeconds}
+          initial={{ opacity: 0, y: '50%', rotateX: -90 }}
+          animate={{ opacity: 1, y: '0%', rotateX: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className='timer-content'>{timeSecondsStr}</p>
+        </motion.div>
+      )}
     </div>
   );
 };

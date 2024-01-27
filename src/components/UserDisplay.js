@@ -630,7 +630,7 @@ import DisplayImage from "../extra/DisplayImage";
 import TeamTaskReport from "./TteamTaskReport";
 import { Button } from "react-bootstrap";
 import TeamTable from "./TeamTable";
-// import TimerComponent from "./TimerComponent";
+import TimerComponent from "./TimerComponent";
 
 const getTokenExpireTime = () => {
   const tokenExpire = localStorage.getItem("tokenExpire");
@@ -1429,7 +1429,7 @@ const Dashboard1 = ({contactInfoList}) => {
                       >
                         PI
                       </a>
-                      {/* <TimerComponent activationTime={data.activationTime}/> */}
+                       <TimerComponent activationTime={data.activationTime}/> 
                       <h6
                         type="button"
                         data-bs-toggle="offcanvas"
