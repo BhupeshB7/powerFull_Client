@@ -1830,3 +1830,49 @@ color: #000428 !important;
   transition: all 0.3s;
   backdrop-filter: blur(1px);
 }
+
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.timer-text {
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  transform: translateZ(10px);
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.timer-container p{
+  font-size: 21px !important;
+  font-weight: 700;
+  font-family:cursive;
+  color: whitesmoke !important;
+  text-align: center;
+}
+.timer-container b{
+  font-size: 28px !important;
+  font-weight: 700;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: whitesmoke !important;
+  word-spacing: 4px !important;
+}
+.timer-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33px;
+  height: 33px;
+  background: rgb(28, 27, 27);
+  margin: 5px;
+  border-radius: 5px;
+  padding: 4px;
+}

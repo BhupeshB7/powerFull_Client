@@ -630,6 +630,7 @@ import DisplayImage from "../extra/DisplayImage";
 import TeamTaskReport from "./TteamTaskReport";
 import { Button } from "react-bootstrap";
 import TeamTable from "./TeamTable";
+import TimerComponent from "./TimerComponent";
 
 const getTokenExpireTime = () => {
   const tokenExpire = localStorage.getItem("tokenExpire");
@@ -1335,7 +1336,7 @@ const Dashboard1 = ({contactInfoList}) => {
       daysLeftForReactivation = `Account has been reactivated`;
     }
   }
-
+ 
   const depositFormPage = () => {
     window.location.href = "/depositform";
   };
@@ -1428,6 +1429,7 @@ const Dashboard1 = ({contactInfoList}) => {
                       >
                         PI
                       </a>
+                      <TimerComponent activationTime={data.activationTime}/>
                       <h6
                         type="button"
                         data-bs-toggle="offcanvas"
