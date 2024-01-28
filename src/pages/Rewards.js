@@ -136,7 +136,7 @@ import ConfettiAnimation from "../components/ConfettiAnimation";
 import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 import Modal from "react-modal";
-import { MdClose } from 'react-icons/md';
+import { FaTimes } from "react-icons/fa";
 const Rewards = () => {
   const [code, setCode] = useState("");
   const [isValid, setIsValid] = useState(null);
@@ -144,56 +144,61 @@ const Rewards = () => {
   const [error, setError] = useState("");
   const [showCelebration, setShowCelebration] = useState(false);
   const userId = localStorage.getItem("GamerUserId");
-    const [giftRewards, setGiftRewards] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+  const [giftRewards, setGiftRewards] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
-  
-      const fetchData = async () => {
-        try {
-          setLoading(true);
-          const response = await axios.get(`https://mlm-production.up.railway.app/api/gift/gift-rewards/${userId}?page=${currentPage}`, {
-            // params: { userId, page: currentPage, pageSize: 10 },
-          });
-          setTotalPages(response.data.totalPages);
-          setGiftRewards(response.data.data);
-        } catch (error) {
-          console.error("Error fetching gift rewards:", error);
-        } finally {
-          setLoading(false);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `https://mlm-production.up.railway.app/api/gift/gift-rewards/${userId}?page=${currentPage}`,
+        {
+          // params: { userId, page: currentPage, pageSize: 10 },
         }
-      };
-      useEffect(() => {
-        fetchData(); // Initial data fetch
-    
-        // Set up an interval to fetch data every 40 seconds
-        const intervalId = setInterval(fetchData, 1000);
-    
-        // Clean up the interval on component unmount
-        return () => clearInterval(intervalId);
-      }, [userId,currentPage]);
-    const handlePageChange = (newPage) => {
-      setCurrentPage(newPage);
-    };
-    const openModal = () => {
-      setModalIsOpen(true);
-    };
-  
-    const closeModal = () => {
-      setModalIsOpen(false);
-    };
+      );
+      setTotalPages(response.data.totalPages);
+      setGiftRewards(response.data.data);
+    } catch (error) {
+      console.error("Error fetching gift rewards:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData(); // Initial data fetch
+
+    // Set up an interval to fetch data every 40 seconds
+    const intervalId = setInterval(fetchData, 1000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [userId, currentPage]);
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   const handleCheckCode = async () => {
     try {
       // const response = await fetch("http://localhost:5000/api/gift/checkCode", {
-        const response = await fetch("https://mlm-production.up.railway.app/api/gift/checkCode", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code, userId }),
-      });
+      const response = await fetch(
+        "https://mlm-production.up.railway.app/api/gift/checkCode",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ code, userId }),
+        }
+      );
 
       if (!response.ok) {
         const data = await response.json();
@@ -221,90 +226,85 @@ const Rewards = () => {
   const handleCelebrationComplete = () => {
     setShowCelebration(false);
   };
-  const customModalStyles = {
-    content: {
-      width: "100%", // Set the width of the modal here
-      height: "500px",
-      left: "1px",
-      zIndex: "9999",
-      position: "absolute", // or "fixed" depending on your layout
-      top: "auto",
-      bottom: "0px",
-      borderRadius:"4px",
-      background:"#000"
-    },
-  };
+  const handleClose=()=>{
+    setModalIsOpen(false);
+  }
   return (
-    <div  className="checkCode" >
+    <div className="checkCode">
       <Container className="checkCode-container">
         {showCelebration && (
           <ConfettiAnimation
             onCelebrationComplete={handleCelebrationComplete}
           />
         )}
-<div>
-        <h4
-          className="text-center text-light fw-bold"
-          style={{ fontStyle: "italic" }}
-        >
-          Claim Your Reward
-        </h4>
-        {/* {error && (
+        <div>
+          <h4
+            className="text-center text-light fw-bold"
+            style={{ fontStyle: "italic" }}
+          >
+            Claim Your Reward
+          </h4>
+          {/* {error && (
           <p className="text-danger" style={{ color: "red" }}>
             {error}
           </p>
         )} */}
-        <label>
-          Code:
+          <label>
+            Code:
+            <br />
+            <input
+              type="text"
+              value={code}
+              placeholder="Enter Your Code"
+              onChange={(e) => setCode(e.target.value)}
+            />
+          </label>
           <br />
-          <input
-            type="text"
-            value={code}
-            placeholder="Enter Your Code"
-            onChange={(e) => setCode(e.target.value)}
-          />
-        </label>
-        <br />
-        <div className="d-flex justify-content-center align-items-center pb-2" style={{gap:'30px',}}>
-          <button className="btn btn-danger"  onClick={handleCheckCode}>Claim</button>
-          <button className="btn btn-success" onClick={openModal}>History</button>
-        </div>
-        {isValid !== null && (
-          <div className="reward-result">
-          {isValid ? (
-            <div>
-              {randomNumber !== null && (
-                <div className="reward-image-container">
-                 
-                  <img
-                    src="https://img.freepik.com/free-vector/gradient-raksha-bandhan-background_23-2149508427.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais"
-                    alt="Gift Reward"
-                    className="reward-image"
-                    style={{borderRadius:'7px',zIndex:'1000'}}
-                  />
-                  <p className="reward-amount text-light fw-bold">
-                    Rewards {randomNumber} Rs
-                  </p>
-
+          <div
+            className="d-flex justify-content-center align-items-center pb-2"
+            style={{ gap: "30px" }}
+          >
+            <button className="btn btn-danger" onClick={handleCheckCode}>
+              Claim
+            </button>
+            <button className="btn btn-success" onClick={openModal}>
+              History
+            </button>
+          </div>
+          {isValid !== null && (
+            <div className="reward-result">
+              {isValid ? (
+                <div>
+                  {randomNumber !== null && (
+                    <div className="reward-image-container">
+                      <img
+                        src="https://img.freepik.com/free-vector/gradient-raksha-bandhan-background_23-2149508427.jpg?size=626&ext=jpg&ga=GA1.1.260354095.1700988836&semt=ais"
+                        alt="Gift Reward"
+                        className="reward-image"
+                        style={{ borderRadius: "7px", zIndex: "1000" }}
+                      />
+                      <p className="reward-amount text-light fw-bold">
+                        Rewards {randomNumber} Rs
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            ) : (
-              <div>
-                {error && (
-                  <p
-                    className="text-danger"
-                    style={{
-                      background: "rgb(255, 179, 179)",
-                      color: "brown",
-                      padding: "5px",
-                      borderRadius: "7px",
-                    }}
-                  >
-                    {error}
-                  </p>
-                )}
-                {/* <p
+              ) : (
+                <div>
+                  {error && (
+                    <p
+                      className="text-danger"
+                      style={{
+                        background: "rgb(255, 179, 179)",
+                        color: "brown",
+                        padding: "5px",
+                        borderRadius: "7px",
+                      }}
+                    >
+                      {error}
+                    </p>
+                  )}
+                  {/* <p
                   style={{
                     background: "rgb(255, 179, 179)",
                     color: "brown",
@@ -315,89 +315,98 @@ const Rewards = () => {
                   Code is not valid. Please check the code. Or code is expired
                   😔{" "}
                 </p> */}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <div>
+          <Modal
+            className="ModalOverlay"
+            overlayClassName="Overlay"
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+           
+            contentLabel="All Reward Details"
+          >
+            <div className="ModalContent">
+            <div className="CloseButton" onClick={handleClose}>
+              <FaTimes />
+            </div>
+            <div className="table-responsive" style={{ marginTop: "10px" }}>
+              <div
+                className="d-flex align-tems-center"
+                style={{ flexDirection: "row-reverse" }}
+              >
+                
               </div>
-            )}
-          </div>
-        )}
-</div>
-<div>
-    <Modal
-      isOpen={modalIsOpen}
-      onRequestClose={closeModal}
-      style={customModalStyles}
-      contentLabel="All Reward Details"
-    >
-       <div
-        className="table-responsive"
-        style={{ marginTop: "10px" }}
-      >
-        <div className="d-flex align-tems-center" style={{flexDirection:'row-reverse'}}>
-
-        <button
-  type="button"
-  className="btn btn-danger text-center p-2 m-1 fw-bold"
-  onClick={closeModal}
->
-  <MdClose />
-</button>
+              <table
+                className="table"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
+                }}
+              >
+                <thead
+                  className="text-light text-center"
+                  style={{ height: "55px" }}
+                >
+                  <tr>
+                    {/* <th>#</th> */}
+                    <th>#</th>
+                    <th>Code</th>
+                    <th>Rewards</th>
+                  </tr>
+                </thead>
+                <tbody
+                  style={{ color: "#FFD700" }}
+                  className="table-hover text-center"
+                >
+                  {giftRewards.map((item, index) => (
+                    <tr key={item._id}>
+                      <td>{index + 1}</td>
+                      <td>{item.code}</td>
+                      {/* <td>{item.color}</td> */}
+                      <td>{item.reward}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {/* Pagination */}
+              <div
+                className="pagination d-flex justify-content-center align-items-center pb-2"
+                style={{ marginTop: "-15px", background: "#0234" }}
+              >
+                {/* Previous Button */}
+                <Button
+                  variant="dark"
+                  className="m-1"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </Button>
+                {/* Display page number and items per page information */}
+                <div
+                  className="text-light p-2"
+                  style={{ fontSize: "21px", fontWeight: "500" }}
+                >
+                  {currentPage} <b className="text-warning">/</b> {totalPages}
+                </div>
+                {/* Next Button */}
+                <Button
+                  variant="dark"
+                  className="m-1"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
+            </div>
+          </Modal>
         </div>
-        <table
-          className="table"
-          style={{
-            backgroundImage: "linear-gradient(60deg, #29323c 0%, #1d1f20 100%)",
-          }}
-        >
-          <thead className="text-light text-center" style={{ height: "55px" }}>
-            <tr>
-              {/* <th>#</th> */}
-               <th>#</th>
-              <th>Code</th>
-              <th>Rewards</th>
-            </tr>
-          </thead>
-          <tbody
-            style={{ color: "#FFD700" }}
-            className="table-hover text-center"
-          >
-            {giftRewards.map((item,index) => (
-              <tr key={item._id}>
-                <td>{index+1}</td>
-                <td>{item.code}</td>
-                {/* <td>{item.color}</td> */}
-                <td>{item.reward}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {/* Pagination */}
-        <div className="pagination d-flex justify-content-center align-items-center pb-2" style={{marginTop:'-15px', background:'#0234'}}>
-          {/* Previous Button */}
-          <Button
-            variant="dark"
-            className="m-1"
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Previous
-          </Button>
-          {/* Display page number and items per page information */}
-          <div className="text-light p-2" style={{fontSize:'21px', fontWeight:'500'}}>
-             {currentPage} <b className="text-warning">/</b> {totalPages}
-          </div>
-          {/* Next Button */}
-          <Button
-            variant="dark"
-            className="m-1"
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
-      
-    </Modal>
-  </div>
         {/* Display CelebrationComponent when showCelebration is true */}
       </Container>
     </div>

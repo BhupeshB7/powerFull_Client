@@ -206,8 +206,8 @@ const TimerComponent = ({ activationTime }) => {
           <motion.p 
            className={`timer-content ${slideDirectionSeconds}`}
            key={animationKeySeconds}
-           initial={{ opacity: 0, y: '50%', rotateX: 90 }}
-           animate={{ opacity: 1, y: '0%', rotateX: 0 }}
+           initial={{ opacity: 0.6, y: '50%', rotateX:90 }}
+        animate={{ opacity: 1, y: '0%', rotateX: 0 }}
            transition={{ duration: 0.5 }}
            >{timeSecondsStr}</motion.p>
         </motion.div>
