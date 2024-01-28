@@ -149,6 +149,7 @@ const TimerComponent = ({ activationTime }) => {
   return (
     <div className="timer-container">
       {days > 0 && (
+        <div>
         <motion.div
           className={`timer-text ${slideDirectionDays}`}
           key={animationKeyDays}
@@ -156,10 +157,13 @@ const TimerComponent = ({ activationTime }) => {
           animate={{ opacity: 1, x: '0%', rotateY: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className='timer-content'>{days}</p>
+          <p className='timer-content'>{days}::</p>
         </motion.div>
+        <h6 className='text-lightP text-center'>D</h6>
+        </div>
       )}
       {hours > 0 && (
+        <div className='timer-contentItem'>
         <motion.div
           className={`timer-text ${slideDirectionHours}`}
           key={animationKeyHours}
@@ -167,10 +171,13 @@ const TimerComponent = ({ activationTime }) => {
           animate={{ opacity: 1, x: '0%', rotateY: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className='timer-content'>{timeHours}</p>
+          <p className='timer-content'>{timeHours}:</p>
         </motion.div>
+        <h6 className='text-lightP text-center'>H</h6>
+        </div>
       )}
       {minutes > 0 && (
+        <div  className='timer-contentItem'>
         <motion.div
           className={`timer-text ${slideDirectionMinutes}`}
           key={animationKeyMinutes}
@@ -178,21 +185,40 @@ const TimerComponent = ({ activationTime }) => {
           animate={{ opacity: 1, y: '0%', rotateX: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <motion.p className='timer-content' key={timeMinutesStr}>
-            {timeMinutesStr}
+          <motion.p
+           className={`timer-content ${slideDirectionSeconds}`}
+           key={timeMinutesStr}
+           initial={{ opacity: 0, y: '50%', rotateX: -90 }}
+           animate={{ opacity: 1, y: '0%', rotateX: 0 }}
+           transition={{ duration: 0.5 }}
+       >
+            {timeMinutesStr}:
           </motion.p>
         </motion.div>
+        <h6 className='text-lightP text-center'>M</h6>
+        </div>
       )}
       {seconds > 0 && (
+        <div>
         <motion.div
-          className={`timer-text ${slideDirectionSeconds}`}
-          key={animationKeySeconds}
-          initial={{ opacity: 0, y: '50%', rotateX: -90 }}
-          animate={{ opacity: 1, y: '0%', rotateX: 0 }}
-          transition={{ duration: 0.5 }}
+        className='timer-text'
         >
-          <p className='timer-content'>{timeSecondsStr}</p>
+          <motion.p 
+           className={`timer-content ${slideDirectionSeconds}`}
+           key={animationKeySeconds}
+           initial={{ opacity: 0, y: '50%', rotateX: 90 }}
+           animate={{ opacity: 1, y: '0%', rotateX: 0 }}
+           transition={{ duration: 0.5 }}
+           >{timeSecondsStr}</motion.p>
         </motion.div>
+        <motion.h6 
+        className={`text-lightP text-center ${slideDirectionSeconds}`}
+        key={animationKeySeconds}
+        initial={{ opacity: 0.6, y: '0%', rotateX: 0 }}
+        animate={{ opacity: 1, y: '-50%', rotateX: 90 }}
+        transition={{ duration: 0.5 }}
+         >S</motion.h6>
+        </div>
       )}
     </div>
   );
