@@ -8,20 +8,18 @@ import LiveGameTimer from "./LiveGameTimer";
 import LiveGameTimerShow from "./LiveGameTimerShow";
 
 const generateSessionId = () => {
-  const getCurrentYear = () => new Date().getFullYear();
-  const getCurrentMonth = () =>
-    (new Date().getMonth() + 1).toString().padStart(2, "0");
+  
+  const getCurrentDate = () =>
+    (new Date().getDate() + 1).toString().padStart(2, "0");
   const getCurrentTimeDigits = () =>
     new Date()
       .toLocaleTimeString("en-US", { hour12: false })
       .replace(/[:]/g, "")
       .slice(0, 4);
 
-  const yearPart = getCurrentYear();
-  const monthPart = getCurrentMonth();
   const timePart = getCurrentTimeDigits();
-
-  return `PI11${yearPart}${monthPart}-${timePart}`;
+  const date = getCurrentDate();
+  return `PILIVE-${date}${timePart}`;
 };
 
 const AdminLiveGame = () => {

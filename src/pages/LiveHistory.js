@@ -85,13 +85,9 @@ const LiveHistory = () => {
   const [checkT, setCheckT] = useState(localStorage.getItem("check"));
   const [colorCounts, setColorCounts] = useState({});
   const [sizeCounts, setSizeCounts] = useState({});
-  const [redCount, setRedCount] = useState(0);
-  const [greenCount, setGreenCount] = useState(0);
-  const [blueVioletCount, setBlueVioletCount] = useState(0);
-  const [bigCount, setBigCount] = useState(0);
-  const [smallCount, setSmallCount] = useState(0);
   const fetchLiveGameUsers = async (page) => {
     try {
+      // const response = await fetch(`http://localhost:5500/api/liveGameHistory?page=${page}&perPage=10`);
       const response = await fetch(`https://mlm-production.up.railway.app/api/liveGameHistory?page=${page}&perPage=10`);
       const data = await response.json();
       setLiveGameUsers(data.data);
@@ -99,11 +95,6 @@ const LiveHistory = () => {
       setCurrentPage(data.currentPage);
       setColorCounts(data.colorCounts);
         setSizeCounts(data.sizeCounts);
-        setRedCount(data.redCount);
-        setGreenCount(data.greenCount);
-        setBlueVioletCount(data.blueVioletCount);
-        setBigCount(data.bigCount);
-        setSmallCount(data.smallCount);
     } catch (error) {
       console.error("Error fetching live game users:", error);
     }
@@ -130,16 +121,7 @@ const LiveHistory = () => {
 
   return (
     <div className="adminLive">
-      {checkT ? (
         <>
-        <div className="m-3">
-          <h6 className="text-light p-2"> Game History</h6>
-          <h6 className="text-light">Total Number of Red : {redCount}</h6>
-          <h6 className="text-light">Total Number of Green : {greenCount}</h6>
-          <h6 className="text-light">Total Number of BlueViolet : {blueVioletCount}</h6>
-          <h6 className="text-light">Total Number of Big : {bigCount}</h6>
-          <h6 className="text-light">Total Number of Small : {smallCount}</h6>
-          </div>
           <div className="table-responsive p-1">
           <Table
               striped
@@ -191,11 +173,7 @@ const LiveHistory = () => {
             </Button>
           </div>
         </>
-      ) : (
-        <>
-          <h6>Login Again</h6>
-        </>
-      )}
+      
     </div>
   );
 };

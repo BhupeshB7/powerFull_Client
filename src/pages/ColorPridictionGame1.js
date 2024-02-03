@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap";
 import LOGO from "../assets/icon.png";
@@ -31,6 +31,7 @@ const ColorPridictionGame1 = () => {
   const [sessionInfo, setSessionInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   const fetchSessionInfo = async () => {
     try {
       const response = await axios.get(
@@ -96,7 +97,11 @@ const ColorPridictionGame1 = () => {
 
   const timerStyle = {
     color: isBlinking ? "red" : "white",
-    fontSize: "24px",
+    fontSize: "23px", fontWeight: "bold"
+  };
+  const timerStyle1 = {
+    color: isBlinking ? "red" : "white",
+    fontSize: "76px", fontWeight: "bold"
   };
   //save time
 
@@ -176,6 +181,14 @@ const ColorPridictionGame1 = () => {
   };
   useEffect(() => {
     getGamerProfile();
+
+    // Set up an interval to fetch gamer profile every 30 seconds
+    const intervalId = setInterval(() => {
+      getGamerProfile();
+    }, 30000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
   }, [data.userId]);
   // useEffect to generate random colors when the component is initially rendered
   useEffect(() => {
@@ -571,10 +584,9 @@ const ColorPridictionGame1 = () => {
                         >
                           {/* {`00:${timer.toString().padStart(2, "0")}`} */}
                           <p className="text-center text-light">
-                            <b style={timerStyle}>
+                            <b style={timerStyle1}>
                               {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                             </b>{" "}
-                            (MM:SS)
                           </p>
                         </h1>
                       </div>

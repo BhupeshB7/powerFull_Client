@@ -96,7 +96,13 @@ const ColorPredictGame = () => {
 
   const timerStyle = {
     color: isBlinking ? "red" : "white",
-    fontSize: "24px",
+    fontSize: "22px",
+    fontWeight:'Bold'
+  };
+  const timerStyle1 = {
+    color: isBlinking ? "red" : "white",
+    fontSize: "66px",
+    fontWeight:'Bold'
   };
   //save time
 
@@ -176,6 +182,14 @@ const ColorPredictGame = () => {
   };
   useEffect(() => {
     getGamerProfile();
+
+    // Set up an interval to fetch gamer profile every 30 seconds
+    const intervalId = setInterval(() => {
+      getGamerProfile();
+    }, 30000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
   }, [data.userId]);
   // useEffect to generate random colors when the component is initially rendered
   useEffect(() => {
@@ -571,10 +585,9 @@ const ColorPredictGame = () => {
                         >
                           {/* {`00:${timer.toString().padStart(2, "0")}`} */}
                           <p className="text-center text-light">
-                            <b style={timerStyle}>
+                            <b style={timerStyle1}>
                               {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                             </b>{" "}
-                            (MM:SS)
                           </p>
                         </h1>
                       </div>

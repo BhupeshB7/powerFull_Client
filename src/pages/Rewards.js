@@ -190,7 +190,7 @@ const Rewards = () => {
     try {
       // const response = await fetch("http://localhost:5000/api/gift/checkCode", {
       const response = await fetch(
-        "https://mlm-production.up.railway.app/api/gift/checkCode",
+        "http://localhost:5500/api/gift/checkCode",
         {
           method: "POST",
           headers: {
