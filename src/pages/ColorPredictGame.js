@@ -199,7 +199,7 @@ const ColorPredictGame = () => {
     });
 
     setButtonColors(randomColors);
-  }, []); // The empty dependency array ensures this effect runs only once
+  }, []); 
 
   useEffect(() => {
     // Check if the remainingTime is less than 7, and update the showModal state accordingly
