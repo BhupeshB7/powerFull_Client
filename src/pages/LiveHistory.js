@@ -7,7 +7,7 @@
 
 //   const fetchLiveGameUsers = async () => {
 //     try {
-//       const response = await fetch("https://mlm-production.up.railway.app/api/liveGameHistory");
+//       const response = await fetch("https://mlm-eo5g.onrender.com/api/liveGameHistory");
 //       const data = await response.json();
 //       setLiveGameUsers(data);
 //     } catch (error) {
@@ -88,7 +88,7 @@ const LiveHistory = () => {
   const fetchLiveGameUsers = async (page) => {
     try {
       // const response = await fetch(`http://localhost:5500/api/liveGameHistory?page=${page}&perPage=10`);
-      const response = await fetch(`https://mlm-production.up.railway.app/api/liveGameHistory?page=${page}&perPage=10`);
+      const response = await fetch(`https://mlm-eo5g.onrender.com/api/liveGameHistory?page=${page}&perPage=10`);
       const data = await response.json();
       setLiveGameUsers(data.data);
       setTotalPages(data.totalPages);

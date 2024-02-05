@@ -301,7 +301,7 @@ const LiveGame = () => {
   const fetchTimer = async () => {
     try {
       const response = await axios.get(
-        "https://mlm-production.up.railway.app/api/user/getTimer"
+        "https://mlm-eo5g.onrender.com/api/user/getTimer"
       );
       console.log(response.data); // Log the response data
       setRemainingTime(response.data.time);
@@ -325,7 +325,7 @@ const LiveGame = () => {
   useEffect(() => {
     const fetchButtonState = async () => {
       const response = await axios.get(
-        "https://mlm-production.up.railway.app/api/notice/button"
+        "https://mlm-eo5g.onrender.com/api/notice/button"
       );
       setIsActive(response.data.active);
     };
@@ -336,7 +336,7 @@ const LiveGame = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-production.up.railway.app/api/users/profile",
+          "https://mlm-eo5g.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -366,7 +366,7 @@ const LiveGame = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-production.up.railway.app/api/gameProfile/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -453,7 +453,7 @@ const LiveGame = () => {
       setAlertMessage(`Bet SuccessFully  Place of ${betAmount}`);
       try {
         const response = await axios.post(
-          "https://mlm-production.up.railway.app/api/gameProfile/startGame",
+          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,
@@ -477,7 +477,7 @@ const LiveGame = () => {
       // console.log(gameDetails);
       try {
         const response = await axios.post(
-          "https://mlm-production.up.railway.app/api/liveGame/saveGame",
+          "https://mlm-eo5g.onrender.com/api/liveGame/saveGame",
           gameDetails
         );
         // console.log(gameDetails);

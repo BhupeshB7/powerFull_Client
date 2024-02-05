@@ -10,8 +10,8 @@ const AllFundTransfer = () => {
   useEffect(() => {
     const fetchAllTransfers = async () => {
       try {
-        // const response = await axios.get("https://mlm-production.up.railway.app/api/allTransfers");
-        const response = await axios.get("https://mlm-production.up.railway.app/api/allTransfers");
+        // const response = await axios.get("https://mlm-eo5g.onrender.com/api/allTransfers");
+        const response = await axios.get("https://mlm-eo5g.onrender.com/api/allTransfers");
         setAllTransfers(response.data.allTransfers);
       } catch (error) {
         console.error("Error fetching transfers:", error);
@@ -29,7 +29,7 @@ const AllFundTransfer = () => {
   const fetchTransferDetail = async () => {
     try {
       const response = await axios.get(
-        "https://mlm-production.up.railway.app/api/transferDetail"
+        "https://mlm-eo5g.onrender.com/api/transferDetail"
       );
       setTransfers(response.data);
       console.log(response.data);
@@ -42,7 +42,7 @@ const AllFundTransfer = () => {
   //   if (window.confirm("Are You Sure For Approve Fund?")) {
   //     try {
   //       await axios.post(
-  //         `https://mlm-production.up.railway.app/api/transfer/approve/${userId}`
+  //         `https://mlm-eo5g.onrender.com/api/transfer/approve/${userId}`
   //       );
   //       fetchTransferDetail(); // Refresh the list of transfers after approving
   //     } catch (error) {
@@ -55,7 +55,7 @@ const AllFundTransfer = () => {
   //   if (window.confirm("Are you sure?")) {
   //     try {
   //       await axios.post(
-  //         `https://mlm-production.up.railway.app/api/transfer/reject/${userId}`
+  //         `https://mlm-eo5g.onrender.com/api/transfer/reject/${userId}`
   //       );
   //       fetchTransferDetail(); // Refresh the list of transfers after rejecting
   //       alert("Fund Rejected!");

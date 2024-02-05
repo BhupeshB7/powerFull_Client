@@ -15,7 +15,7 @@ function Setting() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-production.up.railway.app/api/users/profile",
+        "https://mlm-eo5g.onrender.com/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,

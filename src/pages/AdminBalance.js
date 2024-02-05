@@ -13,7 +13,7 @@ function AdminBalance() {
 
   const searchUser = async () => {
     try {
-      const response = await axios.get(`https://mlm-production.up.railway.app/api/game/balance/${userId}`);
+      const response = await axios.get(`https://mlm-eo5g.onrender.com/api/game/balance/${userId}`);
       setName(response.data.name);
       setIsUpdateDisabled(false);
       setAlert({ show: false, type: '', message: '' }); // Reset alert state
@@ -32,7 +32,7 @@ function AdminBalance() {
         return;
       }
 
-      await axios.put(`https://mlm-production.up.railway.app/api/game/balance/${userId}`, { balance });
+      await axios.put(`https://mlm-eo5g.onrender.com/api/game/balance/${userId}`, { balance });
       setAlert({ show: true, type: 'success', message: 'Balance updated successfully' });
       // Optionally, you can fetch and display the updated user details
     } catch (error) {

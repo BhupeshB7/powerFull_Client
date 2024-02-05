@@ -8,7 +8,7 @@ const TeamTable = ({ userId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://mlm-production.up.railway.app/api/teamTaskMember/${userId}`);
+        const response = await axios.get(`https://mlm-eo5g.onrender.com/api/teamTaskMember/${userId}`);
         setTeamStructure(response.data);
         setCurrentMember(response.data);
       } catch (error) {

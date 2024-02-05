@@ -11,7 +11,7 @@ function  WithdrawalRequests() {
   useEffect(() => {
     // Fetch data from your backend API with pagination and search
     fetch(
-      `https://mlm-production.up.railway.app/api/withdraw/withdrawals?search=${withdrawalQuerySearch}&page=${currentPage}`
+      `https://mlm-eo5g.onrender.com/api/withdraw/withdrawals?search=${withdrawalQuerySearch}&page=${currentPage}`
       // http://localhost:5000/api/withdraw/withdrawals
     )
       .then((response) => response.json())
@@ -30,7 +30,7 @@ function  WithdrawalRequests() {
   const handleApprove = async (id) => {
     try {
       const response = await axios.put(
-        `https://mlm-production.up.railway.app/api/withdraw/withdrawals/${id}`,
+        `https://mlm-eo5g.onrender.com/api/withdraw/withdrawals/${id}`,
         { status: "approved", transaction }
       );
       setWithdrawalRequests(
@@ -46,7 +46,7 @@ function  WithdrawalRequests() {
   const handleWithdrawalDelete = async (request) => {
     try {
       await axios.delete(
-        `https://mlm-production.up.railway.app/api/withdraw/withdrawalWallet/${request._id}`
+        `https://mlm-eo5g.onrender.com/api/withdraw/withdrawalWallet/${request._id}`
       );
       alert("Deleted successfully!");
     } catch (error) {
@@ -58,7 +58,7 @@ function  WithdrawalRequests() {
     try {
       const response = await axios.put(
         // `http://localhost:5000/api/withdraw/withdrawals/reject/${id}`
-        `https://mlm-production.up.railway.app/api/withdraw/withdrawals/reject/${id}`
+        `https://mlm-eo5g.onrender.com/api/withdraw/withdrawals/reject/${id}`
       );
       setWithdrawalRequests((prevRequests) =>
         prevRequests.map((request) =>

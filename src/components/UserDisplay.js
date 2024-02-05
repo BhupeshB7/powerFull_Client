@@ -88,7 +88,7 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       const response = await fetch(
-//         "https://mlm-production.up.railway.app/api/users/profile",
+//         "https://mlm-eo5g.onrender.com/api/users/profile",
 //         {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -119,9 +119,9 @@
 //   useEffect(() => {
 //     const fetchIncome = async () => {
 //       try {
-//         // const response = await fetch(`https://mlm-production.up.railway.app/api/daily-level-income/users/${data.userId}`);
+//         // const response = await fetch(`https://mlm-eo5g.onrender.com/api/daily-level-income/users/${data.userId}`);
 //         const response = await fetch(
-//           `https://mlm-production.up.railway.app/api/daily-level-income/users/${data.userId}`,
+//           `https://mlm-eo5g.onrender.com/api/daily-level-income/users/${data.userId}`,
 //           {
 //             headers: {
 //               "Cache-Control": "no-cache",
@@ -144,7 +144,7 @@
 //   useEffect(() => {
 //     axios
 //       .get(
-//         `https://mlm-production.up.railway.app/api/users/teamStructureRank/${data.userId}`
+//         `https://mlm-eo5g.onrender.com/api/users/teamStructureRank/${data.userId}`
 //       )
 //       .then((response) => {
 //         const data = response.data;
@@ -165,7 +165,7 @@
 //     // Call the backend API to get the team structure
 //     axios
 //       .get(
-//         `https://mlm-production.up.railway.app/api/users/teamStructure/${data.userId}`
+//         `https://mlm-eo5g.onrender.com/api/users/teamStructure/${data.userId}`
 //       )
 //       .then((response) => {
 //         setActiveUsersByLevel(response.data);
@@ -182,7 +182,7 @@
 //     const fetchTeamStructure = async (userId) => {
 //       try {
 //         const response = await axios.get(
-//           `https://mlm-production.up.railway.app/api/users/team/${userId}`
+//           `https://mlm-eo5g.onrender.com/api/users/team/${userId}`
 //         );
 //         setTeamStructure(response.data);
 //         setCurrentDownline(response?.data?.downline);
@@ -198,7 +198,7 @@
 //     const fetchTopupAmount = async (userID) => {
 //       try {
 //         const response = await axios.get(
-//           `https://mlm-production.up.railway.app/api/deposit/topUpuserAmount/${userID}`
+//           `https://mlm-eo5g.onrender.com/api/deposit/topUpuserAmount/${userID}`
 //         );
 //         console.log("API Response:", response.data);
 //         console.log(data.userId);
@@ -236,7 +236,7 @@
 //     const fetchSponsors = async () => {
 //       try {
 //         const response = await axios.get(
-//           `https://mlm-production.up.railway.app/api/direct/${data.userId}`
+//           `https://mlm-eo5g.onrender.com/api/direct/${data.userId}`
 //         );
 //         setSponsors(response.data);
 //       } catch (error) {
@@ -250,7 +250,7 @@
 //   const handleWithdrawalSubmit = (e) => {
 //     e.preventDefault();
 //     const amount = Number(withdrawalAmount); // convert string to number
-//     fetch(`https://mlm-production.up.railway.app/api/withdraw/${data.userId}`, {
+//     fetch(`https://mlm-eo5g.onrender.com/api/withdraw/${data.userId}`, {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -299,9 +299,9 @@
 //     // formData.append('image', userData.image);
 
 //     try {
-//       // const response = await axios.post('https://mlm-production.up.railway.app/api/deposit/upload', formData);
+//       // const response = await axios.post('https://mlm-eo5g.onrender.com/api/deposit/upload', formData);
 //       const response = await axios.post(
-//         "https://mlm-production.up.railway.app/api/deposit/user",
+//         "https://mlm-eo5g.onrender.com/api/deposit/user",
 //         formData
 //       );
 //       const data = response.data;
@@ -325,7 +325,7 @@
 //     event.preventDefault();
 //     try {
 //       const response = await axios.post(
-//         `https://mlm-production.up.railway.app/api/transfer/${data._id}`,
+//         `https://mlm-eo5g.onrender.com/api/transfer/${data._id}`,
 //         { amount: parseFloat(amount) }
 //       );
 //       setMessage(response.data.message);
@@ -338,7 +338,7 @@
 //   const handleClick = async () => {
 //     try {
 //       const response = await fetch(
-//         "https://mlm-production.up.railway.app/api/deposit/topUpActivate/",
+//         "https://mlm-eo5g.onrender.com/api/deposit/topUpActivate/",
 //         {
 //           method: "POST",
 //           headers: {
@@ -364,7 +364,7 @@
 //   const handleActivateUser = async () => {
 //     try {
 //       const response = await fetch(
-//         `https://mlm-production.up.railway.app/api/deposit/topUpUserID/${data.userId}`,
+//         `https://mlm-eo5g.onrender.com/api/deposit/topUpUserID/${data.userId}`,
 //         {
 //           method: "POST",
 //           headers: {
@@ -746,7 +746,7 @@ const Dashboard1 = ({contactInfoList}) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-production.up.railway.app/api/users/profile",
+          "https://mlm-eo5g.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -792,9 +792,9 @@ const Dashboard1 = ({contactInfoList}) => {
   useEffect(() => {
     const fetchIncome = async () => {
       try {
-        // const response = await fetch(`https://mlm-production.up.railway.app/api/daily-level-income/users/${data.userId}`);
+        // const response = await fetch(`https://mlm-eo5g.onrender.com/api/daily-level-income/users/${data.userId}`);
         const response = await fetch(
-          `https://mlm-production.up.railway.app/api/daily-level-income/users/${data.userId}`,
+          `https://mlm-eo5g.onrender.com/api/daily-level-income/users/${data.userId}`,
           {
             headers: {
               "Cache-Control": "no-cache",
@@ -817,7 +817,7 @@ const Dashboard1 = ({contactInfoList}) => {
   useEffect(() => {
     axios
       .get(
-        `https://mlm-production.up.railway.app/api/users/teamStructureRank/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/users/teamStructureRank/${data.userId}`
       )
       .then((response) => {
         const data = response.data;
@@ -838,7 +838,7 @@ const Dashboard1 = ({contactInfoList}) => {
     // Call the backend API to get the team structure
     axios
       .get(
-        `https://mlm-production.up.railway.app/api/users/teamStructure/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/users/teamStructure/${data.userId}`
       )
       .then((response) => {
         setActiveUsersByLevel(response.data);
@@ -852,7 +852,7 @@ const Dashboard1 = ({contactInfoList}) => {
     const fetchTeamStructure = async (userId) => {
       try {
         const response = await axios.get(
-          `https://mlm-production.up.railway.app/api/users/team/${userId}`
+          `https://mlm-eo5g.onrender.com/api/users/team/${userId}`
         );
         setTeamStructure(response.data);
         setCurrentDownline(response?.data?.downline);
@@ -868,7 +868,7 @@ const Dashboard1 = ({contactInfoList}) => {
     const fetchTopupAmount = async (userID) => {
       try {
         const response = await axios.get(
-          `https://mlm-production.up.railway.app/api/deposit/topUpuserAmount/${userID}`
+          `https://mlm-eo5g.onrender.com/api/deposit/topUpuserAmount/${userID}`
         );
         console.log("API Response:", response.data);
         console.log(data.userId);
@@ -906,7 +906,7 @@ const Dashboard1 = ({contactInfoList}) => {
     const fetchSponsors = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-production.up.railway.app/api/direct/${data.userId}`
+          `https://mlm-eo5g.onrender.com/api/direct/${data.userId}`
         );
         setSponsors(response.data);
       } catch (error) {
@@ -921,7 +921,7 @@ const Dashboard1 = ({contactInfoList}) => {
     e.preventDefault();
     const amount = Number(withdrawalAmount); // convert string to number
     fetch(
-      `https://mlm-production.up.railway.app/api/withdraw/user/${data.userId}`,
+      `https://mlm-eo5g.onrender.com/api/withdraw/user/${data.userId}`,
       {
         // fetch(`http://localhost:5000/api/withdraw/user/${data.userId}`, {
         method: "POST",
@@ -963,7 +963,7 @@ const Dashboard1 = ({contactInfoList}) => {
   //   event.preventDefault();
   //   try {
   //     const response = await axios.post(
-  //       `https://mlm-production.up.railway.app/api/transfer/${data._id}`,
+  //       `https://mlm-eo5g.onrender.com/api/transfer/${data._id}`,
   //       { amount: parseFloat(amount) }
   //     );
   //     setMessage(response.data.message);
@@ -976,7 +976,7 @@ const Dashboard1 = ({contactInfoList}) => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        `https://mlm-production.up.railway.app/api/transfer/${data._id}`,
+        `https://mlm-eo5g.onrender.com/api/transfer/${data._id}`,
         { amount: parseFloat(amount) }
       );
   
@@ -1000,7 +1000,7 @@ const Dashboard1 = ({contactInfoList}) => {
   const handleClick = async () => {
     try {
       const response = await fetch(
-        "https://mlm-production.up.railway.app/api/deposit/topUpActivate/",
+        "https://mlm-eo5g.onrender.com/api/deposit/topUpActivate/",
         {
           method: "POST",
           headers: {
@@ -1037,7 +1037,7 @@ const Dashboard1 = ({contactInfoList}) => {
     }
     try {
       const response = await fetch(
-        `https://mlm-production.up.railway.app/api/deposit/topUpUserID/${data.userId}`,
+        `https://mlm-eo5g.onrender.com/api/deposit/topUpUserID/${data.userId}`,
         {
           method: "POST",
           headers: {

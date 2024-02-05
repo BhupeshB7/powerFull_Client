@@ -10,7 +10,7 @@ const NewUsersChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://mlm-production.up.railway.app/api/users/new/users-created');
+        const response = await axios.get('https://mlm-eo5g.onrender.com/api/users/new/users-created');
         setChartData(response.data);
       } catch (error) {
         console.error(error);

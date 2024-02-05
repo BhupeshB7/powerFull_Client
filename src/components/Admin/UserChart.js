@@ -7,13 +7,13 @@ const UserChart = () => {
 
   useEffect(() => {
     // Fetch data for active users
-    fetch("https://mlm-production.up.railway.app/api/admin/count-active-items")
+    fetch("https://mlm-eo5g.onrender.com/api/admin/count-active-items")
       .then((response) => response.json())
       .then((data) => setActiveUserCount(data.numberOfActiveUser))
       .catch((error) => console.error(error));
 
     // Fetch data for total users
-    fetch("https://mlm-production.up.railway.app/api/admin/users/count")
+    fetch("https://mlm-eo5g.onrender.com/api/admin/users/count")
       .then((response) => response.json())
       .then((data) => setTotalCount(data.count))
       .catch((error) => console.error(error));

@@ -21,7 +21,7 @@ const LoginForm = ({ setToken }) => {
     captchaRef.current.reset();
     try {
       const response = await fetch(
-        "https://mlm-production.up.railway.app/api/auth/login",
+        "https://mlm-eo5g.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {

@@ -13,7 +13,7 @@ const ThreeMinuteHistory = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-production.up.railway.app/three/MinuteResultHistory?page=${currentPage}`
+          `https://mlm-eo5g.onrender.com/three/MinuteResultHistory?page=${currentPage}`
         );
         setData(response.data.data);
         setTotalPages(response.data.totalPages);

@@ -13,7 +13,7 @@ const OneMinuteUserHistory = ({ userId }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-production.up.railway.app/api/gameProfile/userDetails/history/${userId}/${currentPage}`
+          `https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/history/${userId}/${currentPage}`
         );
         setUserDetails(response.data.userResults);
         setTotalPages(response.data.totalPages);

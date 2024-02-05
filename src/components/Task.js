@@ -20,7 +20,7 @@ const [isTaskComplete, setIsTaskComplete] = useState(false);
 useEffect(() => {
   const fetchUserId = async () => {
     try {
-      const response = await fetch('https://mlm-production.up.railway.app/api/users/profile', {
+      const response = await fetch('https://mlm-eo5g.onrender.com/api/users/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ useEffect(() => {
 // Fetch the videos from the server when the component mounts
 useEffect(() => {
   async function fetchVideos() {
-    const response = await fetch('https://mlm-production.up.railway.app/api/task/tasks');
+    const response = await fetch('https://mlm-eo5g.onrender.com/api/task/tasks');
     const videos = await response.json();
     // Get watched videos from local storage or set them to an empty array
     const watchedVideos = JSON.parse(localStorage.getItem('watchedVideos')) || [];
@@ -111,7 +111,7 @@ async function updateWallet(userId) {
   // Disable the button
   setIsButtonDisabled(true);
     try {
-      const response = await axios.post(`https://mlm-production.up.railway.app/api/updateWallet/${userId}`);
+      const response = await axios.post(`https://mlm-eo5g.onrender.com/api/updateWallet/${userId}`);
       setWalletUpdated(true);
       console.log(response.data);
       alert("Wallet updated successfully!");
