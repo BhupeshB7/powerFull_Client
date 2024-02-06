@@ -631,6 +631,7 @@ import TeamTaskReport from "./TteamTaskReport";
 import { Button } from "react-bootstrap";
 import TeamTable from "./TeamTable";
 import TimerComponent from "./TimerComponent";
+import ReTopup from "./ReTopup";
 
 const getTokenExpireTime = () => {
   const tokenExpire = localStorage.getItem("tokenExpire");
@@ -1316,7 +1317,10 @@ const Dashboard1 = ({contactInfoList}) => {
     threeMonthsFromActivation.setMonth(
       threeMonthsFromActivation.getMonth() + 3
     );
-    reactivationTime = threeMonthsFromActivation.toLocaleString("en-IN", {
+    const seventyDaysFromActivation = new Date(data.activationTime);
+seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
+
+    reactivationTime = seventyDaysFromActivation.toLocaleString("en-IN", {
       year: "numeric",
       month: "long",
       day: "2-digit",
@@ -1328,7 +1332,7 @@ const Dashboard1 = ({contactInfoList}) => {
     // Calculate the number of days left for reactivation
     const currentDate = new Date();
     const daysRemaining = Math.ceil(
-      (threeMonthsFromActivation - currentDate) / (1000 * 60 * 60 * 24)
+      (seventyDaysFromActivation - currentDate) / (1000 * 60 * 60 * 24)
     );
     if (daysRemaining > 0) {
       daysLeftForReactivation = `Reactivate in ${daysRemaining} days`;
@@ -1917,6 +1921,7 @@ const Dashboard1 = ({contactInfoList}) => {
                     )}
 
                     <div className="id-status" style={{ letterSpacing: "2px" }}>
+                      {/* <ReTopup userId={data.userId}/> */}
                       <h6 className="text-light ms-5 fw-bold">
                         ID Status: {data.is_active ? "Active" : "Inactive"}
                       </h6>
