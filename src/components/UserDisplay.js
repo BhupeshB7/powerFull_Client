@@ -920,9 +920,12 @@ const Dashboard1 = ({contactInfoList}) => {
 
   const handleWithdrawalSubmit = (e) => {
     e.preventDefault();
+     // Disable the withdraw button to prevent multiple clicks
+     document.getElementById("withdrawButton").disabled = true;
     const amount = Number(withdrawalAmount); // convert string to number
     fetch(
       `https://mlm-eo5g.onrender.com/api/withdraw/user/${data.userId}`,
+      // `http://localhost:5500/api/withdraw/user/${data.userId}`,
       {
         // fetch(`http://localhost:5000/api/withdraw/user/${data.userId}`, {
         method: "POST",
@@ -952,6 +955,10 @@ const Dashboard1 = ({contactInfoList}) => {
         console.error("Error:", error);
         toast.error(`Withdrawal failed: ${error.message}`);
         // toast.error('Sunday closed!!!')
+      })
+      .finally(() => {
+        // Re-enable the withdraw button after receiving the response
+        document.getElementById("withdrawButton").disabled = false;
       });
   };
 
@@ -2239,6 +2246,7 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
                                     }
                                   />
                                   <button
+                                  id="withdrawButton"
                                     className="form_button"
                                     disabled={!withdrawalAmount}
                                     style={{
