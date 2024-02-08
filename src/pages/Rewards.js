@@ -154,7 +154,7 @@ const Rewards = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/gift/gift-rewards/${userId}?page=${currentPage}`,
+        `https://cute-puce-xerus.cyclic.app/api/gift/gift-rewards/${userId}?page=${currentPage}`,
         {
           // params: { userId, page: currentPage, pageSize: 10 },
         }

@@ -16,7 +16,7 @@ function Topup() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/users/profile",
+        "https://cute-puce-xerus.cyclic.app/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,8 +36,8 @@ function Topup() {
       try {
         const response = await axios.get(
           // `http://localhost:5000/api/topupHistory/${data.userId}`
-          `https://mlm-eo5g.onrender.com/api/topupUser/${data.userId}?page=${currentPage}`
-          // `https://mlm-eo5g.onrender.com/api/topupUser/${data.userId}?${currentPage}`
+          `https://cute-puce-xerus.cyclic.app/api/topupUser/${data.userId}?page=${currentPage}`
+          // `https://cute-puce-xerus.cyclic.app/api/topupUser/${data.userId}?${currentPage}`
         );
         const { topUpdata, currentPage:fetchedPage, totalPages } = response.data;
         // console.log(topUpdata);

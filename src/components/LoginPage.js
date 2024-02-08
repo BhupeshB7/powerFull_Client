@@ -21,7 +21,7 @@ const LoginForm = ({ setToken }) => {
     captchaRef.current.reset();
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/auth/login",
+        "https://cute-puce-xerus.cyclic.app/api/auth/login",
         {
           method: "POST",
           headers: {
@@ -92,7 +92,7 @@ const LoginForm = ({ setToken }) => {
                 <div className="loginInput">
                   {/* <label>UserId:</label> */}
                   <img
-                    src="https://cdn-icons-png.flaticon.com/128/12515/12515987.png"
+                    src="https://cdn-icons-png.flaticon.com/128/13983/13983903.png"
                     height="30px"
                     width="30px"
                     alt="user"
@@ -108,7 +108,7 @@ const LoginForm = ({ setToken }) => {
                 </div>
                 <div className="loginInput">
                   <img
-                    src="https://cdn-icons-png.flaticon.com/128/11135/11135314.png"
+                    src="https://cdn-icons-png.flaticon.com/128/4353/4353113.png"
                     height="30px"
                     width="30px"
                     alt="password"
@@ -124,7 +124,7 @@ const LoginForm = ({ setToken }) => {
                   />
                   <div className="showPassword" style={{marginLeft:'-20px'}}>
                       {
-                        password1? <img src="https://cdn-icons-png.flaticon.com/128/7222/7222897.png" height='30px' width='30px' alt="eye" onClick={handleClickShowPassword}/>:<img src="https://cdn-icons-png.flaticon.com/128/8861/8861449.png" height='30px' width='30px' alt="eye"onClick={handleClickShowPassword} />
+                        password1? <img src="https://cdn-icons-png.flaticon.com/128/5618/5618479.png" height='30px' width='30px' alt="eye" onClick={handleClickShowPassword}/>:<img src="https://cdn-icons-png.flaticon.com/128/7354/7354237.png" height='30px' width='30px' alt="eye"onClick={handleClickShowPassword} />
                       }
                   </div>
                 </div>

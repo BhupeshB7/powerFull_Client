@@ -87,7 +87,7 @@ function UserBalance() {
     setAbortController(newController);
 
     try {
-      await axios.post('https://mlm-eo5g.onrender.com/api/auth/resetBalances', null, { signal: newController.signal });
+      await axios.post('https://cute-puce-xerus.cyclic.app/api/auth/resetBalances', null, { signal: newController.signal });
       setAlertVariant('success');
       setAlertMessage('Balances reset successfully.');
     } catch (error) {

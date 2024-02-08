@@ -57,7 +57,7 @@ function App() {
 
   useEffect(() => {
     // Fetch contact info details on component mount
-    axios.get('https://mlm-production.up.railway.app/api/contactInfo').then((response) => setContactInfoList(response.data));
+    axios.get('https://cute-puce-xerus.cyclic.app/api/contactInfo').then((response) => setContactInfoList(response.data));
   }, []);
 
   useEffect(() => {

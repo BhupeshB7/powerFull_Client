@@ -16,7 +16,7 @@ function GameBalanceUpdate() {
   const handleGetDetails = async () => {
     try {
       const response = await fetch(
-        `https://mlm-eo5g.onrender.com/api/game/gamer/profile/${userId}`
+        `https://cute-puce-xerus.cyclic.app/api/game/gamer/profile/${userId}`
       );
       const data = await response.json();
       if (Object.keys(data).length === 0) {
@@ -36,7 +36,7 @@ function GameBalanceUpdate() {
   const handleUpdateDetails = async () => {
     try {
       const response = await fetch(
-        `https://mlm-eo5g.onrender.com/api/game/gamer/profile/${userId}`,
+        `https://cute-puce-xerus.cyclic.app/api/game/gamer/profile/${userId}`,
         {
           method: "PUT",
           headers: {

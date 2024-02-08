@@ -11,7 +11,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/users/profile",
+        "https://cute-puce-xerus.cyclic.app/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
