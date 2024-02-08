@@ -1449,7 +1449,7 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
                       >
                         {" "}
                         <img
-                          src="https://cdn-icons-png.flaticon.com/128/9109/9109764.png"
+                          src="https://cdn-icons-png.flaticon.com/128/10765/10765119.png"
                           alt="img"
                           height="50px"
                           width="50px"
