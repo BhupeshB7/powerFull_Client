@@ -8,8 +8,9 @@
 
 import React, { useState } from "react";
 import QRCODE from "../assets/QRCODE4.jpg";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Spinner, Table } from "react-bootstrap";
 const GameDepositForm = () => {
+  const [loading,setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     transactionId: "",
@@ -30,6 +31,7 @@ const GameDepositForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { name, transactionId, userId, depositAmount, image } = formData;
 
     const formDataToSend = new FormData();
@@ -41,13 +43,8 @@ const GameDepositForm = () => {
 
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/deposit/userAmount/gameDeposit",
-        {
-          //   const response = await fetch("http://localhost:5000/api/deposit/userAmount", {
-          //   const response = await fetch("https://mlm-eo5g.onrender.com/api/deposit/userAmount", {
-          method: "POST",
-          body: formDataToSend,
-        }
+        "https://mlm-psi.vercel.app/api/deposit/userAmount/gameDeposit",
+        { method: "POST", body: formDataToSend }
       );
 
       if (response.status === 201) {
@@ -57,12 +54,15 @@ const GameDepositForm = () => {
       } else {
         // Handle the error response
         const data = await response.json();
-        alert("Error: " + data.message); 
+        alert("Error: " + data.message);
       }
     } catch (error) {
       console.error(error);
       alert("Internal server error");
-    }
+    }finally {
+      // Reset loading state to false after submission process is completed
+      setLoading(false);
+  }
   };
   const dashboard = () => {
     window.location.href = "/game/colorpridiction";
@@ -71,7 +71,9 @@ const GameDepositForm = () => {
     <div className="topUPBg depositFormC">
       <h5 className="p-3 text-center text-warning">Deposit</h5>
       <h6 className="text-secondary p-2">Recharge Amount</h6>
-      <h6 className="text-light p-2">*Min <b>Rs 100/-</b> Max - Unlimited</h6>
+      <h6 className="text-light p-2">
+        *Min <b>Rs 100/-</b> Max - Unlimited
+      </h6>
       <div
         className="d-flex justify-content-end"
         style={{ position: "absolute", right: "20px", top: "30px" }}
@@ -117,7 +119,7 @@ const GameDepositForm = () => {
             <tr className="text-warning text-center">
               <td>UPI</td>
               <td>
-              powerfullindia
+                powerfullindia
                 <br />
                 849@khdfcbank
               </td>
@@ -181,8 +183,22 @@ const GameDepositForm = () => {
             onChange={handleImageChange}
           />
         </div>
-        <Button className="m-2" variant="primary" type="submit">
-          Submit
+        <Button
+          className="m-2"
+          variant="primary"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <Spinner
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          ) : (
+            "Submit"
+          )}
         </Button>
       </form>
     </div>

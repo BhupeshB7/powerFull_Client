@@ -21,7 +21,7 @@ const LoginForm = ({ setToken }) => {
     captchaRef.current.reset();
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/auth/login",
+        "https://mlm-psi.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: {

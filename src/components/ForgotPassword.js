@@ -18,7 +18,7 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState("");
 
     const userValid = async () => {
-        const res = await fetch(`https://mlm-eo5g.onrender.com/api/forgotpassword/${id}/${token}`, {
+        const res = await fetch(`https://mlm-psi.vercel.app/api/forgotpassword/${id}/${token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
                 position: "top-center"
             });
         } else {
-            const res = await fetch(`https://mlm-eo5g.onrender.com/api/auth/${id}/${token}`, {
+            const res = await fetch(`https://mlm-psi.vercel.app/api/auth/${id}/${token}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

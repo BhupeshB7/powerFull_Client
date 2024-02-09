@@ -11,7 +11,7 @@ const GameHistory = () => {
   useEffect(() => {
     // Fetch game history data from the server
     fetch(
-      `https://mlm-eo5g.onrender.com/api/withdraw/history?page=${currentPage}&perPage=${perPage}`
+      `https://mlm-psi.vercel.app/api/withdraw/history?page=${currentPage}&perPage=${perPage}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -35,7 +35,7 @@ const GameHistory = () => {
     }
     try {
       const response = await axios.put(
-        `https://mlm-eo5g.onrender.com/api/withdrawal/approve/${id}`
+        `https://mlm-psi.vercel.app/api/withdrawal/approve/${id}`
       );
       alert(response.data.message);
       // Update the status in the gameHistory array

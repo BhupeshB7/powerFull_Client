@@ -16,7 +16,7 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       const response = await fetch(
-//         "https://mlm-eo5g.onrender.com/api/users/profile",
+//         "https://mlm-psi.vercel.app/api/users/profile",
 //         {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@
 //       try {
 //         const response = await axios.get(
 //           // `http://localhost:5000/api/topupHistory/${userId}`
-//           `https://mlm-eo5g.onrender.com/api/deposit/depositHistory/PI45059879`
+//           `https://mlm-psi.vercel.app/api/deposit/depositHistory/PI45059879`
 //         );
 //         const { depositHistory, currentPage, totalPages } = response.data;
 //         console.log(depositHistory);
@@ -166,7 +166,7 @@ function DepositHistory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://mlm-eo5g.onrender.com/api/users/profile", {
+        const response = await axios.get("https://mlm-psi.vercel.app/api/users/profile", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -187,7 +187,7 @@ function DepositHistory() {
       const fetchDepositData = async () => {
         try {
           const response = await axios.get(
-            `https://mlm-eo5g.onrender.com/api/deposit/depositHistory/${data.userId}`
+            `https://mlm-psi.vercel.app/api/deposit/depositHistory/${data.userId}`
           );
           const { depositHistory, currentPage, totalPages } = response.data;
           if (Array.isArray(depositHistory)) {

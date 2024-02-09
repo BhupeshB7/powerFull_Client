@@ -7,7 +7,7 @@ const ButtonToggle = () => {
 
   useEffect(() => {
     const fetchButtonState = async () => {
-      const response = await axios.get('https://mlm-eo5g.onrender.com/api/notice/button');
+      const response = await axios.get('https://mlm-psi.vercel.app/api/notice/button');
       setIsActive(response.data.active);
     };
 
@@ -15,7 +15,7 @@ const ButtonToggle = () => {
   }, []);
 
   const handleButtonClick = async () => {
-    const response = await axios.post('https://mlm-eo5g.onrender.com/api/notice/button/toggle');
+    const response = await axios.post('https://mlm-psi.vercel.app/api/notice/button/toggle');
     const newIsActive = !isActive;
   
     // Assuming the response contains the updated button information

@@ -59,7 +59,7 @@ const ColorPredictGame = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-eo5g.onrender.com/api/users/profile",
+          "https://mlm-psi.vercel.app/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -175,7 +175,7 @@ const ColorPredictGame = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
+        `https://mlm-psi.vercel.app/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -246,7 +246,7 @@ const ColorPredictGame = () => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
+          "https://mlm-psi.vercel.app/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,
@@ -372,7 +372,7 @@ const ColorPredictGame = () => {
       const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
       try {
         const response = await axios.post(
-          "https://mlm-eo5g.onrender.com/api/gameProfile/winningGame",
+          "https://mlm-psi.vercel.app/api/gameProfile/winningGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             winnings: winnings,

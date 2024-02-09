@@ -11,7 +11,7 @@ function Setting() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/users/profile",
+        "https://mlm-psi.vercel.app/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,

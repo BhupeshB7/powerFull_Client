@@ -93,7 +93,7 @@ const NewGame = ({ contactInfoList }) => {
     };
   }, []);
   useEffect(() => {
-    fetch("https://mlm-eo5g.onrender.com/api/notice/v1")
+    fetch("https://mlm-psi.vercel.app/api/notice/v1")
       .then((response) => response.json())
       .then((data) => setNotices(data));
   }, []);
@@ -164,7 +164,7 @@ const NewGame = ({ contactInfoList }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-eo5g.onrender.com/api/users/profile",
+          "https://mlm-psi.vercel.app/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -201,7 +201,7 @@ const NewGame = ({ contactInfoList }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/depositSubmit",
+        "https://mlm-psi.vercel.app/api/depositSubmit",
         {
           method: "POST",
           headers: {
@@ -229,7 +229,7 @@ const NewGame = ({ contactInfoList }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/withdrawalSubmit",
+        "https://mlm-psi.vercel.app/api/withdrawalSubmit",
         {
           method: "POST",
           headers: {
@@ -257,7 +257,7 @@ const NewGame = ({ contactInfoList }) => {
   // const fetchGameHistory = async () => {
   //   try {
   //     const response = await axios.get(
-  //       `https://mlm-eo5g.onrender.com/api/game/history/${userId}`
+  //       `https://mlm-psi.vercel.app/api/game/history/${userId}`
   //     );
   //     setGameHistory(response.data);
   //   } catch (error) {
@@ -289,7 +289,7 @@ const NewGame = ({ contactInfoList }) => {
   const fetchGameHistory = async (page) => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/game/history/${data.userId}?page=${page}`
+        `https://mlm-psi.vercel.app/api/game/history/${data.userId}?page=${page}`
       );
       const {
         page: currentPage,
@@ -317,7 +317,7 @@ const NewGame = ({ contactInfoList }) => {
   const fetchWithdrawalHistory = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/history/${data.userId}`
+        `https://mlm-psi.vercel.app/api/history/${data.userId}`
       );
       setWithdrawalHistory(response.data);
     } catch (error) {
@@ -331,7 +331,7 @@ const NewGame = ({ contactInfoList }) => {
   const fetchDepositHistory = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/deposit/history/${data.userId}`
+        `https://mlm-psi.vercel.app/api/deposit/history/${data.userId}`
       );
       setDepositHistory(response.data);
     } catch (error) {
@@ -401,7 +401,7 @@ const NewGame = ({ contactInfoList }) => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
+        `https://mlm-psi.vercel.app/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -456,7 +456,7 @@ const NewGame = ({ contactInfoList }) => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
+          "https://mlm-psi.vercel.app/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,
@@ -489,7 +489,7 @@ const NewGame = ({ contactInfoList }) => {
         setGameResult(`You Win ₹ ${winnings}`);
         try {
           const response = await axios.post(
-            "https://mlm-eo5g.onrender.com/api/gameProfile/winningGame",
+            "https://mlm-psi.vercel.app/api/gameProfile/winningGame",
             {
               userId: data.userId, // Make sure userId is defined or passed as a prop
               winnings: winnings,
@@ -523,7 +523,7 @@ const NewGame = ({ contactInfoList }) => {
 
     try {
       const response = await axios.post(
-        "https://mlm-eo5g.onrender.com/api/game/saveGame",
+        "https://mlm-psi.vercel.app/api/game/saveGame",
         gameDetails
       );
       console.log(gameDetails);

@@ -40,7 +40,7 @@ const ProfileUpdate = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'https://mlm-eo5g.onrender.com/api/users/profile',
+          'https://mlm-psi.vercel.app/api/users/profile',
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -83,7 +83,7 @@ const ProfileUpdate = () => {
     try {
       // Make API call to update profile using profileData state
       const response = await axios.post(
-        'https://mlm-eo5g.onrender.com/api/users/profileUpdate',
+        'https://mlm-psi.vercel.app/api/users/profileUpdate',
         profileData,
         {
           headers: {

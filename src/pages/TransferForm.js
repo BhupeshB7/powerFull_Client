@@ -21,7 +21,7 @@ const TransferForm = ({ sourceUserId }) => {
 
     axios
       .get(
-        `https://mlm-eo5g.onrender.com/api/targetTransfer/name/${targetUserId}`
+        `https://mlm-psi.vercel.app/api/targetTransfer/name/${targetUserId}`
       )
       .then((response) => {
         if (response.data.name) {
@@ -48,7 +48,7 @@ const TransferForm = ({ sourceUserId }) => {
     try {
       // Send a request to the backend API
       const response = await axios.post(
-        "https://mlm-eo5g.onrender.com/api/transferTopupWallet",
+        "https://mlm-psi.vercel.app/api/transferTopupWallet",
         {
           sourceUserId,
           targetUserId,

@@ -14,7 +14,7 @@ const OneMinuteHistory = () => {
   //     try {
   //       const response = await axios.get(
   //         // `http://localhost:5000/api/randomData1?page=${currentPage}`
-  //         `https://mlm-eo5g.onrender.com/api/randomData1?page=${currentPage}`
+  //         `https://mlm-psi.vercel.app/api/randomData1?page=${currentPage}`
   //       );
   //       setData(response.data.data);
   //       setTotalPages(response.data.totalPages);
@@ -28,7 +28,7 @@ const OneMinuteHistory = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/oneMinuteResultHistory?page=${currentPage}`
+        `https://mlm-psi.vercel.app/oneMinuteResultHistory?page=${currentPage}`
       );
       setData(response.data.data);
       setTotalPages(response.data.totalPages);

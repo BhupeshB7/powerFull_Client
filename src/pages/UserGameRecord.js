@@ -13,7 +13,7 @@ const UserGameRecord = ({ userId }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/${userId}/${currentPage}`
+          `https://mlm-psi.vercel.app/api/gameProfile/userDetails/${userId}/${currentPage}`
         );
         setUserDetails(response.data.userResults);
         setTotalPages(response.data.totalPages);

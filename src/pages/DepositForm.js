@@ -8,8 +8,9 @@
 
 import React, { useState } from "react";
 import QRCODE from "../assets/QRCODE4.jpg";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Spinner, Table } from "react-bootstrap";
 const DepositForm = () => {
+  const [loading,setLoading]= useState(false);
   const [formData, setFormData] = useState({
     name: "",
     transactionId: "",
@@ -30,6 +31,7 @@ const DepositForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { name, transactionId, userID, depositAmount, image } = formData;
 
     const formDataToSend = new FormData();
@@ -41,10 +43,10 @@ const DepositForm = () => {
 
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/deposit/userAmount",
+        "https://mlm-psi.vercel.app/api/deposit/userAmount",
         {
           //   const response = await fetch("http://localhost:5000/api/deposit/userAmount", {
-          //   const response = await fetch("https://mlm-eo5g.onrender.com/api/deposit/userAmount", {
+          //   const response = await fetch("https://mlm-psi.vercel.app/api/deposit/userAmount", {
           method: "POST",
           body: formDataToSend,
         }
@@ -62,7 +64,10 @@ const DepositForm = () => {
     } catch (error) {
       console.error(error);
       alert("Internal server error");
-    }
+    }finally {
+      // Reset loading state to false after submission process is completed
+      setLoading(false);
+  }
   };
   const dashboard = () => {
     window.location.href = "/dashboard";
@@ -181,8 +186,22 @@ const DepositForm = () => {
             onChange={handleImageChange}
           />
         </div>
-        <Button className="m-2" variant="primary" type="submit">
-          Submit
+        <Button
+          className="m-2"
+          variant="primary"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <Spinner
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          ) : (
+            "Submit"
+          )}
         </Button>
       </form>
     </div>

@@ -21,7 +21,7 @@ const AdminLive = () => {
   useEffect(() => {
     const fetchButtonState = async () => {
       const response = await axios.get(
-        "https://mlm-eo5g.onrender.com/api/notice/button"
+        "https://mlm-psi.vercel.app/api/notice/button"
       );
       setIsActive(response.data.active);
     };
@@ -32,7 +32,7 @@ const AdminLive = () => {
     const fetchLiveGameUsers = async () => {
       try {
         const response = await fetch(
-          "https://mlm-eo5g.onrender.com/api/liveGameUsers"
+          "https://mlm-psi.vercel.app/api/liveGameUsers"
         );
         const data = await response.json();
         setLiveGameUsers2(data.liveGameUsers);

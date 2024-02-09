@@ -21,7 +21,7 @@
 //   useEffect(() => {
 //     const fetchUserAndCheckAuthorization = async () => {
 //       try {
-//         const response = await fetch('https://mlm-eo5g.onrender.com/api/users/profile', {
+//         const response = await fetch('https://mlm-psi.vercel.app/api/users/profile', {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
 //           },
@@ -72,7 +72,7 @@
 //         const taskStatusData = {};
 //         for (const task of tasks) {
 //           const taskId = task._id;
-//           const response = await axios.get(`https://mlm-eo5g.onrender.com/userTasks/${taskId}/${id}`);
+//           const response = await axios.get(`https://mlm-psi.vercel.app/userTasks/${taskId}/${id}`);
 //           taskStatusData[taskId] = response.data.completed;
 //         }
 //         setTaskStatus(taskStatusData);
@@ -95,7 +95,7 @@
 //       return;
 //     }
 //     try {
-//       const response = await axios.post(`https://mlm-eo5g.onrender.com/api/updateWallet/${userId}`);
+//       const response = await axios.post(`https://mlm-psi.vercel.app/api/updateWallet/${userId}`);
 //       console.log('Income Wallet updated successfully:', response.data);
 //       alert('Updated');
 //     } catch (error) {
@@ -141,7 +141,7 @@
 
 //   // const updateIncomeWallet = async () => {
 //   //   try {
-//   //     const response = await axios.post(`https://mlm-eo5g.onrender.com/api/updateWallet/${userId}`);
+//   //     const response = await axios.post(`https://mlm-psi.vercel.app/api/updateWallet/${userId}`);
 //   //     console.log('Income Wallet updated successfully:', response.data);
 //   //   } catch (error) {
 //   //     console.error('Failed to update Income Wallet:', error);
@@ -278,7 +278,7 @@ const TaskList = () => {
   useEffect(() => {
     const fetchUserAndCheckAuthorization = async () => {
       try {
-        const response = await fetch('https://mlm-eo5g.onrender.com/api/users/profile', {
+        const response = await fetch('https://mlm-psi.vercel.app/api/users/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -329,7 +329,7 @@ const TaskList = () => {
         const taskStatusData = {};
         for (const task of tasks) {
           const taskId = task._id;
-          const response = await axios.get(`https://mlm-eo5g.onrender.com/userTasks/${taskId}/${id}`);
+          const response = await axios.get(`https://mlm-psi.vercel.app/userTasks/${taskId}/${id}`);
           taskStatusData[taskId] = response.data.completed;
         }
         setTaskStatus(taskStatusData);
@@ -347,7 +347,7 @@ const TaskList = () => {
 
   // const updateIncomeWallet = async () => {
   //   try {
-  //     const response = await axios.post(`https://mlm-eo5g.onrender.com/api/updateWallet/${userId}`);
+  //     const response = await axios.post(`https://mlm-psi.vercel.app/api/updateWallet/${userId}`);
   //     console.log('Income Wallet updated successfully:', response.data);
   //   } catch (error) {
   //     console.error('Failed to update Income Wallet:', error);

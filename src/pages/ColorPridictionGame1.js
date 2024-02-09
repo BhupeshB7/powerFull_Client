@@ -5,7 +5,7 @@ import LOGO from "../assets/icon.png";
 import spinner from "../assets/spinner2.gif";
 import OneMinuteHistory from "./OneMinuteHistory";
 import UserGameRecord from "./UserGameRecord";
-
+import sound from "../assets/audio.mp3";
 const ColorPridictionGame1 = () => {
   // State variables
   const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -31,11 +31,58 @@ const ColorPridictionGame1 = () => {
   const [sessionInfo, setSessionInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const [audio, setAudio] = useState(new Audio(sound));
+  const [isMuted, setIsMuted] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false); // New state to track user interaction
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRemainingTime((prevTime) => {
+        if (prevTime === 10) {
+          playSound();
+        }
+        if (prevTime === 0) {
+          clearInterval(timer);
+          stopSound();
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const playSound = () => {
+    if (hasInteracted && !isMuted) {
+      // Check if user has interacted and is not muted
+      audio.play();
+    }
+  };
+
+  const stopSound = () => {
+    audio.pause();
+    audio.currentTime = 0;
+  };
+
+  const toggleMute = () => {
+    if (audio.paused) {
+      playSound();
+      setIsMuted(false);
+    } else {
+      stopSound();
+      setIsMuted(true);
+    }
+  };
+
+  const handleInteraction = () => {
+    setHasInteracted(true); // Set hasInteracted to true when user interacts
+    playSound(); // Attempt to play sound after interaction
+  };
+
   const fetchSessionInfo = async () => {
     try {
       const response = await axios.get(
-        "https://mlm-eo5g.onrender.com/getLatestSession"
+        "https://mlm-psi.vercel.app/getLatestSession"
       );
       setSessionInfo(response.data);
     } catch (error) {
@@ -59,7 +106,7 @@ const ColorPridictionGame1 = () => {
   const fetchTimer = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/user/getTimer/${sessionInfo.sessionId}`
+        `https://mlm-psi.vercel.app/api/user/getTimer/${sessionInfo.sessionId}`
       );
       setRemainingTime(response.data.time);
     } catch (error) {
@@ -97,11 +144,13 @@ const ColorPridictionGame1 = () => {
 
   const timerStyle = {
     color: isBlinking ? "red" : "white",
-    fontSize: "23px", fontWeight: "bold"
+    fontSize: "23px",
+    fontWeight: "bold",
   };
   const timerStyle1 = {
     color: isBlinking ? "red" : "white",
-    fontSize: "76px", fontWeight: "bold"
+    fontSize: "76px",
+    fontWeight: "bold",
   };
   //save time
 
@@ -127,7 +176,7 @@ const ColorPridictionGame1 = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-eo5g.onrender.com/api/users/profile",
+          "https://mlm-psi.vercel.app/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -169,7 +218,7 @@ const ColorPridictionGame1 = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
+        `https://mlm-psi.vercel.app/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -209,19 +258,22 @@ const ColorPridictionGame1 = () => {
     }
   }, [remainingTime]);
   // Listen to the scroll event to show/hide the button
-  useEffect(()=>{
-  // Fetch data initially
-  if(remainingTime===2){
-    try {
-      const response = axios.post('https://mlm-eo5g.onrender.com/oneMinuteuserResult',{
-      sessionId:sessionInfo.sessionId,
-      userId:data.userId
-    });
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    // Fetch data initially
+    if (remainingTime === 2) {
+      try {
+        const response = axios.post(
+          "https://mlm-psi.vercel.app/oneMinuteuserResult",
+          {
+            sessionId: sessionInfo.sessionId,
+            userId: data.userId,
+          }
+        );
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
-  },[remainingTime])
+  }, [remainingTime]);
   useEffect(() => {
     const handleScroll = () => {
       if (window.pageYOffset > 100) {
@@ -240,7 +292,7 @@ const ColorPridictionGame1 = () => {
   // Functions
   const handleBet = async () => {
     if (betAmount < 1) {
-      alert(remainingTime,sessionInfo.sessionId,data.userId)
+      alert(remainingTime, sessionInfo.sessionId, data.userId);
       alert("Bet Amount Should be greater than 1Rs.😌");
       // handleAlert("Bet Amount Should be greater than 1Rs.😌");
       setShowModal(false);
@@ -271,7 +323,7 @@ const ColorPridictionGame1 = () => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://mlm-eo5g.onrender.com/oneMinuteHistory",
+          "https://mlm-psi.vercel.app/oneMinuteHistory",
           {
             userId: data.userId,
             betAmount: reducedBetAmount,
@@ -287,7 +339,7 @@ const ColorPridictionGame1 = () => {
       }
       try {
         const response = await axios.post(
-          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
+          "https://mlm-psi.vercel.app/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,
@@ -361,7 +413,6 @@ const ColorPridictionGame1 = () => {
   };
 
   const gameId = localStorage.getItem("GameUserId");
-
 
   if (isLoading) {
     return (
@@ -443,7 +494,7 @@ const ColorPridictionGame1 = () => {
   };
 
   return (
-    <div className="threeMinuteGame colorbackGround">
+    <div className="threeMinuteGame colorbackGround" onClick={handleInteraction}>
       <div
         className="d-flex justify-content-end"
         style={{ position: "absolute", right: "20px", top: "30px" }}
@@ -575,13 +626,17 @@ const ColorPridictionGame1 = () => {
         `}
                 </style>
                 <div className="timer">
-                  {remainingTime <= 5 ? (
+                  {remainingTime <= 28 ? (
                     <div className="blur-background">
                       <div className="remaining" style={{ display: "flex" }}>
+                      
                         <h1
                           className="text-danger"
                           style={{ fontSize: "66px", fontWeight: "bold" }}
                         >
+                          <Button variant="dark" className="p-2 m-1" onClick={toggleMute} style={{ fontSize: "20px", fontWeight: "bold" }}>
+                            {audio.paused ? "Unmute" : "Mute"}
+                          </Button>
                           {/* {`00:${timer.toString().padStart(2, "0")}`} */}
                           <p className="text-center text-light">
                             <b style={timerStyle1}>

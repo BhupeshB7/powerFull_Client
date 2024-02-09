@@ -45,7 +45,7 @@ function AdminDeposit() {
   const fetchUsers = async (page) => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/deposit/depositusers?page=${page}&search=${searchQuery}`
+        `https://mlm-psi.vercel.app/api/deposit/depositusers?page=${page}&search=${searchQuery}`
       );
 
       setDepositUsers(response.data.users);
@@ -61,7 +61,7 @@ function AdminDeposit() {
   const handleApproved = async (userID) => {
     try {
       await axios.patch(
-        `https://mlm-eo5g.onrender.com/api/deposit/activate/${userID}`
+        `https://mlm-psi.vercel.app/api/deposit/activate/${userID}`
       );
       // const updatedUser = response.data;
 
@@ -86,7 +86,7 @@ function AdminDeposit() {
   const deleteDeposit = async (id) => {
     try {
       const response = await axios.delete(
-        `https://mlm-eo5g.onrender.com/api/deposit/delete/${id}`
+        `https://mlm-psi.vercel.app/api/deposit/delete/${id}`
       );
       // console.log('Deposit deleted');
       alert(response.data);
