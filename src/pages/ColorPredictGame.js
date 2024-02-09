@@ -34,7 +34,7 @@ const ColorPredictGame = () => {
   const fetchSessionInfo = async () => {
     try {
       const response = await axios.get(
-        "https://cute-puce-xerus.cyclic.app/three/getLatestSession"
+        "https://mlm-eo5g.onrender.com/three/getLatestSession"
       );
       setSessionInfo(response.data);
     } catch (error) {
@@ -58,7 +58,7 @@ const ColorPredictGame = () => {
   const fetchTimer = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/three/api/user/getTimer/${sessionInfo.sessionId}`
+        `https://mlm-eo5g.onrender.com/three/api/user/getTimer/${sessionInfo.sessionId}`
       );
       setRemainingTime(response.data.time);
     } catch (error) {
@@ -128,7 +128,7 @@ const ColorPredictGame = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://cute-puce-xerus.cyclic.app/api/users/profile",
+          "https://mlm-eo5g.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -170,7 +170,7 @@ const ColorPredictGame = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/gameProfile/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -214,7 +214,7 @@ const ColorPredictGame = () => {
   // Fetch data initially
   if(remainingTime===2){
     try {
-      const response = axios.post('https://cute-puce-xerus.cyclic.app/three/MinuteuserResult',{
+      const response = axios.post('https://mlm-eo5g.onrender.com/three/MinuteuserResult',{
       sessionId:sessionInfo.sessionId,
       userId:data.userId
     });
@@ -272,7 +272,7 @@ const ColorPredictGame = () => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://cute-puce-xerus.cyclic.app/three/oneMinuteHistory",
+          "https://mlm-eo5g.onrender.com/three/oneMinuteHistory",
           {
             userId: data.userId,
             betAmount: reducedBetAmount,
@@ -288,7 +288,7 @@ const ColorPredictGame = () => {
       }
       try {
         const response = await axios.post(
-          "https://cute-puce-xerus.cyclic.app/api/gameProfile/startGame",
+          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,

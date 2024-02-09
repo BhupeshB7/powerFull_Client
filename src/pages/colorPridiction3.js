@@ -59,7 +59,7 @@ const ColorPredictGame = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://cute-puce-xerus.cyclic.app/api/users/profile",
+          "https://mlm-eo5g.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -175,7 +175,7 @@ const ColorPredictGame = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/gameProfile/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -246,7 +246,7 @@ const ColorPredictGame = () => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://cute-puce-xerus.cyclic.app/api/gameProfile/startGame",
+          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,
@@ -372,7 +372,7 @@ const ColorPredictGame = () => {
       const winnings = currentBalance * multiplier; // Adjust the multiplier as needed
       try {
         const response = await axios.post(
-          "https://cute-puce-xerus.cyclic.app/api/gameProfile/winningGame",
+          "https://mlm-eo5g.onrender.com/api/gameProfile/winningGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             winnings: winnings,
