@@ -28,7 +28,7 @@ const ContactInfoModal = ({ showModal, closeModal, userData, setUserData }) => {
       // Validation - Add your validation logic here
 
       // Update user data
-      const updatedUserData = await axios.put('https://cute-puce-xerus.cyclic.app/api/users/update', formData);
+      const updatedUserData = await axios.put('https://mlm-eo5g.onrender.com/api/users/update', formData);
       setUserData([updatedUserData.data.userUpdated]);
       setIsUpdateMode(false);
       closeModal();

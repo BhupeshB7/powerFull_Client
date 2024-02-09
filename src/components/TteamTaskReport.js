@@ -15,7 +15,7 @@ const TeamTaskReport = ({ userId }) => {
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
-        const response = await axios.get(`https://cute-puce-xerus.cyclic.app/api/teamTaskReport/${userId}`);
+        const response = await axios.get(`https://mlm-eo5g.onrender.com/api/teamTaskReport/${userId}`);
         setTeamData(response.data);
       } catch (error) {
         console.error('Error fetching team data:', error);

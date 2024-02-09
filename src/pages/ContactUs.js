@@ -27,7 +27,7 @@ function ContactForm() {
     };
 
     try {
-      const response = await axios.post('https://cute-puce-xerus.cyclic.app/api/send-email', dataToSubmit);
+      const response = await axios.post('https://mlm-eo5g.onrender.com/api/send-email', dataToSubmit);
 
       if (response.status === 200) {
         alert('Contact us form submitted!');

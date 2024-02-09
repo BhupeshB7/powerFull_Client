@@ -70,8 +70,8 @@ const RegisterForm = () => {
   const fetchSponsorName = async () => {
     try {
       const sponsorResponse = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/users/getSponsorName/${formData.sponsorId}`
-        // `https://cute-puce-xerus.cyclic.app/api/users/getSponsorName/${formData.sponsorId}`
+        `https://mlm-eo5g.onrender.com/api/users/getSponsorName/${formData.sponsorId}`
+        // `https://mlm-eo5g.onrender.com/api/users/getSponsorName/${formData.sponsorId}`
       );
       setSponsorName(sponsorResponse.data.name);
       // alert(sponsorName);
@@ -96,7 +96,7 @@ const RegisterForm = () => {
     setIsSubmitting(true);
     try {
       const res = await axios.post(
-        "https://cute-puce-xerus.cyclic.app/api/users/register",
+        "https://mlm-eo5g.onrender.com/api/users/register",
         formData
       );
       setUserId(res.data.userId);

@@ -248,7 +248,7 @@
 //     };
 // console.log(totalWon)
 //     try {
-//       const response = await axios.post("https://cute-puce-xerus.cyclic.app/api/game/saveGame", gameDetails);
+//       const response = await axios.post("https://mlm-eo5g.onrender.com/api/game/saveGame", gameDetails);
 //       if (response.status === 201) {
 //         console.log(gameDetails);
 //         console.log("Game details saved successfully");
@@ -654,7 +654,7 @@ const userId = 'PI17218169';
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/gameProfile/${userId}`
+        `https://mlm-eo5g.onrender.com/api/gameProfile/${userId}`
       );
       const result = response.data;
       setProfile(result);
@@ -669,7 +669,7 @@ const userId = 'PI17218169';
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://cute-puce-xerus.cyclic.app/api/depositSubmit", {
+      const response = await fetch("https://mlm-eo5g.onrender.com/api/depositSubmit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -691,7 +691,7 @@ const userId = 'PI17218169';
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://cute-puce-xerus.cyclic.app/api/withdrawalSubmit",
+        "https://mlm-eo5g.onrender.com/api/withdrawalSubmit",
         {
           method: "POST",
           headers: {
@@ -719,7 +719,7 @@ const userId = 'PI17218169';
   const fetchGameHistory = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/game/history/${userId}`
+        `https://mlm-eo5g.onrender.com/api/game/history/${userId}`
       );
       setGameHistory(response.data);
     } catch (error) {
@@ -733,7 +733,7 @@ const userId = 'PI17218169';
   const fetchWithdrawalHistory = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/history/${userId}`
+        `https://mlm-eo5g.onrender.com/api/history/${userId}`
       );
       setWithdrawalHistory(response.data);
     } catch (error) {
@@ -747,7 +747,7 @@ const userId = 'PI17218169';
   const fetchDepositHistory = async () => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/deposit/history/${userId}`
+        `https://mlm-eo5g.onrender.com/api/deposit/history/${userId}`
       );
       setDepositHistory(response.data);
     } catch (error) {
@@ -805,7 +805,7 @@ const userId = 'PI17218169';
 //         console.log(fee);
 //         try {
 //           const response = await axios.post(
-//             `https://cute-puce-xerus.cyclic.app/api/gameProfile/startGame`,
+//             `https://mlm-eo5g.onrender.com/api/gameProfile/startGame`,
 //             {
 //               userId: userId,
 //               entryFee: fee,
@@ -830,7 +830,7 @@ const userId = 'PI17218169';
 //       console.log(profile.balance);
 //       try {
 //         const response = await axios.post(
-//           `https://cute-puce-xerus.cyclic.app/api/gameProfile/winningGame`,
+//           `https://mlm-eo5g.onrender.com/api/gameProfile/winningGame`,
 //           {
 //             userId: userId,
 //             winnings: winnings,
@@ -862,7 +862,7 @@ const userId = 'PI17218169';
 // console.log(targetColor)
 //     try {
 //       const response = await axios.post(
-//         "https://cute-puce-xerus.cyclic.app/api/game/saveGame",
+//         "https://mlm-eo5g.onrender.com/api/game/saveGame",
 //         gameDetails
 //       );
 //       if (response.status === 201) {
@@ -889,7 +889,7 @@ const userId = 'PI17218169';
 //     if (profile.balance >= fee) {
 //       try {
 //         const response = await axios.post(
-//           "https://cute-puce-xerus.cyclic.app/api/gameProfile/startGame",
+//           "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
 //           {
 //             userId: userId,
 //             entryFee: fee,
@@ -931,7 +931,7 @@ const userId = 'PI17218169';
 
 //     try {
 //       const response = await axios.post(
-//         "https://cute-puce-xerus.cyclic.app/api/gameProfile/winningGame",
+//         "https://mlm-eo5g.onrender.com/api/gameProfile/winningGame",
 //         {
 //           userId: userId,
 //           winnings: winnings,
@@ -959,7 +959,7 @@ const userId = 'PI17218169';
 
 //   try {
 //     const response = await axios.post(
-//       "https://cute-puce-xerus.cyclic.app/api/game/saveGame",
+//       "https://mlm-eo5g.onrender.com/api/game/saveGame",
 //       gameDetails
 //     );
 //     console.log(gameDetails);
@@ -979,7 +979,7 @@ const userId = 'PI17218169';
 //   console.log(entryFee);
 //   try {
 //     const response = await axios.post(
-//       "https://cute-puce-xerus.cyclic.app/api/gameProfile/startGame",
+//       "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
 //       {
 //         userId: userId,
 //         entryFee: fee,
@@ -1039,7 +1039,7 @@ const userId = 'PI17218169';
 //   }
 //     try {
 //       const response = await axios.post(
-//         "https://cute-puce-xerus.cyclic.app/api/gameProfile/winningGame",
+//         "https://mlm-eo5g.onrender.com/api/gameProfile/winningGame",
 //         {
 //           userId: userId,
 //           winnings: winnings,
@@ -1065,7 +1065,7 @@ const userId = 'PI17218169';
 
 //   try {
 //     const response = await axios.post(
-//       "https://cute-puce-xerus.cyclic.app/api/game/saveGame",
+//       "https://mlm-eo5g.onrender.com/api/game/saveGame",
 //       gameDetails
 //     );
 //     console.log(gameDetails);
@@ -1090,7 +1090,7 @@ useEffect(() => {
 const startGame = async (fee) => {
   try {
     const response = await axios.post(
-      "https://cute-puce-xerus.cyclic.app/api/gameProfile/startGame",
+      "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
       {
         userId: userId, // Make sure userId is defined or passed as a prop
         entryFee: fee,
@@ -1143,7 +1143,7 @@ const handleColorSelect = async (color) => {
 
   try {
     const response = await axios.post(
-      "https://cute-puce-xerus.cyclic.app/api/gameProfile/winningGame",
+      "https://mlm-eo5g.onrender.com/api/gameProfile/winningGame",
       {
         userId: userId, // Make sure userId is defined or passed as a prop
         winnings: winnings,
@@ -1169,7 +1169,7 @@ const handleColorSelect = async (color) => {
 
   try {
     const response = await axios.post(
-      "https://cute-puce-xerus.cyclic.app/api/game/saveGame",
+      "https://mlm-eo5g.onrender.com/api/game/saveGame",
       gameDetails
     );
     console.log(gameDetails);

@@ -15,7 +15,7 @@
 //   useEffect(() => {
 //     // Make the API request to fetch daily new users count
 //     axios
-//       .get("https://cute-puce-xerus.cyclic.app/api/users/daily-new-users")
+//       .get("https://mlm-eo5g.onrender.com/api/users/daily-new-users")
 //       .then((response) => {
 //         const { count } = response.data;
 //         setNewUsersCount(count);
@@ -28,14 +28,14 @@
 
 //   useEffect(() => {
 //     // Fetch data from your backend API
-//     fetch("https://cute-puce-xerus.cyclic.app/api/admin/count-active-items")
+//     fetch("https://mlm-eo5g.onrender.com/api/admin/count-active-items")
 //       .then((response) => response.json())
 //       .then((data) => setActiveUserCount(data.numberOfActiveUser))
 //       .catch((error) => console.error(error));
 //   }, []);
 
 //   useEffect(() => {
-//     fetch("https://cute-puce-xerus.cyclic.app/api/admin/users/count")
+//     fetch("https://mlm-eo5g.onrender.com/api/admin/users/count")
 //       .then((response) => response.json())
 //       .then((data) => setCount(data.count))
 //       .catch((error) => console.error(error));
@@ -44,7 +44,7 @@
 //   const getUsers = async (page = 1) => {
 //     try {
 //       const response = await axios.get(
-//         `https://cute-puce-xerus.cyclic.app/api/admin/api/users?page=${page}&search=${searchQuery}&itemsPerPage=${itemsPerPage}`
+//         `https://mlm-eo5g.onrender.com/api/admin/api/users?page=${page}&search=${searchQuery}&itemsPerPage=${itemsPerPage}`
 //       );
 //       const { users, totalPages } = response.data;
 //       setUsers(users);
@@ -70,7 +70,7 @@
 //   const handleDeactivate = async (userId) => {
 //     try {
 //       const response = await axios.patch(
-//         `https://cute-puce-xerus.cyclic.app/api/active/${userId}/deactivate`
+//         `https://mlm-eo5g.onrender.com/api/active/${userId}/deactivate`
 //       );
 //       const updatedUser = response.data;
 
@@ -92,7 +92,7 @@
 //   const handleActivate = async (userId) => {
 //     try {
 //       const response = await axios.patch(
-//         `https://cute-puce-xerus.cyclic.app/api/active/${userId}/activate`
+//         `https://mlm-eo5g.onrender.com/api/active/${userId}/activate`
 //       );
 //       const updatedUser = response.data;
 
@@ -113,12 +113,12 @@
 
 //   const handleDeleteUser = async (id) => {
 //     await axios.delete(
-//       `https://cute-puce-xerus.cyclic.app/api/admin/api/users/${id}`
+//       `https://mlm-eo5g.onrender.com/api/admin/api/users/${id}`
 //     );
 //     setUsers(users.filter((user) => user._id !== id));
 //   };
 //   const handleBlock = (id) => {
-//     axios.put(`https://cute-puce-xerus.cyclic.app/api/auth/block/${id}`)
+//     axios.put(`https://mlm-eo5g.onrender.com/api/auth/block/${id}`)
 //       .then(response => {
 //         setUsers(users.map(user => (user._id === id ? response.data : user)));
 //       })
@@ -126,7 +126,7 @@
 //   };
 
 //   const handleUnblock = (id) => {
-//     axios.put(`https://cute-puce-xerus.cyclic.app/api/auth/unblock/${id}`)
+//     axios.put(`https://mlm-eo5g.onrender.com/api/auth/unblock/${id}`)
 //       .then(response => {
 //         setUsers(users.map(user => (user._id === id ? response.data : user)));
 //       })
@@ -366,7 +366,7 @@ function UserData() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   useEffect(() => {
     axios
-      .get("https://cute-puce-xerus.cyclic.app/api/users/daily-new-users")
+      .get("https://mlm-eo5g.onrender.com/api/users/daily-new-users")
       .then((response) => {
         const { count } = response.data;
         setNewUsersCount(count);
@@ -380,7 +380,7 @@ function UserData() {
   const getUsers = async (page = 1) => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/admin/api/users?page=${page}&search=${searchQuery}&itemsPerPage=${itemsPerPage}`
+        `https://mlm-eo5g.onrender.com/api/admin/api/users?page=${page}&search=${searchQuery}&itemsPerPage=${itemsPerPage}`
       );
       const { users, totalPages } = response.data;
       setUsers(users);
@@ -408,7 +408,7 @@ function UserData() {
   const handleDeactivate = async (userId) => {
     try {
       const response = await axios.patch(
-        `https://cute-puce-xerus.cyclic.app/api/active/${userId}/deactivate`
+        `https://mlm-eo5g.onrender.com/api/active/${userId}/deactivate`
       );
       const updatedUser = response.data;
 
@@ -430,7 +430,7 @@ function UserData() {
   const handleActivate = async (userId) => {
     try {
       const response = await axios.patch(
-        `https://cute-puce-xerus.cyclic.app/api/active/${userId}/activate`
+        `https://mlm-eo5g.onrender.com/api/active/${userId}/activate`
       );
       const updatedUser = response.data;
 
@@ -451,7 +451,7 @@ function UserData() {
 
   const handleDeleteUser = async (id) => {
     await axios.delete(
-      `https://cute-puce-xerus.cyclic.app/api/admin/api/users/${id}`
+      `https://mlm-eo5g.onrender.com/api/admin/api/users/${id}`
     );
     setUsers(users.filter((user) => user._id !== id));
   };
@@ -476,7 +476,7 @@ function UserData() {
   //   if (confirmationUserId) {
   //     // Perform the action based on the user's choice
   //     axios
-  //       .put(`https://cute-puce-xerus.cyclic.app/api/auth/block/${confirmationUserId}`)
+  //       .put(`https://mlm-eo5g.onrender.com/api/auth/block/${confirmationUserId}`)
   //       .then((response) => {
   //         setUsers(users.map((user) => (user._id === confirmationUserId ? response.data : user)));
   //       })
@@ -495,8 +495,8 @@ function UserData() {
         users.map(async (user) => {
           if (user._id === confirmationUserId) {
             const endpoint = user.isBlocked
-              ? `https://cute-puce-xerus.cyclic.app/api/auth/unblock/${confirmationUserId}`
-              : `https://cute-puce-xerus.cyclic.app/api/auth/block/${confirmationUserId}`;
+              ? `https://mlm-eo5g.onrender.com/api/auth/unblock/${confirmationUserId}`
+              : `https://mlm-eo5g.onrender.com/api/auth/block/${confirmationUserId}`;
 
             try {
               const response = await axios.put(endpoint);

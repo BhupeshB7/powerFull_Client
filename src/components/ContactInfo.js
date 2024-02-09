@@ -16,7 +16,7 @@ const ContactInfo = () => {
 
   useEffect(() => {
     // Fetch user details on component mount
-    axios.get('https://cute-puce-xerus.cyclic.app/api/contactInfo').then((response) => setUserDetails(response.data));
+    axios.get('https://mlm-eo5g.onrender.com/api/contactInfo').then((response) => setUserDetails(response.data));
   }, []);
 
   const handleInputChange = (e) => {
@@ -28,7 +28,7 @@ const ContactInfo = () => {
     const requestMethod = 'post';
 
     // Send request to save/update user details
-    axios[requestMethod]('https://cute-puce-xerus.cyclic.app/api/contactInfo', userDetails).then(() => {
+    axios[requestMethod]('https://mlm-eo5g.onrender.com/api/contactInfo', userDetails).then(() => {
       setIsEditMode(false);
     });
   };

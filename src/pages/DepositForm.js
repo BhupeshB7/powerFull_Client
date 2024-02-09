@@ -41,10 +41,10 @@ const DepositForm = () => {
 
     try {
       const response = await fetch(
-        "https://cute-puce-xerus.cyclic.app/api/deposit/userAmount",
+        "https://mlm-eo5g.onrender.com/api/deposit/userAmount",
         {
           //   const response = await fetch("http://localhost:5000/api/deposit/userAmount", {
-          //   const response = await fetch("https://cute-puce-xerus.cyclic.app/api/deposit/userAmount", {
+          //   const response = await fetch("https://mlm-eo5g.onrender.com/api/deposit/userAmount", {
           method: "POST",
           body: formDataToSend,
         }

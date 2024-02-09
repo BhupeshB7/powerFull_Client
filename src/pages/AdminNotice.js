@@ -19,13 +19,13 @@ function AdminNotice() {
   };
 
   useEffect(() => {
-    fetch('https://cute-puce-xerus.cyclic.app/api/notice/v1')
+    fetch('https://mlm-eo5g.onrender.com/api/notice/v1')
       .then((response) => response.json())
       .then((data) => setNotices(data));
   }, []);
 
   const addNotice = (text) => {
-    fetch('https://cute-puce-xerus.cyclic.app/api/notice/v1', {
+    fetch('https://mlm-eo5g.onrender.com/api/notice/v1', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
@@ -39,7 +39,7 @@ function AdminNotice() {
   };
 
   const deleteNotice = (id) => {
-    fetch(`https://cute-puce-xerus.cyclic.app/api/notice/notice/${id}`, {
+    fetch(`https://mlm-eo5g.onrender.com/api/notice/notice/${id}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())

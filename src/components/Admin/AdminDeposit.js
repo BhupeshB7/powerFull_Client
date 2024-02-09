@@ -45,7 +45,7 @@ function AdminDeposit() {
   const fetchUsers = async (page) => {
     try {
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/deposit/depositusers?page=${page}&search=${searchQuery}`
+        `https://mlm-eo5g.onrender.com/api/deposit/depositusers?page=${page}&search=${searchQuery}`
       );
 
       setDepositUsers(response.data.users);
@@ -61,7 +61,7 @@ function AdminDeposit() {
   const handleApproved = async (userID) => {
     try {
       await axios.patch(
-        `https://cute-puce-xerus.cyclic.app/api/deposit/activate/${userID}`
+        `https://mlm-eo5g.onrender.com/api/deposit/activate/${userID}`
       );
       // const updatedUser = response.data;
 
@@ -86,7 +86,7 @@ function AdminDeposit() {
   const deleteDeposit = async (id) => {
     try {
       const response = await axios.delete(
-        `https://cute-puce-xerus.cyclic.app/api/deposit/delete/${id}`
+        `https://mlm-eo5g.onrender.com/api/deposit/delete/${id}`
       );
       // console.log('Deposit deleted');
       alert(response.data);

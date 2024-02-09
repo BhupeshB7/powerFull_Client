@@ -25,7 +25,7 @@ const PasswordReset = () => {
       });
     } else {
       const res = await fetch(
-        "https://cute-puce-xerus.cyclic.app/api/auth/sendpasswordlink",
+        "https://mlm-eo5g.onrender.com/api/auth/sendpasswordlink",
         {
           method: "POST",
           headers: {
