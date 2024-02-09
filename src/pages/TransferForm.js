@@ -21,7 +21,7 @@ const TransferForm = ({ sourceUserId }) => {
 
     axios
       .get(
-        `https://cute-puce-xerus.cyclic.app/api/targetTransfer/name/${targetUserId}`
+        `https://mlm-eo5g.onrender.com/api/targetTransfer/name/${targetUserId}`
       )
       .then((response) => {
         if (response.data.name) {
@@ -48,7 +48,7 @@ const TransferForm = ({ sourceUserId }) => {
     try {
       // Send a request to the backend API
       const response = await axios.post(
-        "https://cute-puce-xerus.cyclic.app/api/transferTopupWallet",
+        "https://mlm-eo5g.onrender.com/api/transferTopupWallet",
         {
           sourceUserId,
           targetUserId,

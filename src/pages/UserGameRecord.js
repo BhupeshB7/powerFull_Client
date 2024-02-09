@@ -13,7 +13,7 @@ const UserGameRecord = ({ userId }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://cute-puce-xerus.cyclic.app/api/gameProfile/userDetails/${userId}/${currentPage}`
+          `https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/${userId}/${currentPage}`
         );
         setUserDetails(response.data.userResults);
         setTotalPages(response.data.totalPages);

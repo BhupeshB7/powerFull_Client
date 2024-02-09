@@ -13,7 +13,7 @@ const FundHistory = ({ userId }) => {
 const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('https://cute-puce-xerus.cyclic.app/api/users/profile', {
+      const response = await fetch('https://mlm-eo5g.onrender.com/api/users/profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,7 +32,7 @@ const navigate = useNavigate();
   useEffect(() => {
     const fetchPendingTransfers = async () => {
       try {
-        const response = await axios.get(`https://cute-puce-xerus.cyclic.app/api/pendingTransfers/${data._id}`);
+        const response = await axios.get(`https://mlm-eo5g.onrender.com/api/pendingTransfers/${data._id}`);
         setAllTransfers(response.data.allTransfers);
       } catch (error) {
         console.error("Error fetching transfers:", error);

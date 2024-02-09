@@ -154,7 +154,7 @@ const Rewards = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://cute-puce-xerus.cyclic.app/api/gift/gift-rewards/${userId}?page=${currentPage}`,
+        `https://mlm-eo5g.onrender.com/api/gift/gift-rewards/${userId}?page=${currentPage}`,
         {
           // params: { userId, page: currentPage, pageSize: 10 },
         }
@@ -190,7 +190,7 @@ const Rewards = () => {
     try {
       // const response = await fetch("http://localhost:5000/api/gift/checkCode", {
       const response = await fetch(
-        "http://localhost:5500/api/gift/checkCode",
+        "https://mlm-eo5g.onrender.com/api/gift/checkCode",
         {
           method: "POST",
           headers: {

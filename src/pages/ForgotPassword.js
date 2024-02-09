@@ -16,7 +16,7 @@ function ForgotPassword() {
     event.preventDefault();
 
     try {
-      await axios.post('https://cute-puce-xerus.cyclic.app/api/auth/forgot-password', { email });
+      await axios.post('https://mlm-eo5g.onrender.com/api/auth/forgot-password', { email });
       setIsEmailSent(true);
       toast.success('OTP sent to email');
       otpInputRef.current.focus();
@@ -29,7 +29,7 @@ function ForgotPassword() {
     event.preventDefault();
 
     try {
-      await axios.post('https://cute-puce-xerus.cyclic.app/api/auth/reset-password', { email, otp, newPassword });
+      await axios.post('https://mlm-eo5g.onrender.com/api/auth/reset-password', { email, otp, newPassword });
       toast.success('Password updated successfully');
       setEmail('');
       setOtp('');
