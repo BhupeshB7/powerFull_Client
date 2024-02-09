@@ -106,7 +106,7 @@ const ColorPridictionGame1 = () => {
   const fetchTimer = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-eo5g.onrender.com/api/user/getTimer/${sessionInfo.sessionId}`
+        `https://mlm-psi.vercel.app/api/user/getTimer/${sessionInfo.sessionId}`
       );
       setRemainingTime(response.data.time);
     } catch (error) {
@@ -263,7 +263,7 @@ const ColorPridictionGame1 = () => {
     if (remainingTime === 2) {
       try {
         const response = axios.post(
-          "https://mlm-eo5g.onrender.com/oneMinuteuserResult",
+          "https://mlm-psi.vercel.app/oneMinuteuserResult",
           {
             sessionId: sessionInfo.sessionId,
             userId: data.userId,
@@ -494,7 +494,7 @@ const ColorPridictionGame1 = () => {
   };
 
   return (
-    <div className="threeMinuteGame colorbackGround" onClick={handleInteraction}>
+    <div className="threeMinuteGame colorbackGround" >
       <div
         className="d-flex justify-content-end"
         style={{ position: "absolute", right: "20px", top: "30px" }}
@@ -625,7 +625,7 @@ const ColorPridictionGame1 = () => {
           }
         `}
                 </style>
-                <div className="timer">
+                <div className="timer" onClick={handleInteraction}>
                   {remainingTime <= 5 ? (
                     <div className="blur-background">
                       <div className="remaining" style={{ display: "flex" }}>
