@@ -77,7 +77,7 @@ const OneMinuteHistory = () => {
           >
             {data.map((item) => (
               <tr key={item._id}>
-                <td>{item.sessionIds}</td>
+                <td>{item.sessionId}</td>
                 <td>{item.number}</td>
                 {/* <td>{item.color}</td> */}
                 <td>{item.letter}</td>

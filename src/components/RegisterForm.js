@@ -170,7 +170,7 @@ const RegisterForm = () => {
                             fontWeight: "600",
                             marginTop: "16px",
                             marginBottom: "-15px",
-                            color: "salmon",
+                            color: "black",
                           }}
                         >
                           Welcome
@@ -179,15 +179,15 @@ const RegisterForm = () => {
                           style={{
                             fontWeight: "bold",
                             height: "2px",
-                            color: "pink",
+                            color: "black",
                           }}
                         />
                         <div
                           className="body"
                           style={{
-                            fontSize: "16px",
+                            fontSize: "18px",
                             marginTop: "-15px",
-                            color: "sandybrown",
+                            color: "rgb(18, 58, 32)",
                           }}
                         >
                           Register to continue
@@ -256,15 +256,15 @@ const RegisterForm = () => {
                             {showPassword ? (
                               <AiFillEyeInvisible
                                 style={{
-                                  fontSize: "23px",
-                                  color: "sandyBrown",
+                                  fontSize: "26px",
+                                  color: "rgb(98, 255, 213)",
                                 }}
                               />
                             ) : (
                               <AiFillEye
                                 style={{
-                                  fontSize: "23px",
-                                  color: "sandyBrown",
+                                  fontSize: "26px",
+                                  color: "rgb(205, 255, 205)",
                                 }}
                               />
                             )}
@@ -340,7 +340,7 @@ const RegisterForm = () => {
                         Sponsor Name: {sponsorName}
                       </div>
                     ) : (
-                      <div className="text-center text-danger">
+                      <div className="text-center text-danger bg-dark p-1" style={{borderRadius:'5px'}}>
                         Sponsor Name Not Found
                       </div>
                     )}
@@ -357,10 +357,9 @@ const RegisterForm = () => {
                   </button> */}
 
                     <Button
-                      variant="success"
                       type="submit"
                       disabled={!sponsorName}
-                      className="btn text-light m-3"
+                      className="btn-grad m-3"
                       style={{ letterSpacing: "4px", scale: "1.03" }}
                     >
                       {isSubmitting ? "processing..." : "Register"}

@@ -22,7 +22,7 @@ const ColorPridictionGame1 = () => {
   const [multiplicationFactor, setMultiplicationFactor] = useState(1);
   const [buttonColors, setButtonColors] = useState([]);
   const [gameResult, setGameResult] = useState("");
-  const [remainingTime, setRemainingTime] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(60);
   const [isBlinking, setIsBlinking] = useState(false);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -245,7 +245,7 @@ const ColorPridictionGame1 = () => {
       const randomIndex = Math.floor(Math.random() * predefinedColors1.length);
       return predefinedColors1[randomIndex];
     });
-
+ 
     setButtonColors(randomColors);
   }, []); // The empty dependency array ensures this effect runs only once
 
@@ -258,8 +258,21 @@ const ColorPridictionGame1 = () => {
     }
   }, [remainingTime]);
   // Listen to the scroll event to show/hide the button
+
   useEffect(() => {
     // Fetch data initially
+    if (remainingTime === 5) {
+      try {
+        const response = axios.post(
+          "https://mlm-psi.vercel.app/saveGameResult",
+          {
+            sessionId: sessionInfo.sessionId,
+          }
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
     if (remainingTime === 2) {
       try {
         const response = axios.post(

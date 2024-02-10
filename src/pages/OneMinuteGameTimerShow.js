@@ -21,7 +21,7 @@ const OneMinuteGameTimerShow = ({ sessionId }) => {
     fetchTimer();
 
     // Set up an interval to fetch updated data every 5 seconds (adjust as needed)
-    const intervalId = setInterval(fetchTimer, 5000);
+    const intervalId = setInterval(fetchTimer, 1000);
 
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(intervalId);
@@ -39,7 +39,9 @@ const OneMinuteGameTimerShow = ({ sessionId }) => {
     // Clear the timer when the component unmounts
     return () => clearInterval(timer);
   }, [remainingTime]);
+  useEffect(()=>{
 
+  },[sessionId,remainingTime]);
   const minutes = Math.floor(remainingTime / 60);
   const seconds = remainingTime % 60;
 
