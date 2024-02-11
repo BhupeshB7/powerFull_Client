@@ -818,7 +818,7 @@ const Dashboard1 = ({contactInfoList}) => {
   useEffect(() => {
     axios
       .get(
-        `https://mlm-psi.vercel.app/api/users/teamStructureRank/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/users/teamStructureRank/${data.userId}`
       )
       .then((response) => {
         const data = response.data;
@@ -839,7 +839,7 @@ const Dashboard1 = ({contactInfoList}) => {
     // Call the backend API to get the team structure
     axios
       .get(
-        `https://mlm-psi.vercel.app/api/users/teamStructure/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/users/teamStructure/${data.userId}`
       )
       .then((response) => {
         setActiveUsersByLevel(response.data);
