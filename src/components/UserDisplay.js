@@ -2061,7 +2061,7 @@ const Dashboard1 = ({ contactInfoList }) => {
                           </div>
                           <div className="col">
                             <div className="d-flex flex-row">
-                              <div className="p-2">
+                              <div className="p-1">
                                 <div className="d-flex flex-column income-border">
                                   <div className="p-2 text-light">
                                     Self Income
@@ -2074,7 +2074,7 @@ const Dashboard1 = ({ contactInfoList }) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="p-2">
+                              <div className="p-1">
                                 <div className="d-flex flex-column income-border">
                                   <div className="p-2 text-light">
                                     Team income
@@ -2087,9 +2087,9 @@ const Dashboard1 = ({ contactInfoList }) => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="p-2">
+                              <div className="">
                                 <div className="d-flex flex-column income-border">
-                                  <div className="p-2 text-light">Reward</div>
+                                  <div className="p-1 text-light">Reward</div>
                                   <div
                                     className="p-2"
                                     style={{ color: "cyan" }}

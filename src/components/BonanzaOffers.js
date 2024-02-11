@@ -48,7 +48,7 @@ const BonanzaOffers = () => {
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
         />
-        <button className='m-1' onClick={fetchData}>Check</button>
+        <button className='m-1 btn-grad' onClick={fetchData}>Check</button>
       </div>
       {error && <p className="error-message">{error}</p>}
       {downlineCount > 0 && (
