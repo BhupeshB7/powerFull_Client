@@ -137,7 +137,7 @@ function Setting() {
                         </div>
                       </div>
                       <div className="p-2">
-                        <div className="d-flex flex-column">
+                        <div className="d-flex flex-column income-border">
                           <div className="p-2 text-light">Reward</div>
                           <div className="p-2" style={{ color: "cyan" }}>
                             {data.rewards}

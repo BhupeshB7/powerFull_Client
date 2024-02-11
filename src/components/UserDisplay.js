@@ -841,11 +841,9 @@ const Dashboard1 = ({ contactInfoList }) => {
       )
       .then((response) => {
         const responseData = response.data;
-        if (responseData.rank === "Fresher") {
-          setRank("FRESHER");
-        } else {
+        
           setRank(responseData.rank);
-        }
+      
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
