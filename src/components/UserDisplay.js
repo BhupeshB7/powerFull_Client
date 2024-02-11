@@ -853,7 +853,7 @@ const Dashboard1 = ({contactInfoList}) => {
     const fetchTeamStructure = async (userId) => {
       try {
         const response = await axios.get(
-          `https://mlm-psi.vercel.app/api/users/team/${userId}`
+          `https://mlm-eo5g.onrender.com/api/users/team/${userId}`
         );
         setTeamStructure(response.data);
         setCurrentDownline(response?.data?.downline);
@@ -1938,16 +1938,11 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
                       style={{ letterSpacing: "2px" }}
                     >
                       <div className="text-light ms-5 fw-bold">
-                        {teamStructure &&
-                        teamStructure.activeDownlineCount !== null ? (
                           <div>
                             {/* <p>Rank: {getLevel(teamStructure.activeDownlineCount)}</p> */}
                             <h6 className="fw-400">Rank: {rank}</h6>
                             {/* Render other team structure data */}
                           </div>
-                        ) : (
-                          <p>Loading...</p>
-                        )}
                       </div>
                     </div>
                     {/* Balance Section */}
