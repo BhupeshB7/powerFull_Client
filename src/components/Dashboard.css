@@ -183,8 +183,7 @@ background-blend-mode: screen, overlay, hard-light, normal; */
   border: 1px solid #01b7ff;
 }
 .income-border {
- box-shadow: 0 3px rgba(255, 255, 255, 0.25);
- box-shadow: 1px 3px 6px rgba(255, 255, 255, 0.25);
+ box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.85);
  border-radius: 5px;
   padding: 4px;
   margin: 3px;
