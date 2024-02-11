@@ -642,12 +642,12 @@ const isTokenExpired = () => {
   const expireTime = getTokenExpireTime();
   return expireTime ? expireTime < Date.now() : true;
 };
-// 
+//
 const HappyNewYearAnimation = () => {
   return (
     <div className="d-flex justify-content-center align-items-center">
-      <div style={{ width: '100%', height:'800px' }}>
-       {/* <div style={{ height: '100%', paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
+      <div style={{ width: "100%", height: "800px" }}>
+        {/* <div style={{ height: '100%', paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
         <iframe
           title="Happy New Year Animation"
           src="https://giphy.com/embed/mJQdWQD4mWuC1NrzC2/video"
@@ -658,20 +658,20 @@ const HappyNewYearAnimation = () => {
           style={{ left: 0, position: 'absolute', top: 0 }}
         ></iframe>
       </div> */}
-      <h6 className="text-secondary text-center">Loading...</h6>
-    </div>
-    
-
+        <h6 className="text-secondary text-center">Loading...</h6>
+      </div>
     </div>
   );
 };
 
-const Dashboard = ({contactInfoList}) => {
+const Dashboard = ({ contactInfoList }) => {
   const [showAnimation, setShowAnimation] = useState(true);
 
   useEffect(() => {
     // Check if the flag is present in local storage
-    const hasAnimationShownBefore = localStorage.getItem('hasAnimationShownBefore');
+    const hasAnimationShownBefore = localStorage.getItem(
+      "hasAnimationShownBefore"
+    );
 
     if (hasAnimationShownBefore) {
       // Animation has been shown before, don't show it again
@@ -681,7 +681,7 @@ const Dashboard = ({contactInfoList}) => {
       const timer = setTimeout(() => {
         setShowAnimation(false);
         // Set the flag in local storage to indicate that the animation has been shown
-        localStorage.setItem('hasAnimationShownBefore', true);
+        localStorage.setItem("hasAnimationShownBefore", true);
       }, 1000);
 
       // Clear the timer when the component is unmounted
@@ -693,13 +693,13 @@ const Dashboard = ({contactInfoList}) => {
       {showAnimation ? (
         <HappyNewYearAnimation />
       ) : (
-        <Dashboard1 contactInfoList={contactInfoList}/>
+        <Dashboard1 contactInfoList={contactInfoList} />
       )}
     </div>
   );
 };
-// 
-const Dashboard1 = ({contactInfoList}) => {
+//
+const Dashboard1 = ({ contactInfoList }) => {
   // State declarations
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [data, setData] = useState([]);
@@ -762,7 +762,7 @@ const Dashboard1 = ({contactInfoList}) => {
           localStorage.setItem("GamerUserId", result.userId);
         }
         if (result.role) {
-          const userrole = result.role; 
+          const userrole = result.role;
           // console.log(userrole);
           if (userrole === "admin") {
             localStorage.setItem("check", "nfwnwen");
@@ -815,26 +815,46 @@ const Dashboard1 = ({contactInfoList}) => {
     fetchIncome();
   }, [data.userId]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://mlm-eo5g.onrender.com/api/users/teamStructureRank/${data.userId}`
+  //     )
+  //     .then((response) => {
+  //       const data = response.data;
+  //       if (data.rank === "Fresher") {
+  //         setRank("FRESHER");
+  //       } else {
+  //         // setRank(`Congratulations! You have achieved the rank: ${data.rank}.`);
+  //         setRank(`${data.rank}.`);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //       setRank("An error occurred while fetching the data.");
+  //     });
+  // }, [data.userId]);
   useEffect(() => {
     axios
       .get(
         `https://mlm-eo5g.onrender.com/api/users/teamStructureRank/${data.userId}`
       )
       .then((response) => {
-        const data = response.data;
-        if (data.rank === "Fresher") {
+        const responseData = response.data;
+        if (responseData.rank === "Fresher") {
           setRank("FRESHER");
         } else {
-          // setRank(`Congratulations! You have achieved the rank: ${data.rank}.`);
-          setRank(`${data.rank}.`);
+          setRank(responseData.rank);
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
         setRank("An error occurred while fetching the data.");
+      })
+      .finally(() => {
+        setIsLoading(false); // Set loading to false regardless of success or error
       });
   }, [data.userId]);
-
   useEffect(() => {
     // Call the backend API to get the team structure
     axios
@@ -920,8 +940,8 @@ const Dashboard1 = ({contactInfoList}) => {
 
   const handleWithdrawalSubmit = (e) => {
     e.preventDefault();
-     // Disable the withdraw button to prevent multiple clicks
-     document.getElementById("withdrawButton").disabled = true;
+    // Disable the withdraw button to prevent multiple clicks
+    document.getElementById("withdrawButton").disabled = true;
     const amount = Number(withdrawalAmount); // convert string to number
     fetch(
       `https://mlm-psi.vercel.app/api/withdraw/user/${data.userId}`,
@@ -987,7 +1007,7 @@ const Dashboard1 = ({contactInfoList}) => {
         `https://mlm-psi.vercel.app/api/transfer/${data._id}`,
         { amount: parseFloat(amount) }
       );
-  
+
       if (response.data.error) {
         // Handle error messages
         setMessage(response.data.error);
@@ -1002,7 +1022,7 @@ const Dashboard1 = ({contactInfoList}) => {
       setMessage(data.error);
     }
   };
-  
+
   //Fund move API and Function End
 
   const handleClick = async () => {
@@ -1116,7 +1136,7 @@ const Dashboard1 = ({contactInfoList}) => {
 
   // For User LogOut
   const handleLogout = () => {
-    localStorage.removeItem('hasAnimationShownBefore');
+    localStorage.removeItem("hasAnimationShownBefore");
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     window.location.href = "/login";
@@ -1138,10 +1158,9 @@ const Dashboard1 = ({contactInfoList}) => {
       position: "absolute", // or "fixed" depending on your layout
       top: "auto",
       bottom: "0px",
-      borderRadius:"4px"
+      borderRadius: "4px",
     },
   };
-  
 
   if (isLoading) {
     return (
@@ -1325,7 +1344,7 @@ const Dashboard1 = ({contactInfoList}) => {
       threeMonthsFromActivation.getMonth() + 3
     );
     const seventyDaysFromActivation = new Date(data.activationTime);
-seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
+    seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
 
     reactivationTime = seventyDaysFromActivation.toLocaleString("en-IN", {
       year: "numeric",
@@ -1347,7 +1366,7 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
       daysLeftForReactivation = `Account has been reactivated`;
     }
   }
- 
+
   const depositFormPage = () => {
     window.location.href = "/depositform";
   };
@@ -1440,7 +1459,7 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
                       >
                         PI
                       </a>
-                       <TimerComponent activationTime={data.activationTime}/> 
+                      <TimerComponent activationTime={data.activationTime} />
                       <h6
                         type="button"
                         data-bs-toggle="offcanvas"
@@ -1938,11 +1957,14 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
                       style={{ letterSpacing: "2px" }}
                     >
                       <div className="text-light ms-5 fw-bold">
+                        {isLoading ? (
+                          <p className="text-light">Loading...</p>
+                        ) : (
                           <div>
-                            {/* <p>Rank: {getLevel(teamStructure.activeDownlineCount)}</p> */}
                             <h6 className="fw-400">Rank: {rank}</h6>
                             {/* Render other team structure data */}
                           </div>
+                        )}
                       </div>
                     </div>
                     {/* Balance Section */}
@@ -2241,7 +2263,7 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
                                     }
                                   />
                                   <button
-                                  id="withdrawButton"
+                                    id="withdrawButton"
                                     className="form_button"
                                     disabled={!withdrawalAmount}
                                     style={{
@@ -2688,9 +2710,7 @@ seventyDaysFromActivation.setDate(seventyDaysFromActivation.getDate() + 70);
 
                           <div className="col-3">
                             <Link
-                              to={
-                                `https://wa.me/${contactInfoList.mobile}/?text=Hi!%20I'm%20interested%20to%20know%20more.`
-                              }
+                              to={`https://wa.me/${contactInfoList.mobile}/?text=Hi!%20I'm%20interested%20to%20know%20more.`}
                               className="contact-icon col-2"
                             >
                               <ImWhatsapp className="contact-svg" />
