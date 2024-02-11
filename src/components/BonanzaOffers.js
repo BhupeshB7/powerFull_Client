@@ -1,6 +1,7 @@
 // BonanzaOffers.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 const formatActivationTime = (activationTime) => {
   const options = {
     year: 'numeric',
@@ -48,7 +49,7 @@ const BonanzaOffers = () => {
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
         />
-        <button className='m-1 btn-grad' onClick={fetchData}>Check</button>
+        <Button  className='m-1 btn-grad' onClick={fetchData}>Check</Button>
       </div>
       {error && <p className="error-message">{error}</p>}
       {downlineCount > 0 && (
