@@ -51,10 +51,10 @@ const App = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://mlm-psi.vercel.app/delete/${id}`, { signal });
+      await axios.delete(`https://mlm-eo5g.onrender.com/delete/${id}`, { signal });
 
       // Fetch the updated images after deletion
-      const response = await axios.get('https://mlm-psi.vercel.app/images', { signal });
+      const response = await axios.get('https://mlm-eo5g.onrender.com/images', { signal });
       setImages(response.data);
     } catch (error) {
       if (axios.isCancel(error)) {
@@ -68,7 +68,7 @@ const App = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('https://mlm-psi.vercel.app/images', { signal });
+        const response = await axios.get('https://mlm-eo5g.onrender.com/images', { signal });
 console.log('Server Response:', response);
 setImages(response.data);
 
