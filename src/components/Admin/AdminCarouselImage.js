@@ -31,14 +31,14 @@ const App = () => {
       const formData = new FormData();
       formData.append('image', image);
 
-      await axios.post('https://mlm-psi.vercel.app/upload', formData, {
+      await axios.post('https://mlm-eo5g.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
       // Fetch the updated images after upload
-      const response = await axios.get('https://mlm-psi.vercel.app/images', { signal });
+      const response = await axios.get('https://mlm-eo5g.onrender.com/images', { signal });
       setImages(response.data);
     } catch (error) {
       if (axios.isCancel(error)) {

@@ -53,7 +53,7 @@ function ControlledCarousel() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('https://mlm-psi.vercel.app/images');
+        const response = await axios.get('https://mlm-eo5g.onrender.com/images');
         setImages(response.data);
       } catch (error) {
         console.error(error);

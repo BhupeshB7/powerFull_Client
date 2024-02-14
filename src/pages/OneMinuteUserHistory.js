@@ -13,9 +13,9 @@ const OneMinuteUserHistory = ({ userId }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-psi.vercel.app/api/gameProfile/userDetails/history/${userId}/${currentPage}`
+          `http://localhost:5500/api/gameProfile/userDetails/history/${userId}/${currentPage}`
         );
-        setUserDetails(response.data.userResults);
+        setUserDetails(response.data.userResults) ;
         setTotalPages(response.data.totalPages);
         setLastPage(response.data.userResults.length === 0);
       } catch (error) {
