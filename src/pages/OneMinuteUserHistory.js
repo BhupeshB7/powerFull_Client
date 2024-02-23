@@ -2,35 +2,36 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Modal, Button, Table } from "react-bootstrap";
 
-const OneMinuteUserHistory = ({ userId }) => {
+const OneMinuteUserHistory = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [lastPage, setLastPage] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
-
+const userId = localStorage.getItem('GamerUserId')
+const fetchUserDetails = async () => {
+  try {
+    const response = await axios.get(
+     'https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/history/PI21820725/1'
+      // `https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/history/${userId}/${currentPage}`
+    );
+    console.log("Response Data",response.data);
+    console.log("Response Data");
+    console.log("Response Data userResults:",response.data.userResults);
+    setUserDetails(response.data.userResults) ;
+    setTotalPages(response.data.totalPages);
+    setLastPage(response.data.userResults.length === 0);
+  } catch (error) {
+    console.error(error);
+  }
+};
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(
-          `https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/history/${userId}/${currentPage}`
-        );
-        console.log("Response Data",response.data);
-        console.log("Response Data userResults:",response.data.userResults);
-        setUserDetails(response.data.userResults) ;
-        setTotalPages(response.data.totalPages);
-        setLastPage(response.data.userResults.length === 0);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchUserDetails();
 
     // Polling mechanism to fetch data every 10 seconds (adjust as needed)
     const pollingInterval = setInterval(() => {
       fetchUserDetails();
-    }, 10000); // 10 seconds
+    }, 1000); // 10 seconds
 
     // Cleanup interval on component unmount
     return () => clearInterval(pollingInterval);
@@ -38,6 +39,7 @@ const OneMinuteUserHistory = ({ userId }) => {
 
   const handleShow = () => {
     setShowModal(true);
+    fetchUserDetails();
   };
 
   const handleClose = () => {

@@ -214,11 +214,11 @@ const ColorPridictionGame1 = () => {
   const predefinedLetter = ["Small", "Big"];
   // const predefinedNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   const predefinedColors1 = ["green", "red", "violet"];
-
+    const detailUserId = localStorage.getItem('GamerUserId')
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-psi.vercel.app/api/gameProfile/${data.userId}`
+        `https://mlm-psi.vercel.app/api/gameProfile/${detailUserId}`
       );
       const result = response.data;
       setProfile(result);
@@ -273,10 +273,11 @@ const ColorPridictionGame1 = () => {
         console.error(error);
       }
     }
-    if (remainingTime === 2) {
+    if (remainingTime === 3) {
+      console.log("Session Info Id",sessionInfo.sessionId)
       try {
         const response = axios.post(
-          "https://mlm-psi.vercel.app/oneMinuteuserResult",
+          "https://mlm-eo5g.onrender.com/oneMinuteuserResult",
           {
             sessionId: sessionInfo.sessionId,
             userId: data.userId,
