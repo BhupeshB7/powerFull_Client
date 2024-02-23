@@ -16,6 +16,7 @@ import QRCODE from "../assets/QRCODE3.jpg";
 import LOGO from "../assets/icon.png";
 import sound from "../assets/audio.mp3";
 import Rewards from "./Rewards";
+import GameWithdrawal from "./Game/GameWithdrawal";
 const PredictGame = ({ contactInfoList }) => {
   // const [targetColor, setTargetColor] = useState("");
   // const [targetNumber, setTargetNumber] = useState("");
@@ -162,14 +163,15 @@ const PredictGame = ({ contactInfoList }) => {
     UTR: "",
   });
   const [formData1, setFormData1] = useState({
-    userId: "",
-    name: "",
+    userId: gameData.userId,
+    name: gameData.accountHolderName,
     amount: "",
-    UPI: "",
-    accountNo: "",
-    IFSCCODE: "",
+    UPI: gameData.GPay,
+    accountNo: gameData.accountNo,
+    IFSCCODE: gameData.IFSCCODE,
   });
   const handleChange = (e) => {
+   
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -178,38 +180,15 @@ const PredictGame = ({ contactInfoList }) => {
   };
   const handleChange1 = (e) => {
     const { name, value } = e.target;
-
-    // Check if the field is 'accountNo' and gameData is available
-    if (name === "accountNo") {
-      setFormData1({
-        ...formData1,
-        [name]: gameData.accountNo, // Set the value from gameData
-      });
-    }
-    if (name === "UPI") {
-      setFormData1({
-        ...formData1,
-        [name]: gameData.GPay, // Set the value from gameData
-      });
-    }
-    if (name === "name") {
-      setFormData1({
-        ...formData1,
-        [name]: gameData.name, // Set the value from gameData
-      });
-    }
-    if (name === "userId") {
-      setFormData1({
-        ...formData1,
-        [name]: gameData.userId, // Set the value from gameData
-      });
-    } else {
+    console.log("gameData:", gameData);
+    console.log("formData1:", formData1);
       setFormData1({
         ...formData1,
         [name]: value,
       });
-    }
+    
   };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -245,6 +224,7 @@ const PredictGame = ({ contactInfoList }) => {
   // const userId = "PI17218169";
 
   const handleSubmit = async (e) => {
+    
     if (formData.amount < 100) {
       alert("Minimum Withdrawal Amount 100");
       return;
@@ -273,6 +253,10 @@ const PredictGame = ({ contactInfoList }) => {
     }
   };
   const handleSubmitWithdrawal = async (e) => {
+    // console.log("gameData:", gameData);
+  console.log("formData1:", formData1);
+  console.log("Form submitted with data:", formData1);
+  alert("Form submitted with data:", formData1);
     if (formData1.amount < 110) {
       alert("Minimum Withdrawal Amount is 110");
       return;
@@ -504,15 +488,7 @@ const PredictGame = ({ contactInfoList }) => {
                 >
                   Deposit
                 </Button>
-                <Button
-                  variant="outline-warning"
-                  className="m-1"
-                  style={{ borderRadius: "20px" }}
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop2"
-                >
-                  Withdraw
-                </Button>
+                <GameWithdrawal gameData={gameData}/>
               </div>
               <div className="wallet">
                 <div className="content">
@@ -564,6 +540,7 @@ const PredictGame = ({ contactInfoList }) => {
                 </Col>
               </Row>
             </Container>
+            
             <Rewards />
             <div className="notification-area">
               <div className="notification">
@@ -934,7 +911,7 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="userId"
                           placeholder="UserId"
-                          value={gameData ? gameData.userId : formData1.userId}
+                          value={ formData1.userId}
                           onChange={handleChange1}
                           disabled={gameData ? true : false}
                           // disabled
@@ -946,11 +923,7 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="name"
                           placeholder="Name"
-                          value={
-                            gameData
-                              ? gameData.accountHolderName
-                              : formData1.name
-                          }
+                          value={formData1.name}
                           onChange={handleChange1}
                           disabled={gameData ? true : false}
                           required
@@ -972,7 +945,7 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="GPay"
                           placeholder="Payment UPI "
-                          value={gameData ? gameData.GPay : formData1.UPI}
+                          value={formData1.UPI}
                           onChange={handleChange1}
                           disabled={gameData ? true : false}
                           required
@@ -984,9 +957,7 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="accountNo"
                           placeholder="Account No"
-                          value={
-                            gameData ? gameData.accountNo : formData1.accountNo
-                          }
+                          value={formData1.accountNo }
                           onChange={handleChange1}
                           disabled={gameData ? true : false} // Disable the input if gameData is available
                           required
@@ -999,9 +970,7 @@ const PredictGame = ({ contactInfoList }) => {
                           type="text"
                           name="IFSCCODE"
                           placeholder="IFSCCODE..."
-                          value={
-                            gameData ? gameData.ifscCode : formData1.IFSCCODE
-                          }
+                          value={formData1.IFSCCODE}
                           onChange={handleChange1}
                           disabled={gameData ? true : false}
                           required

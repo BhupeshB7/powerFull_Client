@@ -15,6 +15,8 @@ const OneMinuteUserHistory = ({ userId }) => {
         const response = await axios.get(
           `https://mlm-eo5g.onrender.com/api/gameProfile/userDetails/history/${userId}/${currentPage}`
         );
+        console.log("Response Data",response.data);
+        console.log("Response Data userResults:",response.data.userResults);
         setUserDetails(response.data.userResults) ;
         setTotalPages(response.data.totalPages);
         setLastPage(response.data.userResults.length === 0);
