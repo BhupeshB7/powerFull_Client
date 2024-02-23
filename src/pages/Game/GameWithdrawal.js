@@ -35,7 +35,7 @@ const GameWithdrawal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+//    console.log('formdata:',formData1)
     if (formData1.amount < 110) {
       setAlertInfo({ show: true, variant: 'danger', message: 'Minimum Withdrawal Amount is 110' });
       setLoading(false);
