@@ -3,15 +3,20 @@ import Modal from "react-modal";
 import { FaTimes } from "react-icons/fa";
 import { Alert, Button } from "react-bootstrap";
 import { Spinner } from "react-bootstrap";
-const GameWithdrawal = ({ gameData }) => {
+const GameWithdrawal = () => {
+    const gameUserId = localStorage.getItem('GamerUserId');
+    const gameAccountNo = localStorage.getItem('GameAccountName');
+    const GameIFSCCODE = localStorage.getItem('GamerIFSCCODE');
+    const GameAccountNo = localStorage.getItem('GameAccountNo');
+    const GameUPI = localStorage.getItem('GameGPay');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [formData1, setFormData1] = useState({
-    userId: gameData.userId,
-    name: gameData.accountHolderName,
+    userId: gameUserId,
+    name: gameAccountNo,
     amount: "",
-    UPI: gameData.GPay,
-    accountNo: gameData.accountNo,
-    IFSCCODE: gameData.ifscCode,
+    UPI: GameUPI,
+    accountNo: GameAccountNo,
+    IFSCCODE: GameIFSCCODE,
   });
   const [loading, setLoading] = useState(false);
   const [alertInfo, setAlertInfo] = useState({ show: false, variant: '', message: '' });
@@ -26,7 +31,6 @@ const GameWithdrawal = ({ gameData }) => {
     // Example: display an alert with the error message
     // alert("Withdrawal request failed: " + errorData.error);
     setAlertInfo({ show: true, variant: 'danger', message: errorData.error });
-      
   };
   const handleSubmit = async (e) => {
     e.preventDefault();

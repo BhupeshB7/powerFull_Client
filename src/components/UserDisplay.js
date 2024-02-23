@@ -760,6 +760,10 @@ const Dashboard1 = ({ contactInfoList }) => {
         // Store userId in localStorage
         if (result.userId) {
           localStorage.setItem("GamerUserId", result.userId);
+          localStorage.setItem("GameAccountName", result.accountHolderName);
+          localStorage.setItem("GamerIFSCCODE", result.ifscCode);
+          localStorage.setItem("GameAccountNo", result.accountNo);
+          localStorage.setItem("GameGPay", result.GPay);
         }
         if (result.role) {
           const userrole = result.role;
