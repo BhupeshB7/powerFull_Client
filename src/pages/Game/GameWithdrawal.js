@@ -131,7 +131,7 @@ const GameWithdrawal = () => {
                 className="text-start text-warning"
                 style={{ border: "1px solid yellow", padding: "7px" }}
               >
-                IFSC CODE{formData1.IFSCCODE}
+                IFSC CODE: {formData1.IFSCCODE}
               </h6>
               <h6
                 className="text-end text-warning"
@@ -151,11 +151,12 @@ const GameWithdrawal = () => {
                     margin: "8px",
                     padding: "7px",
                   }}
+                  required
                 />
               </label>
               {loading ? (
-                <div>
-                  Submitting... <Spinner animation="border" />
+                <div className="d-flex" style={{alignItems:'center',justifyContent:'center'}}>
+                  Please wait... <Spinner animation="border" />
                 </div>
               ) : (
                 <Button variant="warning" type="submit">Withdraw</Button>
