@@ -675,7 +675,7 @@ const ColorPridictionGame1 = () => {
                         <p className="text-danger">{error}</p>
                       ) : (
                         <>
-                          <p className="text-warning">
+                          <p style={{color:'rgb(255, 106, 106)'}}>
                             {" "}
                             {sessionInfo.sessionId}
                           </p>
@@ -698,12 +698,15 @@ const ColorPridictionGame1 = () => {
                         }
                       >
                         {/* {formattedMinutes}:{formattedSeconds} */}
+                        <div className="game_timer">
+
                         <p className="text-center text-light">
                           <b style={timerStyle}>
                             {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                           </b>{" "}
                           (MM:SS)
                         </p>
+                        </div>
                       </b>
                     </h1>
                   </div>

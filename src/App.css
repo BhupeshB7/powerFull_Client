@@ -823,8 +823,9 @@ ul li:nth-child(3) {
   border-radius: 20px;
   margin-top: -55px;
   height: 125px;
-
-  background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+  background-image: url('https://img.freepik.com/free-vector/blue-neon-geometric-shapes-vector-digital-technology_53876-111848.jpg?t=st=1708771147~exp=1708774747~hmac=eaa46b4ccaedf7a9ec0c90be605339544d000029f1f645386658b2e1e549c6b7&w=996');
+  background-position: center;
+  background-size: 100% 100%;
 }
 .time_box_2 {
   display: flex;
@@ -847,21 +848,21 @@ ul li:nth-child(3) {
   height: 115px;
   width: 90%;
   /* background: rgb(255, 182, 73); */
-  background: #c31432; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #240b36,
-    #c31432
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #240b36,
-    #c31432
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background-image: url('https://img.freepik.com/free-vector/digital-technology-background-vector-with-blue-neon-geometric-shapes_53876-111852.jpg?t=st=1708770764~exp=1708774364~hmac=8d5bcd9d5d389b4195c0e953ece45c155fff43b72b17feb23d8feec477958667&w=996');
+  background-position: center;
+  background-size: 100% 100%;
   margin: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   margin-top: -30px;
+  /* transform: rotateY(180deg);  */
+  color: rgb(255, 106, 106);
+}
+.game_timer{
+  background-image: url('https://img.freepik.com/free-vector/gradient-black-background-with-cubes_23-2149152314.jpg?t=st=1708771988~exp=1708775588~hmac=9dd0553253c02dfa3e8279295a0058eb06f1358ebe8b7ea72115859ebc2c5ec2&w=996');
+  background-position: center;
+  background-size: 100% 100%;
+  padding: 7px;
+  border-radius: 12px;
 }
 .game_choice_color {
   animation: fadeInAnimation ease 4s;
