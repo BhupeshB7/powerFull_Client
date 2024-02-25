@@ -1206,7 +1206,13 @@ ul li:nth-child(3) {
   color: #fff;
   text-decoration: none;
 }
-
+.teamStructure_user{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  flex-direction: column;
+}
 .loginBG {
   background-color: hsla(0, 100%, 50%, 1);
   background-image: radial-gradient(

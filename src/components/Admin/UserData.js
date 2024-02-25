@@ -351,6 +351,7 @@ import AdminCarouselImage from "./AdminCarouselImage";
 import NewUsersChart from "./NewUsersChart";
 import UserChart from "./UserChart";
 import BonanzaOffers from "../BonanzaOffers";
+import TeamStructureModal from "./TeamStructureModal";
 
 const itemsPerPage = 20;
 
@@ -525,6 +526,7 @@ function UserData() {
         <UserChart />
         <NewUsersChart />
         <BonanzaOffers/>
+        <TeamStructureModal/>
         <Row className="m-3">
           <Col sm={12} md={6} lg={4} className="balanceCard1">
             <div>

@@ -153,6 +153,7 @@ const Home = ({ contactInfoList }) => {
      
       <div className="home-content">
         {/* Home Section */}
+      
         <div className="home-section">
           <div className="home-container d-flex ">
             <h1>Welcome to</h1>
