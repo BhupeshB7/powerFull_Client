@@ -571,6 +571,7 @@ function UserData() {
         placeholder="Search users..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        style={{maxWidth:'290px'}}
       />
 
       <div className="table-responsive">

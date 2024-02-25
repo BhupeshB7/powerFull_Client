@@ -72,6 +72,8 @@ const TeamStructureModal = () => {
           <Modal.Title>TEAM STRUCTURE</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div div className='table-responsive'>
+
           <table className="table table-bordered">
             <thead className="fw-300">
               <tr className="text-light">
@@ -96,6 +98,8 @@ const TeamStructureModal = () => {
               ))}
             </tbody>
           </table>
+          </div>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
