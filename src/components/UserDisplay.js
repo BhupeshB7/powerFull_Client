@@ -1949,7 +1949,7 @@ const Dashboard1 = ({ contactInfoList }) => {
                     )}
 
                     <div className="id-status" style={{ letterSpacing: "2px" }}>
-                      {/* <ReTopup userId={data.userId}/> */}
+                      <ReTopup topupWallet={data.topupWallet}/>
                       <h6 className="text-light ms-5 fw-bold">
                         ID Status: {data.is_active ? "Active" : "Inactive"}
                       </h6>

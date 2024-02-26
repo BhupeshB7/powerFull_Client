@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Dhurjati&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dhurjati&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Dhurjati&family=Open+Sans:wght@700&family=Roboto:ital,wght@0,500;0,700;0,900;1,900&family=Rubik+Glitch+Pop&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap');
 * {
   font-size: 17px;
   margin: 0;
@@ -1978,4 +1981,53 @@ color: #000428 !important;
 
 .CloseButton:hover {
   text-decoration: underline;
+}
+.retopUp_container {
+  position: fixed;
+  bottom: 10%; /* Show from bottom 20% above */
+  left: 50%; /* Horizontal center */
+  z-index: 10000 !important;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
+  border-radius: 27px;
+  width: 140px;
+  height: 45px;
+  padding-top: 15px;
+}
+
+.retopUp_container p{
+  color: #190909;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  /* font-family: 'Dhurjati', sans-serif; */
+  font-family: "Rubik", sans-serif;
+  font-family: 'Agbalumo', system-ui;
+}
+.retopUp_content{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  padding: 7px;
+  gap:13px;
+}
+.retopUp_input{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  flex-direction: column;
+}
+.retopUp_input input{
+  border: 2px solid #302020;
+  background: #ffcdcd;
+  color: #160a0a !important;
+}
+.retopUp_input ::placeholder{
+  color: #464647;
 }
