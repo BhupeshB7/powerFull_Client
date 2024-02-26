@@ -87,7 +87,7 @@ function UserBalance() {
     setAbortController(newController);
 
     try {
-      await axios.post('https://mlm-psi.vercel.app/api/auth/resetBalances', null, { signal: newController.signal });
+      await axios.post('https:///mlm-psi.vercel.app/api/auth/resetBalances', null, { signal: newController.signal });
       setAlertVariant('success');
       setAlertMessage('Balances reset successfully.');
     } catch (error) {
@@ -118,7 +118,7 @@ function UserBalance() {
         </Alert>
       )}
        <h6 className='text-danger'>Set All User Balance 0</h6>
-      <Button variant='primary' onClick={handleShowModal}>
+      <Button variant='primary' disabled onClick={handleShowModal}>
         Reset Balances to 0
       </Button>
 
