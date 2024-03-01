@@ -1995,11 +1995,23 @@ color: #000428 !important;
   background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);
   border-radius: 27px;
   width: 140px;
-  height: 45px;
-  padding-top: 15px;
+  height: 55px;
+ padding: 0px;
+ flex-direction: column;
+ box-shadow: inset 0 0 1em rgb(254, 154, 154),0 0 1.3 rgb(249, 167, 167);
 }
-
-.retopUp_container p{
+.retopUp_container::before{
+  content: "";
+  position: absolute;
+  top: auto;
+  width: 100%;
+  height:70%;
+  bottom: -34%;
+  background: #ffafaf;
+  transform: perspective(5em) rotateX(40deg) scale(1,0.40);
+  filter: blur(20px);
+}
+.retopUp_container h6{
   color: #190909;
   font-weight: 700;
   font-size: 18px;
@@ -2027,6 +2039,7 @@ color: #000428 !important;
   border: 2px solid #302020;
   background: #ffcdcd;
   color: #160a0a !important;
+  width: 280px;
 }
 .retopUp_input ::placeholder{
   color: #464647;
