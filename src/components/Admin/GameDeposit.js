@@ -54,7 +54,7 @@ function  GameDeposit() {
 
   useEffect(() => {
     // Make a GET request to your backend API endpoint
-    fetch('https://mlm-psi.vercel.app/api/statistics') // Assuming your backend is running on the same host/port
+    fetch('https://mlm-eo5g.onrender.com/api/statistics') // Assuming your backend is running on the same host/port
       .then((response) => response.json())
       .then((data) => {
         setStatistics(data);
@@ -68,7 +68,7 @@ function  GameDeposit() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-psi.vercel.app/api/deposit/history?page=${currentPage}`
+          `https://mlm-eo5g.onrender.com/api/deposit/history?page=${currentPage}`
         );
         const { gameHistory, paginationInfo } = response.data;
         setGameHistory(gameHistory);
@@ -92,7 +92,7 @@ function  GameDeposit() {
     }
   
     try {
-      const response = await axios.put(`https://mlm-psi.vercel.app/api/approve/${id}`, { amount });
+      const response = await axios.put(`https://mlm-eo5g.onrender.com/api/approve/${id}`, { amount });
       alert(response.data.message);
       
       // Update the status in the gameHistory array
@@ -122,7 +122,7 @@ function  GameDeposit() {
   const deleteDeposit = async (id) => {
     try {
       const response = await axios.delete(
-        `https://mlm-psi.vercel.app/api/gameDeposit/delete/${id}`
+        `https://mlm-eo5g.onrender.com/api/gameDeposit/delete/${id}`
       );
       // console.log('Deposit deleted');
       alert(response.data);

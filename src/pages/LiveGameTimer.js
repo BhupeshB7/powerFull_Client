@@ -11,7 +11,7 @@ const LiveGameTimer = () => {
 
   const handleSetTimer = async () => {
     try {
-      const response = await axios.post('https://mlm-psi.vercel.app/api/admin/setTimer', { time });
+      const response = await axios.post('https://mlm-eo5g.onrender.com/api/admin/setTimer', { time });
       setMessage(response.data.message);
       setError('');
     } catch (error) {

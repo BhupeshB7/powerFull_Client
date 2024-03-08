@@ -37,7 +37,7 @@ const UserWallet = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://mlm-psi.vercel.app/api/users/userWalletUpdating/",
+        "https://mlm-eo5g.onrender.com/api/users/userWalletUpdating/",
         {
           userId,
           balance,
@@ -57,7 +57,7 @@ const UserWallet = () => {
   const fetchUserAccountDetails = async () => {
     try {
       const response = await axios.get(
-        "https://mlm-psi.vercel.app/api/users/sponsors",
+        "https://mlm-eo5g.onrender.com/api/users/sponsors",
         {
           params: {
             userId: userId,

@@ -17,7 +17,7 @@ function ChangePassword() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-psi.vercel.app/api/users/profile",
+        "https://mlm-eo5g.onrender.com/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -72,7 +72,7 @@ function ChangePassword() {
     if (!hasError) {
       try {
         const response = await fetch(
-          "https://mlm-psi.vercel.app/api/change-password",
+          "https://mlm-eo5g.onrender.com/api/change-password",
           {
             method: "POST",
             headers: {

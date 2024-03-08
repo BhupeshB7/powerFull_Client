@@ -63,7 +63,7 @@ const GameWithdrawalForm = () => {
 const fetchData = async () => {
   try {
     const response = await axios.get(
-      `https://mlm-psi.vercel.app/api/game/withdrawal/profile/${userId}`,
+      `https://mlm-eo5g.onrender.com/api/game/withdrawal/profile/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ const fetchData = async () => {
     try {
       // Make API call to update profile using profileData state
       const response = await axios.post(
-        `https://mlm-psi.vercel.app/api/game/withdrawal/profileUpdate/${userId}`,
+        `https://mlm-eo5g.onrender.com/api/game/withdrawal/profileUpdate/${userId}`,
         profileData,
         {
           headers: {

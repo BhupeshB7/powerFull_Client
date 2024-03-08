@@ -82,7 +82,7 @@ const ColorPridictionGame1 = () => {
   const fetchSessionInfo = async () => {
     try {
       const response = await axios.get(
-        "https://mlm-psi.vercel.app/getLatestSession"
+        "https://mlm-eo5g.onrender.com/getLatestSession"
       );
       setSessionInfo(response.data);
     } catch (error) {
@@ -106,7 +106,7 @@ const ColorPridictionGame1 = () => {
   const fetchTimer = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-psi.vercel.app/api/user/getTimer/${sessionInfo.sessionId}`
+        `https://mlm-eo5g.onrender.com/api/user/getTimer/${sessionInfo.sessionId}`
       );
       setRemainingTime(response.data.time);
     } catch (error) {
@@ -176,7 +176,7 @@ const ColorPridictionGame1 = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-psi.vercel.app/api/users/profile",
+          "https://mlm-eo5g.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -218,7 +218,7 @@ const ColorPridictionGame1 = () => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-psi.vercel.app/api/gameProfile/${detailUserId}`
+        `https://mlm-eo5g.onrender.com/api/gameProfile/${detailUserId}`
       );
       const result = response.data;
       setProfile(result);
@@ -264,7 +264,7 @@ const ColorPridictionGame1 = () => {
     if (remainingTime === 5) {
       try {
         const response = axios.post(
-          "https://mlm-psi.vercel.app/saveGameResult",
+          "https://mlm-eo5g.onrender.com/saveGameResult",
           {
             sessionId: sessionInfo.sessionId,
           }
@@ -337,7 +337,7 @@ const ColorPridictionGame1 = () => {
       alert(`Bet Place SuccessFully! of ${betAmount} Rs.`);
       try {
         const response = await axios.post(
-          "https://mlm-psi.vercel.app/oneMinuteHistory",
+          "https://mlm-eo5g.onrender.com/oneMinuteHistory",
           {
             userId: data.userId,
             betAmount: reducedBetAmount,
@@ -353,7 +353,7 @@ const ColorPridictionGame1 = () => {
       }
       try {
         const response = await axios.post(
-          "https://mlm-psi.vercel.app/api/gameProfile/startGame",
+          "https://mlm-eo5g.onrender.com/api/gameProfile/startGame",
           {
             userId: data.userId, // Make sure userId is defined or passed as a prop
             entryFee: betAmount,

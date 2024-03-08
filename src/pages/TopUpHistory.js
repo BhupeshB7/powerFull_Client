@@ -16,7 +16,7 @@ function TopUpHistory() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://mlm-psi.vercel.app/api/users/profile",
+        "https://mlm-eo5g.onrender.com/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ function TopUpHistory() {
       try {
         const response = await axios.get(
           // `http://localhost:5000/api/topupHistory/${userId}`
-          `https://mlm-psi.vercel.app/api/topupHistory/${data.userId}`
+          `https://mlm-eo5g.onrender.com/api/topupHistory/${data.userId}`
         );
         const { topUpdata, currentPage, totalPages } = response.data;
         // console.log(topUpdata);

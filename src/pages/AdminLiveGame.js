@@ -47,7 +47,7 @@ const AdminLiveGame = () => {
     if (selectedColor && selectedNumber && selectedSize) {
       // Send the data to the backend along with the session ID
       axios
-        .post("https://mlm-psi.vercel.app/api/saveSelection", {
+        .post("https://mlm-eo5g.onrender.com/api/saveSelection", {
           sessionId: newSessionId,
           color: selectedColor,
           number: selectedNumber,

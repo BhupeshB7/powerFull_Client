@@ -21,7 +21,7 @@ const Task = () => {
   useEffect(() => {
     const fetchUserId = async () => {
       try {
-        const response = await fetch('https://mlm-psi.vercel.app/api/users/profile', {
+        const response = await fetch('https://mlm-eo5g.onrender.com/api/users/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -75,7 +75,7 @@ const Task = () => {
         //  const userId = userId;
         // Assuming you have the user ID of the logged-in user stored somewhere in your application state
         // const userId = '643ef2a4f3f52691d4459259'; // Replace this with the actual user ID of the logged-in user
-        const userTaskResponse = await axios.get(`https://mlm-psi.vercel.app/userTasks/${taskId}/${userId}`);
+        const userTaskResponse = await axios.get(`https://mlm-eo5g.onrender.com/userTasks/${taskId}/${userId}`);
         // console.log(`Task Page user Id - ${userId} `)
         setUserTaskStatus(userTaskResponse.data.completed);
       } catch (error) {

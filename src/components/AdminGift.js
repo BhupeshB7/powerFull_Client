@@ -11,7 +11,7 @@ const AdminGift = () => {
 
   const handleGenerateCode = async () => {
     try {
-      const response = await fetch('https://mlm-psi.vercel.app/api/gift/generateCode', {
+      const response = await fetch('https://mlm-eo5g.onrender.com/api/gift/generateCode', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const OneMinuteGameTimerShow = ({ sessionId }) => {
 
   const fetchTimer = async () => {
     try {
-      const response = await axios.get(`https://mlm-psi.vercel.app/api/user/getTimer/${sessionId}`);
+      const response = await axios.get(`https://mlm-eo5g.onrender.com/api/user/getTimer/${sessionId}`);
       setRemainingTime(response.data.time);
     } catch (error) {
       console.error(error);

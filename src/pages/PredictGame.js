@@ -62,7 +62,7 @@ const PredictGame = ({ contactInfoList }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://mlm-psi.vercel.app/api/game/withdrawal/profile/${userId}`,
+          `https://mlm-eo5g.onrender.com/api/game/withdrawal/profile/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${token1}`,
@@ -116,7 +116,7 @@ const PredictGame = ({ contactInfoList }) => {
     };
   }, []);
   useEffect(() => {
-    fetch("https://mlm-psi.vercel.app/api/notice/v1")
+    fetch("https://mlm-eo5g.onrender.com/api/notice/v1")
       .then((response) => response.json())
       .then((data) => setNotices(data));
   }, []);
@@ -194,7 +194,7 @@ const PredictGame = ({ contactInfoList }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://mlm-psi.vercel.app/api/users/profile",
+          "https://mlm-eo5g.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -232,7 +232,7 @@ const PredictGame = ({ contactInfoList }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://mlm-psi.vercel.app/api/depositSubmit",
+        "https://mlm-eo5g.onrender.com/api/depositSubmit",
         {
           method: "POST",
           headers: {
@@ -264,7 +264,7 @@ const PredictGame = ({ contactInfoList }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://mlm-psi.vercel.app/api/withdrawalSubmit",
+        "https://mlm-eo5g.onrender.com/api/withdrawalSubmit",
         {
           method: "POST",
           headers: {
@@ -302,7 +302,7 @@ const PredictGame = ({ contactInfoList }) => {
   // const fetchGameHistory = async () => {
   //   try {
   //     const response = await axios.get(
-  //       `https://mlm-psi.vercel.app/api/game/history/${userId}`
+  //       `https://mlm-eo5g.onrender.com/api/game/history/${userId}`
   //     );
   //     setGameHistory(response.data);
   //   } catch (error) {
@@ -332,7 +332,7 @@ const PredictGame = ({ contactInfoList }) => {
   const fetchWithdrawalHistory = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-psi.vercel.app/api/history/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/history/${data.userId}`
       );
       setWithdrawalHistory(response.data);
     } catch (error) {
@@ -346,7 +346,7 @@ const PredictGame = ({ contactInfoList }) => {
   const fetchDepositHistory = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-psi.vercel.app/api/deposit/history/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/deposit/history/${data.userId}`
       );
       setDepositHistory(response.data);
     } catch (error) {
@@ -403,7 +403,7 @@ const PredictGame = ({ contactInfoList }) => {
   const getGamerProfile = async () => {
     try {
       const response = await axios.get(
-        `https://mlm-psi.vercel.app/api/gameProfile/${data.userId}`
+        `https://mlm-eo5g.onrender.com/api/gameProfile/${data.userId}`
       );
       const result = response.data;
       setProfile(result);

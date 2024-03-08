@@ -10,7 +10,7 @@ const LiveGameTimerShow = () => {
 
     const fetchTimer = async () => {
       try {
-        const response = await axios.get('https://mlm-psi.vercel.app/api/user/getTimer');
+        const response = await axios.get('https://mlm-eo5g.onrender.com/api/user/getTimer');
         console.log(response.data);  // Log the response data
         setRemainingTime(response.data.time);
       } catch (error) {
