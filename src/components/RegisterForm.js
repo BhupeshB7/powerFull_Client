@@ -18,7 +18,7 @@ const RegisterForm = () => {
     mobile: "",
     sponsorId: "",
   });
-
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   function onClickHome() {
     navigate("/");
@@ -93,6 +93,10 @@ const RegisterForm = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.mobile.trim()) {
+      setErrorMessage('Please enter mobile');
+      return;
+    }
     setIsSubmitting(true);
     try {
       const res = await axios.post(
@@ -293,8 +297,9 @@ const RegisterForm = () => {
                         pattern="[0-9]{1}[0-9]{9}"
                         onBlur={handleFocus}
                         focused={focused.toString()}
-                        // required
+                        required
                       />
+                      {errorMessage && <p className="text-danger bg-white text-center"style={{borderRadius:'7px'}}>{errorMessage}</p>}
                       <span>Mobile No should be 10 Digit, Or only number</span>
                     </div>
                     <div className="form_input">

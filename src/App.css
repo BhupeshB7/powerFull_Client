@@ -1644,7 +1644,7 @@ color: green !important;
 }
 .gameProfile-Update {
   background-image: linear-gradient(to top, #1d6363 0%, #330867 100%);
-  height: 98vh;
+  height: 100%;
   width: 100%;
 }
 form .Game_withdrawal_form {
