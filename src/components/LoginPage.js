@@ -131,7 +131,7 @@ const LoginForm = ({ setToken }) => {
                 <div className="form_input">
                   <ReCAPTCHA
                     style={{ background: "transparent", margin: "10px" }}
-                    sitekey="6LesDAkmAAAAANop2voHvPE_NCuh17wZf7J85ybm"
+                    sitekey={"6LdxqJ0pAAAAAPDd-7cTDkPo01brJJpc1ezDcVF4"}
                     onChange={handleCaptchaChange}
                     ref={captchaRef}
                   />
