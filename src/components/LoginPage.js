@@ -2,25 +2,29 @@ import React, { useRef, useState } from "react";
 import logo from "../assets/PI1.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReCAPTCHA from "react-google-recaptcha";
 import { Link } from "react-router-dom";
 import spinner2 from "../assets/spinner2.gif";
+import Captcha from "./Captcha";
 const LoginForm = ({ setToken }) => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [password1, setPassword1] = useState(true);
   const [captchaResponse, setCaptchaResponse] = useState("");
   const [error, setError] = useState(null);
-  const captchaRef = useRef();
   //for Login Submission
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
+  const handleCaptchaVerification = (verified) => {
+    setCaptchaVerified(verified);
+  };
   // const BASE_URl = process.env.BASE_URL
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    captchaRef.current.reset();
     try {
       const response = await fetch(
+        // "http://localhost:5500/api/auth/login",
         "https://mlm-psi.vercel.app/api/auth/login",
         {
           method: "POST",
@@ -39,7 +43,7 @@ const LoginForm = ({ setToken }) => {
       }
 
       const { token } = await response.json();
-      localStorage.removeItem('hasAnimationShownBefore');
+      localStorage.removeItem("hasAnimationShownBefore");
       localStorage.setItem("token", token);
       // token will expire in 6 hours
       localStorage.setItem("tokenExpire", Date.now() + 21600000); //86400000 for 24
@@ -59,9 +63,9 @@ const LoginForm = ({ setToken }) => {
   const handleCaptchaChange = (response) => {
     setCaptchaResponse(response);
   };
-  const handleClickShowPassword =()=>{
-    setPassword1(!password1)
-  }
+  const handleClickShowPassword = () => {
+    setPassword1(!password1);
+  };
   return (
     <>
       <div
@@ -116,46 +120,71 @@ const LoginForm = ({ setToken }) => {
                   />
 
                   <input
-                    type={password1?'password':'text'}
+                    type={password1 ? "password" : "text"}
                     placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <div className="showPassword" style={{marginLeft:'-20px'}}>
-                      {
-                        password1? <img src="https://cdn-icons-png.flaticon.com/128/5618/5618479.png" height='30px' width='30px' alt="eye" onClick={handleClickShowPassword}/>:<img src="https://cdn-icons-png.flaticon.com/128/7354/7354237.png" height='30px' width='30px' alt="eye"onClick={handleClickShowPassword} />
-                      }
+                  <div className="showPassword" style={{ marginLeft: "-20px" }}>
+                    {password1 ? (
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/128/5618/5618479.png"
+                        height="30px"
+                        width="30px"
+                        alt="eye"
+                        onClick={handleClickShowPassword}
+                      />
+                    ) : (
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/128/7354/7354237.png"
+                        height="30px"
+                        width="30px"
+                        alt="eye"
+                        onClick={handleClickShowPassword}
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="form_input">
-                  <ReCAPTCHA
+                  {/* <ReCAPTCHA
                     style={{ background: "transparent", margin: "10px" }}
                     sitekey={"6LdxqJ0pAAAAAPDd-7cTDkPo01brJJpc1ezDcVF4"}
                     onChange={handleCaptchaChange}
                     ref={captchaRef}
-                  />
+                  /> */}
+
                 </div>
-                {/* <button type="submit" className='btn text-light m-2 mt-0' style={{  backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')", letterSpacing:'4px', scale:'1.03',}} >
-      {isSubmitting? {spinner2}:'LOGIN'}
-      </button> */}
-                <button
-                  type="submit"
-                  className="btn text-light m-2 mt-0"
-                  style={{
-                    backgroundImage:
-                      "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')",
-                    letterSpacing: "4px",
-                    transform: "scale(1.03)",
-                  }}
-                >
-                  {isSubmitting ? (
-                    <img src={spinner2} height='30px' width='30px' alt="Loading" />
-                  ) : (
-                    "LOGIN"
-                  )}
-                </button>
-                <br />
+                <Captcha onVerification={handleCaptchaVerification}/>
+                {captchaVerified && (
+                  <>
+                  <button
+                    type="submit"
+                    className="btn text-light m-2 mt-3"
+                    style={{
+                      backgroundImage:
+                        "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpF5Q7kZdjUq-gfzOvwIDxu93MNZRCjC3zKMNe2YS2&s')",
+                      letterSpacing: "4px",
+                      transform: "scale(1.03)",
+                    }}
+                  >
+                    {isSubmitting ? (
+                      <img
+                        src={spinner2}
+                        height="30px"
+                        width="30px"
+                        alt="Loading"
+                      />
+                    ) : (
+                      "LOGIN"
+                    )}
+                  </button>
+                  <br/>
+                  </>
+                )}
+                {!captchaVerified && (
+                  <h6 className="text-center m-2">Please verify the captcha first.</h6>
+                )}
                 <Link
                   to={"/register"}
                   style={{ color: "#eee", marginLeft: "8px" }}
@@ -168,6 +197,7 @@ const LoginForm = ({ setToken }) => {
                     SignUp
                   </a>{" "}
                 </Link>
+                <br/>
                 <Link
                   to={"/password-reset"}
                   style={{
