@@ -79,8 +79,8 @@ function Captcha({onVerification}) {
             onChange={handleInputChange}
             className="captcha-text-input m-1"
             required
-            maxLength={8}
-            minLength={8}
+            maxLength={6}
+            minLength={6}
             placeholder="Enter Captcha"
           />
         </div>
