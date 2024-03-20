@@ -18,7 +18,7 @@ const RegisterForm = () => {
     mobile: "",
     sponsorId: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   function onClickHome() {
     navigate("/");
@@ -94,7 +94,7 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.mobile.trim()) {
-      setErrorMessage('Please enter mobile');
+      setErrorMessage("Please enter mobile");
       return;
     }
     setIsSubmitting(true);
@@ -135,30 +135,12 @@ const RegisterForm = () => {
     <>
       {!userId ? (
         <div className="register_content">
-          <Container
-            className="Register_Container"
-            style={{
-              // backgroundImage:"url('https://pin.it/4orZ87g')",
-              // backgroundImage:'linear-gradient(to right, #fa709a 0%, #fee140 100%)',
-              height: "780px", width:'90%', borderRadius:'7px'
-              // background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
-            }}
-          >
-            <div
-              className="form_container"
-              // style={{
-              //   // backgroundImage: `url('https://img.freepik.com/free-photo/bank-card-mobile-phone-online-payment_107791-16646.jpg?size=626&ext=jpg&ga=GA1.1.393936886.1688825666&semt=sph')`,
-              //    backgroundImage: `url(${registerImage})`,
-              //   backgroundRepeat: "no-repeat",
-              //   backgroundSize: "100% 100vh",
-
-              // }}
-            >
-              <div className="form_data">
+          <Container className="Register_Container">
+              <div className="register">
                 <form className="register_img mt-3" onSubmit={handleSubmit}>
-                  <div className="formInput register">
+                  <div className=" ">
                     <div className="form_section mt-4">
-                      <div className="img" style={{ marginLeft: "20px" }}>
+                      <div className="img">
                         <img
                           src={logo}
                           height={"100px"}
@@ -174,7 +156,7 @@ const RegisterForm = () => {
                             fontWeight: "600",
                             marginTop: "16px",
                             marginBottom: "-15px",
-                            color: "black",
+                            color: "white",
                           }}
                         >
                           Welcome
@@ -183,7 +165,7 @@ const RegisterForm = () => {
                           style={{
                             fontWeight: "bold",
                             height: "2px",
-                            color: "black",
+                            color: "rgb(187 247 208)",
                           }}
                         />
                         <div
@@ -191,15 +173,15 @@ const RegisterForm = () => {
                           style={{
                             fontSize: "18px",
                             marginTop: "-15px",
-                            color: "rgb(18, 58, 32)",
+                            color: "rgb(74 222 128)",
                           }}
                         >
                           Register to continue
                         </div>
                       </div>
                     </div>
-                    <div className="form_input">
-                      <label htmlFor="name" className="form-label">
+                    <div>
+                      <label htmlFor="name" >
                         Name
                       </label>
                       <input
@@ -215,8 +197,8 @@ const RegisterForm = () => {
                         required
                       />
                     </div>
-                    <div className="form_input">
-                      <label htmlFor="email" className="form-label">
+                    <div>
+                      <label htmlFor="email" >
                         Email
                       </label>
                       <input
@@ -233,8 +215,8 @@ const RegisterForm = () => {
                       />
                       <span>Enter correct Email ID</span>
                     </div>
-                    <div className="form_input">
-                      <label htmlFor="password" className="form-label">
+                    <div>
+                      <label htmlFor="password" >
                         Password
                       </label>
                       <div>
@@ -261,14 +243,14 @@ const RegisterForm = () => {
                               <AiFillEyeInvisible
                                 style={{
                                   fontSize: "26px",
-                                  color: "rgb(98, 255, 213)",
+                                  color: " rgb(74 222 128)",
                                 }}
                               />
                             ) : (
                               <AiFillEye
                                 style={{
                                   fontSize: "26px",
-                                  color: "rgb(205, 255, 205)",
+                                  color: " rgb(74 222 128)",
                                 }}
                               />
                             )}
@@ -282,8 +264,8 @@ const RegisterForm = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="form_input">
-                      <label htmlFor="mobile" className="form-label">
+                    <div >
+                      <label htmlFor="mobile" >
                         Mobile
                       </label>
                       <input
@@ -299,11 +281,18 @@ const RegisterForm = () => {
                         focused={focused.toString()}
                         required
                       />
-                      {errorMessage && <p className="text-danger bg-white text-center"style={{borderRadius:'7px'}}>{errorMessage}</p>}
+                      {errorMessage && (
+                        <p
+                          className="text-danger bg-white text-center"
+                          style={{ borderRadius: "7px" }}
+                        >
+                          {errorMessage}
+                        </p>
+                      )}
                       <span>Mobile No should be 10 Digit, Or only number</span>
                     </div>
-                    <div className="form_input">
-                      <label htmlFor="sponsorId" className="form-label">
+                    <div >
+                      <label htmlFor="sponsorId" >
                         Sponsor ID
                       </label>
                       {/* <input
@@ -345,21 +334,13 @@ const RegisterForm = () => {
                         Sponsor Name: {sponsorName}
                       </div>
                     ) : (
-                      <div className="text-center text-danger bg-dark p-1" style={{borderRadius:'5px'}}>
+                      <div
+                        className="text-center text-danger"
+                        style={{ borderRadius: "5px" }}
+                      >
                         Sponsor Name Not Found
                       </div>
                     )}
-                    <div className="captcha">
-                      {/* <ReCAPTCHA sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' onChange={onChange} /> */}
-                    </div>
-
-                    {/* <button
-                    type="submit"
-                    className="btn btn-success mt-2"
-                    disabled={!sponsorName}
-                  >
-                    {isSubmitting ? "processing..." : "Register"}
-                  </button> */}
 
                     <Button
                       type="submit"
@@ -387,7 +368,6 @@ const RegisterForm = () => {
       </div>
     )}  */}
               </div>
-            </div>
           </Container>
         </div>
       ) : (

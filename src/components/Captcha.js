@@ -74,7 +74,7 @@ function Captcha({onVerification}) {
         </div>
         <div className="captcha-input">
           <input
-            type="text"
+            type="number"
             value={inputCaptcha}
             onChange={handleInputChange}
             className="captcha-text-input m-1"

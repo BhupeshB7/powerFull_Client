@@ -612,6 +612,7 @@ import Modal from "react-modal";
 import "./Dashboard.css";
 import logo from "../assets/PI1.png";
 import spinner from "../assets/spinner2.gif";
+import ram from "../assets/RAM.mp4";
 import { MdOutlineTransferWithinAStation, MdEmail } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
 import { ImWhatsapp } from "react-icons/im";
@@ -647,17 +648,27 @@ const HappyNewYearAnimation = () => {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div style={{ width: "100%", height: "800px" }}>
-        {/* <div style={{ height: '100%', paddingBottom: '177.77777777777777%', position: 'relative', width: '100%' }}>
-        <iframe
-          title="Happy New Year Animation"
-          src="https://giphy.com/embed/mJQdWQD4mWuC1NrzC2/video"
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          allowFullScreen
-          style={{ left: 0, position: 'absolute', top: 0 }}
-        ></iframe>
-      </div> */}
+        <div
+          style={{
+            height: "100%",
+            paddingBottom: "177.77777777777777%",
+            position: "relative",
+            width: "100%",
+          }}
+        >
+          <iframe
+            title="Happy New Year Animation"
+            src={ram}
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            allowFullScreen
+            style={{ left: 0, position: "absolute", top: 0 }}
+            autoplay // add autoplay attribute
+            muted // add muted attribute
+          ></iframe>
+          
+        </div>
         <h6 className="text-secondary text-center">Loading...</h6>
       </div>
     </div>
@@ -682,7 +693,7 @@ const Dashboard = ({ contactInfoList }) => {
         setShowAnimation(false);
         // Set the flag in local storage to indicate that the animation has been shown
         localStorage.setItem("hasAnimationShownBefore", true);
-      }, 1000);
+      }, 9000);
 
       // Clear the timer when the component is unmounted
       return () => clearTimeout(timer);
@@ -845,9 +856,8 @@ const Dashboard1 = ({ contactInfoList }) => {
       )
       .then((response) => {
         const responseData = response.data;
-        
-          setRank(responseData.rank);
-      
+
+        setRank(responseData.rank);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -1949,7 +1959,7 @@ const Dashboard1 = ({ contactInfoList }) => {
                     )}
 
                     <div className="id-status" style={{ letterSpacing: "2px" }}>
-                      <ReTopup topupWallet={data.topupWallet}/>
+                      <ReTopup topupWallet={data.topupWallet} />
                       <h6 className="text-light ms-5 fw-bold">
                         ID Status: {data.is_active ? "Active" : "Inactive"}
                       </h6>
