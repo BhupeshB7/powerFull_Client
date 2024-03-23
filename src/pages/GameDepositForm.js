@@ -43,7 +43,7 @@ const GameDepositForm = () => {
 
     try {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/deposit/userAmount/gameDeposit",
+        "https://mlm-psi.vercel.app/api/deposit/userAmount/gameDeposit",
         { method: "POST", body: formDataToSend }
       );
 

@@ -141,7 +141,6 @@ function App() {
           <Route path='/withdrawalform/game' element={<GameWithdrawalForm/>}/>
           <Route path='/deposithistory' element={<DepsoitHistory/>}/>
           <Route  path="*" element={<Error/>} />
-
         </Routes>
       </div>
     </BrowserRouter>
