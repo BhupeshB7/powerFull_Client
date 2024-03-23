@@ -48,7 +48,6 @@ const GameDepositForm = () => {
       );
 
       if (response.status === 201) {
-        // Successfully uploaded the deposit
         alert("Deposit successful");
         window.location.href = "/game/colorpridiction";
       } else {
