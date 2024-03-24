@@ -633,6 +633,7 @@ import { Button } from "react-bootstrap";
 import TeamTable from "./TeamTable";
 import TimerComponent from "./TimerComponent";
 import ReTopup from "./ReTopup";
+import Award from "../pages/Awards/Award";
 
 const getTokenExpireTime = () => {
   const tokenExpire = localStorage.getItem("tokenExpire");
@@ -749,6 +750,10 @@ const Dashboard1 = ({ contactInfoList }) => {
   const [topUpAmount, setTopUpAmount] = useState("");
   const [isApproved, setIsApproved] = useState(false);
   const [imagePresent, setImagePresent] = useState(false);
+  const [mlmAward,setmlmAward] =useState(false);
+  const handleMLMAwards=()=>{
+    setmlmAward(!mlmAward);
+  }
   // Callback function to set the imagePresent state when an image is successfully uploaded
   const handleImageUploadSuccess = () => {
     setImagePresent(true);
@@ -2761,6 +2766,15 @@ const Dashboard1 = ({ contactInfoList }) => {
                       </div>
                     </div>
                   </div>
+                  <div className="awards-timeUpdate">
+                  <div className="awards">
+                        <button onClick={handleMLMAwards} className="button-83 retopUp_container retopUp_container-button" >Awards</button>
+                  </div>
+                 
+                  </div>
+                  {mlmAward ?(<> 
+                  <Award/>
+                  </>):(<></>)}
                   <div className="time_update">
                     <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUYEr6dGrRfmPzVp03_uHsktADr47VhHqtJBEDDqDZ9YpccdmnNyfQRwMhiXgZi4EVvw&usqp=CAU"
@@ -2776,6 +2790,7 @@ const Dashboard1 = ({ contactInfoList }) => {
                       Last update: {realTimeDate}
                     </h6>
                   </div>
+                  
                   <div
                     className="bottom_section "
                     style={{ marginTop: "90px" }}

@@ -352,6 +352,7 @@ import NewUsersChart from "./NewUsersChart";
 import UserChart from "./UserChart";
 import BonanzaOffers from "../BonanzaOffers";
 import TeamStructureModal from "./TeamStructureModal";
+import AdminGift from "../AdminGift";
 
 const itemsPerPage = 20;
 
@@ -525,6 +526,7 @@ function UserData() {
       <Container>
         <UserChart />
         <NewUsersChart />
+        <AdminGift title={"MLM Awards"} endpoint={"gift/generateCode"}/>
         <BonanzaOffers/>
         <TeamStructureModal/>
         <Row className="m-3">

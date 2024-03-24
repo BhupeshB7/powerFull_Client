@@ -1,7 +1,7 @@
 // GenerateCodeForm.jsx
 import React, { useState } from 'react';
 
-const AdminGift = () => {
+const AdminGift = ({title,endpoint}) => {
   const [amount, setAmount] = useState('');
   const [giftTime, setGiftTime] = useState('');
   const [generatedCode, setGeneratedCode] = useState('');
@@ -11,7 +11,8 @@ const AdminGift = () => {
 
   const handleGenerateCode = async () => {
     try {
-      const response = await fetch('https://mlm-eo5g.onrender.com/api/gift/generateCode', {
+      // gift/generateCode
+      const response = await fetch(`https://mlm-eo5g.onrender.com/api/${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ const AdminGift = () => {
   return (
     <div className='admiGift-container'>
       <div className='adminGift'>
-        <h2>Gift Rewards</h2>
+        <h6 className='text-center text-dark'>{title}</h6>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <label>
            Max Amount:<br/>

@@ -182,7 +182,7 @@ function  GameDeposit() {
       </Row>
    
       <AdminNotice/>
-      <AdminGift/>
+      <AdminGift title={"Gift Rewards"} endpoint={'gift/generateCode'}/>
       <div className="table-responsive">
         <table className="table table-bordered table-warning">
           <thead className="table-primary">
