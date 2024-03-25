@@ -106,6 +106,7 @@ const Award = () => {
                 value={code}
                 placeholder="Enter Your Code"
                 onChange={(e) => setCode(e.target.value)}
+                style={{width:'210px'}}
               />
             </div>
             <button
