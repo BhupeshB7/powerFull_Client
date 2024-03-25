@@ -153,9 +153,9 @@ const Award = () => {
             <div className="reward_image mt-5">
               {/* <img style={{borderRadius:'10px'}} height={300} width={300} src={rewardImage} alt="ico" /> */}
             </div>
-            <div className="rewards_text">10Rs</div>
+            <div className="rewards_text">{randomNumber}Rs</div>
             <div className="rewards_textP">PowerFull India</div>
-            {/* <div className="rewards_text">{randomNumber}</div> */}
+            {/* <div className="rewards_text"></div> */}
             </div>
           </Modal>
     </Container>
