@@ -19,7 +19,7 @@ const Award = () => {
     try {
       // const response = await fetch("http://localhost:5000/api/gift/checkCode", {
       const response = await fetch(
-        "https://mlm-eo5g.onrender.com/api/gift/checkCode",
+        "https://mlm-eo5g.onrender.com/api/gift/checkCode/mlm",
         {
           method: "POST",
           headers: {
