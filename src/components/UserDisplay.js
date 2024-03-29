@@ -612,7 +612,7 @@ import Modal from "react-modal";
 import "./Dashboard.css";
 import logo from "../assets/PI1.png";
 import spinner from "../assets/spinner2.gif";
-import ram from "../assets/RAM.mp4";
+// import ram from "../assets/RAM.mp4";
 import { MdOutlineTransferWithinAStation, MdEmail } from "react-icons/md";
 import { IoCall } from "react-icons/io5";
 import { ImWhatsapp } from "react-icons/im";
@@ -649,7 +649,7 @@ const HappyNewYearAnimation = () => {
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div style={{ width: "100%", height: "800px" }}>
-        <div
+        {/* <div
           style={{
             height: "100%",
             paddingBottom: "177.77777777777777%",
@@ -669,7 +669,7 @@ const HappyNewYearAnimation = () => {
             muted // add muted attribute
           ></iframe>
           
-        </div>
+        </div> */}
         <h6 className="text-secondary text-center">Loading...</h6>
       </div>
     </div>
